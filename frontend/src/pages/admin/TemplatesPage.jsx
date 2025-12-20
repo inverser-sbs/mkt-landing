@@ -156,6 +156,8 @@ const TemplatesPage = () => {
             color: 'bg-gray-50 border-gray-200'
           };
           const campaignsUsing = getCampaignsForTemplate(template.key);
+          const templateSlots = getSlotsForTemplate(template.key);
+          const templateButtons = getButtonsForTemplate(template.key);
           
           return (
             <Card key={template.key} className={`p-5 ${info.color} border`}>
@@ -172,17 +174,51 @@ const TemplatesPage = () => {
                   
                   <p className="text-gray-600 mb-3">{info.description}</p>
                   
-                  {/* Features */}
-                  {info.features.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      {info.features.map((feature, idx) => (
-                        <span key={idx} className="inline-flex items-center text-xs bg-white px-2 py-1 rounded-full border">
-                          <CheckCircle2 className="w-3 h-3 text-green-500 mr-1" />
-                          {feature}
+                  {/* Template Stats */}
+                  <div className="flex items-center gap-4 mb-3 text-sm text-gray-600">
+                    <span className="flex items-center gap-1">
+                      <MousePointer2 className="w-4 h-4" />
+                      <strong>{templateButtons.length}</strong> botones
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <LayoutGrid className="w-4 h-4" />
+                      <strong>{templateSlots.length}</strong> ubicaciones
+                    </span>
+                  </div>
+                  
+                  {/* Buttons in this template */}
+                  <div className="mb-3">
+                    <p className="text-sm font-medium text-gray-700 mb-1">Botones del template:</p>
+                    <div className="flex flex-wrap gap-2">
+                      {templateButtons.map((button) => (
+                        <span 
+                          key={button.key} 
+                          className="inline-flex items-center text-xs bg-white px-2 py-1 rounded-full border"
+                          title={button.description}
+                        >
+                          <MousePointer2 className="w-3 h-3 text-[#7c3aed] mr-1" />
+                          {button.label_default}
                         </span>
                       ))}
                     </div>
-                  )}
+                  </div>
+                  
+                  {/* Slots */}
+                  <div className="mb-3">
+                    <p className="text-sm font-medium text-gray-700 mb-1">Ubicaciones (slots):</p>
+                    <div className="flex flex-wrap gap-2">
+                      {templateSlots.map((slot) => (
+                        <span 
+                          key={slot.key} 
+                          className="inline-flex items-center text-xs bg-gray-100 px-2 py-1 rounded-full"
+                          title={slot.description}
+                        >
+                          <LayoutGrid className="w-3 h-3 text-gray-500 mr-1" />
+                          {slot.label}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                   
                   {/* Campaigns using this template */}
                   <div className="mt-3">
