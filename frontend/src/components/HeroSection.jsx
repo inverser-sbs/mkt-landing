@@ -35,10 +35,10 @@ const HeroSection = () => {
 
             {/* Main Heading */}
             <div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                 <span className="text-gray-900">Certificación Profesional</span>
                 <br />
-                <span className="text-[#7c3aed]">Neurocoaching & Mentor Program</span>
+                <span className="text-[#7c3aed]">Neurocoaching <span className="font-serif italic">&</span> Mentor Program</span>
               </h1>
             </div>
 
