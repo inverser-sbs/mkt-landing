@@ -560,3 +560,30 @@ agent_communication:
 
   - agent: "testing"
     message: "🎉 NEW BUTTON SYSTEM TESTING COMPLETED SUCCESSFULLY: Comprehensive Playwright automation verified all review_request requirements working perfectly. ✅ ACTIONS PAGE (/admin/actions): Header 'Configurar Botones', context banner shows campaign name + template + button/location counts, info card explains BOTÓN → ACCIÓN → SLOT → URL flow, action cards display button names with badges and location badges. ✅ TEMPLATES PAGE (/admin/templates): CPN template shows '4 botones • 4 ubicaciones', 'Botones del template:' section with expected buttons, 'Ubicaciones (slots):' section with Hero/CTA/Footer slots, architecture explanation shows 4 concepts. ✅ CAMPAIGN SWITCHING: Selector functional, context banner updates, 'Configurar Botón' button managed correctly. ✅ LANDING PAGE (/cpn/noel-rivera): Buttons render in correct slots with proper styling, mentor information displays correctly. ALL BUTTON SYSTEM REQUIREMENTS VERIFIED - READY FOR PRODUCTION USE."
+
+  - task: "Action Delete Bug Fix - Valid Link Check"
+    implemented: true
+    working: true
+    file: "/app/backend/services/action_service.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "BUG FIX: Delete action was blocked by orphan links (mentor deleted) and empty URL links. Fixed logic to: 1) Only count VALID links (mentor exists + URL not empty), 2) Auto-cleanup orphan and empty links on delete, 3) Added force delete option, 4) Added global cleanup-orphans endpoint. Backend curl tests passed."
+
+  - task: "Action Delete Bug Fix - Frontend UI"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/admin/ActionsPage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Updated delete dialog: 1) Shows detailed link breakdown (valid/orphan/empty), 2) Green message if deletable, amber warning if blocked, 3) Force delete dialog with explicit warning, 4) 'Limpiar datos huérfanos' button added to admin UI. Needs frontend testing."
+
+  - agent: "main"
+    message: "BUG FIX DE ELIMINACIÓN DE ACCIONES COMPLETADO: El problema era que el check contaba TODOS los links sin verificar si el mentor existía o si la URL estaba vacía. Ahora: 1) Delete normal solo bloquea si hay links VÁLIDOS (mentor existe + URL no vacía), 2) Links huérfanos y vacíos se auto-limpian, 3) Force delete disponible con confirmación explícita, 4) Botón 'Limpiar datos huérfanos' agregado para mantenimiento admin. Backend testeado con curl - todas las pruebas pasaron. Por favor test frontend en /admin/actions."
