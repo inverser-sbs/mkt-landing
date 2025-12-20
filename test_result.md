@@ -385,3 +385,66 @@ agent_communication:
     message: "Analytics UI campaign-aware complete. PHASE 2 COMPLETE. KPIs, mentor stats, action stats all filtered by campaign. Verified: CPN=85 visits/32 clicks, Suitex=36 visits/6 clicks, mentor-program=20 visits/5 clicks. Data isolation confirmed - each campaign shows ONLY its own metrics."
   - agent: "testing"
     message: "🎉 PHASE 2 ANALYTICS TESTING COMPLETED SUCCESSFULLY: All campaign-aware analytics functionality verified working perfectly. ✅ Campaign Selector: Functional with 3 campaigns (CPN, Suitex, Mentor-Program). ✅ Period Selector: Working (7/30/90/365 days). ✅ Context Banner: Updates correctly showing campaign name, period, template. ✅ KPI Cards: Total Visits, Total Clicks, CTR, Active Mentors all displaying correctly. ✅ CRITICAL Data Isolation VERIFIED: CPN (85 visits, 32 clicks, /cpn/noel-rivera, actions: agenda/whatsapp/formulario), Suitex (36 visits, 6 clicks, /suitex/noel-rivera, ONLY demo action), completely different data per campaign. ✅ UI Elements: Mentor table with sortable columns, action breakdown with progress bars, refresh button all functional. ✅ Backend Integration: All API endpoints working correctly with campaign filtering. PHASE 2 COMPLETE - Analytics system ready for production use."
+
+  - task: "Templates Page - Flow explanation and listing"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/admin/TemplatesPage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "New page /admin/templates showing: 1) Prominent explanation that templates are NOT created from UI - Emergent is the engine. 2) 4-step process to request new templates. 3) List of available templates with descriptions, features, and campaigns using each. 4) Ver ejemplo button per template. Verified via screenshot."
+
+  - task: "Campaigns Page - Clear non-technical UX text"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/admin/CampaignsPage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Updated info card with clearer explanations: Template = DISEÑO, Acciones = BOTONES, Mentores = LINKS. Added prominent yellow box: 'El template NO define los botones. Los botones se configuran por separado en Acciones.' Verified via screenshot."
+
+  - task: "Mentor Form with Photo Upload"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/admin/MentorFormPage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Complete mentor edit form with: Photo section (preview, upload with validation JPG/PNG/WebP max 5MB), Basic info (name, lastname, email, slug, group), Active toggle, Delete button. Note explaining photo is global across campaigns. Verified via screenshot - form shows for existing mentor with all fields."
+
+  - task: "Admin Navigation - Templates menu item"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/AdminLayout.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Added Templates menu item with Palette icon to AdminLayout. Verified via screenshot - menu shows: Mentores, Campañas, Templates, Acciones, CSV, Analítica."
+
+  - task: "Mentors List - Edit Mentor Button"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/admin/MentorsListPage.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Added prominent 'Editar Mentor' button at top of action buttons in mentor cards. Uses UserPen icon. Navigates to /admin/mentor/{id} for full edit form. Verified via screenshot - button visible on all mentor cards."
+
+  - agent: "main"
+    message: "FLUJO DE CREACIÓN DE LANDINGS CERRADO: 1) Templates Page (/admin/templates) created - explains Emergent is the engine, NO uploads, NO external code. 4-step process documented. 2) Campaigns Page updated with clearer UX text - Template=DISEÑO, Acciones=BOTONES, Mentores=LINKS. Explicit note that templates don't define buttons. 3) Mentor Edit Form with photo upload - validates file types and size, photo is global per mentor. 4) Admin navigation includes Templates menu item. 5) Mentors list has prominent 'Editar Mentor' button. All verified via screenshots. Please test the new pages."
