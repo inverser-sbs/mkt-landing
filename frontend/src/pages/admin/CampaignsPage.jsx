@@ -389,7 +389,7 @@ const CampaignsPage = () => {
 
             {/* Template Key */}
             <div className="space-y-2">
-              <Label htmlFor="template_key">Template</Label>
+              <Label htmlFor="template_key">Diseño de Landing</Label>
               <select
                 id="template_key"
                 value={formData.template_key}
@@ -398,12 +398,15 @@ const CampaignsPage = () => {
               >
                 {availableTemplates.map(template => (
                   <option key={template.key} value={template.key}>
-                    {template.name} ({template.key})
+                    {template.key === 'generic' ? '🌐 Generic (diseño neutro)' : 
+                     template.key === 'cpn' ? '📚 CPN (certificación coaching)' :
+                     template.key === 'suitex' ? '💼 Suitex (estilo SaaS)' :
+                     `${template.name} (${template.key})`}
                   </option>
                 ))}
               </select>
               <p className="text-xs text-gray-500">
-                Selecciona "generic" para nuevas campañas. Crea templates personalizados con Emergent.
+                Recomendado: usa <strong>Generic</strong> para campañas nuevas. Tiene un diseño profesional que funciona para cualquier producto.
               </p>
             </div>
 
