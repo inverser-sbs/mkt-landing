@@ -13,6 +13,7 @@ import AdminLayout from "./components/AdminLayout";
 // Admin pages (will be created)
 import MentorsListPage from "./pages/admin/MentorsListPage";
 import MentorFormPage from "./pages/admin/MentorFormPage";
+import CampaignsPage from "./pages/admin/CampaignsPage";
 import ActionsPage from "./pages/admin/ActionsPage";
 import CSVPage from "./pages/admin/CSVPage";
 import AnalyticsPage from "./pages/admin/AnalyticsPage";
@@ -57,6 +58,16 @@ function App() {
                 <ProtectedRoute>
                   <AdminLayout>
                     <MentorFormPage />
+                  </AdminLayout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/campaigns"
+              element={
+                <ProtectedRoute>
+                  <AdminLayout>
+                    <CampaignsPage />
                   </AdminLayout>
                 </ProtectedRoute>
               }
