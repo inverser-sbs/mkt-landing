@@ -350,3 +350,30 @@ agent_communication:
     message: "CSV UI campaign-aware complete. Template download per campaign (CPN=3 actions, Suitex=1, mentor-program=2). Export filtered by campaign. Preview shows new/existing/errors counts. Import with options (create_new, update_existing, overwrite_links). All operations isolated by campaign_key."
   - agent: "testing"
     message: "✅ CSV PAGE CAMPAIGN-AWARE TESTING COMPLETED SUCCESSFULLY: All functionality verified working perfectly. Campaign selector shows 3 campaigns with proper dropdown. Template downloads working for all campaigns (CPN, Suitex, Mentor-Program) with correct filenames and campaign-specific action columns. Export functionality working with 'all' and 'active' filters. Preview/Import UI elements present with proper validation (preview button disabled without file). Context banner updates correctly showing campaign context. Info box with campaign-specific notes present. All 3 main UI sections functional. Campaign isolation confirmed - each template contains only actions from selected campaign. Backend integration working correctly with proper API responses and file downloads."
+
+  - task: "Analytics Page campaign-aware"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/admin/AnalyticsPage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Complete Analytics UI with campaign selector. Features: KPI cards (visits, clicks, CTR, active mentors), mentor performance table with sorting, action clicks breakdown with percentages. Period filter (7/30/90/365 days). Verified isolation: CPN shows 85 visits, Suitex shows 36, mentor-program shows 20. Each shows only its own actions."
+
+  - task: "Analytics Backend campaign-aware"
+    implemented: true
+    working: true
+    file: "/app/backend/routes/tracking.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "New endpoints: /stats/campaign/{key}, /stats/campaign/{key}/mentors, /stats/campaign/{key}/actions. All queries filter by campaign_key. Legacy endpoints preserved for backward compatibility."
+
+  - agent: "main"
+    message: "Analytics UI campaign-aware complete. PHASE 2 COMPLETE. KPIs, mentor stats, action stats all filtered by campaign. Verified: CPN=85 visits/32 clicks, Suitex=36 visits/6 clicks, mentor-program=20 visits/5 clicks. Data isolation confirmed - each campaign shows ONLY its own metrics."
