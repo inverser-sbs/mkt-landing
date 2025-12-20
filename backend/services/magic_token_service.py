@@ -1,7 +1,7 @@
 from motor.motor_asyncio import AsyncIOMotorDatabase
 from models.magic_token import MagicToken, MagicTokenCreate, MagicTokenResponse
 from datetime import datetime, timedelta
-from typing import Optional
+from typing import Optional, List
 import secrets
 import hashlib
 from bson import ObjectId
@@ -17,10 +17,16 @@ class MagicTokenService:
     def _hash_token(self, token: str) -> str:
         return hashlib.sha256(token.encode()).hexdigest()
     
-    async def generate_token(self, mentor_id: str, days_valid: int = 30) -> MagicTokenResponse:
-        # Invalidate previous tokens for this mentor
+    async def generate_token(
+        self, 
+        mentor_id: str, 
+        campaign_key: str,
+        days_valid: int = 30
+    ) -> MagicTokenResponse:
+        """Generate a magic token for a specific mentor+campaign combination"""
+        # Invalidate previous tokens for this mentor+campaign
         await self.collection.update_many(
-            {"mentor_id": mentor_id, "is_valid": True},
+            {"mentor_id": mentor_id, "campaign_key": campaign_key, "is_valid": True},
             {"$set": {"is_valid": False}}
         )
         
@@ -31,6 +37,7 @@ class MagicTokenService:
         
         token_dict = {
             "mentor_id": mentor_id,
+            "campaign_key": campaign_key,
             "token_hash": token_hash,
             "expires_at": expires_at,
             "created_at": datetime.utcnow(),
@@ -44,18 +51,22 @@ class MagicTokenService:
         if not mentor:
             raise ValueError("Mentor not found")
         
-        magic_link = f"{FRONTEND_URL}/edit/{mentor['slug']}?token={token}"
+        # Magic link now includes campaign_key
+        magic_link = f"{FRONTEND_URL}/edit/{campaign_key}/{mentor['slug']}?token={token}"
         
         return MagicTokenResponse(
             magic_link=magic_link,
-            expires_at=expires_at
+            expires_at=expires_at,
+            campaign_key=campaign_key
         )
     
-    async def validate_token(self, mentor_id: str, token: str) -> bool:
+    async def validate_token(self, mentor_id: str, campaign_key: str, token: str) -> bool:
+        """Validate a token for a specific mentor+campaign"""
         token_hash = self._hash_token(token)
         
         token_doc = await self.collection.find_one({
             "mentor_id": mentor_id,
+            "campaign_key": campaign_key,
             "token_hash": token_hash,
             "is_valid": True
         })
@@ -69,10 +80,14 @@ class MagicTokenService:
         
         return True
     
-    async def get_token_info(self, mentor_id: str) -> Optional[dict]:
-        """Get current valid token info for mentor"""
+    async def get_token_info(self, mentor_id: str, campaign_key: str = None) -> Optional[dict]:
+        """Get current valid token info for mentor, optionally filtered by campaign"""
+        query = {"mentor_id": mentor_id, "is_valid": True}
+        if campaign_key:
+            query["campaign_key"] = campaign_key
+        
         token_doc = await self.collection.find_one(
-            {"mentor_id": mentor_id, "is_valid": True},
+            query,
             sort=[("created_at", -1)]
         )
         
@@ -80,7 +95,23 @@ class MagicTokenService:
             return None
         
         return {
+            "campaign_key": token_doc.get("campaign_key", "cpn"),
             "expires_at": token_doc["expires_at"],
             "created_at": token_doc["created_at"],
             "is_expired": token_doc["expires_at"] < datetime.utcnow()
         }
+    
+    async def get_all_tokens_for_mentor(self, mentor_id: str) -> List[dict]:
+        """Get all valid tokens for a mentor across all campaigns"""
+        tokens = []
+        async for token_doc in self.collection.find(
+            {"mentor_id": mentor_id, "is_valid": True},
+            sort=[("created_at", -1)]
+        ):
+            tokens.append({
+                "campaign_key": token_doc.get("campaign_key", "cpn"),
+                "expires_at": token_doc["expires_at"],
+                "created_at": token_doc["created_at"],
+                "is_expired": token_doc["expires_at"] < datetime.utcnow()
+            })
+        return tokens

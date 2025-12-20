@@ -1,9 +1,10 @@
-from pydantic import BaseModel, Field, HttpUrl
+from pydantic import BaseModel, Field
 from typing import Optional
 from datetime import datetime
 
 class MentorLinkBase(BaseModel):
     mentor_id: str
+    campaign_key: str  # Campaign this link belongs to
     action_key: str
     url: str = Field(..., min_length=1)
 
@@ -22,6 +23,7 @@ class MentorLink(MentorLinkBase):
         from_attributes = True
 
 class MentorLinkBulkUpdate(BaseModel):
+    campaign_key: str
     action_key: str
     url: str
     apply_to: str = "all"  # all, active, group
