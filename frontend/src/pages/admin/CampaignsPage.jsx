@@ -249,10 +249,15 @@ const CampaignsPage = () => {
         <div className="flex items-start space-x-3">
           <Info className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
           <div className="text-sm text-blue-800">
-            <p className="font-medium mb-1">Sistema Multi-Campaña</p>
-            <p>
-              Cada campaña puede tener su propia landing page mediante <code className="bg-blue-100 px-1 rounded">template_key</code>. 
-              Para crear un nuevo template, solicítalo a Emergent y luego actualiza la campaña con el nuevo template_key.
+            <p className="font-medium mb-2">¿Cómo funciona?</p>
+            <ul className="space-y-1 list-disc list-inside">
+              <li><strong>Template</strong>: Define el diseño visual de la landing page</li>
+              <li><strong>generic</strong>: Diseño neutro que funciona para cualquier campaña nueva</li>
+              <li><strong>cpn</strong>: Diseño específico para Certificación NeuroCoaching</li>
+              <li><strong>suitex</strong>: Diseño específico estilo SaaS para Suitex</li>
+            </ul>
+            <p className="mt-2 text-blue-700">
+              💡 Al crear una campaña nueva, usa <strong>generic</strong> para tener una landing funcional de inmediato.
             </p>
           </div>
         </div>
