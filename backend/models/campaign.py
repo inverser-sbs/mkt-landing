@@ -6,6 +6,7 @@ import re
 class CampaignBase(BaseModel):
     key: str = Field(..., min_length=2, max_length=50)
     name: str = Field(..., min_length=1, max_length=200)
+    template_key: str = Field(..., min_length=2, max_length=50)  # NUEVO: define qué landing usar
     active: bool = True
     sort_order: int = 0
     
@@ -22,6 +23,14 @@ class CampaignBase(BaseModel):
         if '--' in v:
             raise ValueError('Campaign key cannot contain double hyphens')
         
+        return v.lower()
+    
+    @validator('template_key')
+    def validate_template_key(cls, v):
+        # Template key follows same rules as campaign key
+        pattern = r'^[a-z0-9]+(?:-[a-z0-9]+)*$'
+        if not re.match(pattern, v):
+            raise ValueError('Template key must contain only lowercase letters, numbers, and single hyphens')
         return v.lower()
 
 class CampaignCreate(CampaignBase):
