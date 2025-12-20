@@ -134,7 +134,7 @@ const TemplatesPage = () => {
               <div className="flex items-center space-x-2 text-sm bg-yellow-50 p-3 rounded-lg border border-yellow-200">
                 <HelpCircle className="w-5 h-5 text-yellow-600 flex-shrink-0" />
                 <span>
-                  <strong>¿No tienes un template específico?</strong> Usa <strong>"Genérico"</strong> - funciona perfectamente para cualquier campaña nueva.
+                  <strong>¿No tienes un template específico?</strong> Usa <strong>&ldquo;Genérico&rdquo;</strong> - funciona perfectamente para cualquier campaña nueva.
                 </span>
               </div>
             </div>

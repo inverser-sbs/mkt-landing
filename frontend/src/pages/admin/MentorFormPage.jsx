@@ -387,7 +387,7 @@ const MentorFormPage = () => {
               {photoPreview && (
                 <div className="mt-3 flex items-center text-sm text-amber-600 bg-amber-50 px-3 py-2 rounded-md">
                   <AlertCircle className="w-4 h-4 mr-2 flex-shrink-0" />
-                  <span>La foto se guardará al hacer clic en "Guardar"</span>
+                  <span>La foto se guardará al hacer clic en &ldquo;Guardar&rdquo;</span>
                 </div>
               )}
 
@@ -564,7 +564,7 @@ const MentorFormPage = () => {
           <AlertDialogHeader>
             <AlertDialogTitle>¿Eliminar mentor?</AlertDialogTitle>
             <AlertDialogDescription>
-              Esto eliminará al mentor "{formData.first_name} {formData.last_name}" y todos sus enlaces asociados.
+              Esto eliminará al mentor &ldquo;{formData.first_name} {formData.last_name}&rdquo; y todos sus enlaces asociados.
               Esta acción no se puede deshacer.
             </AlertDialogDescription>
           </AlertDialogHeader>
