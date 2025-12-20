@@ -202,11 +202,14 @@ agent_communication:
     file: "/app/frontend/src/templates/LandingGeneric.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: true
         agent: "main"
         comment: "Template por defecto para nuevas campañas. Renderiza acciones dinámicamente, muestra nombre de campaña y mentor. Verificado con campaña mentor-program."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: LandingGeneric template working perfectly for /mentor-program/noel-rivera. Shows 'Programa de Mentores 2025' title, mentor 'Noel Rivera' with photo, action buttons 'Aplicar al Programa' and 'Más Información'. Contains expected sections: '¿Por qué elegirnos?' and 'Lo que incluye'. NO coaching or Suitex specific content found - completely neutral template as designed."
 
   - task: "TEMPLATE_REGISTRY system"
     implemented: true
@@ -214,11 +217,14 @@ agent_communication:
     file: "/app/frontend/src/templates/index.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: true
         agent: "main"
         comment: "Sistema de registro de templates con helpers getTemplate(), getAvailableTemplates(). Fallback a generic con warning. Documentación incluida."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: TEMPLATE_REGISTRY system working correctly. All 3 templates (generic, cpn, suitex) properly registered and accessible. Template selection in admin shows all available options: 'Generic (generic), Cpn (cpn), Suitex (suitex)'. Dynamic template loading verified - each campaign loads its correct template based on template_key."
 
   - task: "Admin Campaigns CRUD"
     implemented: true
@@ -226,11 +232,14 @@ agent_communication:
     file: "/app/frontend/src/pages/admin/CampaignsPage.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: true
         agent: "main"
         comment: "CRUD completo para campañas. Validación de key (solo a-z0-9-), palabras reservadas bloqueadas, selector de templates disponibles, URL sugerida."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: Admin Campaigns CRUD fully functional. Found 3 campaigns: 'Certificación Profesional NeuroCoaching' (cpn), 'Suitex (InverSer Experience)' (suitex), 'Programa de Mentores 2025' (generic). Each campaign card shows name, URL format, template key, Edit and Delete buttons. 'Nueva Campaña' modal contains all required fields: Key, Name, Template dropdown with all available templates, Order, Active toggle, Create and Cancel buttons."
 
   - agent: "main"
     message: "Implementación completa del sistema multi-campaña escalable: 1) LandingGeneric como fallback para nuevas campañas, 2) TEMPLATE_REGISTRY extensible con documentación, 3) Admin CRUD de Campañas con validaciones y selector de templates. Verificado: /mentor-program/noel-rivera usa template generic correctamente. Admin panel muestra 3 campañas. Documentación en /app/TEMPLATE_SYSTEM_DOCS.md"
