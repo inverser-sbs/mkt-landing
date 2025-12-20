@@ -4,6 +4,7 @@ from typing import Optional
 
 class EventBase(BaseModel):
     mentor_id: str
+    campaign_key: str  # ADDED for multi-campaign
     event_type: str  # visit | click
     action_key: Optional[str] = None  # solo para clicks
     country: Optional[str] = None
