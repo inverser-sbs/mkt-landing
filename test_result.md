@@ -265,3 +265,42 @@ agent_communication:
     message: "Actions Page campaign-aware complete. Implemented: campaign selector dropdown, localStorage persistence, context banner, CRUD scoped to campaign. Backend updated: action model includes campaign_key, service validates unique action_key per campaign, API supports ?campaign_key filter. Verified isolation: created test action in mentor-program, confirmed NOT visible in cpn/suitex."
   - agent: "testing"
     message: "✅ CAMPAIGN-AWARE ACTIONS PAGE TESTING COMPLETED: All functionality verified working perfectly. Campaign selector shows 3 campaigns with proper dropdown. CPN shows 3 actions (agenda, whatsapp, formulario), Suitex shows 1 action (demo), Mentor-Program shows 2 actions with generic template. Action isolation confirmed working - actions are completely separated by campaign. Context banner updates correctly. All UI elements present (order numbers, labels, badges, buttons). New action modal has all required fields. CRUD operations working. System ready for production use."
+
+  - task: "Mentors UI campaign-aware"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/admin/MentorsListPage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Complete Mentors UI with campaign selector. Features: campaign dropdown with localStorage, links modal per campaign, magic link modal per campaign, URL copy per campaign. Verified isolation: CPN shows 3 actions, Suitex shows 1, mentor-program shows 2."
+
+  - task: "MentorEditPage campaign-aware"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/MentorEditPage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "MentorEditPage updated to support /edit/:campaign/:slug routes. Shows campaign context, only allows editing links for that specific campaign. Legacy /edit/:slug redirects to cpn."
+
+  - task: "Magic tokens campaign-aware backend"
+    implemented: true
+    working: true
+    file: "/app/backend/services/magic_token_service.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Magic tokens now include campaign_key. Tokens are scoped per mentor+campaign. Validation checks campaign match. Magic link URL includes campaign: /edit/{campaign}/{slug}?token=xxx"
+
+  - agent: "main"
+    message: "Mentors UI campaign-aware complete. Backend: magic_token_service, mentor_link_service, admin_mentors.py, mentor_edit.py all updated with campaign_key support. Frontend: MentorsListPage with campaign selector, links modal, magic link modal. MentorEditPage supports /edit/:campaign/:slug. Isolation verified: CPN=3 actions, Suitex=1, mentor-program=2."
