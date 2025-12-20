@@ -1,14 +1,36 @@
 import React from 'react';
 import { Button } from './ui/button';
-import { Star, Award, Phone } from 'lucide-react';
+import { Star, Award, Phone, Calendar, MessageCircle } from 'lucide-react';
 import { Badge } from './ui/badge';
 
-const HeroSection = () => {
-  const handleWhatsApp = () => {
-    window.open(
-      'https://wa.me/13059005673?text=Me%20interesa%20agendar%20una%20llamada%20para%20obtener%20mas%20informaci%C3%B3n%20de%20la%20Certificaci%C3%B3n%20Profesional',
-      '_blank'
-    );
+const HeroSection = ({ mentorData, onActionClick }) => {
+  // If no mentor data, use default (generic landing)
+  const mentor = mentorData?.mentor || {
+    first_name: 'Nuestro',
+    last_name: 'Equipo',
+    photo_url: null
+  };
+  
+  const actions = mentorData?.actions || [];
+
+  const handleActionClick = (action) => {
+    if (onActionClick) {
+      onActionClick(action.action_key);
+    }
+    window.open(action.url, '_blank');
+  };
+
+  const getActionIcon = (actionKey) => {
+    switch (actionKey) {
+      case 'agenda':
+        return Calendar;
+      case 'whatsapp':
+        return Phone;
+      case 'formulario':
+        return MessageCircle;
+      default:
+        return Phone;
+    }
   };
 
   return (
