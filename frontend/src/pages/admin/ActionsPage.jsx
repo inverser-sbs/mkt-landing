@@ -692,26 +692,59 @@ const ActionsPage = () => {
                     </div>
                   </div>
                   
+                  {/* Actions - different for retired vs active */}
                   <div className="flex items-center gap-2">
-                    <Button
-                      onClick={() => toggleActive(action)}
-                      size="sm"
-                      variant="outline"
-                      className={action.active ? "text-orange-600" : "text-green-600"}
-                    >
-                      {action.active ? 'Desactivar' : 'Activar'}
-                    </Button>
-                    <Button onClick={() => openModal(action)} size="sm" variant="outline">
-                      <Edit className="w-4 h-4" />
-                    </Button>
-                    <Button
-                      onClick={() => confirmDelete(action)}
-                      size="sm"
-                      variant="outline"
-                      className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </Button>
+                    {isRetired ? (
+                      // Retired action - minimal options
+                      <span className="text-xs text-gray-400">Archivada</span>
+                    ) : (
+                      // Active/Inactive action - full options
+                      <>
+                        <Button
+                          onClick={() => toggleActive(action)}
+                          size="sm"
+                          variant="outline"
+                          className={action.active ? "text-orange-600" : "text-green-600"}
+                          title={action.active ? 'Desactivar' : 'Activar'}
+                        >
+                          {action.active ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                        </Button>
+                        <Button 
+                          onClick={() => openModal(action)} 
+                          size="sm" 
+                          variant="outline"
+                          title="Editar"
+                        >
+                          <Edit className="w-4 h-4" />
+                        </Button>
+                        <Button
+                          onClick={() => openReplaceModal(action)}
+                          size="sm"
+                          variant="outline"
+                          title="Migrar enlaces a otra acción"
+                        >
+                          <RefreshCw className="w-4 h-4" />
+                        </Button>
+                        <Button
+                          onClick={() => confirmRetire(action)}
+                          size="sm"
+                          variant="outline"
+                          className="text-amber-600 hover:text-amber-700 hover:bg-amber-50"
+                          title="Archivar (conserva datos)"
+                        >
+                          <Archive className="w-4 h-4" />
+                        </Button>
+                        <Button
+                          onClick={() => confirmDelete(action)}
+                          size="sm"
+                          variant="outline"
+                          className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                          title="Eliminar definitivamente"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </>
+                    )}
                   </div>
                 </div>
               </Card>
