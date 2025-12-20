@@ -83,25 +83,66 @@ const HeroSection = () => {
 
           {/* Right Image */}
           <div className="relative">
-            <div className="relative w-full h-[500px] bg-gradient-to-br from-purple-100 via-green-50 to-purple-50 rounded-3xl overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-full h-full bg-gradient-to-br from-[#c4ff0f]/20 via-[#7c3aed]/20 to-purple-300/30 backdrop-blur-3xl">
+            <div className="relative w-full h-[500px] rounded-3xl overflow-hidden">
+              {/* Gradient Background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-100 via-green-50 to-purple-50"></div>
+              
+              {/* Brain Illustration with Glowing Effect */}
+              <div className="absolute inset-0" style={{
+                backgroundImage: 'url(https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=800&auto=format&fit=crop&q=60)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                opacity: 0.4,
+                mixBlendMode: 'multiply'
+              }}></div>
+              
+              {/* Glowing Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#c4ff0f]/30 via-[#7c3aed]/30 to-purple-400/30 backdrop-blur-sm">
+                <div className="w-full h-full relative">
+                  {/* Animated Neural Network Effect */}
                   <svg
-                    className="w-full h-full opacity-40"
-                    viewBox="0 0 400 400"
+                    className="absolute inset-0 w-full h-full opacity-60"
+                    viewBox="0 0 500 500"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
+                    {/* Brain Outline */}
                     <path
-                      d="M200 50 C250 50, 280 80, 280 130 C280 160, 270 180, 250 190 L250 250 C250 280, 230 300, 200 300 C170 300, 150 280, 150 250 L150 190 C130 180, 120 160, 120 130 C120 80, 150 50, 200 50 Z"
-                      stroke="#7c3aed"
-                      strokeWidth="2"
+                      d="M250 100 C300 100, 350 120, 350 180 C350 220, 340 250, 320 270 L320 350 C320 390, 290 420, 250 420 C210 420, 180 390, 180 350 L180 270 C160 250, 150 220, 150 180 C150 120, 200 100, 250 100 Z"
+                      stroke="url(#gradient1)"
+                      strokeWidth="3"
                       fill="none"
-                      opacity="0.6"
+                      className="animate-pulse"
+                      style={{ animationDuration: '3s' }}
                     />
-                    <circle cx="200" cy="120" r="60" stroke="#c4ff0f" strokeWidth="2" fill="none" opacity="0.8" />
-                    <circle cx="170" cy="110" r="8" fill="#7c3aed" opacity="0.6" />
-                    <circle cx="230" cy="110" r="8" fill="#7c3aed" opacity="0.6" />
+                    
+                    {/* Neural Connections */}
+                    <circle cx="250" cy="160" r="80" stroke="url(#gradient2)" strokeWidth="2" fill="none" opacity="0.7" />
+                    <circle cx="220" cy="150" r="10" fill="#c4ff0f" opacity="0.8" className="animate-pulse" style={{ animationDuration: '2s' }} />
+                    <circle cx="280" cy="150" r="10" fill="#7c3aed" opacity="0.8" className="animate-pulse" style={{ animationDuration: '2.5s' }} />
+                    <circle cx="250" cy="200" r="8" fill="#c4ff0f" opacity="0.6" className="animate-pulse" style={{ animationDuration: '3s' }} />
+                    
+                    {/* Neural Lines */}
+                    <line x1="220" y1="150" x2="180" y2="200" stroke="#c4ff0f" strokeWidth="2" opacity="0.5" />
+                    <line x1="280" y1="150" x2="320" y2="200" stroke="#7c3aed" strokeWidth="2" opacity="0.5" />
+                    <line x1="250" y1="200" x2="250" y2="280" stroke="#c4ff0f" strokeWidth="2" opacity="0.4" />
+                    
+                    {/* Additional nodes */}
+                    <circle cx="200" cy="240" r="6" fill="#7c3aed" opacity="0.7" className="animate-pulse" style={{ animationDuration: '2.2s' }} />
+                    <circle cx="300" cy="240" r="6" fill="#c4ff0f" opacity="0.7" className="animate-pulse" style={{ animationDuration: '2.8s' }} />
+                    <circle cx="250" cy="300" r="7" fill="#7c3aed" opacity="0.8" className="animate-pulse" style={{ animationDuration: '3.2s' }} />
+                    
+                    <defs>
+                      <linearGradient id="gradient1" x1="150" y1="100" x2="350" y2="420">
+                        <stop offset="0%" stopColor="#c4ff0f" stopOpacity="0.8" />
+                        <stop offset="50%" stopColor="#7c3aed" stopOpacity="0.8" />
+                        <stop offset="100%" stopColor="#a855f7" stopOpacity="0.6" />
+                      </linearGradient>
+                      <linearGradient id="gradient2" x1="170" y1="100" x2="330" y2="220">
+                        <stop offset="0%" stopColor="#c4ff0f" stopOpacity="0.9" />
+                        <stop offset="100%" stopColor="#7c3aed" stopOpacity="0.7" />
+                      </linearGradient>
+                    </defs>
                   </svg>
                 </div>
               </div>
