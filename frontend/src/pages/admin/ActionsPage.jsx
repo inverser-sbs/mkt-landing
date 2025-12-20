@@ -42,12 +42,21 @@ import {
   Layers,
   LayoutGrid,
   Info,
-  MapPin
+  MapPin,
+  MousePointer2,
+  Settings2,
+  CheckCircle2
 } from 'lucide-react';
 import { useToast } from '../../hooks/use-toast';
 import { Toaster } from '../../components/ui/toaster';
 import { useNavigate } from 'react-router-dom';
-import { getSlotsForTemplate } from '../../templates';
+import { 
+  getSlotsForTemplate, 
+  getButtonsForTemplate,
+  getButtonByKey,
+  getAllowedSlotsForButton,
+  getButtonDefaultLabel
+} from '../../templates';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const STORAGE_KEY = 'inverser_selected_campaign';
@@ -68,18 +77,27 @@ const ActionsPage = () => {
   // Form state
   const [formData, setFormData] = useState({
     action_key: '',
+    button_key: '',
     label: '',
     description: '',
     active: true,
     order: 0,
-    display_slots: ['cta']  // Default slot
+    display_slots: []
   });
   const [formErrors, setFormErrors] = useState({});
 
-  // Get available slots for current campaign
-  const availableSlots = selectedCampaign 
-    ? getSlotsForTemplate(selectedCampaign.template_key || 'cpn')
-    : [];
+  // Get template info for current campaign
+  const templateKey = selectedCampaign?.template_key || 'cpn';
+  const availableSlots = getSlotsForTemplate(templateKey);
+  const availableButtons = getButtonsForTemplate(templateKey);
+  
+  // Get allowed slots based on selected button
+  const selectedButton = formData.button_key 
+    ? getButtonByKey(templateKey, formData.button_key) 
+    : null;
+  const allowedSlots = formData.button_key 
+    ? getAllowedSlotsForButton(templateKey, formData.button_key)
+    : availableSlots;
 
   // Load campaigns on mount
   useEffect(() => {
@@ -90,10 +108,20 @@ const ActionsPage = () => {
   useEffect(() => {
     if (selectedCampaign) {
       fetchActions(selectedCampaign.key);
-      // Save to localStorage
       localStorage.setItem(STORAGE_KEY, selectedCampaign.key);
     }
   }, [selectedCampaign]);
+
+  // Reset slots when button changes
+  useEffect(() => {
+    if (formData.button_key && selectedButton) {
+      // Auto-select all allowed slots for this button
+      setFormData(prev => ({
+        ...prev,
+        display_slots: [...selectedButton.allowed_slots]
+      }));
+    }
+  }, [formData.button_key]);
 
   const fetchCampaigns = async () => {
     try {
@@ -102,16 +130,9 @@ const ActionsPage = () => {
       setCampaigns(activeCampaigns);
       
       if (activeCampaigns.length > 0) {
-        // Try to restore last selected campaign from localStorage
         const savedCampaignKey = localStorage.getItem(STORAGE_KEY);
         const savedCampaign = activeCampaigns.find(c => c.key === savedCampaignKey);
-        
-        if (savedCampaign) {
-          setSelectedCampaign(savedCampaign);
-        } else {
-          // Default to first campaign
-          setSelectedCampaign(activeCampaigns[0]);
-        }
+        setSelectedCampaign(savedCampaign || activeCampaigns[0]);
       }
     } catch (error) {
       console.error('Error fetching campaigns:', error);
@@ -152,12 +173,15 @@ const ActionsPage = () => {
   const validateForm = () => {
     const errors = {};
     
+    if (!formData.button_key) {
+      errors.button_key = 'Selecciona un botón del template';
+    }
+    
     if (!formData.action_key) {
       errors.action_key = 'El key es requerido';
     } else if (!/^[a-z0-9_-]+$/.test(formData.action_key)) {
       errors.action_key = 'Solo letras minúsculas, números, guiones y guiones bajos';
     } else if (!selectedAction) {
-      // Check for duplicate only on create
       const exists = actions.some(a => a.action_key === formData.action_key);
       if (exists) {
         errors.action_key = 'Este key ya existe en esta campaña';
@@ -165,7 +189,7 @@ const ActionsPage = () => {
     }
     
     if (!formData.label) {
-      errors.label = 'La etiqueta es requerida';
+      errors.label = 'El texto del botón es requerido';
     }
 
     if (formData.display_slots.length === 0) {
@@ -181,6 +205,7 @@ const ActionsPage = () => {
       setSelectedAction(action);
       setFormData({
         action_key: action.action_key,
+        button_key: action.button_key || action.action_key,
         label: action.label,
         description: action.description || '',
         active: action.active,
@@ -191,11 +216,12 @@ const ActionsPage = () => {
       setSelectedAction(null);
       setFormData({
         action_key: '',
+        button_key: '',
         label: '',
         description: '',
         active: true,
-        order: actions.length, // Default to end of list
-        display_slots: ['cta']  // Default slot
+        order: actions.length,
+        display_slots: []
       });
     }
     setFormErrors({});
@@ -208,18 +234,36 @@ const ActionsPage = () => {
     setFormErrors({});
   };
 
+  const handleButtonSelect = (buttonKey) => {
+    const button = getButtonByKey(templateKey, buttonKey);
+    if (button) {
+      setFormData(prev => ({
+        ...prev,
+        button_key: buttonKey,
+        action_key: prev.action_key || buttonKey, // Auto-fill action_key
+        label: prev.label || button.label_default, // Auto-fill label
+        display_slots: [...button.allowed_slots] // Auto-select all allowed slots
+      }));
+    }
+    if (formErrors.button_key) {
+      setFormErrors(prev => ({ ...prev, button_key: null }));
+    }
+  };
+
   const handleSlotToggle = (slotKey) => {
+    // Only allow toggling slots that are allowed for this button
+    if (selectedButton && !selectedButton.allowed_slots.includes(slotKey)) {
+      return;
+    }
+    
     setFormData(prev => {
       const currentSlots = prev.display_slots || [];
       if (currentSlots.includes(slotKey)) {
-        // Remove slot
         return { ...prev, display_slots: currentSlots.filter(s => s !== slotKey) };
       } else {
-        // Add slot
         return { ...prev, display_slots: [...currentSlots, slotKey] };
       }
     });
-    // Clear error when user selects a slot
     if (formErrors.display_slots) {
       setFormErrors(prev => ({ ...prev, display_slots: null }));
     }
@@ -233,33 +277,27 @@ const ActionsPage = () => {
     setSaving(true);
     try {
       if (selectedAction) {
-        // Update existing action
         await axios.put(`${BACKEND_URL}/api/admin/actions/${selectedAction.id}`, {
           label: formData.label,
+          button_key: formData.button_key,
           description: formData.description || null,
           active: formData.active,
           order: formData.order,
           display_slots: formData.display_slots
         });
-        toast({
-          title: 'Actualizado',
-          description: 'Acción actualizada correctamente'
-        });
+        toast({ title: 'Actualizado', description: 'Acción actualizada correctamente' });
       } else {
-        // Create new action
         await axios.post(`${BACKEND_URL}/api/admin/actions`, {
           campaign_key: selectedCampaign.key,
           action_key: formData.action_key,
+          button_key: formData.button_key,
           label: formData.label,
           description: formData.description || null,
           active: formData.active,
           order: formData.order,
           display_slots: formData.display_slots
         });
-        toast({
-          title: 'Creado',
-          description: 'Acción creada correctamente'
-        });
+        toast({ title: 'Creado', description: 'Acción creada correctamente' });
       }
       
       closeModal();
@@ -286,10 +324,7 @@ const ActionsPage = () => {
     
     try {
       await axios.delete(`${BACKEND_URL}/api/admin/actions/${selectedAction.id}`);
-      toast({
-        title: 'Eliminado',
-        description: 'Acción eliminada correctamente'
-      });
+      toast({ title: 'Eliminado', description: 'Acción eliminada correctamente' });
       fetchActions(selectedCampaign.key);
     } catch (error) {
       console.error('Error deleting action:', error);
@@ -324,14 +359,24 @@ const ActionsPage = () => {
     }
   };
 
-  // Helper to get slot labels for display
+  // Helper to get slot labels
   const getSlotLabels = (slotKeys) => {
-    if (!slotKeys || slotKeys.length === 0) return 'Sin ubicación';
+    if (!slotKeys || slotKeys.length === 0) return ['Sin ubicación'];
     return slotKeys.map(key => {
       const slot = availableSlots.find(s => s.key === key);
       return slot ? slot.label.replace('Hero - ', '').replace('CTA ', '') : key;
     });
   };
+
+  // Helper to get button info
+  const getButtonInfo = (buttonKey) => {
+    const button = getButtonByKey(templateKey, buttonKey);
+    return button || { label_default: buttonKey, description: '' };
+  };
+
+  // Check which buttons are already configured
+  const configuredButtonKeys = actions.map(a => a.button_key || a.action_key);
+  const unconfiguredButtons = availableButtons.filter(b => !configuredButtonKeys.includes(b.key));
 
   if (loading) {
     return (
@@ -341,7 +386,6 @@ const ActionsPage = () => {
     );
   }
 
-  // Empty state - no campaigns
   if (campaigns.length === 0) {
     return (
       <div className="max-w-4xl mx-auto">
@@ -368,9 +412,9 @@ const ActionsPage = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-3xl font-display font-bold text-gray-900">Acciones (Botones)</h1>
+          <h1 className="text-3xl font-display font-bold text-gray-900">Configurar Botones</h1>
           <p className="text-gray-600 mt-1">
-            Define qué botones aparecen y en qué sección de la landing
+            Configura los botones del template para que los mentores puedan personalizar sus URLs
           </p>
         </div>
         
@@ -392,7 +436,7 @@ const ActionsPage = () => {
         </div>
       </div>
 
-      {/* Context Banner with Template Info */}
+      {/* Context Banner */}
       {selectedCampaign && (
         <Card className="p-4 mb-6 bg-purple-50 border-purple-200">
           <div className="flex items-center justify-between flex-wrap gap-4">
@@ -402,12 +446,17 @@ const ActionsPage = () => {
                 <p className="font-medium text-purple-900">
                   Campaña: <span className="font-bold">{selectedCampaign.name}</span>
                 </p>
-                <p className="text-sm text-purple-700 flex items-center gap-2">
-                  <span>Template: <strong>{selectedCampaign.template_key || 'cpn'}</strong></span>
+                <p className="text-sm text-purple-700 flex items-center gap-3">
+                  <span>Template: <strong>{templateKey}</strong></span>
+                  <span>•</span>
+                  <span className="flex items-center">
+                    <MousePointer2 className="w-3 h-3 mr-1" />
+                    {availableButtons.length} botones en el diseño
+                  </span>
                   <span>•</span>
                   <span className="flex items-center">
                     <LayoutGrid className="w-3 h-3 mr-1" />
-                    {availableSlots.length} slots disponibles
+                    {availableSlots.length} ubicaciones
                   </span>
                 </p>
               </div>
@@ -415,27 +464,67 @@ const ActionsPage = () => {
             <Button
               onClick={() => openModal()}
               className="bg-[#7c3aed] hover:bg-purple-700"
+              disabled={unconfiguredButtons.length === 0}
             >
               <Plus className="w-4 h-4 mr-2" />
-              Nueva Acción
+              Configurar Botón
             </Button>
           </div>
         </Card>
       )}
 
-      {/* Info Card - Explain the concept */}
+      {/* Info Card */}
       <Card className="p-4 mb-6 bg-blue-50 border-blue-200">
         <div className="flex items-start space-x-3">
           <Info className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
           <div className="text-sm text-blue-800">
-            <p className="font-semibold mb-1">¿Cómo funcionan los Slots?</p>
+            <p className="font-semibold mb-1">¿Cómo funciona?</p>
             <p>
-              Cada <strong>Acción</strong> es un botón. Los <strong>Slots</strong> indican <em>dónde</em> aparece ese botón en la landing.
-              Por ejemplo: un botón puede aparecer en el <strong>Hero</strong> (arriba) y también en el <strong>CTA</strong> (abajo).
+              El template <strong>{templateKey}</strong> tiene <strong>{availableButtons.length} botones</strong> predefinidos en su diseño.
+              Aquí configuras cada botón para que los mentores puedan asignar sus URLs personalizadas.
             </p>
+            <div className="mt-2 flex items-center gap-2 text-xs">
+              <span className="bg-blue-100 px-2 py-1 rounded">BOTÓN (del diseño)</span>
+              <span>→</span>
+              <span className="bg-blue-100 px-2 py-1 rounded">ACCIÓN (configuración)</span>
+              <span>→</span>
+              <span className="bg-blue-100 px-2 py-1 rounded">SLOT (ubicación)</span>
+              <span>→</span>
+              <span className="bg-blue-100 px-2 py-1 rounded">URL (del mentor)</span>
+            </div>
           </div>
         </div>
       </Card>
+
+      {/* Unconfigured Buttons Alert */}
+      {unconfiguredButtons.length > 0 && (
+        <Card className="p-4 mb-6 bg-amber-50 border-amber-200">
+          <div className="flex items-start space-x-3">
+            <AlertCircle className="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" />
+            <div className="text-sm text-amber-800">
+              <p className="font-semibold mb-1">Botones sin configurar</p>
+              <p>
+                Estos botones existen en el template pero no están configurados:
+              </p>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {unconfiguredButtons.map(button => (
+                  <Badge 
+                    key={button.key} 
+                    variant="outline" 
+                    className="bg-white border-amber-300 text-amber-700 cursor-pointer hover:bg-amber-100"
+                    onClick={() => {
+                      handleButtonSelect(button.key);
+                      setModalOpen(true);
+                    }}
+                  >
+                    + {button.label_default}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Card>
+      )}
 
       {/* Actions List */}
       {actionsLoading ? (
@@ -444,233 +533,320 @@ const ActionsPage = () => {
         </div>
       ) : actions.length === 0 ? (
         <Card className="p-12 text-center">
-          <AlertCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+          <MousePointer2 className="w-12 h-12 text-gray-400 mx-auto mb-4" />
           <h3 className="text-xl font-semibold text-gray-900 mb-2">
-            Sin acciones en esta campaña
+            Sin botones configurados
           </h3>
           <p className="text-gray-600 mb-6">
-            Esta campaña no tiene acciones configuradas. Crea la primera acción para 
-            que los mentores puedan agregar sus enlaces.
+            El template tiene {availableButtons.length} botones disponibles. 
+            Configura cada uno para que los mentores puedan personalizar sus URLs.
           </p>
           <Button onClick={() => openModal()} className="bg-[#7c3aed] hover:bg-purple-700">
             <Plus className="w-4 h-4 mr-2" />
-            Crear primera acción
+            Configurar primer botón
           </Button>
         </Card>
       ) : (
         <div className="space-y-3">
-          {actions.map((action) => (
-            <Card key={action.id} className="p-4 hover:shadow-md transition-shadow">
-              <div className="flex items-center gap-4">
-                {/* Drag Handle (visual only for now) */}
-                <div className="text-gray-400 cursor-move">
-                  <GripVertical className="w-5 h-5" />
-                </div>
-                
-                {/* Order Number */}
-                <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-sm font-medium text-gray-600">
-                  {action.order}
-                </div>
-                
-                {/* Action Info */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <h3 className="font-semibold text-gray-900">{action.label}</h3>
-                    <Badge variant="secondary" className="font-mono text-xs">
-                      {action.action_key}
-                    </Badge>
-                    <Badge variant={action.active ? "default" : "outline"}>
-                      {action.active ? 'Activa' : 'Inactiva'}
-                    </Badge>
+          {actions.map((action) => {
+            const buttonInfo = getButtonInfo(action.button_key || action.action_key);
+            return (
+              <Card key={action.id} className="p-4 hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-4">
+                  <div className="text-gray-400 cursor-move">
+                    <GripVertical className="w-5 h-5" />
                   </div>
                   
-                  {/* Slots Display */}
-                  <div className="flex items-center gap-1 mt-2 flex-wrap">
-                    <MapPin className="w-3 h-3 text-gray-400" />
-                    <span className="text-xs text-gray-500">Ubicación:</span>
-                    {getSlotLabels(action.display_slots).map((label, idx) => (
-                      <Badge key={idx} variant="outline" className="text-xs bg-purple-50 border-purple-200 text-purple-700">
-                        {label}
+                  <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-sm font-medium text-gray-600">
+                    {action.order}
+                  </div>
+                  
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <h3 className="font-semibold text-gray-900">{action.label}</h3>
+                      <Badge variant="secondary" className="font-mono text-xs bg-purple-100 text-purple-700">
+                        {action.button_key || action.action_key}
                       </Badge>
-                    ))}
+                      <Badge variant={action.active ? "default" : "outline"}>
+                        {action.active ? 'Activa' : 'Inactiva'}
+                      </Badge>
+                    </div>
+                    
+                    {/* Button description */}
+                    {buttonInfo.description && (
+                      <p className="text-xs text-gray-500 mt-1">{buttonInfo.description}</p>
+                    )}
+                    
+                    {/* Slots Display */}
+                    <div className="flex items-center gap-1 mt-2 flex-wrap">
+                      <MapPin className="w-3 h-3 text-gray-400" />
+                      <span className="text-xs text-gray-500">Ubicación:</span>
+                      {getSlotLabels(action.display_slots).map((label, idx) => (
+                        <Badge key={idx} variant="outline" className="text-xs bg-purple-50 border-purple-200 text-purple-700">
+                          {label}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
                   
-                  {action.description && (
-                    <p className="text-sm text-gray-500 mt-1">{action.description}</p>
-                  )}
+                  <div className="flex items-center gap-2">
+                    <Button
+                      onClick={() => toggleActive(action)}
+                      size="sm"
+                      variant="outline"
+                      className={action.active ? "text-orange-600" : "text-green-600"}
+                    >
+                      {action.active ? 'Desactivar' : 'Activar'}
+                    </Button>
+                    <Button onClick={() => openModal(action)} size="sm" variant="outline">
+                      <Edit className="w-4 h-4" />
+                    </Button>
+                    <Button
+                      onClick={() => confirmDelete(action)}
+                      size="sm"
+                      variant="outline"
+                      className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </div>
                 </div>
-                
-                {/* Actions */}
-                <div className="flex items-center gap-2">
-                  <Button
-                    onClick={() => toggleActive(action)}
-                    size="sm"
-                    variant="outline"
-                    className={action.active ? "text-orange-600" : "text-green-600"}
-                  >
-                    {action.active ? 'Desactivar' : 'Activar'}
-                  </Button>
-                  <Button
-                    onClick={() => openModal(action)}
-                    size="sm"
-                    variant="outline"
-                  >
-                    <Edit className="w-4 h-4" />
-                  </Button>
-                  <Button
-                    onClick={() => confirmDelete(action)}
-                    size="sm"
-                    variant="outline"
-                    className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </Button>
-                </div>
-              </div>
-            </Card>
-          ))}
+              </Card>
+            );
+          })}
         </div>
       )}
 
-      {/* Create/Edit Modal */}
+      {/* Create/Edit Modal - 3 Step Flow */}
       <Dialog open={modalOpen} onOpenChange={setModalOpen}>
-        <DialogContent className="sm:max-w-lg">
+        <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>
-              {selectedAction ? 'Editar Acción' : 'Nueva Acción'}
+            <DialogTitle className="flex items-center gap-2">
+              <Settings2 className="w-5 h-5" />
+              {selectedAction ? 'Editar Configuración' : 'Configurar Botón'}
             </DialogTitle>
           </DialogHeader>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Action Key (only editable on create) */}
-            <div className="space-y-2">
-              <Label htmlFor="action_key">Key (identificador)</Label>
-              <Input
-                id="action_key"
-                value={formData.action_key}
-                onChange={(e) => setFormData({ ...formData, action_key: e.target.value.toLowerCase() })}
-                placeholder="whatsapp, calendly, demo..."
-                disabled={!!selectedAction}
-                className={formErrors.action_key ? 'border-red-500' : ''}
-              />
-              {formErrors.action_key && (
-                <p className="text-sm text-red-500">{formErrors.action_key}</p>
-              )}
-              {!selectedAction && (
-                <p className="text-xs text-gray-500">
-                  Identificador único. Ej: whatsapp, agenda, demo
-                </p>
-              )}
-            </div>
-
-            {/* Label */}
-            <div className="space-y-2">
-              <Label htmlFor="label">Texto del botón</Label>
-              <Input
-                id="label"
-                value={formData.label}
-                onChange={(e) => setFormData({ ...formData, label: e.target.value })}
-                placeholder="Hablar por WhatsApp"
-                className={formErrors.label ? 'border-red-500' : ''}
-              />
-              {formErrors.label && (
-                <p className="text-sm text-red-500">{formErrors.label}</p>
-              )}
-            </div>
-
+          <form onSubmit={handleSubmit} className="space-y-6">
+            
             {/* ============================================ */}
-            {/* SLOTS SELECTION - NEW FEATURE */}
+            {/* PASO 1: Seleccionar Botón del Template */}
             {/* ============================================ */}
             <div className="space-y-3">
-              <div>
-                <Label className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4" />
-                  ¿Dónde aparece este botón?
-                </Label>
-                <p className="text-xs text-gray-500 mt-1">
-                  Selecciona las secciones de la landing donde se mostrará este botón
-                </p>
+              <div className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                <span className="w-6 h-6 rounded-full bg-[#7c3aed] text-white flex items-center justify-center text-xs">1</span>
+                ¿Qué botón del template estás configurando?
               </div>
               
-              {/* Template Context */}
-              <div className="bg-gray-50 p-3 rounded-lg text-xs text-gray-600">
-                <span className="font-medium">Template actual:</span> {selectedCampaign?.template_key || 'cpn'}
+              <div className="bg-gray-50 p-3 rounded-lg text-xs text-gray-600 mb-2">
+                Template: <strong>{templateKey}</strong> • {availableButtons.length} botones disponibles
               </div>
 
-              {/* Slots Checkboxes */}
-              <div className="space-y-2 border rounded-lg p-3">
-                {availableSlots.map((slot) => (
-                  <div 
-                    key={slot.key}
-                    className={`flex items-start space-x-3 p-2 rounded-md transition-colors ${
-                      formData.display_slots.includes(slot.key) 
-                        ? 'bg-purple-50 border border-purple-200' 
-                        : 'hover:bg-gray-50'
-                    }`}
-                  >
-                    <Checkbox
-                      id={`slot-${slot.key}`}
-                      checked={formData.display_slots.includes(slot.key)}
-                      onCheckedChange={() => handleSlotToggle(slot.key)}
-                    />
-                    <div className="flex-1">
-                      <label 
-                        htmlFor={`slot-${slot.key}`}
-                        className="text-sm font-medium cursor-pointer block"
-                      >
-                        {slot.label}
-                      </label>
-                      <p className="text-xs text-gray-500">{slot.description}</p>
+              <div className="space-y-2">
+                {availableButtons.map((button) => {
+                  const isConfigured = configuredButtonKeys.includes(button.key) && 
+                    (!selectedAction || selectedAction.button_key !== button.key);
+                  const isSelected = formData.button_key === button.key;
+                  
+                  return (
+                    <div 
+                      key={button.key}
+                      onClick={() => !isConfigured && !selectedAction && handleButtonSelect(button.key)}
+                      className={`
+                        p-3 rounded-lg border-2 transition-all
+                        ${isSelected 
+                          ? 'border-[#7c3aed] bg-purple-50' 
+                          : isConfigured 
+                            ? 'border-gray-200 bg-gray-50 opacity-50 cursor-not-allowed'
+                            : selectedAction
+                              ? 'border-gray-200 bg-gray-50 cursor-not-allowed'
+                              : 'border-gray-200 hover:border-purple-300 cursor-pointer'
+                        }
+                      `}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="font-medium text-gray-900">{button.label_default}</p>
+                          <p className="text-xs text-gray-500">{button.description}</p>
+                          <div className="flex gap-1 mt-1">
+                            {button.allowed_slots.map(slot => (
+                              <span key={slot} className="text-xs bg-gray-200 px-1.5 py-0.5 rounded">
+                                {slot}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                        {isSelected && <CheckCircle2 className="w-5 h-5 text-[#7c3aed]" />}
+                        {isConfigured && !isSelected && (
+                          <Badge variant="outline" className="text-xs">Ya configurado</Badge>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
               
-              {formErrors.display_slots && (
-                <p className="text-sm text-red-500">{formErrors.display_slots}</p>
+              {formErrors.button_key && (
+                <p className="text-sm text-red-500">{formErrors.button_key}</p>
               )}
             </div>
 
-            {/* Description */}
-            <div className="space-y-2">
-              <Label htmlFor="description">Descripción interna (opcional)</Label>
-              <Input
-                id="description"
-                value={formData.description}
-                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                placeholder="Nota para el equipo admin"
-              />
-            </div>
+            {/* ============================================ */}
+            {/* PASO 2: Personalizar Texto */}
+            {/* ============================================ */}
+            {formData.button_key && (
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                  <span className="w-6 h-6 rounded-full bg-[#7c3aed] text-white flex items-center justify-center text-xs">2</span>
+                  Personaliza el texto (opcional)
+                </div>
 
-            {/* Order */}
-            <div className="space-y-2">
-              <Label htmlFor="order">Orden de aparición</Label>
-              <Input
-                id="order"
-                type="number"
-                value={formData.order}
-                onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) || 0 })}
-                min="0"
-              />
-            </div>
+                <div className="space-y-3">
+                  {/* Label */}
+                  <div className="space-y-2">
+                    <Label htmlFor="label">Texto del botón</Label>
+                    <Input
+                      id="label"
+                      value={formData.label}
+                      onChange={(e) => setFormData({ ...formData, label: e.target.value })}
+                      placeholder={getButtonDefaultLabel(templateKey, formData.button_key)}
+                      className={formErrors.label ? 'border-red-500' : ''}
+                    />
+                    {formErrors.label && (
+                      <p className="text-sm text-red-500">{formErrors.label}</p>
+                    )}
+                    <p className="text-xs text-gray-500">
+                      Default: {getButtonDefaultLabel(templateKey, formData.button_key)}
+                    </p>
+                  </div>
 
-            {/* Active */}
-            <div className="flex items-center justify-between">
-              <Label htmlFor="active">Activa</Label>
-              <Switch
-                id="active"
-                checked={formData.active}
-                onCheckedChange={(checked) => setFormData({ ...formData, active: checked })}
-              />
-            </div>
+                  {/* Action Key (hidden for most users, auto-generated) */}
+                  {!selectedAction && (
+                    <div className="space-y-2">
+                      <Label htmlFor="action_key" className="text-gray-500">
+                        ID interno (auto-generado)
+                      </Label>
+                      <Input
+                        id="action_key"
+                        value={formData.action_key}
+                        onChange={(e) => setFormData({ ...formData, action_key: e.target.value.toLowerCase() })}
+                        placeholder={formData.button_key}
+                        className={`font-mono text-sm ${formErrors.action_key ? 'border-red-500' : ''}`}
+                      />
+                      {formErrors.action_key && (
+                        <p className="text-sm text-red-500">{formErrors.action_key}</p>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Description */}
+                  <div className="space-y-2">
+                    <Label htmlFor="description">Nota interna (opcional)</Label>
+                    <Input
+                      id="description"
+                      value={formData.description}
+                      onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                      placeholder="Nota para el equipo admin"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* ============================================ */}
+            {/* PASO 3: Seleccionar Ubicaciones (Slots) */}
+            {/* ============================================ */}
+            {formData.button_key && (
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                  <span className="w-6 h-6 rounded-full bg-[#7c3aed] text-white flex items-center justify-center text-xs">3</span>
+                  ¿Dónde aparece este botón?
+                </div>
+
+                <p className="text-xs text-gray-500">
+                  Este botón puede aparecer en las siguientes ubicaciones del template:
+                </p>
+
+                <div className="space-y-2 border rounded-lg p-3">
+                  {availableSlots.map((slot) => {
+                    const isAllowed = selectedButton?.allowed_slots.includes(slot.key);
+                    const isChecked = formData.display_slots.includes(slot.key);
+                    
+                    return (
+                      <div 
+                        key={slot.key}
+                        className={`
+                          flex items-start space-x-3 p-2 rounded-md transition-colors
+                          ${!isAllowed 
+                            ? 'opacity-40 cursor-not-allowed' 
+                            : isChecked 
+                              ? 'bg-purple-50 border border-purple-200' 
+                              : 'hover:bg-gray-50'
+                          }
+                        `}
+                      >
+                        <Checkbox
+                          id={`slot-${slot.key}`}
+                          checked={isChecked}
+                          onCheckedChange={() => handleSlotToggle(slot.key)}
+                          disabled={!isAllowed}
+                        />
+                        <div className="flex-1">
+                          <label 
+                            htmlFor={`slot-${slot.key}`}
+                            className={`text-sm font-medium block ${!isAllowed ? 'text-gray-400' : 'cursor-pointer'}`}
+                          >
+                            {slot.label}
+                            {!isAllowed && <span className="text-xs text-gray-400 ml-2">(no disponible para este botón)</span>}
+                          </label>
+                          <p className="text-xs text-gray-500">{slot.description}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                
+                {formErrors.display_slots && (
+                  <p className="text-sm text-red-500">{formErrors.display_slots}</p>
+                )}
+              </div>
+            )}
+
+            {/* Order & Active */}
+            {formData.button_key && (
+              <div className="grid grid-cols-2 gap-4 pt-2 border-t">
+                <div className="space-y-2">
+                  <Label htmlFor="order">Orden</Label>
+                  <Input
+                    id="order"
+                    type="number"
+                    value={formData.order}
+                    onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) || 0 })}
+                    min="0"
+                  />
+                </div>
+                <div className="flex items-center justify-between pt-6">
+                  <Label htmlFor="active">Activa</Label>
+                  <Switch
+                    id="active"
+                    checked={formData.active}
+                    onCheckedChange={(checked) => setFormData({ ...formData, active: checked })}
+                  />
+                </div>
+              </div>
+            )}
 
             <DialogFooter>
               <Button type="button" variant="outline" onClick={closeModal}>
                 Cancelar
               </Button>
-              <Button type="submit" disabled={saving} className="bg-[#7c3aed] hover:bg-purple-700">
+              <Button 
+                type="submit" 
+                disabled={saving || !formData.button_key} 
+                className="bg-[#7c3aed] hover:bg-purple-700"
+              >
                 {saving && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
-                {selectedAction ? 'Guardar' : 'Crear'}
+                {selectedAction ? 'Guardar' : 'Configurar'}
               </Button>
             </DialogFooter>
           </form>
@@ -681,11 +857,11 @@ const ActionsPage = () => {
       <AlertDialog open={deleteConfirmOpen} onOpenChange={setDeleteConfirmOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>¿Eliminar acción?</AlertDialogTitle>
+            <AlertDialogTitle>¿Eliminar configuración?</AlertDialogTitle>
             <AlertDialogDescription>
-              Esto eliminará la acción &ldquo;{selectedAction?.label}&rdquo; de la campaña.
+              Esto eliminará la configuración del botón &ldquo;{selectedAction?.label}&rdquo;.
               <br /><br />
-              <strong>Nota:</strong> No se puede eliminar si hay mentores con enlaces configurados para esta acción.
+              <strong>Nota:</strong> No se puede eliminar si hay mentores con URLs configuradas.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
