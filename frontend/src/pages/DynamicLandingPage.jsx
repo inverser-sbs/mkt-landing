@@ -2,18 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-// Template imports
-import LandingCPN from '../templates/LandingCPN';
-import LandingSuitex from '../templates/LandingSuitex';
+// Import template system
+import { getTemplate, DEFAULT_TEMPLATE_KEY } from '../templates';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
-// Template registry - maps template_key to component
-const TEMPLATE_REGISTRY = {
-  cpn: LandingCPN,
-  suitex: LandingSuitex,
-};
-
+/**
+ * DynamicLandingPage - Componente principal para renderizar landings multi-campaña
+ * 
+ * Este componente:
+ * 1. Obtiene campaign y slug de la URL (/:campaign/:slug)
+ * 2. Llama a la API para obtener datos del mentor y campaña
+ * 3. Lee el template_key de la campaña
+ * 4. Renderiza el template correspondiente usando TEMPLATE_REGISTRY
+ * 
+ * Si el template_key no existe en el registry, usa el template "generic" como fallback
+ * y muestra un warning en consola.
+ */
 const DynamicLandingPage = () => {
   const { campaign, slug } = useParams();
   const [mentorData, setMentorData] = useState(null);
@@ -71,7 +76,7 @@ const DynamicLandingPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#faf8f5] flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#7c3aed] mx-auto mb-4"></div>
           <p className="text-gray-600">Cargando...</p>
@@ -82,9 +87,9 @@ const DynamicLandingPage = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-[#faf8f5] flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-display font-bold text-gray-900 mb-4">{error}</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">{error}</h1>
           <p className="text-gray-600 mb-6">El mentor que buscas no está disponible.</p>
           <a href="/" className="text-[#7c3aed] hover:underline">Volver al inicio</a>
         </div>
@@ -92,17 +97,11 @@ const DynamicLandingPage = () => {
     );
   }
 
-  // Get template_key from campaign data (fallback to 'cpn')
-  const templateKey = mentorData?.campaign?.template_key || 'cpn';
+  // Get template_key from campaign data (fallback to default)
+  const templateKey = mentorData?.campaign?.template_key || DEFAULT_TEMPLATE_KEY;
   
-  // Get the template component from registry
-  let TemplateComponent = TEMPLATE_REGISTRY[templateKey];
-  
-  // Fallback to CPN with warning if template not found
-  if (!TemplateComponent) {
-    console.warn(`[DynamicLandingPage] Template "${templateKey}" not found in registry. Falling back to "cpn".`);
-    TemplateComponent = TEMPLATE_REGISTRY['cpn'];
-  }
+  // Get the template component using the registry helper
+  const TemplateComponent = getTemplate(templateKey);
 
   return (
     <TemplateComponent 
