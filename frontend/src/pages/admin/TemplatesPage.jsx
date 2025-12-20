@@ -276,24 +276,32 @@ const TemplatesPage = () => {
         <div className="flex items-start space-x-3">
           <Info className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
           <div>
-            <h3 className="font-semibold text-blue-900 mb-2">Conceptos clave</h3>
-            <div className="grid md:grid-cols-3 gap-4 text-sm text-blue-800">
+            <h3 className="font-semibold text-blue-900 mb-2">Arquitectura del Sistema</h3>
+            <div className="grid md:grid-cols-4 gap-4 text-sm text-blue-800">
               <div>
                 <Palette className="w-4 h-4 inline mr-1" />
                 <strong>Template</strong>
-                <p className="text-blue-700 mt-1">El diseño visual de la página (colores, layout, estilo)</p>
+                <p className="text-blue-700 mt-1">El diseño visual de la página</p>
               </div>
               <div>
-                <Layers className="w-4 h-4 inline mr-1" />
-                <strong>Campaña</strong>
-                <p className="text-blue-700 mt-1">Un producto o programa específico con su propia URL</p>
+                <MousePointer2 className="w-4 h-4 inline mr-1" />
+                <strong>Botón</strong>
+                <p className="text-blue-700 mt-1">Elemento interactivo definido en el template</p>
+              </div>
+              <div>
+                <LayoutGrid className="w-4 h-4 inline mr-1" />
+                <strong>Slot (Ubicación)</strong>
+                <p className="text-blue-700 mt-1">Dónde aparece el botón (Hero, CTA, Footer...)</p>
               </div>
               <div>
                 <ArrowRight className="w-4 h-4 inline mr-1" />
-                <strong>Acciones (Botones)</strong>
-                <p className="text-blue-700 mt-1">Los botones disponibles se configuran en Acciones, NO en el template</p>
+                <strong>Acción</strong>
+                <p className="text-blue-700 mt-1">Configuración que conecta el botón con la URL del mentor</p>
               </div>
             </div>
+            <p className="mt-3 text-xs text-blue-700 bg-blue-100 p-2 rounded">
+              <strong>Flujo:</strong> BOTÓN (del diseño) → ACCIÓN (configuración) → SLOT (ubicación) → URL (del mentor)
+            </p>
           </div>
         </div>
       </Card>
