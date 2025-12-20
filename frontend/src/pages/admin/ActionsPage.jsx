@@ -1051,17 +1051,122 @@ const ActionsPage = () => {
       <AlertDialog open={deleteConfirmOpen} onOpenChange={setDeleteConfirmOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>¿Eliminar configuración?</AlertDialogTitle>
-            <AlertDialogDescription>
-              Esto eliminará la configuración del botón &ldquo;{selectedAction?.label}&rdquo;.
-              <br /><br />
-              <strong>Nota:</strong> No se puede eliminar si hay mentores con URLs configuradas.
+            <AlertDialogTitle className="flex items-center gap-2">
+              <Trash2 className="w-5 h-5 text-red-600" />
+              ¿Eliminar configuración?
+            </AlertDialogTitle>
+            <AlertDialogDescription asChild>
+              <div>
+                <p>Esto eliminará la configuración del botón &ldquo;{selectedAction?.label}&rdquo;.</p>
+                
+                {selectedActionLinkInfo && (
+                  <div className="mt-3 p-3 bg-gray-50 rounded-lg text-sm">
+                    <p className="font-semibold text-gray-700 mb-2">Estado de enlaces:</p>
+                    <ul className="space-y-1">
+                      <li className="flex items-center gap-2">
+                        <span className={selectedActionLinkInfo.valid > 0 ? 'text-red-600 font-semibold' : 'text-green-600'}>
+                          {selectedActionLinkInfo.valid > 0 ? '⚠️' : '✅'}
+                        </span>
+                        <span>{selectedActionLinkInfo.valid} enlaces válidos (mentor existe + URL no vacía)</span>
+                      </li>
+                      {selectedActionLinkInfo.orphan > 0 && (
+                        <li className="flex items-center gap-2 text-gray-500">
+                          <span>🗑️</span>
+                          <span>{selectedActionLinkInfo.orphan} enlaces huérfanos (se eliminarán automáticamente)</span>
+                        </li>
+                      )}
+                      {selectedActionLinkInfo.empty_url > 0 && (
+                        <li className="flex items-center gap-2 text-gray-500">
+                          <span>📭</span>
+                          <span>{selectedActionLinkInfo.empty_url} enlaces con URL vacía (se eliminarán automáticamente)</span>
+                        </li>
+                      )}
+                    </ul>
+                  </div>
+                )}
+                
+                {selectedActionLinkInfo?.valid > 0 ? (
+                  <div className="mt-3 p-3 bg-amber-50 rounded-lg border border-amber-200">
+                    <p className="text-amber-800 text-sm">
+                      <strong>⚠️ Atención:</strong> Hay {selectedActionLinkInfo.valid} mentor(es) con URLs activas.
+                      <br />
+                      <span className="text-xs">Si continúas, deberás usar "Eliminar forzado" para borrar también esos enlaces.</span>
+                    </p>
+                  </div>
+                ) : (
+                  <div className="mt-3 p-3 bg-green-50 rounded-lg border border-green-200">
+                    <p className="text-green-800 text-sm">
+                      ✅ No hay enlaces válidos activos. Se puede eliminar de forma segura.
+                    </p>
+                  </div>
+                )}
+              </div>
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancelar</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDelete} className="bg-red-600 hover:bg-red-700">
+            <AlertDialogAction 
+              onClick={() => handleDelete(false)} 
+              className="bg-red-600 hover:bg-red-700"
+            >
               Eliminar
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Force Delete Confirmation */}
+      <AlertDialog open={forceDeleteConfirmOpen} onOpenChange={setForceDeleteConfirmOpen}>
+        <AlertDialogContent className="border-red-200">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="flex items-center gap-2 text-red-600">
+              <AlertTriangle className="w-5 h-5" />
+              ¡Eliminar Forzado!
+            </AlertDialogTitle>
+            <AlertDialogDescription asChild>
+              <div>
+                <div className="bg-red-50 p-3 rounded-lg border border-red-200 mt-2">
+                  <p className="text-red-800 text-sm font-semibold">
+                    Esta acción eliminará:
+                  </p>
+                  <ul className="list-disc list-inside mt-2 text-red-700 text-sm">
+                    <li>La configuración del botón &ldquo;{selectedAction?.label}&rdquo;</li>
+                    <li><strong>TODOS</strong> los enlaces de mentores asociados</li>
+                    <li>Los datos de analítica podrían verse afectados</li>
+                  </ul>
+                </div>
+                
+                <div className="mt-3 p-3 bg-amber-50 rounded-lg border border-amber-200">
+                  <p className="text-amber-800 text-sm">
+                    <strong>💡 Alternativa:</strong> Usa &ldquo;Archivar&rdquo; para ocultar el botón pero conservar todos los datos históricos.
+                  </p>
+                </div>
+                
+                <p className="mt-3 text-sm text-gray-600">
+                  ¿Estás seguro de que quieres continuar?
+                </p>
+              </div>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <Button
+              onClick={() => {
+                setForceDeleteConfirmOpen(false);
+                confirmRetire(selectedAction);
+              }}
+              variant="outline"
+              className="text-amber-600 border-amber-300 hover:bg-amber-50"
+            >
+              <Archive className="w-4 h-4 mr-2" />
+              Archivar en su lugar
+            </Button>
+            <AlertDialogAction 
+              onClick={handleForceDelete} 
+              className="bg-red-600 hover:bg-red-700"
+            >
+              <AlertTriangle className="w-4 h-4 mr-2" />
+              Sí, eliminar todo
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
