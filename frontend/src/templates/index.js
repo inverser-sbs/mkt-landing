@@ -229,43 +229,6 @@ export const TEMPLATE_BUTTONS = {
     }
   ]
 };
-    },
-    {
-      key: 'directorio',
-      label_default: 'Ver Directorio',
-      description: 'Acceso al directorio de coaches/mentores',
-      allowed_slots: ['footer'],
-      icon: 'users',
-      style: 'outline'
-    }
-  ],
-  'suitex': [
-    {
-      key: 'demo',
-      label_default: 'Agendar Demo',
-      description: 'Botón principal para solicitar una demostración del producto',
-      allowed_slots: ['hero_primary', 'cta', 'pricing'],
-      icon: 'calendar',
-      style: 'primary'
-    },
-    {
-      key: 'whatsapp',
-      label_default: 'Contactar por WhatsApp',
-      description: 'Contacto directo para consultas rápidas',
-      allowed_slots: ['hero_secondary', 'cta'],
-      icon: 'message-circle',
-      style: 'secondary'
-    },
-    {
-      key: 'prueba_gratis',
-      label_default: 'Prueba Gratis',
-      description: 'Acceso a prueba gratuita del producto',
-      allowed_slots: ['hero_secondary', 'pricing'],
-      icon: 'zap',
-      style: 'outline'
-    }
-  ]
-};
 
 // ============================================
 // HELPER FUNCTIONS
