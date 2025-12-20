@@ -98,7 +98,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Multi-campaign marketing platform for InverSer. Each campaign can have its own landing page template. The system must support different UIs for different campaigns while sharing the same backend, admin panel, mentors, tracking and CSV system."
+user_problem_statement: "Multi-campaign marketing platform for InverSer. Each campaign can have its own landing page template. The system must support N campaigns with different landing page UIs while sharing the same backend, admin panel, mentors, tracking and CSV system. Emergent is the engine for creating new landings."
 
 backend:
   - task: "Public API returns campaign template_key"
