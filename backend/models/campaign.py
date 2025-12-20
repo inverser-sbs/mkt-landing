@@ -38,6 +38,7 @@ class CampaignCreate(CampaignBase):
 
 class CampaignUpdate(BaseModel):
     name: Optional[str] = Field(None, min_length=1, max_length=200)
+    template_key: Optional[str] = Field(None, min_length=2, max_length=50)
     active: Optional[bool] = None
     sort_order: Optional[int] = None
 
