@@ -4,21 +4,26 @@ import axios from 'axios';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/card';
-import { AlertCircle, CheckCircle2, ExternalLink, Save } from 'lucide-react';
+import { Badge } from '../components/ui/badge';
+import { AlertCircle, CheckCircle2, ExternalLink, Save, Layers } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
 import { Toaster } from '../components/ui/toaster';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const MentorEditPage = () => {
-  const { slug } = useParams();
+  const { campaign, slug } = useParams();
   const [searchParams] = useSearchParams();
   const token = searchParams.get('token');
   const { toast } = useToast();
 
+  // Use campaign from params or default to 'cpn' for legacy URLs
+  const campaignKey = campaign || 'cpn';
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [mentorData, setMentorData] = useState(null);
+  const [campaignData, setCampaignData] = useState(null);
   const [links, setLinks] = useState({});
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -32,15 +37,16 @@ const MentorEditPage = () => {
 
     fetchMentorData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [slug, token]);
+  }, [slug, campaignKey, token]);
 
   const fetchMentorData = async () => {
     try {
       const response = await axios.get(
-        `${BACKEND_URL}/api/edit/${slug}?token=${token}`
+        `${BACKEND_URL}/api/edit/${campaignKey}/${slug}?token=${token}`
       );
       
-      setMentorData(response.data);
+      setMentorData(response.data.mentor);
+      setCampaignData(response.data.campaign);
       
       // Initialize links state
       const initialLinks = {};
@@ -54,7 +60,12 @@ const MentorEditPage = () => {
       if (err.response?.status === 401) {
         setError('Token inválido o expirado. Por favor, solicite un nuevo link de edición a su administrador.');
       } else if (err.response?.status === 404) {
-        setError('Mentor no encontrado.');
+        const detail = err.response?.data?.detail || '';
+        if (detail.includes('Campaign')) {
+          setError('Campaña no encontrada o inactiva.');
+        } else {
+          setError('Mentor no encontrado.');
+        }
       } else {
         setError('Error al cargar los datos. Por favor, intente nuevamente.');
       }
@@ -77,7 +88,7 @@ const MentorEditPage = () => {
 
     try {
       await axios.put(
-        `${BACKEND_URL}/api/edit/${slug}?token=${token}`,
+        `${BACKEND_URL}/api/edit/${campaignKey}/${slug}?token=${token}`,
         links
       );
 
@@ -148,6 +159,13 @@ const MentorEditPage = () => {
     );
   }
 
+  // Get actions from response
+  const actions = mentorData ? Object.keys(links).map(key => ({
+    action_key: key,
+    label: key, // Will be overwritten by actual data
+    current_url: links[key]
+  })) : [];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#faf8f5] to-purple-50 py-12 px-4">
       <Toaster />
@@ -159,10 +177,21 @@ const MentorEditPage = () => {
             Panel de Edición
           </h1>
           <p className="text-lg text-gray-600">
-            Hola, <span className="font-semibold">{mentorData.mentor.first_name} {mentorData.mentor.last_name}</span>
+            Hola, <span className="font-semibold">{mentorData?.first_name} {mentorData?.last_name}</span>
           </p>
+          
+          {/* Campaign Badge */}
+          {campaignData && (
+            <div className="mt-4 flex items-center justify-center space-x-2">
+              <Layers className="w-4 h-4 text-[#7c3aed]" />
+              <Badge variant="secondary" className="text-sm">
+                Campaña: {campaignData.name}
+              </Badge>
+            </div>
+          )}
+          
           <p className="text-sm text-gray-500 mt-2">
-            Edita los enlaces de tus botones de acción
+            Edita los enlaces de tus botones de acción para esta campaña
           </p>
         </div>
 
@@ -182,53 +211,56 @@ const MentorEditPage = () => {
           <CardHeader>
             <CardTitle>Enlaces de Acciones</CardTitle>
             <CardDescription>
-              Actualiza las URLs de tus botones. Si dejas un campo vacío, ese botón no aparecerá en tu página.
+              Actualiza las URLs de tus botones para la campaña "{campaignData?.name}". 
+              Si dejas un campo vacío, ese botón no aparecerá en tu página.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            {mentorData.actions.map((action) => (
-              <div key={action.action_key} className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <label className="text-sm font-semibold text-gray-900">
-                    {action.label}
-                  </label>
-                  {links[action.action_key] && (
-                    <a
-                      href={links[action.action_key]}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs text-[#7c3aed] hover:underline flex items-center"
-                    >
-                      <ExternalLink className="w-3 h-3 mr-1" />
-                      Probar enlace
-                    </a>
+            {Object.entries(links).length === 0 ? (
+              <div className="text-center py-8 text-gray-500">
+                <p>No hay acciones configuradas para esta campaña.</p>
+              </div>
+            ) : (
+              Object.entries(links).map(([actionKey, url]) => (
+                <div key={actionKey} className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <label className="text-sm font-semibold text-gray-900 capitalize">
+                      {actionKey.replace(/-/g, ' ').replace(/_/g, ' ')}
+                    </label>
+                    {url && (
+                      <a
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-[#7c3aed] hover:underline flex items-center"
+                      >
+                        <ExternalLink className="w-3 h-3 mr-1" />
+                        Probar enlace
+                      </a>
+                    )}
+                  </div>
+                  
+                  <Input
+                    type="url"
+                    placeholder="https://ejemplo.com/tu-enlace"
+                    value={url}
+                    onChange={(e) => handleLinkChange(actionKey, e.target.value)}
+                    className="font-mono text-sm"
+                  />
+                  
+                  {url && !url.startsWith('http') && (
+                    <p className="text-xs text-amber-600">
+                      ⚠️ La URL debe empezar con http:// o https://
+                    </p>
                   )}
                 </div>
-                
-                {action.description && (
-                  <p className="text-xs text-gray-500">{action.description}</p>
-                )}
-                
-                <Input
-                  type="url"
-                  placeholder="https://ejemplo.com/tu-enlace"
-                  value={links[action.action_key] || ''}
-                  onChange={(e) => handleLinkChange(action.action_key, e.target.value)}
-                  className="font-mono text-sm"
-                />
-                
-                {links[action.action_key] && !links[action.action_key].startsWith('http') && (
-                  <p className="text-xs text-amber-600">
-                    ⚠️ La URL debe empezar con http:// o https://
-                  </p>
-                )}
-              </div>
-            ))}
+              ))
+            )}
 
             <div className="pt-6 border-t">
               <Button
                 onClick={handleSave}
-                disabled={saving}
+                disabled={saving || Object.keys(links).length === 0}
                 className="w-full bg-[#7c3aed] hover:bg-purple-700 text-white py-6 text-lg font-semibold"
               >
                 {saving ? (
@@ -252,7 +284,16 @@ const MentorEditPage = () => {
           <p className="text-sm text-blue-900">
             <span className="font-semibold">💡 Consejo:</span> Después de guardar los cambios, 
             puedes verificar que todo funcione correctamente visitando tu página pública en{' '}
-            <span className="font-mono bg-blue-100 px-1 rounded">/{mentorData.mentor.slug}</span>
+            <span className="font-mono bg-blue-100 px-1 rounded">/{campaignKey}/{mentorData?.slug}</span>
+          </p>
+        </div>
+
+        {/* Campaign Isolation Notice */}
+        <div className="mt-4 bg-amber-50 border border-amber-200 rounded-lg p-4">
+          <p className="text-sm text-amber-900">
+            <span className="font-semibold">⚠️ Nota:</span> Este link de edición solo permite modificar 
+            los enlaces de la campaña "{campaignData?.name}". Para editar enlaces de otras campañas, 
+            solicita un link de edición específico a tu administrador.
           </p>
         </div>
       </div>
