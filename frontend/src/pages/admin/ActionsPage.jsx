@@ -668,13 +668,30 @@ const ActionsPage = () => {
         <h2 className="text-lg font-semibold text-gray-900">
           Botones Configurados ({actions.filter(a => a.status !== 'retired').length})
         </h2>
-        <div className="flex items-center gap-2">
-          <Label htmlFor="show-retired" className="text-sm text-gray-600">Ver archivados</Label>
-          <Switch
-            id="show-retired"
-            checked={showRetired}
-            onCheckedChange={setShowRetired}
-          />
+        <div className="flex items-center gap-4">
+          <Button
+            onClick={handleCleanupOrphans}
+            variant="outline"
+            size="sm"
+            disabled={cleaningOrphans}
+            className="text-gray-600 hover:text-gray-800"
+            title="Limpia enlaces de mentores eliminados y URLs vacías"
+          >
+            {cleaningOrphans ? (
+              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+            ) : (
+              <Wrench className="w-4 h-4 mr-2" />
+            )}
+            Limpiar datos huérfanos
+          </Button>
+          <div className="flex items-center gap-2">
+            <Label htmlFor="show-retired" className="text-sm text-gray-600">Ver archivados</Label>
+            <Switch
+              id="show-retired"
+              checked={showRetired}
+              onCheckedChange={setShowRetired}
+            />
+          </div>
         </div>
       </div>
 
