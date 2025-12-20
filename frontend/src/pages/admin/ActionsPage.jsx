@@ -6,6 +6,7 @@ import { Label } from '../../components/ui/label';
 import { Badge } from '../../components/ui/badge';
 import { Card } from '../../components/ui/card';
 import { Switch } from '../../components/ui/switch';
+import { Checkbox } from '../../components/ui/checkbox';
 import {
   Dialog,
   DialogContent,
@@ -38,11 +39,15 @@ import {
   Loader2,
   Zap,
   AlertCircle,
-  Layers
+  Layers,
+  LayoutGrid,
+  Info,
+  MapPin
 } from 'lucide-react';
 import { useToast } from '../../hooks/use-toast';
 import { Toaster } from '../../components/ui/toaster';
 import { useNavigate } from 'react-router-dom';
+import { getSlotsForTemplate } from '../../templates';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const STORAGE_KEY = 'inverser_selected_campaign';
@@ -66,9 +71,15 @@ const ActionsPage = () => {
     label: '',
     description: '',
     active: true,
-    order: 0
+    order: 0,
+    display_slots: ['cta']  // Default slot
   });
   const [formErrors, setFormErrors] = useState({});
+
+  // Get available slots for current campaign
+  const availableSlots = selectedCampaign 
+    ? getSlotsForTemplate(selectedCampaign.template_key || 'cpn')
+    : [];
 
   // Load campaigns on mount
   useEffect(() => {
@@ -156,6 +167,10 @@ const ActionsPage = () => {
     if (!formData.label) {
       errors.label = 'La etiqueta es requerida';
     }
+
+    if (formData.display_slots.length === 0) {
+      errors.display_slots = 'Selecciona al menos una ubicación';
+    }
     
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
@@ -169,7 +184,8 @@ const ActionsPage = () => {
         label: action.label,
         description: action.description || '',
         active: action.active,
-        order: action.order || 0
+        order: action.order || 0,
+        display_slots: action.display_slots || ['cta']
       });
     } else {
       setSelectedAction(null);
@@ -178,7 +194,8 @@ const ActionsPage = () => {
         label: '',
         description: '',
         active: true,
-        order: actions.length // Default to end of list
+        order: actions.length, // Default to end of list
+        display_slots: ['cta']  // Default slot
       });
     }
     setFormErrors({});
@@ -189,6 +206,23 @@ const ActionsPage = () => {
     setModalOpen(false);
     setSelectedAction(null);
     setFormErrors({});
+  };
+
+  const handleSlotToggle = (slotKey) => {
+    setFormData(prev => {
+      const currentSlots = prev.display_slots || [];
+      if (currentSlots.includes(slotKey)) {
+        // Remove slot
+        return { ...prev, display_slots: currentSlots.filter(s => s !== slotKey) };
+      } else {
+        // Add slot
+        return { ...prev, display_slots: [...currentSlots, slotKey] };
+      }
+    });
+    // Clear error when user selects a slot
+    if (formErrors.display_slots) {
+      setFormErrors(prev => ({ ...prev, display_slots: null }));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -204,7 +238,8 @@ const ActionsPage = () => {
           label: formData.label,
           description: formData.description || null,
           active: formData.active,
-          order: formData.order
+          order: formData.order,
+          display_slots: formData.display_slots
         });
         toast({
           title: 'Actualizado',
@@ -218,7 +253,8 @@ const ActionsPage = () => {
           label: formData.label,
           description: formData.description || null,
           active: formData.active,
-          order: formData.order
+          order: formData.order,
+          display_slots: formData.display_slots
         });
         toast({
           title: 'Creado',
@@ -288,6 +324,15 @@ const ActionsPage = () => {
     }
   };
 
+  // Helper to get slot labels for display
+  const getSlotLabels = (slotKeys) => {
+    if (!slotKeys || slotKeys.length === 0) return 'Sin ubicación';
+    return slotKeys.map(key => {
+      const slot = availableSlots.find(s => s.key === key);
+      return slot ? slot.label.replace('Hero - ', '').replace('CTA ', '') : key;
+    });
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
@@ -323,9 +368,9 @@ const ActionsPage = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-3xl font-display font-bold text-gray-900">Acciones</h1>
+          <h1 className="text-3xl font-display font-bold text-gray-900">Acciones (Botones)</h1>
           <p className="text-gray-600 mt-1">
-            Gestiona los botones/acciones disponibles para cada campaña
+            Define qué botones aparecen y en qué sección de la landing
           </p>
         </div>
         
@@ -347,18 +392,23 @@ const ActionsPage = () => {
         </div>
       </div>
 
-      {/* Context Banner */}
+      {/* Context Banner with Template Info */}
       {selectedCampaign && (
         <Card className="p-4 mb-6 bg-purple-50 border-purple-200">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between flex-wrap gap-4">
             <div className="flex items-center space-x-3">
               <Zap className="w-5 h-5 text-[#7c3aed]" />
               <div>
                 <p className="font-medium text-purple-900">
-                  Acciones para la campaña: <span className="font-bold">{selectedCampaign.name}</span>
+                  Campaña: <span className="font-bold">{selectedCampaign.name}</span>
                 </p>
-                <p className="text-sm text-purple-700">
-                  URL: /{selectedCampaign.key}/&lt;slug&gt; • Template: {selectedCampaign.template_key}
+                <p className="text-sm text-purple-700 flex items-center gap-2">
+                  <span>Template: <strong>{selectedCampaign.template_key || 'cpn'}</strong></span>
+                  <span>•</span>
+                  <span className="flex items-center">
+                    <LayoutGrid className="w-3 h-3 mr-1" />
+                    {availableSlots.length} slots disponibles
+                  </span>
                 </p>
               </div>
             </div>
@@ -372,6 +422,20 @@ const ActionsPage = () => {
           </div>
         </Card>
       )}
+
+      {/* Info Card - Explain the concept */}
+      <Card className="p-4 mb-6 bg-blue-50 border-blue-200">
+        <div className="flex items-start space-x-3">
+          <Info className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+          <div className="text-sm text-blue-800">
+            <p className="font-semibold mb-1">¿Cómo funcionan los Slots?</p>
+            <p>
+              Cada <strong>Acción</strong> es un botón. Los <strong>Slots</strong> indican <em>dónde</em> aparece ese botón en la landing.
+              Por ejemplo: un botón puede aparecer en el <strong>Hero</strong> (arriba) y también en el <strong>CTA</strong> (abajo).
+            </p>
+          </div>
+        </div>
+      </Card>
 
       {/* Actions List */}
       {actionsLoading ? (
@@ -395,7 +459,7 @@ const ActionsPage = () => {
         </Card>
       ) : (
         <div className="space-y-3">
-          {actions.map((action, index) => (
+          {actions.map((action) => (
             <Card key={action.id} className="p-4 hover:shadow-md transition-shadow">
               <div className="flex items-center gap-4">
                 {/* Drag Handle (visual only for now) */}
@@ -410,7 +474,7 @@ const ActionsPage = () => {
                 
                 {/* Action Info */}
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 flex-wrap">
                     <h3 className="font-semibold text-gray-900">{action.label}</h3>
                     <Badge variant="secondary" className="font-mono text-xs">
                       {action.action_key}
@@ -419,6 +483,18 @@ const ActionsPage = () => {
                       {action.active ? 'Activa' : 'Inactiva'}
                     </Badge>
                   </div>
+                  
+                  {/* Slots Display */}
+                  <div className="flex items-center gap-1 mt-2 flex-wrap">
+                    <MapPin className="w-3 h-3 text-gray-400" />
+                    <span className="text-xs text-gray-500">Ubicación:</span>
+                    {getSlotLabels(action.display_slots).map((label, idx) => (
+                      <Badge key={idx} variant="outline" className="text-xs bg-purple-50 border-purple-200 text-purple-700">
+                        {label}
+                      </Badge>
+                    ))}
+                  </div>
+                  
                   {action.description && (
                     <p className="text-sm text-gray-500 mt-1">{action.description}</p>
                   )}
@@ -458,7 +534,7 @@ const ActionsPage = () => {
 
       {/* Create/Edit Modal */}
       <Dialog open={modalOpen} onOpenChange={setModalOpen}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="sm:max-w-lg">
           <DialogHeader>
             <DialogTitle>
               {selectedAction ? 'Editar Acción' : 'Nueva Acción'}
@@ -482,14 +558,14 @@ const ActionsPage = () => {
               )}
               {!selectedAction && (
                 <p className="text-xs text-gray-500">
-                  Identificador único para esta acción. Ej: whatsapp, agenda, demo
+                  Identificador único. Ej: whatsapp, agenda, demo
                 </p>
               )}
             </div>
 
             {/* Label */}
             <div className="space-y-2">
-              <Label htmlFor="label">Etiqueta (botón)</Label>
+              <Label htmlFor="label">Texto del botón</Label>
               <Input
                 id="label"
                 value={formData.label}
@@ -502,14 +578,67 @@ const ActionsPage = () => {
               )}
             </div>
 
+            {/* ============================================ */}
+            {/* SLOTS SELECTION - NEW FEATURE */}
+            {/* ============================================ */}
+            <div className="space-y-3">
+              <div>
+                <Label className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4" />
+                  ¿Dónde aparece este botón?
+                </Label>
+                <p className="text-xs text-gray-500 mt-1">
+                  Selecciona las secciones de la landing donde se mostrará este botón
+                </p>
+              </div>
+              
+              {/* Template Context */}
+              <div className="bg-gray-50 p-3 rounded-lg text-xs text-gray-600">
+                <span className="font-medium">Template actual:</span> {selectedCampaign?.template_key || 'cpn'}
+              </div>
+
+              {/* Slots Checkboxes */}
+              <div className="space-y-2 border rounded-lg p-3">
+                {availableSlots.map((slot) => (
+                  <div 
+                    key={slot.key}
+                    className={`flex items-start space-x-3 p-2 rounded-md transition-colors ${
+                      formData.display_slots.includes(slot.key) 
+                        ? 'bg-purple-50 border border-purple-200' 
+                        : 'hover:bg-gray-50'
+                    }`}
+                  >
+                    <Checkbox
+                      id={`slot-${slot.key}`}
+                      checked={formData.display_slots.includes(slot.key)}
+                      onCheckedChange={() => handleSlotToggle(slot.key)}
+                    />
+                    <div className="flex-1">
+                      <label 
+                        htmlFor={`slot-${slot.key}`}
+                        className="text-sm font-medium cursor-pointer block"
+                      >
+                        {slot.label}
+                      </label>
+                      <p className="text-xs text-gray-500">{slot.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              {formErrors.display_slots && (
+                <p className="text-sm text-red-500">{formErrors.display_slots}</p>
+              )}
+            </div>
+
             {/* Description */}
             <div className="space-y-2">
-              <Label htmlFor="description">Descripción (opcional)</Label>
+              <Label htmlFor="description">Descripción interna (opcional)</Label>
               <Input
                 id="description"
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                placeholder="Descripción interna de la acción"
+                placeholder="Nota para el equipo admin"
               />
             </div>
 
@@ -554,7 +683,7 @@ const ActionsPage = () => {
           <AlertDialogHeader>
             <AlertDialogTitle>¿Eliminar acción?</AlertDialogTitle>
             <AlertDialogDescription>
-              Esto eliminará la acción "{selectedAction?.label}" de la campaña.
+              Esto eliminará la acción &ldquo;{selectedAction?.label}&rdquo; de la campaña.
               <br /><br />
               <strong>Nota:</strong> No se puede eliminar si hay mentores con enlaces configurados para esta acción.
             </AlertDialogDescription>
