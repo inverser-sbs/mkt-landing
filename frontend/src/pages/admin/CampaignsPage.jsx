@@ -244,20 +244,35 @@ const CampaignsPage = () => {
         </Button>
       </div>
 
-      {/* Info Card */}
-      <Card className="p-4 mb-6 bg-blue-50 border-blue-200">
+      {/* Info Card - Clear and Non-Technical */}
+      <Card className="p-5 mb-6 bg-blue-50 border-blue-200">
         <div className="flex items-start space-x-3">
           <Info className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
           <div className="text-sm text-blue-800">
-            <p className="font-medium mb-2">¿Cómo funciona?</p>
-            <ul className="space-y-1 list-disc list-inside">
-              <li><strong>Template</strong>: Define el diseño visual de la landing page</li>
-              <li><strong>generic</strong>: Diseño neutro que funciona para cualquier campaña nueva</li>
-              <li><strong>cpn</strong>: Diseño específico para Certificación NeuroCoaching</li>
-              <li><strong>suitex</strong>: Diseño específico estilo SaaS para Suitex</li>
-            </ul>
-            <p className="mt-2 text-blue-700">
-              💡 Al crear una campaña nueva, usa <strong>generic</strong> para tener una landing funcional de inmediato.
+            <p className="font-semibold text-base mb-3">¿Qué es una campaña?</p>
+            <p className="mb-3">
+              Una <strong>campaña</strong> es un producto, programa o servicio con su propia página web de mentores.
+              Por ejemplo: "Certificación NeuroCoaching" o "Suitex Oficina Digital".
+            </p>
+            
+            <div className="grid md:grid-cols-3 gap-4 mt-4 bg-white p-4 rounded-lg border border-blue-100">
+              <div>
+                <p className="font-semibold text-blue-900 mb-1">🎨 Template = DISEÑO</p>
+                <p className="text-blue-700 text-xs">El aspecto visual de la página (colores, estilo, layout)</p>
+              </div>
+              <div>
+                <p className="font-semibold text-blue-900 mb-1">⚡ Acciones = BOTONES</p>
+                <p className="text-blue-700 text-xs">Los botones disponibles se configuran en la sección "Acciones"</p>
+              </div>
+              <div>
+                <p className="font-semibold text-blue-900 mb-1">👤 Mentores = LINKS</p>
+                <p className="text-blue-700 text-xs">Cada mentor tiene sus propios enlaces por campaña</p>
+              </div>
+            </div>
+            
+            <p className="mt-4 text-blue-700 bg-yellow-50 p-2 rounded border border-yellow-200">
+              <strong>💡 Importante:</strong> El template NO define los botones. 
+              Los botones se configuran por separado en <strong>Acciones</strong>.
             </p>
           </div>
         </div>
