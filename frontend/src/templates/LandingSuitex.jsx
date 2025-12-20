@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Check, Zap, Users, BarChart3, Calendar, MessageCircle } from 'lucide-react';
+import { getImageUrl } from '../utils/imageUrl';
 
 const LandingSuitex = ({ mentorData, onActionClick }) => {
   const mentor = mentorData?.mentor || {};
