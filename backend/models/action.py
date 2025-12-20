@@ -1,14 +1,24 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, validator
 from typing import Optional
 from datetime import datetime
+import re
 
 class ActionBase(BaseModel):
+    campaign_key: str = Field(..., min_length=2, max_length=50)
     action_key: str = Field(..., min_length=1, max_length=50)
     label: str = Field(..., min_length=1, max_length=100)
     description: Optional[str] = None
     active: bool = True
     order: int = 0
     action_type: str = "url"  # Por ahora solo URL
+    
+    @validator('action_key')
+    def validate_action_key(cls, v):
+        # Action key must be lowercase, alphanumeric, hyphens/underscores only
+        pattern = r'^[a-z0-9_-]+$'
+        if not re.match(pattern, v):
+            raise ValueError('Action key must contain only lowercase letters, numbers, hyphens and underscores')
+        return v.lower()
 
 class ActionCreate(ActionBase):
     pass
