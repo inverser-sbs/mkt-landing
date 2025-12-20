@@ -73,11 +73,14 @@ const ActionsPage = () => {
   const [actionsLoading, setActionsLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const [forceDeleteConfirmOpen, setForceDeleteConfirmOpen] = useState(false);
   const [retireConfirmOpen, setRetireConfirmOpen] = useState(false);
   const [replaceModalOpen, setReplaceModalOpen] = useState(false);
   const [selectedAction, setSelectedAction] = useState(null);
+  const [selectedActionLinkInfo, setSelectedActionLinkInfo] = useState(null);
   const [saving, setSaving] = useState(false);
   const [showRetired, setShowRetired] = useState(false);
+  const [cleaningOrphans, setCleaningOrphans] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
   
