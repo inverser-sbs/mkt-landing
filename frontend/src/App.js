@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import DynamicLandingPage from "./pages/DynamicLandingPage";
 import MentorEditPage from "./pages/MentorEditPage";
 import LoginPage from "./pages/LoginPage";
+import LegacyRedirect from "./components/LegacyRedirect";
 import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminLayout from "./components/AdminLayout";
