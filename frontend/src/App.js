@@ -92,11 +92,11 @@ function App() {
               }
             />
             
-            {/* Dynamic mentor landing - multi-campaign */}
+            {/* Dynamic mentor landing - multi-campaign (MUST be before legacy) */}
             <Route path="/:campaign/:slug" element={<DynamicLandingPage />} />
             
-            {/* Legacy redirect - old single campaign URLs */}
-            <Route path="/:slug" element={<DynamicLandingPage />} />
+            {/* Legacy redirect - old URLs without campaign */}
+            <Route path="/:slug" element={<LegacyRedirect />} />
           </Routes>
         </BrowserRouter>
       </div>
