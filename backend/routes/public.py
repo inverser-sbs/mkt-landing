@@ -51,8 +51,12 @@ async def get_mentor_by_slug(campaign: str, slug: str, db: AsyncIOMotorDatabase 
             if not display_slots:
                 display_slots = ["cta"]
             
+            # Get button_key with fallback to action_key
+            button_key = action.get("button_key") or action["action_key"]
+            
             available_actions.append({
                 "action_key": action["action_key"],
+                "button_key": button_key,
                 "label": action["label"],
                 "url": links[action["action_key"]],
                 "order": action["order"],
