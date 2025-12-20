@@ -336,22 +336,22 @@ curl ".../template" -o template.csv
 
 ### Export
 ```
-GET https://landing-pro-30.preview.emergentagent.com/api/admin/csv/export
+GET https://multicampaign.preview.emergentagent.com/api/admin/csv/export
 ```
 
 ### Import
 ```
-POST https://landing-pro-30.preview.emergentagent.com/api/admin/csv/import
+POST https://multicampaign.preview.emergentagent.com/api/admin/csv/import
 ```
 
 ### Preview
 ```
-POST https://landing-pro-30.preview.emergentagent.com/api/admin/csv/preview
+POST https://multicampaign.preview.emergentagent.com/api/admin/csv/preview
 ```
 
 ### Template
 ```
-GET https://landing-pro-30.preview.emergentagent.com/api/admin/csv/template
+GET https://multicampaign.preview.emergentagent.com/api/admin/csv/template
 ```
 
 ---

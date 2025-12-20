@@ -172,7 +172,7 @@ frontend:
         comment: "Verified via screenshot - /noel-rivera redirects to /cpn/noel-rivera correctly. Final URL confirmed in browser."
       - working: true
         agent: "testing"
-        comment: "✅ TESTED: Legacy redirect working perfectly. /noel-rivera automatically redirects to /cpn/noel-rivera. Final URL verified as https://landing-pro-30.preview.emergentagent.com/cpn/noel-rivera."
+        comment: "✅ TESTED: Legacy redirect working perfectly. /noel-rivera automatically redirects to /cpn/noel-rivera. Final URL verified as https://multicampaign.preview.emergentagent.com/cpn/noel-rivera."
 
 metadata:
   created_by: "main_agent"
