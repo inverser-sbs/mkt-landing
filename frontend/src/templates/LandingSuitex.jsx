@@ -263,7 +263,8 @@ const LandingSuitex = ({ mentorData, onActionClick }) => {
             </p>
           )}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            {actions.map((action) => {
+            {/* CTA Slot Actions */}
+            {displayCtaActions.map((action) => {
               const Icon = getActionIcon(action.action_key);
               return (
                 <Button
