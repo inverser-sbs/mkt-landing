@@ -424,7 +424,7 @@ const MentorsListPage = () => {
                 <div className="flex-shrink-0">
                   {mentor.photo_url ? (
                     <img
-                      src={mentor.photo_url}
+                      src={mentor.photo_url.startsWith('http') ? mentor.photo_url : `${BACKEND_URL}${mentor.photo_url}`}
                       alt={`${mentor.first_name} ${mentor.last_name}`}
                       className="w-16 h-16 rounded-full object-cover"
                     />
