@@ -313,3 +313,5 @@ agent_communication:
 
   - agent: "main"
     message: "Mentors UI campaign-aware complete. Backend: magic_token_service, mentor_link_service, admin_mentors.py, mentor_edit.py all updated with campaign_key support. Frontend: MentorsListPage with campaign selector, links modal, magic link modal. MentorEditPage supports /edit/:campaign/:slug. Isolation verified: CPN=3 actions, Suitex=1, mentor-program=2."
+  - agent: "testing"
+    message: "🔴 CRITICAL BACKEND ERROR FOUND: MentorLink model validation failing due to missing created_at/updated_at fields in database records. Frontend UI working perfectly - campaign selector, context banner, action buttons, modals all functional. Enlaces modal shows correct CPN actions (agenda, whatsapp, formulario). Magic Link generation works with campaign context. Backend ValidationError prevents some link operations. URGENT: Fix MentorLink model validation or add missing timestamp fields to existing database records."
