@@ -1,7 +1,10 @@
 from pydantic import BaseModel, Field, validator
-from typing import Optional, List
+from typing import Optional, List, Literal
 from datetime import datetime
 import re
+
+# Action status types
+ActionStatus = Literal["active", "inactive", "retired"]
 
 class ActionBase(BaseModel):
     campaign_key: str = Field(..., min_length=2, max_length=50)
@@ -10,6 +13,7 @@ class ActionBase(BaseModel):
     label: str = Field(..., min_length=1, max_length=100)
     description: Optional[str] = None
     active: bool = True
+    status: ActionStatus = "active"  # active, inactive, retired
     order: int = 0
     action_type: str = "url"  # Por ahora solo URL
     display_slots: List[str] = Field(default_factory=lambda: ["cta"])  # Slots donde se muestra
@@ -38,6 +42,7 @@ class ActionUpdate(BaseModel):
     button_key: Optional[str] = Field(None, max_length=50)
     description: Optional[str] = None
     active: Optional[bool] = None
+    status: Optional[ActionStatus] = None
     order: Optional[int] = None
     action_type: Optional[str] = None
     display_slots: Optional[List[str]] = None
