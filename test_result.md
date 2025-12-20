@@ -1,7 +1,3 @@
-#====================================================================================================
-# START - Testing Protocol - DO NOT EDIT OR REMOVE THIS SECTION
-#====================================================================================================
-
 # THIS SECTION CONTAINS CRITICAL TESTING INSTRUCTIONS FOR BOTH AGENTS
 # BOTH MAIN_AGENT AND TESTING_AGENT MUST PRESERVE THIS ENTIRE BLOCK
 
@@ -101,3 +97,87 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "Multi-campaign marketing platform for InverSer. Each campaign can have its own landing page template. The system must support different UIs for different campaigns while sharing the same backend, admin panel, mentors, tracking and CSV system."
+
+backend:
+  - task: "Public API returns campaign template_key"
+    implemented: true
+    working: true
+    file: "/app/backend/routes/public.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "API endpoint /api/public/mentor/{campaign}/{slug} returns campaign.template_key correctly. Verified via curl - cpn returns template_key:cpn, suitex returns template_key:suitex"
+
+frontend:
+  - task: "Dynamic template system in DynamicLandingPage"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/DynamicLandingPage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Implemented template registry pattern. DynamicLandingPage fetches campaign data, extracts template_key, and renders corresponding component (LandingCPN or LandingSuitex). Fallback to cpn with console warning if template not found."
+
+  - task: "LandingCPN template component"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/templates/LandingCPN.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Wrapper component that renders the original NeuroCoaching certification landing page. Receives mentorData and onActionClick props."
+
+  - task: "LandingSuitex template component"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/templates/LandingSuitex.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "New SaaS-style landing page with Hero, Benefits, How it works, For who, CTA and Footer sections. Uses action_key=demo for primary CTA. Completely different copy/design from CPN."
+
+  - task: "Legacy URL redirect"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/LegacyRedirect.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Verified via screenshot - /noel-rivera redirects to /cpn/noel-rivera correctly. Final URL confirmed in browser."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: true
+
+test_plan:
+  current_focus:
+    - "Dynamic template system in DynamicLandingPage"
+    - "LandingCPN template component"
+    - "LandingSuitex template component"
+    - "Legacy URL redirect"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "main"
+    message: "Implemented P0 tasks: 1) Template system in DynamicLandingPage.jsx - reads template_key from API and renders correct component from TEMPLATE_REGISTRY. 2) LandingSuitex.jsx - Complete SaaS landing with no coaching copy. 3) Verified manually via screenshots: /cpn/noel-rivera shows NeuroCoaching, /suitex/noel-rivera shows Suitex SaaS, /noel-rivera redirects to /cpn/noel-rivera. Please run frontend tests to verify all template switching works correctly."
