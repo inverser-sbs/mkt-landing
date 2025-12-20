@@ -141,7 +141,41 @@ const LandingSuitex = ({ mentorData, onActionClick }) => {
             )}
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              {actions.map((action) => {
+              {/* Hero Primary Actions */}
+              {heroPrimaryActions.map((action) => {
+                const Icon = getActionIcon(action.action_key);
+                return (
+                  <Button
+                    key={action.action_key}
+                    onClick={() => handleActionClick(action)}
+                    size="lg"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg"
+                  >
+                    <Icon className="w-5 h-5 mr-2" />
+                    {action.label}
+                  </Button>
+                );
+              })}
+              
+              {/* Hero Secondary Actions */}
+              {heroSecondaryActions.map((action) => {
+                const Icon = getActionIcon(action.action_key);
+                return (
+                  <Button
+                    key={action.action_key}
+                    onClick={() => handleActionClick(action)}
+                    size="lg"
+                    variant="outline"
+                    className="border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-6 text-lg"
+                  >
+                    <Icon className="w-5 h-5 mr-2" />
+                    {action.label}
+                  </Button>
+                );
+              })}
+              
+              {/* Fallback if no slot-specific actions */}
+              {!hasSlotActions && actions.map((action) => {
                 const Icon = getActionIcon(action.action_key);
                 return (
                   <Button
