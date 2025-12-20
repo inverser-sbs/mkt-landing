@@ -49,7 +49,9 @@ import {
   Archive,
   RefreshCw,
   Eye,
-  EyeOff
+  EyeOff,
+  AlertTriangle,
+  Wrench
 } from 'lucide-react';
 import { useToast } from '../../hooks/use-toast';
 import { Toaster } from '../../components/ui/toaster';
