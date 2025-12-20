@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from './ui/button';
 import { Star, Award, Phone, Calendar, MessageCircle } from 'lucide-react';
 import { Badge } from './ui/badge';
+import { getImageUrl } from '../utils/imageUrl';
 
 const HeroSection = ({ mentorData, onActionClick }) => {
   // If no mentor data, use default (generic landing)
