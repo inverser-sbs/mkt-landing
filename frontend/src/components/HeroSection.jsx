@@ -3,6 +3,7 @@ import { Button } from './ui/button';
 import { Star, Award, Phone, Calendar, MessageCircle } from 'lucide-react';
 import { Badge } from './ui/badge';
 import { getImageUrl } from '../utils/imageUrl';
+import { getActionsForSlot } from '../utils/slotHelpers';
 
 const HeroSection = ({ mentorData, onActionClick }) => {
   // If no mentor data, use default (generic landing)
@@ -13,6 +14,15 @@ const HeroSection = ({ mentorData, onActionClick }) => {
   };
   
   const actions = mentorData?.actions || [];
+  
+  // Filter actions by slot
+  const primaryActions = getActionsForSlot(actions, 'hero_primary');
+  const secondaryActions = getActionsForSlot(actions, 'hero_secondary');
+  
+  // If no slot-specific actions, fallback to showing first 2 actions
+  const hasSlotActions = primaryActions.length > 0 || secondaryActions.length > 0;
+  const displayPrimary = hasSlotActions ? primaryActions : actions.slice(0, 1);
+  const displaySecondary = hasSlotActions ? secondaryActions : actions.slice(1, 2);
 
   const handleActionClick = (action) => {
     if (onActionClick) {
