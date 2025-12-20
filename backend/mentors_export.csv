@@ -1,0 +1,4 @@
+first_name,last_name,email,slug,active,mentor_group,photo_url,action:agenda,action:whatsapp,action:formulario
+Noel,Rivera,noel@inverser.us,noel-rivera,true,team,https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop,https://calendly.com/inverser/certificacion-neurocoaching,https://wa.me/99999999?text=Test%20Updated,https://forms.gle/inverser-aplicacion
+María,González Updated,maria.updated@ejemplo.com,maria-gonzalez,true,premium,https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400,https://calendly.com/maria-updated,https://wa.me/1111111111,https://forms.gle/maria-new
+Carlos,Rodríguez,carlos@ejemplo.com,carlos-rodriguez,true,team,https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400,https://calendly.com/carlos,,https://forms.gle/carlos-form
