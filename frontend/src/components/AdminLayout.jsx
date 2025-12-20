@@ -9,7 +9,8 @@ import {
   BarChart3, 
   LogOut,
   Menu,
-  X
+  X,
+  Layers
 } from 'lucide-react';
 
 const AdminLayout = ({ children }) => {
@@ -20,6 +21,7 @@ const AdminLayout = ({ children }) => {
 
   const menuItems = [
     { path: '/admin', label: 'Mentores', icon: Users },
+    { path: '/admin/campaigns', label: 'Campañas', icon: Layers },
     { path: '/admin/actions', label: 'Acciones', icon: Zap },
     { path: '/admin/csv', label: 'CSV', icon: FileDown },
     { path: '/admin/analytics', label: 'Analítica', icon: BarChart3 },
