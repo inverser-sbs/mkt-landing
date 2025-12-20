@@ -69,3 +69,20 @@ async def get_mentor_by_slug(campaign: str, slug: str, db: AsyncIOMotorDatabase 
         },
         "actions": available_actions
     }
+
+@router.get("/mentor/{slug}/redirect-info")
+async def get_mentor_redirect_info(slug: str, db: AsyncIOMotorDatabase = Depends(get_db)):
+    """
+    Legacy route - provides info for frontend to redirect to /cpn/:slug
+    """
+    mentor_service = MentorService(db)
+    
+    # Get mentor
+    mentor = await mentor_service.get_mentor_by_slug(slug)
+    if not mentor:
+        raise HTTPException(status_code=404, detail="Mentor not found")
+    
+    return {
+        "redirect_to": f"/cpn/{slug}",
+        "message": "Please use the new URL format: /cpn/{slug}"
+    }
