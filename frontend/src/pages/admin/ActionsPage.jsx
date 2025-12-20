@@ -1107,7 +1107,7 @@ const ActionsPage = () => {
                     <p className="text-amber-800 text-sm">
                       <strong>⚠️ Atención:</strong> Hay {selectedActionLinkInfo.valid} mentor(es) con URLs activas.
                       <br />
-                      <span className="text-xs">Si continúas, deberás usar "Eliminar forzado" para borrar también esos enlaces.</span>
+                      <span className="text-xs">Si continúas, deberás usar &ldquo;Eliminar forzado&rdquo; para borrar también esos enlaces.</span>
                     </p>
                   </div>
                 ) : (
