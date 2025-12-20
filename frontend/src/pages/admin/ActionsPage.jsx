@@ -1008,6 +1008,111 @@ const ActionsPage = () => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      {/* Retire Confirmation */}
+      <AlertDialog open={retireConfirmOpen} onOpenChange={setRetireConfirmOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle className="flex items-center gap-2">
+              <Archive className="w-5 h-5 text-amber-600" />
+              ¿Archivar acción?
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              Esto archivará la acción &ldquo;{selectedAction?.label}&rdquo;.
+              <br /><br />
+              <strong>¿Qué significa archivar?</strong>
+              <ul className="list-disc list-inside mt-2 text-sm">
+                <li>No aparecerá en la landing</li>
+                <li>No estará disponible para mentores</li>
+                <li>Se conservan los enlaces existentes (historial)</li>
+                <li>No aparecerá en esta lista (a menos que actives &ldquo;Ver archivados&rdquo;)</li>
+              </ul>
+              <br />
+              <span className="text-amber-600">Recomendado cuando el diseño cambia y quieres conservar los datos.</span>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction onClick={handleRetire} className="bg-amber-600 hover:bg-amber-700">
+              <Archive className="w-4 h-4 mr-2" />
+              Archivar
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Replace Action Modal */}
+      <Dialog open={replaceModalOpen} onOpenChange={setReplaceModalOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <RefreshCw className="w-5 h-5 text-blue-600" />
+              Migrar Enlaces a Otra Acción
+            </DialogTitle>
+          </DialogHeader>
+          
+          <div className="space-y-4">
+            <div className="bg-blue-50 p-3 rounded-lg text-sm text-blue-800">
+              <p>
+                Esto migrará <strong>todos los enlaces de mentores</strong> de la acción 
+                <strong> &ldquo;{selectedAction?.label}&rdquo;</strong> a otra acción.
+              </p>
+              <p className="mt-2 text-xs">
+                Útil cuando un botón cambia de nombre o se reemplaza por otro.
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <Label>Acción origen (actual)</Label>
+              <Input 
+                value={selectedAction?.label || ''} 
+                disabled 
+                className="bg-gray-100"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label>Migrar enlaces a:</Label>
+              <Select 
+                value={replaceData.newActionKey} 
+                onValueChange={(value) => setReplaceData({ newActionKey: value })}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Seleccionar acción destino" />
+                </SelectTrigger>
+                <SelectContent>
+                  {actions
+                    .filter(a => a.action_key !== selectedAction?.action_key && a.status !== 'retired')
+                    .map((action) => (
+                      <SelectItem key={action.action_key} value={action.action_key}>
+                        {action.label} ({action.action_key})
+                      </SelectItem>
+                    ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="bg-amber-50 p-3 rounded-lg text-sm text-amber-800">
+              <strong>Después de migrar:</strong> puedes archivar la acción original.
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button type="button" variant="outline" onClick={() => setReplaceModalOpen(false)}>
+              Cancelar
+            </Button>
+            <Button 
+              onClick={handleReplace} 
+              disabled={saving || !replaceData.newActionKey}
+              className="bg-blue-600 hover:bg-blue-700"
+            >
+              {saving && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+              <RefreshCw className="w-4 h-4 mr-2" />
+              Migrar Enlaces
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
