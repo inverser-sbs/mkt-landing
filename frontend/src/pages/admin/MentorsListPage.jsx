@@ -452,46 +452,61 @@ const MentorsListPage = () => {
               </div>
 
               {/* Actions */}
-              <div className="mt-4 grid grid-cols-2 gap-2">
+              <div className="mt-4 space-y-2">
+                {/* Edit Mentor Button - Prominent */}
                 <Button
-                  onClick={() => openLinksModal(mentor)}
+                  onClick={() => navigate(`/admin/mentor/${mentor.id}`)}
                   size="sm"
-                  variant="outline"
-                  disabled={!selectedCampaign}
-                  title="Editar enlaces"
+                  variant="default"
+                  className="w-full bg-[#7c3aed] hover:bg-purple-700"
+                  title="Editar datos y foto del mentor"
                 >
-                  <LinkIcon className="w-4 h-4 mr-1" />
-                  Enlaces
+                  <UserPen className="w-4 h-4 mr-2" />
+                  Editar Mentor
                 </Button>
-                <Button
-                  onClick={() => openMagicLinkModal(mentor)}
-                  size="sm"
-                  variant="outline"
-                  disabled={!selectedCampaign}
-                  title="Generar magic link"
-                >
-                  <Wand2 className="w-4 h-4 mr-1" />
-                  Magic Link
-                </Button>
-                <Button
-                  onClick={() => copyPublicUrl(mentor.slug)}
-                  size="sm"
-                  variant="outline"
-                  disabled={!selectedCampaign}
-                  title="Copiar URL pública"
-                >
-                  <Copy className="w-4 h-4 mr-1" />
-                  URL
-                </Button>
-                <Button
-                  onClick={() => toggleActive(mentor)}
-                  size="sm"
-                  variant="outline"
-                  title={mentor.active ? 'Desactivar' : 'Activar'}
-                >
-                  {mentor.active ? <EyeOff className="w-4 h-4 mr-1" /> : <Eye className="w-4 h-4 mr-1" />}
-                  {mentor.active ? 'Off' : 'On'}
-                </Button>
+                
+                {/* Secondary Actions Grid */}
+                <div className="grid grid-cols-2 gap-2">
+                  <Button
+                    onClick={() => openLinksModal(mentor)}
+                    size="sm"
+                    variant="outline"
+                    disabled={!selectedCampaign}
+                    title="Editar enlaces"
+                  >
+                    <LinkIcon className="w-4 h-4 mr-1" />
+                    Enlaces
+                  </Button>
+                  <Button
+                    onClick={() => openMagicLinkModal(mentor)}
+                    size="sm"
+                    variant="outline"
+                    disabled={!selectedCampaign}
+                    title="Generar magic link"
+                  >
+                    <Wand2 className="w-4 h-4 mr-1" />
+                    Magic Link
+                  </Button>
+                  <Button
+                    onClick={() => copyPublicUrl(mentor.slug)}
+                    size="sm"
+                    variant="outline"
+                    disabled={!selectedCampaign}
+                    title="Copiar URL pública"
+                  >
+                    <Copy className="w-4 h-4 mr-1" />
+                    URL
+                  </Button>
+                  <Button
+                    onClick={() => toggleActive(mentor)}
+                    size="sm"
+                    variant="outline"
+                    title={mentor.active ? 'Desactivar' : 'Activar'}
+                  >
+                    {mentor.active ? <EyeOff className="w-4 h-4 mr-1" /> : <Eye className="w-4 h-4 mr-1" />}
+                    {mentor.active ? 'Off' : 'On'}
+                  </Button>
+                </div>
               </div>
             </Card>
           ))}
