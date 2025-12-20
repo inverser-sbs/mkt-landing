@@ -55,7 +55,7 @@ const CampaignsPage = () => {
   const [formData, setFormData] = useState({
     key: '',
     name: '',
-    template_key: 'generic',
+    template_key: 'cpn',
     active: true,
     sort_order: 0
   });
