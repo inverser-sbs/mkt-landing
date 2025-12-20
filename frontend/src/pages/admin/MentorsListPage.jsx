@@ -35,7 +35,8 @@ import {
   Calendar,
   Layers,
   CheckCircle2,
-  AlertCircle
+  AlertCircle,
+  UserPen
 } from 'lucide-react';
 import { useToast } from '../../hooks/use-toast';
 import { Toaster } from '../../components/ui/toaster';
