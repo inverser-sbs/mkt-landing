@@ -12,140 +12,130 @@ const HeroSection = () => {
   };
 
   return (
-    <section id="inicio" className="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
-          <div className="space-y-6">
-            {/* Rating */}
-            <div className="flex items-center space-x-2">
-              <div className="flex space-x-1">
-                {[1, 2, 3, 4, 5].map((i) => (
-                  <Star key={i} className="w-5 h-5 fill-[#c4ff0f] text-[#c4ff0f]" />
-                ))}
-              </div>
-              <span className="text-sm text-gray-600">(+100 valoraciones)</span>
+    <section id="inicio" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+      {/* Animated Background Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#faf8f5] via-purple-50/30 to-green-50/20"></div>
+      
+      {/* Abstract Neural Network Background */}
+      <div className="absolute right-0 top-0 w-1/2 h-full opacity-40 hidden lg:block">
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='800' height='800' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23c4ff0f;stop-opacity:0.3' /%3E%3Cstop offset='50%25' style='stop-color:%237c3aed;stop-opacity:0.4' /%3E%3Cstop offset='100%25' style='stop-color:%23a855f7;stop-opacity:0.2' /%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='400' cy='200' r='150' fill='none' stroke='url(%23g1)' stroke-width='2' opacity='0.6'/%3E%3Ccircle cx='500' cy='400' r='120' fill='none' stroke='url(%23g1)' stroke-width='2' opacity='0.5'/%3E%3Ccircle cx='300' cy='500' r='100' fill='none' stroke='url(%23g1)' stroke-width='2' opacity='0.4'/%3E%3Cline x1='400' y1='200' x2='500' y2='400' stroke='%237c3aed' stroke-width='1.5' opacity='0.3'/%3E%3Cline x1='500' y1='400' x2='300' y2='500' stroke='%23c4ff0f' stroke-width='1.5' opacity='0.3'/%3E%3Ccircle cx='400' cy='200' r='8' fill='%23c4ff0f' opacity='0.8'/%3E%3Ccircle cx='500' cy='400' r='8' fill='%237c3aed' opacity='0.8'/%3E%3Ccircle cx='300' cy='500' r='8' fill='%23c4ff0f' opacity='0.8'/%3E%3C/svg%3E")`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            maskImage: 'linear-gradient(to left, black 30%, transparent 90%)',
+            WebkitMaskImage: 'linear-gradient(to left, black 30%, transparent 90%)'
+          }}
+        ></div>
+      </div>
+
+      {/* Floating Particles Effect */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-float"
+            style={{
+              background: i % 3 === 0 ? '#c4ff0f' : i % 3 === 1 ? '#7c3aed' : '#a855f7',
+              width: `${Math.random() * 100 + 50}px`,
+              height: `${Math.random() * 100 + 50}px`,
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${Math.random() * 10 + 10}s`
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="max-w-3xl">
+          {/* Rating */}
+          <div className="flex items-center space-x-2 mb-6 animate-fade-in">
+            <div className="flex space-x-1">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <Star key={i} className="w-5 h-5 fill-[#c4ff0f] text-[#c4ff0f]" />
+              ))}
             </div>
-
-            {/* Badge */}
-            <Badge className="bg-purple-100 text-[#7c3aed] border-purple-200 hover:bg-purple-100">
-              <Award className="w-4 h-4 mr-2" />
-              Avalada por GCF y Universidad Global de Florida
-            </Badge>
-
-            {/* Main Heading */}
-            <div>
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                <span className="text-gray-900">Certificación Profesional</span>
-                <br />
-                <span className="text-[#7c3aed]">Neurocoaching <span className="font-serif italic">&</span> Mentor Program</span>
-              </h1>
-            </div>
-
-            {/* Description */}
-            <p className="text-lg text-gray-700">
-              <span className="font-semibold">Transforma tu vida y la de otros</span> mientras
-              construyes una carrera con propósito. Únete a la comunidad de coaches que ya están
-              generando impacto y resultados extraordinarios.
-            </p>
-
-            <p className="text-gray-600">
-              Forma parte ya de la Comunidad de Formación más completa. Con tu registro podrás
-              solicitar tu entrevista.
-            </p>
-
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button
-                onClick={handleWhatsApp}
-                className="bg-[#c4ff0f] text-gray-900 hover:bg-[#b3ef00] font-semibold px-8 py-6 text-lg transition-all duration-300 hover:scale-105"
-              >
-                Únete Hoy →
-              </Button>
-              <Button
-                onClick={handleWhatsApp}
-                variant="outline"
-                className="border-[#7c3aed] text-[#7c3aed] hover:bg-purple-50 px-8 py-6 text-lg transition-all duration-300"
-              >
-                <Phone className="w-5 h-5 mr-2" />
-                Agendar Llamada
-              </Button>
-            </div>
-
-            {/* Fire Alert */}
-            <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
-              <p className="text-sm text-gray-700">
-                🔥 <span className="font-semibold">Oportunidad única:</span> Formación + acceso de
-                por vida a la membresía de Coaches NeuroEvolutivos con Acreditación Internacional.
-              </p>
-            </div>
+            <span className="text-sm text-gray-600">(+100 valoraciones)</span>
           </div>
 
-          {/* Right Image */}
-          <div className="relative">
-            <div className="relative w-full h-[500px] rounded-3xl overflow-hidden">
-              {/* Gradient Background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-100 via-green-50 to-purple-50"></div>
-              
-              {/* Brain Illustration with Glowing Effect */}
-              <div className="absolute inset-0" style={{
-                backgroundImage: 'url(https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=800&auto=format&fit=crop&q=60)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                opacity: 0.4,
-                mixBlendMode: 'multiply'
-              }}></div>
-              
-              {/* Glowing Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#c4ff0f]/30 via-[#7c3aed]/30 to-purple-400/30 backdrop-blur-sm">
-                <div className="w-full h-full relative">
-                  {/* Animated Neural Network Effect */}
-                  <svg
-                    className="absolute inset-0 w-full h-full opacity-60"
-                    viewBox="0 0 500 500"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    {/* Brain Outline */}
-                    <path
-                      d="M250 100 C300 100, 350 120, 350 180 C350 220, 340 250, 320 270 L320 350 C320 390, 290 420, 250 420 C210 420, 180 390, 180 350 L180 270 C160 250, 150 220, 150 180 C150 120, 200 100, 250 100 Z"
-                      stroke="url(#gradient1)"
-                      strokeWidth="3"
-                      fill="none"
-                      className="animate-pulse"
-                      style={{ animationDuration: '3s' }}
-                    />
-                    
-                    {/* Neural Connections */}
-                    <circle cx="250" cy="160" r="80" stroke="url(#gradient2)" strokeWidth="2" fill="none" opacity="0.7" />
-                    <circle cx="220" cy="150" r="10" fill="#c4ff0f" opacity="0.8" className="animate-pulse" style={{ animationDuration: '2s' }} />
-                    <circle cx="280" cy="150" r="10" fill="#7c3aed" opacity="0.8" className="animate-pulse" style={{ animationDuration: '2.5s' }} />
-                    <circle cx="250" cy="200" r="8" fill="#c4ff0f" opacity="0.6" className="animate-pulse" style={{ animationDuration: '3s' }} />
-                    
-                    {/* Neural Lines */}
-                    <line x1="220" y1="150" x2="180" y2="200" stroke="#c4ff0f" strokeWidth="2" opacity="0.5" />
-                    <line x1="280" y1="150" x2="320" y2="200" stroke="#7c3aed" strokeWidth="2" opacity="0.5" />
-                    <line x1="250" y1="200" x2="250" y2="280" stroke="#c4ff0f" strokeWidth="2" opacity="0.4" />
-                    
-                    {/* Additional nodes */}
-                    <circle cx="200" cy="240" r="6" fill="#7c3aed" opacity="0.7" className="animate-pulse" style={{ animationDuration: '2.2s' }} />
-                    <circle cx="300" cy="240" r="6" fill="#c4ff0f" opacity="0.7" className="animate-pulse" style={{ animationDuration: '2.8s' }} />
-                    <circle cx="250" cy="300" r="7" fill="#7c3aed" opacity="0.8" className="animate-pulse" style={{ animationDuration: '3.2s' }} />
-                    
-                    <defs>
-                      <linearGradient id="gradient1" x1="150" y1="100" x2="350" y2="420">
-                        <stop offset="0%" stopColor="#c4ff0f" stopOpacity="0.8" />
-                        <stop offset="50%" stopColor="#7c3aed" stopOpacity="0.8" />
-                        <stop offset="100%" stopColor="#a855f7" stopOpacity="0.6" />
-                      </linearGradient>
-                      <linearGradient id="gradient2" x1="170" y1="100" x2="330" y2="220">
-                        <stop offset="0%" stopColor="#c4ff0f" stopOpacity="0.9" />
-                        <stop offset="100%" stopColor="#7c3aed" stopOpacity="0.7" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                </div>
+          {/* Badge */}
+          <Badge className="bg-purple-100 text-[#7c3aed] border-purple-200 hover:bg-purple-100 mb-8 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+            <Award className="w-4 h-4 mr-2" />
+            Avalada por GCF y Universidad Global de Florida
+          </Badge>
+
+          {/* Main Heading */}
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-slide-up">
+            <span className="text-gray-900">Certificación Profesional</span>
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7c3aed] via-purple-500 to-[#7c3aed]">
+              Neurocoaching <span className="font-serif italic">&</span> Mentor Program
+            </span>
+          </h1>
+
+          {/* Description */}
+          <p className="text-lg md:text-xl text-gray-700 mb-4 max-w-2xl animate-slide-up" style={{ animationDelay: '0.1s' }}>
+            <span className="font-semibold text-gray-900">Transforma tu vida y la de otros</span> mientras
+            construyes una carrera con propósito. Únete a la comunidad de coaches que ya están
+            generando impacto y resultados extraordinarios.
+          </p>
+
+          <p className="text-base text-gray-600 mb-8 max-w-2xl animate-slide-up" style={{ animationDelay: '0.15s' }}>
+            Forma parte ya de la Comunidad de Formación más completa. Con tu registro podrás
+            solicitar tu entrevista.
+          </p>
+
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row gap-4 mb-8 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+            <Button
+              onClick={handleWhatsApp}
+              className="bg-[#c4ff0f] text-gray-900 hover:bg-[#b3ef00] font-semibold px-10 py-7 text-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+            >
+              Únete Hoy →
+            </Button>
+            <Button
+              onClick={handleWhatsApp}
+              variant="outline"
+              className="border-2 border-[#7c3aed] text-[#7c3aed] hover:bg-[#7c3aed] hover:text-white px-10 py-7 text-lg transition-all duration-300"
+            >
+              <Phone className="w-5 h-5 mr-2" />
+              Agendar Llamada
+            </Button>
+          </div>
+
+          {/* Fire Alert */}
+          <div className="bg-gradient-to-r from-orange-50 to-orange-100 border-l-4 border-orange-400 rounded-lg p-4 mb-8 animate-slide-up" style={{ animationDelay: '0.25s' }}>
+            <p className="text-sm font-medium text-gray-800">
+              🔥 <span className="font-bold">Oportunidad única:</span> Formación + acceso de
+              por vida a la membresía de Coaches NeuroEvolutivos con Acreditación Internacional.
+            </p>
+          </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-3 gap-6 animate-slide-up" style={{ animationDelay: '0.3s' }}>
+            <div className="text-center sm:text-left">
+              <div className="flex items-center gap-2 justify-center sm:justify-start mb-1">
+                <div className="w-2 h-2 rounded-full bg-[#c4ff0f] animate-pulse"></div>
+                <span className="text-3xl md:text-4xl font-display font-bold text-gray-900">280</span>
               </div>
+              <span className="text-sm text-gray-600">Días de formación</span>
+            </div>
+            <div className="text-center sm:text-left">
+              <div className="flex items-center gap-2 justify-center sm:justify-start mb-1">
+                <div className="w-2 h-2 rounded-full bg-[#7c3aed] animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                <span className="text-3xl md:text-4xl font-display font-bold text-gray-900">3</span>
+              </div>
+              <span className="text-sm text-gray-600">Niveles evolutivos</span>
+            </div>
+            <div className="text-center sm:text-left">
+              <div className="flex items-center gap-2 justify-center sm:justify-start mb-1">
+                <div className="w-2 h-2 rounded-full bg-[#c4ff0f] animate-pulse" style={{ animationDelay: '1s' }}></div>
+                <span className="text-3xl md:text-4xl font-display font-bold text-gray-900">100%</span>
+              </div>
+              <span className="text-sm text-gray-600">Online y flexible</span>
             </div>
           </div>
         </div>
