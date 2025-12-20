@@ -112,20 +112,25 @@ const HeroSection = ({ mentorData, onActionClick }) => {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 mb-8 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-            <Button
-              onClick={handleWhatsApp}
-              className="bg-[#c4ff0f] text-gray-900 hover:bg-[#b3ef00] font-semibold px-10 py-7 text-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
-            >
-              Únete Hoy →
-            </Button>
-            <Button
-              onClick={handleWhatsApp}
-              variant="outline"
-              className="border-2 border-[#7c3aed] text-[#7c3aed] hover:bg-[#7c3aed] hover:text-white px-10 py-7 text-lg transition-all duration-300"
-            >
-              <Phone className="w-5 h-5 mr-2" />
-              Agendar Llamada
-            </Button>
+            {actions.slice(0, 2).map((action, index) => {
+              const Icon = getActionIcon(action.action_key);
+              return (
+                <Button
+                  key={action.action_key}
+                  onClick={() => handleActionClick(action)}
+                  className={index === 0 
+                    ? "bg-[#c4ff0f] text-gray-900 hover:bg-[#b3ef00] font-semibold px-10 py-7 text-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                    : "border-2 border-[#7c3aed] text-[#7c3aed] hover:bg-[#7c3aed] hover:text-white px-10 py-7 text-lg transition-all duration-300"
+                  }
+                >
+                  <Icon className="w-5 h-5 mr-2" />
+                  {action.label}
+                </Button>
+              );
+            })}
+            {actions.length === 0 && (
+              <p className="text-gray-600 italic">No hay acciones disponibles</p>
+            )}
           </div>
 
           {/* Fire Alert */}
