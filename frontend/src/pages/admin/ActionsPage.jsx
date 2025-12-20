@@ -122,7 +122,7 @@ const ActionsPage = () => {
       fetchActions(selectedCampaign.key);
       localStorage.setItem(STORAGE_KEY, selectedCampaign.key);
     }
-  }, [selectedCampaign]);
+  }, [selectedCampaign, showRetired]);
 
   // Reset slots when button changes
   useEffect(() => {
