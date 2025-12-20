@@ -42,6 +42,9 @@ class ActionService:
         # Fallback for actions without display_slots
         if "display_slots" not in action or not action["display_slots"]:
             action["display_slots"] = ["cta"]
+        # Fallback for actions without button_key (use action_key as button_key)
+        if "button_key" not in action or not action["button_key"]:
+            action["button_key"] = action.get("action_key")
         return Action(**action)
     
     async def get_action_by_key(self, campaign_key: str, action_key: str) -> Optional[Action]:
@@ -56,6 +59,9 @@ class ActionService:
         # Fallback for actions without display_slots
         if "display_slots" not in action or not action["display_slots"]:
             action["display_slots"] = ["cta"]
+        # Fallback for actions without button_key
+        if "button_key" not in action or not action["button_key"]:
+            action["button_key"] = action.get("action_key")
         return Action(**action)
     
     async def get_actions_by_campaign(self, campaign_key: str, active_only: bool = False) -> List[Action]:
@@ -70,6 +76,9 @@ class ActionService:
             # Fallback for actions without display_slots
             if "display_slots" not in action or not action["display_slots"]:
                 action["display_slots"] = ["cta"]
+            # Fallback for actions without button_key
+            if "button_key" not in action or not action["button_key"]:
+                action["button_key"] = action.get("action_key")
             actions.append(Action(**action))
         
         return actions
@@ -86,6 +95,9 @@ class ActionService:
             # Fallback for actions without display_slots
             if "display_slots" not in action or not action["display_slots"]:
                 action["display_slots"] = ["cta"]
+            # Fallback for actions without button_key
+            if "button_key" not in action or not action["button_key"]:
+                action["button_key"] = action.get("action_key")
             actions.append(Action(**action))
         
         return actions
