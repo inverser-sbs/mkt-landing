@@ -10,13 +10,14 @@ import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminLayout from "./components/AdminLayout";
 
-// Admin pages (will be created)
+// Admin pages
 import MentorsListPage from "./pages/admin/MentorsListPage";
 import MentorFormPage from "./pages/admin/MentorFormPage";
 import CampaignsPage from "./pages/admin/CampaignsPage";
 import ActionsPage from "./pages/admin/ActionsPage";
 import CSVPage from "./pages/admin/CSVPage";
 import AnalyticsPage from "./pages/admin/AnalyticsPage";
+import TemplatesPage from "./pages/admin/TemplatesPage";
 
 function App() {
   return (
@@ -100,6 +101,16 @@ function App() {
                 <ProtectedRoute>
                   <AdminLayout>
                     <AnalyticsPage />
+                  </AdminLayout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/templates"
+              element={
+                <ProtectedRoute>
+                  <AdminLayout>
+                    <TemplatesPage />
                   </AdminLayout>
                 </ProtectedRoute>
               }
