@@ -28,7 +28,9 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             
-            {/* Mentor edit panel with magic token */}
+            {/* Mentor edit panel with magic token (campaign-aware) */}
+            <Route path="/edit/:campaign/:slug" element={<MentorEditPage />} />
+            {/* Legacy edit route - defaults to cpn campaign */}
             <Route path="/edit/:slug" element={<MentorEditPage />} />
             
             {/* Admin routes (protected) */}
