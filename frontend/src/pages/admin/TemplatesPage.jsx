@@ -12,11 +12,17 @@ import {
   CheckCircle2,
   Layers,
   HelpCircle,
-  ArrowRight
+  ArrowRight,
+  MousePointer2,
+  LayoutGrid
 } from 'lucide-react';
 import { useToast } from '../../hooks/use-toast';
 import { Toaster } from '../../components/ui/toaster';
-import { TEMPLATE_REGISTRY, getAvailableTemplates } from '../../templates';
+import { 
+  getAvailableTemplates, 
+  getSlotsForTemplate, 
+  getButtonsForTemplate 
+} from '../../templates';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
