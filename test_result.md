@@ -245,3 +245,18 @@ agent_communication:
     message: "Implementación completa del sistema multi-campaña escalable: 1) LandingGeneric como fallback para nuevas campañas, 2) TEMPLATE_REGISTRY extensible con documentación, 3) Admin CRUD de Campañas con validaciones y selector de templates. Verificado: /mentor-program/noel-rivera usa template generic correctamente. Admin panel muestra 3 campañas. Documentación en /app/TEMPLATE_SYSTEM_DOCS.md"
   - agent: "testing"
     message: "✅ COMPLETE MULTI-CAMPAIGN SYSTEM TESTING SUCCESSFUL: All 7 tasks verified working. Template system perfectly differentiates campaigns: CPN (NeuroCoaching certification), Suitex (SaaS office digital), Generic (Mentor Program 2025 - neutral content). Admin CRUD fully functional with 3 campaigns, template selector, and all required fields. Legacy redirect working. Template registry system operational with proper fallbacks. System ready for production deployment."
+
+  - task: "Actions Page campaign-aware"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/admin/ActionsPage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Complete Actions UI with campaign selector. Features: campaign dropdown (remembers last selection via localStorage), context banner showing campaign name/URL/template, CRUD operations scoped to selected campaign. Verified: cpn shows 3 actions, suitex shows 1, mentor-program shows 2. Created test action in mentor-program and confirmed it did NOT appear in other campaigns."
+
+  - agent: "main"
+    message: "Actions Page campaign-aware complete. Implemented: campaign selector dropdown, localStorage persistence, context banner, CRUD scoped to campaign. Backend updated: action model includes campaign_key, service validates unique action_key per campaign, API supports ?campaign_key filter. Verified isolation: created test action in mentor-program, confirmed NOT visible in cpn/suitex."
