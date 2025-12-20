@@ -563,15 +563,18 @@ agent_communication:
 
   - task: "Action Delete Bug Fix - Valid Link Check"
     implemented: true
-    working: true
+    working: false
     file: "/app/backend/services/action_service.py"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: true
         agent: "main"
         comment: "BUG FIX: Delete action was blocked by orphan links (mentor deleted) and empty URL links. Fixed logic to: 1) Only count VALID links (mentor exists + URL not empty), 2) Auto-cleanup orphan and empty links on delete, 3) Added force delete option, 4) Added global cleanup-orphans endpoint. Backend curl tests passed."
+      - working: false
+        agent: "testing"
+        comment: "CRITICAL BUG FOUND: Mentor ID validation is broken in action_service.py lines 198-199. The code queries mentors with projection {'id': 1} but 'id' field doesn't exist in MongoDB - it should use {'_id': 1}. This causes ALL mentor links to be counted as 'orphan' instead of 'valid', making the delete validation ineffective. API endpoints work correctly: GET /api/admin/actions/{id}/link-count returns detailed breakdown, POST /api/admin/actions/cleanup-orphans removes orphan data, DELETE with force=true works. However, normal delete is never blocked because valid links are incorrectly classified as orphan."
 
   - task: "Action Delete Bug Fix - Frontend UI"
     implemented: true
@@ -579,11 +582,14 @@ agent_communication:
     file: "/app/frontend/src/pages/admin/ActionsPage.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: true
         agent: "main"
         comment: "Updated delete dialog: 1) Shows detailed link breakdown (valid/orphan/empty), 2) Green message if deletable, amber warning if blocked, 3) Force delete dialog with explicit warning, 4) 'Limpiar datos huérfanos' button added to admin UI. Needs frontend testing."
+      - working: true
+        agent: "testing"
+        comment: "✅ FRONTEND UI VERIFIED: All delete dialog components working correctly. Delete button opens modal showing link breakdown (valid/orphan/empty_url counts). 'Limpiar datos huérfanos' button present with wrench icon and functional. Force delete flow shows proper warning dialogs. UI correctly communicates what will happen during deletion. However, due to backend mentor validation bug, all links show as 'orphan' instead of 'valid' which affects the user experience."
 
   - agent: "main"
     message: "BUG FIX DE ELIMINACIÓN DE ACCIONES COMPLETADO: El problema era que el check contaba TODOS los links sin verificar si el mentor existía o si la URL estaba vacía. Ahora: 1) Delete normal solo bloquea si hay links VÁLIDOS (mentor existe + URL no vacía), 2) Links huérfanos y vacíos se auto-limpian, 3) Force delete disponible con confirmación explícita, 4) Botón 'Limpiar datos huérfanos' agregado para mantenimiento admin. Backend testeado con curl - todas las pruebas pasaron. Por favor test frontend en /admin/actions."
