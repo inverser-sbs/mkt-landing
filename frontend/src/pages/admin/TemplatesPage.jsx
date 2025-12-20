@@ -22,12 +22,6 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 // Template descriptions - human readable
 const TEMPLATE_INFO = {
-  'generic': {
-    name: 'Genérico',
-    description: 'Diseño profesional y neutro que funciona para cualquier tipo de campaña. Ideal para comenzar rápidamente.',
-    features: ['Diseño limpio y moderno', 'Colores neutros adaptables', 'Botones dinámicos'],
-    color: 'bg-gray-100 border-gray-300'
-  },
   'cpn': {
     name: 'CPN - Certificación NeuroCoaching',
     description: 'Diseño especializado para programas de certificación en coaching con elementos visuales de neurociencia.',
