@@ -5,7 +5,7 @@ import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/card';
 import { AlertCircle, CheckCircle2, ExternalLink, Save } from 'lucide-react';
-import { toast } from '../components/ui/use-toast';
+import { useToast } from '../hooks/use-toast';
 import { Toaster } from '../components/ui/toaster';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
