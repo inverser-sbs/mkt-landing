@@ -182,10 +182,10 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Dynamic template system in DynamicLandingPage"
-    - "LandingCPN template component"
-    - "LandingSuitex template component"
-    - "Legacy URL redirect"
+    - "Action Slots System - Backend Model"
+    - "Action Slots System - Template Registry" 
+    - "Action Slots System - Admin UI"
+    - "Action Slots System - Landing Templates"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
