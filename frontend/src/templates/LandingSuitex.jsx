@@ -3,10 +3,22 @@ import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Check, Zap, Users, BarChart3, Calendar, MessageCircle } from 'lucide-react';
 import { getImageUrl } from '../utils/imageUrl';
+import { getActionsForSlot } from '../utils/slotHelpers';
 
 const LandingSuitex = ({ mentorData, onActionClick }) => {
   const mentor = mentorData?.mentor || {};
   const actions = mentorData?.actions || [];
+
+  // Filter actions by slot
+  const heroPrimaryActions = getActionsForSlot(actions, 'hero_primary');
+  const heroSecondaryActions = getActionsForSlot(actions, 'hero_secondary');
+  const ctaActions = getActionsForSlot(actions, 'cta');
+  const pricingActions = getActionsForSlot(actions, 'pricing');
+  
+  // If no slot-specific actions, fallback to all actions
+  const hasSlotActions = heroPrimaryActions.length > 0 || heroSecondaryActions.length > 0 || ctaActions.length > 0;
+  const heroActions = hasSlotActions ? [...heroPrimaryActions, ...heroSecondaryActions] : actions;
+  const displayCtaActions = hasSlotActions ? ctaActions : actions;
 
   const handleActionClick = (action) => {
     if (onActionClick) {
