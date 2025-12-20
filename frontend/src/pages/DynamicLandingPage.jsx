@@ -46,11 +46,11 @@ const DynamicLandingPage = () => {
   }, [slug]);
 
   const trackEvent = async (eventType, actionKey = null) => {
-    if (!mentorData) return;
+    if (!mentorData || !slug) return;
     
     try {
       await axios.post(`${BACKEND_URL}/api/track/event`, {
-        mentor_id: mentorData.mentor.id || slug,
+        mentor_id: slug, // Use slug as mentor identifier for tracking
         event_type: eventType,
         action_key: actionKey
       });
