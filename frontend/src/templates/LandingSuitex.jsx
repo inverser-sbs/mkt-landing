@@ -112,7 +112,7 @@ const LandingSuitex = ({ mentorData, onActionClick }) => {
               <div className="flex items-center justify-center space-x-3 mb-8">
                 {mentor.photo_url ? (
                   <img
-                    src={mentor.photo_url}
+                    src={getImageUrl(mentor.photo_url)}
                     alt={`${mentor.first_name} ${mentor.last_name}`}
                     className="w-12 h-12 rounded-full border-2 border-blue-600"
                   />
