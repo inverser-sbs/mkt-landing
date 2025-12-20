@@ -161,7 +161,8 @@ const ActionsPage = () => {
   const fetchActions = useCallback(async (campaignKey) => {
     setActionsLoading(true);
     try {
-      const response = await axios.get(`${BACKEND_URL}/api/admin/actions?campaign_key=${campaignKey}`);
+      const url = `${BACKEND_URL}/api/admin/actions?campaign_key=${campaignKey}&include_retired=${showRetired}`;
+      const response = await axios.get(url);
       setActions(response.data);
     } catch (error) {
       console.error('Error fetching actions:', error);
