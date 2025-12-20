@@ -1,0 +1,2 @@
+first_name,last_name,email,slug,active,mentor_group,photo_url,action:agenda,action:whatsapp,action:formulario
+Juan,Pérez,juan@ejemplo.com,juan-perez,true,team,https://ejemplo.com/foto.jpg,https://ejemplo.com/enlace,https://ejemplo.com/enlace,https://ejemplo.com/enlace
