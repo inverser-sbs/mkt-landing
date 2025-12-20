@@ -64,10 +64,35 @@ async def get_action(
 
 @router.get("/{action_id}/link-count")
 async def get_action_link_count(action_id: str, db: AsyncIOMotorDatabase = Depends(get_db)):
-    """Get the number of mentor links using this action"""
+    """
+    Get detailed link count for this action.
+    Returns:
+    - valid: links with existing mentor and non-empty URL
+    - orphan: links with non-existent mentor_id
+    - empty_url: links with empty URL
+    - total: total raw count
+    """
     service = ActionService(db)
-    count = await service.get_action_link_count(action_id)
-    return {"count": count}
+    link_info = await service.get_valid_links_for_action(action_id)
+    return link_info
+
+@router.post("/cleanup-orphans")
+async def cleanup_orphan_data(db: AsyncIOMotorDatabase = Depends(get_db)):
+    """
+    Admin maintenance tool: Clean up orphan data.
+    Removes:
+    - mentor_links with non-existent mentor_id
+    - mentor_links with empty URLs  
+    - magic_tokens with non-existent mentor_id
+    
+    This prevents stale data from blocking action deletion.
+    """
+    service = ActionService(db)
+    result = await service.cleanup_orphan_data()
+    return {
+        "message": "Limpieza completada",
+        "deleted": result
+    }
 
 @router.put("/{action_id}", response_model=Action)
 async def update_action(
