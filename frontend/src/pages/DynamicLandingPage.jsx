@@ -19,7 +19,7 @@ import Footer from '../components/Footer';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const DynamicLandingPage = () => {
-  const { slug } = useParams();
+  const { campaign, slug } = useParams();
   const [mentorData, setMentorData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -27,13 +27,14 @@ const DynamicLandingPage = () => {
   useEffect(() => {
     const fetchMentorData = async () => {
       try {
-        const response = await axios.get(`${BACKEND_URL}/api/public/mentor/${slug}`);
+        const response = await axios.get(`${BACKEND_URL}/api/public/mentor/${campaign}/${slug}`);
         setMentorData(response.data);
         
         // Track visit
         try {
           await axios.post(`${BACKEND_URL}/api/track/event`, {
             mentor_id: slug,
+            campaign_key: campaign,
             event_type: 'visit'
           });
         } catch (trackErr) {
@@ -47,11 +48,11 @@ const DynamicLandingPage = () => {
       }
     };
 
-    if (slug) {
+    if (slug && campaign) {
       fetchMentorData();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [slug]);
+  }, [slug, campaign]);
 
   const trackEvent = async (eventType, actionKey = null) => {
     if (!mentorData || !slug) return;
