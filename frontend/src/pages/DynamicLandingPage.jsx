@@ -31,7 +31,14 @@ const DynamicLandingPage = () => {
         setMentorData(response.data);
         
         // Track visit
-        trackEvent('visit');
+        try {
+          await axios.post(`${BACKEND_URL}/api/track/event`, {
+            mentor_id: slug,
+            event_type: 'visit'
+          });
+        } catch (trackErr) {
+          console.error('Error tracking visit:', trackErr);
+        }
       } catch (err) {
         console.error('Error fetching mentor data:', err);
         setError(err.response?.status === 404 ? 'Mentor no encontrado' : 'Error cargando datos');
@@ -43,6 +50,7 @@ const DynamicLandingPage = () => {
     if (slug) {
       fetchMentorData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
 
   const trackEvent = async (eventType, actionKey = null) => {
