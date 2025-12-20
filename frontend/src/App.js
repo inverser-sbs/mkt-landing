@@ -9,7 +9,13 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
+          {/* Generic landing - redirect to home or show generic */}
           <Route path="/" element={<HomePage />} />
+          
+          {/* Dynamic mentor landing */}
+          <Route path="/:slug" element={<DynamicLandingPage />} />
+          
+          {/* Admin and edit routes will be added later */}
         </Routes>
       </BrowserRouter>
     </div>
