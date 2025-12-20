@@ -59,7 +59,8 @@ async def get_mentor_by_slug(campaign: str, slug: str, db: AsyncIOMotorDatabase 
     return {
         "campaign": {
             "key": campaign,
-            "name": campaign_doc["name"]
+            "name": campaign_doc["name"],
+            "template_key": campaign_doc.get("template_key", "cpn")  # Fallback to cpn
         },
         "mentor": {
             "first_name": mentor.first_name,
