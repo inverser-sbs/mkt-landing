@@ -91,7 +91,6 @@ const DynamicLandingPage = () => {
     <div className="min-h-screen bg-[#faf8f5]">
       <Navbar />
       <HeroSection mentorData={mentorData} onActionClick={handleActionClick} />
-      <StatsSection />
       <AwakeningSection />
       <IsForYouSection />
       <WhatYouAchieveSection />
