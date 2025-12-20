@@ -39,6 +39,9 @@ class ActionService:
             return None
         
         action["id"] = str(action["_id"])
+        # Fallback for actions without display_slots
+        if "display_slots" not in action or not action["display_slots"]:
+            action["display_slots"] = ["cta"]
         return Action(**action)
     
     async def get_action_by_key(self, campaign_key: str, action_key: str) -> Optional[Action]:
@@ -50,6 +53,9 @@ class ActionService:
             return None
         
         action["id"] = str(action["_id"])
+        # Fallback for actions without display_slots
+        if "display_slots" not in action or not action["display_slots"]:
+            action["display_slots"] = ["cta"]
         return Action(**action)
     
     async def get_actions_by_campaign(self, campaign_key: str, active_only: bool = False) -> List[Action]:
@@ -61,6 +67,9 @@ class ActionService:
         actions = []
         async for action in self.collection.find(query).sort("order", 1):
             action["id"] = str(action["_id"])
+            # Fallback for actions without display_slots
+            if "display_slots" not in action or not action["display_slots"]:
+                action["display_slots"] = ["cta"]
             actions.append(Action(**action))
         
         return actions
@@ -74,6 +83,9 @@ class ActionService:
         actions = []
         async for action in self.collection.find(query).sort([("campaign_key", 1), ("order", 1)]):
             action["id"] = str(action["_id"])
+            # Fallback for actions without display_slots
+            if "display_slots" not in action or not action["display_slots"]:
+                action["display_slots"] = ["cta"]
             actions.append(Action(**action))
         
         return actions
