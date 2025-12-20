@@ -9,7 +9,7 @@ const MethodologySection = () => {
     { letter: 'L', title: 'Lógralo', description: 'Celebra cada meta alcanzada', color: 'bg-yellow-500' },
     { letter: 'E', title: 'Evoluciona', description: 'Crece y transforma', color: 'bg-orange-500' },
     { letter: 'A', title: 'Avanza', description: 'Mantén el movimiento', color: 'bg-red-500' },
-    { letter: 'R', title: 'RefleAccióna', description: 'Reflexiona y ajusta', color: 'bg-indigo-500' },
+    { letter: 'R', title: 'RefleAcciona', description: 'Reflexiona y ajusta', color: 'bg-indigo-500' },
   ];
 
   return (
@@ -19,7 +19,7 @@ const MethodologySection = () => {
           <p className="text-sm font-semibold text-[#7c3aed] uppercase tracking-wider mb-4">
             Nuestra Metodología
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Método PEDALEAR</h2>
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">Método PEDALEAR</h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             El ciclo de la transformación. Cada pedalazo representa un compromiso contigo mismo,
             con tu futuro y con el impacto que generarás en los demás.
@@ -37,14 +37,14 @@ const MethodologySection = () => {
               >
                 <span className="text-3xl font-bold text-white">{step.letter}</span>
               </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">{step.title}</h3>
+              <h3 className="font-display text-lg font-bold text-gray-900 mb-2">{step.title}</h3>
               <p className="text-sm text-gray-600">{step.description}</p>
             </div>
           ))}
         </div>
 
         <div className="bg-gradient-to-r from-purple-100 to-green-100 rounded-3xl p-8 text-center">
-          <blockquote className="text-2xl font-semibold text-gray-900 italic">
+          <blockquote className="font-display text-2xl font-semibold text-gray-900 italic">
             "El cambio verdadero no ocurre por casualidad, sino por elección."
           </blockquote>
         </div>

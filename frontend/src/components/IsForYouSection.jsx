@@ -26,7 +26,7 @@ const IsForYouSection = () => {
           <p className="text-sm font-semibold text-[#7c3aed] uppercase tracking-wider mb-4">
             ¿Es para ti?
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">
             ¿Cómo saber si esta formación es para ti?
           </h2>
         </div>
@@ -48,7 +48,7 @@ const IsForYouSection = () => {
         </div>
 
         <div className="bg-gradient-to-br from-[#7c3aed] to-purple-600 rounded-3xl p-10 text-white text-center">
-          <h3 className="text-2xl md:text-3xl font-bold mb-4">
+          <h3 className="font-display text-2xl md:text-3xl font-bold mb-4">
             Si quieres dar un salto cuántico en tu calidad de vida
           </h3>
           <p className="text-lg mb-6 opacity-90">

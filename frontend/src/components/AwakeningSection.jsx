@@ -16,7 +16,7 @@ const AwakeningSection = () => {
           <p className="text-sm font-semibold text-[#7c3aed] uppercase tracking-wider">
             ES MOMENTO DE DESPERTAR
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-gray-900">
             ¿Sientes que <span className="text-[#7c3aed]">falta algo en tu vida?</span>
           </h2>
         </div>
@@ -32,7 +32,7 @@ const AwakeningSection = () => {
         </div>
 
         <div className="bg-gradient-to-br from-purple-50 to-green-50 rounded-3xl p-12 mt-12">
-          <h3 className="text-3xl md:text-4xl font-bold mb-6">
+          <h3 className="font-display text-3xl md:text-4xl font-bold mb-6">
             <span className="text-gray-900">CRECE, </span>
             <span className="text-[#c4ff0f]">EVOLUCIONA</span>
             <span className="text-gray-900"> Y EXPÁNDETE</span>

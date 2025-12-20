@@ -48,7 +48,7 @@ const WhatYouAchieveSection = () => {
           <p className="text-sm font-semibold text-[#7c3aed] uppercase tracking-wider mb-4">
             ¿Qué lograrás?
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">
             ¿Qué lograrás en la Certificación?
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
@@ -65,7 +65,7 @@ const WhatYouAchieveSection = () => {
             >
               <CardHeader>
                 <achievement.icon className={`w-12 h-12 mb-4 ${achievement.color}`} />
-                <CardTitle className="text-xl font-bold text-gray-900">
+                <CardTitle className="font-display text-xl font-bold text-gray-900">
                   {achievement.title}
                 </CardTitle>
               </CardHeader>
