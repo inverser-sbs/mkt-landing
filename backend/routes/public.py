@@ -46,11 +46,17 @@ async def get_mentor_by_slug(campaign: str, slug: str, db: AsyncIOMotorDatabase 
     available_actions = []
     for action in actions:
         if action["action_key"] in links:
+            # Get display_slots with fallback
+            display_slots = action.get("display_slots", ["cta"])
+            if not display_slots:
+                display_slots = ["cta"]
+            
             available_actions.append({
                 "action_key": action["action_key"],
                 "label": action["label"],
                 "url": links[action["action_key"]],
-                "order": action["order"]
+                "order": action["order"],
+                "display_slots": display_slots
             })
     
     # Sort by order
