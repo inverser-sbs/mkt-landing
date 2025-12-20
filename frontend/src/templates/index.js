@@ -8,19 +8,14 @@
  * 1. Cada campaña en la BD tiene un campo `template_key`
  * 2. DynamicLandingPage usa este archivo para mapear template_key → componente
  * 3. Si el template_key no existe, se usa el template "cpn" como fallback
+ * 4. Cada template define sus "slots" (ubicaciones donde pueden aparecer botones)
  * 
  * CÓMO AGREGAR UN NUEVO TEMPLATE:
  * 1. Crear el componente en /app/frontend/src/templates/Landing[Nombre].jsx
  * 2. Importarlo aquí abajo
  * 3. Agregarlo al objeto TEMPLATE_REGISTRY con su key
- * 4. Actualizar la campaña en Admin con el nuevo template_key
- * 
- * EJEMPLO:
- * // 1. Crear /app/frontend/src/templates/LandingMentorProgram.jsx
- * // 2. Importar:
- * import LandingMentorProgram from './LandingMentorProgram';
- * // 3. Agregar al registry:
- * 'mentor-program': LandingMentorProgram,
+ * 4. Definir los slots disponibles en TEMPLATE_SLOTS
+ * 5. Actualizar la campaña en Admin con el nuevo template_key
  * 
  * CONVENCIÓN DE NOMBRES:
  * - Archivo: Landing[NombreEnPascalCase].jsx
@@ -41,17 +36,66 @@ export const TEMPLATE_REGISTRY = {
   
   // Suitex - Oficina Digital SaaS
   'suitex': LandingSuitex,
-  
-  // ============================================
-  // AGREGAR NUEVOS TEMPLATES AQUÍ
-  // ============================================
-  // 'mentor-program': LandingMentorProgram,
-  // 'eventos': LandingEventos,
-  // 'workshops': LandingWorkshops,
 };
 
 // Template por defecto cuando no se encuentra el template_key
 export const DEFAULT_TEMPLATE_KEY = 'cpn';
+
+/**
+ * SLOTS POR TEMPLATE
+ * ==================
+ * Define las ubicaciones (slots) donde pueden aparecer botones en cada template.
+ * Cada slot tiene:
+ * - key: identificador único (usado en display_slots de cada acción)
+ * - label: nombre legible para el admin
+ * - description: descripción de dónde aparece
+ */
+export const TEMPLATE_SLOTS = {
+  'cpn': [
+    { 
+      key: 'hero_primary', 
+      label: 'Hero - Botón Principal',
+      description: 'Botón grande y destacado en la sección principal (Hero)'
+    },
+    { 
+      key: 'hero_secondary', 
+      label: 'Hero - Botones Secundarios',
+      description: 'Botones más pequeños debajo del botón principal'
+    },
+    { 
+      key: 'cta', 
+      label: 'CTA Final',
+      description: 'Sección de llamada a la acción al final de la página'
+    },
+    { 
+      key: 'footer', 
+      label: 'Footer',
+      description: 'Botones en el pie de página'
+    }
+  ],
+  'suitex': [
+    { 
+      key: 'hero_primary', 
+      label: 'Hero - Botón Principal',
+      description: 'Botón de Demo/Acción principal en el Hero'
+    },
+    { 
+      key: 'hero_secondary', 
+      label: 'Hero - Botones Secundarios',
+      description: 'Botones adicionales en el Hero (ej: WhatsApp)'
+    },
+    { 
+      key: 'cta', 
+      label: 'CTA Final',
+      description: 'Botón principal en la sección final de conversión'
+    },
+    { 
+      key: 'pricing', 
+      label: 'Pricing',
+      description: 'Botones en la sección de precios'
+    }
+  ]
+};
 
 // Función helper para obtener el template
 export const getTemplate = (templateKey) => {
@@ -75,6 +119,18 @@ export const getAvailableTemplates = () => {
     key,
     name: key.charAt(0).toUpperCase() + key.slice(1).replace(/-/g, ' ')
   }));
+};
+
+// Obtener slots disponibles para un template
+export const getSlotsForTemplate = (templateKey) => {
+  return TEMPLATE_SLOTS[templateKey] || TEMPLATE_SLOTS[DEFAULT_TEMPLATE_KEY] || [];
+};
+
+// Obtener descripción de un slot
+export const getSlotDescription = (templateKey, slotKey) => {
+  const slots = getSlotsForTemplate(templateKey);
+  const slot = slots.find(s => s.key === slotKey);
+  return slot ? slot.description : slotKey;
 };
 
 export default TEMPLATE_REGISTRY;
