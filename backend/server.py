@@ -14,6 +14,7 @@ from routes.admin_actions import router as admin_actions_router
 from routes.admin_links import router as admin_links_router
 from routes.tracking import router as tracking_router
 from routes.mentor_edit import router as mentor_edit_router
+from routes.admin_csv import router as admin_csv_router
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
