@@ -252,7 +252,7 @@ const CampaignsPage = () => {
             <p className="font-semibold text-base mb-3">¿Qué es una campaña?</p>
             <p className="mb-3">
               Una <strong>campaña</strong> es un producto, programa o servicio con su propia página web de mentores.
-              Por ejemplo: "Certificación NeuroCoaching" o "Suitex Oficina Digital".
+              Por ejemplo: &ldquo;Certificación NeuroCoaching&rdquo; o &ldquo;Suitex Oficina Digital&rdquo;.
             </p>
             
             <div className="grid md:grid-cols-3 gap-4 mt-4 bg-white p-4 rounded-lg border border-blue-100">
@@ -262,7 +262,7 @@ const CampaignsPage = () => {
               </div>
               <div>
                 <p className="font-semibold text-blue-900 mb-1">⚡ Acciones = BOTONES</p>
-                <p className="text-blue-700 text-xs">Los botones disponibles se configuran en la sección "Acciones"</p>
+                <p className="text-blue-700 text-xs">Los botones disponibles se configuran en la sección &ldquo;Acciones&rdquo;</p>
               </div>
               <div>
                 <p className="font-semibold text-blue-900 mb-1">👤 Mentores = LINKS</p>
@@ -466,7 +466,7 @@ const CampaignsPage = () => {
           <AlertDialogHeader>
             <AlertDialogTitle>¿Eliminar campaña?</AlertDialogTitle>
             <AlertDialogDescription>
-              Esto eliminará la campaña "{selectedCampaign?.name}". 
+              Esto eliminará la campaña &ldquo;{selectedCampaign?.name}&rdquo;. 
               Esta acción no se puede deshacer.
               <br /><br />
               <strong>Nota:</strong> No se puede eliminar si tiene acciones asociadas.
