@@ -7,7 +7,7 @@
  * CÓMO FUNCIONA:
  * 1. Cada campaña en la BD tiene un campo `template_key`
  * 2. DynamicLandingPage usa este archivo para mapear template_key → componente
- * 3. Si el template_key no existe, se usa el template "generic" como fallback
+ * 3. Si el template_key no existe, se usa el template "cpn" como fallback
  * 
  * CÓMO AGREGAR UN NUEVO TEMPLATE:
  * 1. Crear el componente en /app/frontend/src/templates/Landing[Nombre].jsx
@@ -27,21 +27,16 @@
  * - template_key: nombre-en-kebab-case
  * 
  * TEMPLATES DISPONIBLES:
- * - generic: Template por defecto, neutral, para nuevas campañas
- * - cpn: Certificación Profesional NeuroCoaching
+ * - cpn: Certificación Profesional NeuroCoaching (DEFAULT)
  * - suitex: Suitex - Oficina Digital SaaS
  */
 
-import LandingGeneric from './LandingGeneric';
 import LandingCPN from './LandingCPN';
 import LandingSuitex from './LandingSuitex';
 
 // Registry de templates disponibles
 export const TEMPLATE_REGISTRY = {
-  // Template por defecto - usar para nuevas campañas
-  'generic': LandingGeneric,
-  
-  // Certificación Profesional NeuroCoaching
+  // Certificación Profesional NeuroCoaching (DEFAULT)
   'cpn': LandingCPN,
   
   // Suitex - Oficina Digital SaaS
@@ -56,7 +51,7 @@ export const TEMPLATE_REGISTRY = {
 };
 
 // Template por defecto cuando no se encuentra el template_key
-export const DEFAULT_TEMPLATE_KEY = 'generic';
+export const DEFAULT_TEMPLATE_KEY = 'cpn';
 
 // Función helper para obtener el template
 export const getTemplate = (templateKey) => {
