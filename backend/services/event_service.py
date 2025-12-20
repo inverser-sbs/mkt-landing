@@ -16,7 +16,16 @@ class EventService:
         return hashlib.sha256(ip.encode()).hexdigest()[:16]
     
     async def track_event(self, event_data: EventCreate, ip: str = None) -> Event:
+        # If mentor_id looks like a slug (contains hyphen), convert to ID
+        mentor_id = event_data.mentor_id
+        if '-' in mentor_id:
+            # It's a slug, need to find the mentor ID
+            mentor = await self.db.mentors.find_one({"slug": mentor_id})
+            if mentor:
+                mentor_id = str(mentor["_id"])
+        
         event_dict = event_data.dict()
+        event_dict["mentor_id"] = mentor_id
         event_dict["timestamp"] = datetime.utcnow()
         
         if ip:
