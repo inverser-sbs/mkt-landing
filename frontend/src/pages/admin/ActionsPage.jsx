@@ -330,28 +330,81 @@ const ActionsPage = () => {
     }
   };
 
-  const confirmDelete = (action) => {
+  const confirmDelete = async (action) => {
     setSelectedAction(action);
+    // Fetch link info to show accurate data
+    try {
+      const response = await axios.get(`${BACKEND_URL}/api/admin/actions/${action.id}/link-count`);
+      setSelectedActionLinkInfo(response.data);
+    } catch (error) {
+      setSelectedActionLinkInfo({ valid: 0, orphan: 0, empty_url: 0, total: 0 });
+    }
     setDeleteConfirmOpen(true);
   };
 
-  const handleDelete = async () => {
+  const handleDelete = async (force = false) => {
     if (!selectedAction) return;
     
     try {
-      await axios.delete(`${BACKEND_URL}/api/admin/actions/${selectedAction.id}`);
-      toast({ title: 'Eliminado', description: 'Acción eliminada correctamente' });
+      await axios.delete(`${BACKEND_URL}/api/admin/actions/${selectedAction.id}?force=${force}`);
+      toast({ 
+        title: 'Eliminado', 
+        description: force 
+          ? 'Acción y todos sus enlaces eliminados correctamente'
+          : 'Acción eliminada correctamente' 
+      });
       fetchActions(selectedCampaign.key);
     } catch (error) {
       console.error('Error deleting action:', error);
+      const detail = error.response?.data?.detail || 'No se pudo eliminar la acción';
+      
+      // If delete failed due to valid links, offer force delete
+      if (detail.includes('URLs activas') || detail.includes('mentor(es)')) {
+        setDeleteConfirmOpen(false);
+        setForceDeleteConfirmOpen(true);
+        return;
+      }
+      
       toast({
         title: 'Error',
-        description: error.response?.data?.detail || 'No se pudo eliminar la acción',
+        description: detail,
         variant: 'destructive'
       });
     } finally {
       setDeleteConfirmOpen(false);
       setSelectedAction(null);
+      setSelectedActionLinkInfo(null);
+    }
+  };
+
+  const handleForceDelete = async () => {
+    await handleDelete(true);
+    setForceDeleteConfirmOpen(false);
+  };
+
+  // Cleanup orphan data
+  const handleCleanupOrphans = async () => {
+    setCleaningOrphans(true);
+    try {
+      const response = await axios.post(`${BACKEND_URL}/api/admin/actions/cleanup-orphans`);
+      const deleted = response.data.deleted;
+      toast({
+        title: 'Limpieza completada',
+        description: `Eliminados: ${deleted.orphan_links_deleted} links huérfanos, ${deleted.empty_url_links_deleted} links vacíos, ${deleted.orphan_tokens_deleted} tokens huérfanos`
+      });
+      // Refresh actions to update counts
+      if (selectedCampaign) {
+        fetchActions(selectedCampaign.key);
+      }
+    } catch (error) {
+      console.error('Error cleaning orphans:', error);
+      toast({
+        title: 'Error',
+        description: 'No se pudo realizar la limpieza',
+        variant: 'destructive'
+      });
+    } finally {
+      setCleaningOrphans(false);
     }
   };
 
