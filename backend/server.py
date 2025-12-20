@@ -28,10 +28,10 @@ db = client[os.environ['DB_NAME']]
 # Create the main app
 app = FastAPI(title="InverSer Marketing System")
 
-# Mount uploads directory
+# Mount uploads directory (use /api prefix for Kubernetes ingress routing)
 UPLOAD_DIR = Path("/app/backend/uploads")
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
-app.mount("/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
+app.mount("/api/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
 
 # Include routers
 app.include_router(public_router)
