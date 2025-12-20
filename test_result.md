@@ -463,5 +463,56 @@ agent_communication:
 
   - agent: "main"
     message: "FLUJO DE CREACIÓN DE LANDINGS CERRADO: 1) Templates Page (/admin/templates) created - explains Emergent is the engine, NO uploads, NO external code. 4-step process documented. 2) Campaigns Page updated with clearer UX text - Template=DISEÑO, Acciones=BOTONES, Mentores=LINKS. Explicit note that templates don't define buttons. 3) Mentor Edit Form with photo upload - validates file types and size, photo is global per mentor. 4) Admin navigation includes Templates menu item. 5) Mentors list has prominent 'Editar Mentor' button. All verified via screenshots. Please test the new pages."
+
+  - task: "Action Slots System - Backend Model"
+    implemented: true
+    working: true
+    file: "/app/backend/models/action.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Added display_slots field to Action model. List[str] with default ['cta']. ActionUpdate also supports display_slots. Backend fallback for existing actions without slots."
+
+  - task: "Action Slots System - Template Registry"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/templates/index.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Extended TEMPLATE_REGISTRY with TEMPLATE_SLOTS. Each template defines available slots (hero_primary, hero_secondary, cta, footer, pricing). Added getSlotsForTemplate() and getSlotDescription() helpers."
+
+  - task: "Action Slots System - Admin UI"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/admin/ActionsPage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Complete rewrite of ActionsPage with: 1) Multi-select checkboxes for slots in create/edit modal. 2) Template context showing current template and available slots. 3) Info card explaining how slots work. 4) Slot badges displayed on each action card. Verified via screenshots."
+
+  - task: "Action Slots System - Landing Templates"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/HeroSection.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Updated HeroSection and LandingSuitex to render actions by slot. Created slotHelpers.js with getActionsForSlot(), getPrimaryActionForSlot(), hasActionsForSlot(). Fallback to all actions if no slot-specific actions defined. Verified on /cpn/noel-rivera - buttons appear in correct slots."
+
+  - agent: "main"
+    message: "SISTEMA DE SLOTS PARA ACCIONES COMPLETO: El admin ahora puede definir claramente DÓNDE aparece cada botón. Modal de crear/editar acción muestra checkboxes por slot con descripciones. Lista de acciones muestra badges de ubicación. Templates renderan acciones según sus slots asignados. Validación: 'Agendar Llamada' en Hero Principal + CTA Final, 'WhatsApp' en Hero Secundario + CTA Final. Todo funcionando correctamente."
   - agent: "testing"
     message: "🎉 ALL 5 NEW FEATURES TESTING COMPLETED SUCCESSFULLY: Comprehensive Playwright automation verified all requirements working perfectly. ✅ 1) Templates Page (/admin/templates): Prominent '¿Cómo se crean los templates?' section, 'Los templates NO se crean desde esta pantalla' text, complete 4-step process (Describe → Emergent → Crea → Asigna), all 3 templates listed (generic, cpn, suitex) with descriptions and 'Ver ejemplo' buttons, campaigns usage sections present. ✅ 2) Campaigns Page UX (/admin/campaigns): '¿Qué es una campaña?' info card, 3 key concepts clearly explained (Template=DISEÑO, Acciones=BOTONES, Mentores=LINKS), yellow warning 'El template NO define los botones', separate configuration text found. ✅ 3) Mentor Edit Form (/admin/mentor/{id}): 'Foto del Mentor' section with preview, 'Cambiar foto' button, validation info (JPG/PNG/WebP, 5MB max), global photo note, 'Información Básica' with all fields (Nombre, Apellido, Email, Slug, Grupo), 'Estado activo' toggle, Eliminar/Guardar buttons. ✅ 4) Admin Navigation: Templates menu item found in correct order (Mentores, Campañas, Templates, Acciones, CSV, Analítica), functional navigation. ✅ 5) Mentors List Edit Button (/admin): Prominent purple 'Editar Mentor' button on all 4 mentor cards, correct styling, functional navigation to edit form. ALL FEATURES READY FOR PRODUCTION USE."
