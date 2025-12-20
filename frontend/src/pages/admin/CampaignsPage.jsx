@@ -413,8 +413,7 @@ const CampaignsPage = () => {
               >
                 {availableTemplates.map(template => (
                   <option key={template.key} value={template.key}>
-                    {template.key === 'generic' ? '🌐 Generic (diseño neutro)' : 
-                     template.key === 'cpn' ? '📚 CPN (certificación coaching)' :
+                    {template.key === 'cpn' ? '📚 CPN (certificación coaching)' :
                      template.key === 'suitex' ? '💼 Suitex (estilo SaaS)' :
                      `${template.name} (${template.key})`}
                   </option>
