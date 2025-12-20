@@ -132,7 +132,7 @@ const LandingGeneric = ({ mentorData, onActionClick }) => {
                 <div className="text-center">
                   {mentor.photo_url ? (
                     <img
-                      src={mentor.photo_url}
+                      src={getImageUrl(mentor.photo_url)}
                       alt={`${mentor.first_name} ${mentor.last_name}`}
                       className="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-[#c4ff0f]"
                     />
