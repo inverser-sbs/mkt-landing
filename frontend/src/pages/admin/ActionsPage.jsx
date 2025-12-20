@@ -73,10 +73,18 @@ const ActionsPage = () => {
   const [actionsLoading, setActionsLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const [retireConfirmOpen, setRetireConfirmOpen] = useState(false);
+  const [replaceModalOpen, setReplaceModalOpen] = useState(false);
   const [selectedAction, setSelectedAction] = useState(null);
   const [saving, setSaving] = useState(false);
+  const [showRetired, setShowRetired] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
+  
+  // Replace action state
+  const [replaceData, setReplaceData] = useState({
+    newActionKey: ''
+  });
 
   // Form state
   const [formData, setFormData] = useState({
