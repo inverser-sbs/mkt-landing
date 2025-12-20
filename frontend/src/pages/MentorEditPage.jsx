@@ -14,6 +14,7 @@ const MentorEditPage = () => {
   const { slug } = useParams();
   const [searchParams] = useSearchParams();
   const token = searchParams.get('token');
+  const { toast } = useToast();
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
