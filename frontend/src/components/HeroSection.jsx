@@ -166,6 +166,20 @@ const HeroSection = ({ mentorData, onActionClick }) => {
             </div>
           </div>
         </div>
+
+        {/* Mentor Photo (Right side for desktop) */}
+        {mentor.photo_url && (
+          <div className="hidden lg:block absolute right-12 top-1/2 -translate-y-1/2">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#c4ff0f]/20 to-[#7c3aed]/20 blur-3xl"></div>
+              <img 
+                src={mentor.photo_url}
+                alt={`${mentor.first_name} ${mentor.last_name}`}
+                className="relative w-96 h-96 object-cover rounded-full border-4 border-white shadow-2xl"
+              />
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
