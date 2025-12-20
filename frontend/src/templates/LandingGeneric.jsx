@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Check, ArrowRight, Star, Target, Rocket } from 'lucide-react';
+import { getImageUrl } from '../utils/imageUrl';
 
 /**
  * LandingGeneric - Template por defecto para nuevas campañas
