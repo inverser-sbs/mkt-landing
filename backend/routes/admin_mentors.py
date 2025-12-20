@@ -89,8 +89,8 @@ async def upload_photo(
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
     
-    # Update mentor
-    photo_url = f"/uploads/mentors/{filename}"
+    # Update mentor (use /api prefix for Kubernetes ingress routing)
+    photo_url = f"/api/uploads/mentors/{filename}"
     service = MentorService(db)
     mentor = await service.update_mentor(mentor_id, MentorUpdate(photo_url=photo_url))
     
