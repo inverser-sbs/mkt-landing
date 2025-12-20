@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import Navbar from '../components/Navbar';
-import HeroSection from '../components/HeroSection';
-import AwakeningSection from '../components/AwakeningSection';
-import IsForYouSection from '../components/IsForYouSection';
-import WhatYouAchieveSection from '../components/WhatYouAchieveSection';
-import MethodologySection from '../components/MethodologySection';
-import WhyInverserSection from '../components/WhyInverserSection';
-import LevelsSection from '../components/LevelsSection';
-import CommunitySection from '../components/CommunitySection';
-import PartnerSection from '../components/PartnerSection';
-import AccreditationsSection from '../components/AccreditationsSection';
-import FAQSection from '../components/FAQSection';
-import CTASection from '../components/CTASection';
-import Footer from '../components/Footer';
+
+// Template imports
+import LandingCPN from '../templates/LandingCPN';
+import LandingSuitex from '../templates/LandingSuitex';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
+// Template registry - maps template_key to component
+const TEMPLATE_REGISTRY = {
+  cpn: LandingCPN,
+  suitex: LandingSuitex,
+};
 
 const DynamicLandingPage = () => {
   const { campaign, slug } = useParams();
@@ -59,7 +55,7 @@ const DynamicLandingPage = () => {
     
     try {
       await axios.post(`${BACKEND_URL}/api/track/event`, {
-        mentor_id: slug, // Use slug as mentor identifier for tracking
+        mentor_id: slug,
         campaign_key: campaign,
         event_type: eventType,
         action_key: actionKey
@@ -96,23 +92,23 @@ const DynamicLandingPage = () => {
     );
   }
 
+  // Get template_key from campaign data (fallback to 'cpn')
+  const templateKey = mentorData?.campaign?.template_key || 'cpn';
+  
+  // Get the template component from registry
+  let TemplateComponent = TEMPLATE_REGISTRY[templateKey];
+  
+  // Fallback to CPN with warning if template not found
+  if (!TemplateComponent) {
+    console.warn(`[DynamicLandingPage] Template "${templateKey}" not found in registry. Falling back to "cpn".`);
+    TemplateComponent = TEMPLATE_REGISTRY['cpn'];
+  }
+
   return (
-    <div className="min-h-screen bg-[#faf8f5]">
-      <Navbar />
-      <HeroSection mentorData={mentorData} onActionClick={handleActionClick} />
-      <AwakeningSection />
-      <IsForYouSection />
-      <WhatYouAchieveSection />
-      <MethodologySection />
-      <WhyInverserSection />
-      <LevelsSection />
-      <CommunitySection />
-      <PartnerSection />
-      <AccreditationsSection />
-      <FAQSection />
-      <CTASection mentorData={mentorData} onActionClick={handleActionClick} />
-      <Footer />
-    </div>
+    <TemplateComponent 
+      mentorData={mentorData} 
+      onActionClick={handleActionClick} 
+    />
   );
 };
 
