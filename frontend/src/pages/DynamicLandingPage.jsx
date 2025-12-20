@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
-import StatsSection from '../components/StatsSection';
 import AwakeningSection from '../components/AwakeningSection';
 import IsForYouSection from '../components/IsForYouSection';
 import WhatYouAchieveSection from '../components/WhatYouAchieveSection';
