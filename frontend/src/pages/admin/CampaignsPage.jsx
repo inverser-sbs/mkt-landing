@@ -128,7 +128,7 @@ const CampaignsPage = () => {
       setFormData({
         key: '',
         name: '',
-        template_key: 'generic',
+        template_key: 'cpn',
         active: true,
         sort_order: campaigns.length
       });
