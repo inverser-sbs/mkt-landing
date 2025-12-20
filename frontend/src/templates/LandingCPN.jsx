@@ -16,7 +16,7 @@ import Footer from '../components/Footer';
 
 const LandingCPN = ({ mentorData, onActionClick }) => {
   return (
-    <div className=\"min-h-screen bg-[#faf8f5]\">
+    <div className="min-h-screen bg-[#faf8f5]">
       <Navbar />
       <HeroSection mentorData={mentorData} onActionClick={onActionClick} />
       <AwakeningSection />
