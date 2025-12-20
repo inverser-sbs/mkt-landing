@@ -39,6 +39,7 @@ app.include_router(admin_actions_router)
 app.include_router(admin_links_router)
 app.include_router(tracking_router)
 app.include_router(mentor_edit_router)
+app.include_router(admin_csv_router)
 
 # Add CORS middleware
 app.add_middleware(
