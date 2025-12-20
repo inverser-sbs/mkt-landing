@@ -45,7 +45,11 @@ import {
   MapPin,
   MousePointer2,
   Settings2,
-  CheckCircle2
+  CheckCircle2,
+  Archive,
+  RefreshCw,
+  Eye,
+  EyeOff
 } from 'lucide-react';
 import { useToast } from '../../hooks/use-toast';
 import { Toaster } from '../../components/ui/toaster';
