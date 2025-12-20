@@ -1,0 +1,251 @@
+<analysis>
+**original_problem_statement:**
+The user initially requested a frontend clone of the website . This request evolved into creating a full-stack marketing and affiliation system for a company called InverSer.
+
+The final, and current, set of requirements is to build a **multi-campaign marketing system**. This system must support multiple, distinct landing pages, each associated with a specific marketing campaign.
+
+**PRODUCT REQUIREMENTS:**
+1.  **Multi-Campaign, Multi-Template Architecture:** The core of the system is that different campaigns (e.g., , ) can render completely different frontend landing pages (, ) within the same project. The routing is .
+2.  **Dynamic Landings:** Each landing page () must dynamically display the mentor's information (name, photo) and a set of buttons/actions specific to that mentor and that campaign.
+3.  **Mentor Self-Service:** Mentors must be able to edit their own action links (e.g., WhatsApp, Calendly) for each campaign they are part of, using a secure magic link ().
+4.  **Comprehensive Admin Panel:** An admin user must be able to manage the entire system via a private  panel. This includes:
+    *   Full CRUD for Campaigns, including assigning a .
+    *   Full CRUD for Mentors.
+    *   Full CRUD for Actions, scoped per campaign.
+    *   A UI to manage mentor links for each campaign.
+    *   Functionality to generate and manage mentor magic links.
+    *   A campaign-aware CSV Import/Export feature for bulk mentor management.
+    *   An analytics dashboard to view visits and clicks, filterable by campaign.
+5.  **Event Tracking:** The system must track all  to landing pages and  on action buttons, associating them with the correct mentor and campaign.
+6.  **Backward Compatibility:** Old URLs () must automatically redirect to the default campaign's URL ().
+7.  **Future Enhancements (Phase 3):** Implement a history of link changes, mentor status per campaign, and simple session-based attribution.
+
+**User's preferred language**: Spanish. The next agent MUST respond in Spanish.
+
+**what currently exists?**
+A full-stack application with a FastAPI backend and React frontend. The backend data model and APIs have been migrated to support a multi-campaign architecture. This includes models for , , , , and . The frontend routing handles  and includes a redirect for legacy single-campaign URLs. The Mentor magic link edit panel and backend CSV import/export are functional. An Admin Panel exists with authentication and a basic mentor list, but it is not yet fully campaign-aware. A placeholder file for a new landing page, , has been created.
+
+**Last working item**:
+*   **Last item agent was working:** Implementing the frontend template system. The agent added a  to the  model and created a new wrapper component () for the original landing page to fit into this new architecture.
+*   **Status:** IN PROGRESS
+*   **Agent Testing Done:** N
+*   **Which testing method agent to use?** Frontend testing agent. The agent should verify that navigating to  renders the original NeuroCoaching landing and navigating to  renders the new (currently placeholder) Suitex landing.
+*   **User Testing Done:** N
+
+**All Pending/In progress Issue list**:
+There are no outstanding bugs. The work is focused on new feature implementation.
+
+**In progress Task List**:
+*   **Task 1: Complete Frontend Template Rendering System (P0)**
+    *   **Where to resume:** The agent needs to implement the logic in the main landing page component () to fetch the  from the API and dynamically render the correct landing page component (e.g.,  or ).
+    *   **What will be achieved with this?** This will complete the core requirement of the multi-campaign architecture, allowing different UIs for different campaigns.
+    *   **Status:** IN PROGRESS
+    *   **Should Test frontend/backend/both after fix?** Frontend
+    *   **Blocked on something:** None
+
+**Upcoming and Future Tasks**
+
+**PHASE 2 (Highest Priority)**
+
+*   **Task 1 (P0): Build  UI:**
+    *   Implement the UI for the new Suitex landing page in . It should have a SaaS product feel with sections for Hero, Benefits, How it works, and a Request Demo CTA.
+*   **Task 2 (P1): Admin - Campaign CRUD:**
+    *   Create a new section in the  panel for full CRUD operations on Campaigns (, , , ).
+*   **Task 3 (P1): Admin - Actions per Campaign:**
+    *   Make the Actions page in the admin panel campaign-aware by adding a mandatory campaign selector dropdown. All CRUD operations for actions should be scoped to the selected campaign.
+*   **Task 4 (P2): Mentor Edit Panel - Campaign Selector:**
+    *   Add a campaign selector dropdown to the mentor's magic link edit page (). The mentor should be able to switch between campaigns to edit their links for each one.
+*   **Task 5 (P2): Admin - CSV Import/Export per Campaign:**
+    *   Update the CSV management UI in the admin panel to be campaign-aware. This includes a campaign selector for downloading templates, exporting data, and importing data.
+*   **Task 6 (P2): Admin - Analytics per Campaign:**
+    *   Enhance the Analytics page with a campaign selector to filter all stats (visits, clicks, rankings) by the selected campaign.
+
+**PHASE 3 (Future Tasks)**
+
+*   **Task 7: Governance - History of Link Changes:**
+    *   Create a  collection in the DB. Log every change to a mentor's link, noting who made the change (admin or mentor) and when. Display this history in the admin panel.
+*   **Task 8: Granular Status - Mentor Status per Campaign:**
+    *   Implement a system to set a mentor's status (, , etc.) on a per-campaign basis. Reflect this status on the public landing page.
+*   **Task 9: Better Metrics - Simple Attribution Tracking:**
+    *   Implement attribution tracking using a client-side  (in a cookie or localStorage) to better understand user journeys without storing personal data.
+
+**Completed work in this session**
+- **Initial Frontend Clone:** Created a pixel-perfect clone of .
+- **Full-Stack System:** Built a complete backend with FastAPI and MongoDB.
+- **Dynamic Content:** Implemented dynamic mentor pages based on a URL slug.
+- **Event Tracking:** Integrated tracking for page visits and button clicks.
+- **Mentor Self-Service:** Created a secure magic link edit panel for mentors.
+- **CSV Management:** Developed a backend service for bulk import/export of mentors.
+- **Admin Panel Foundation:** Built the initial React Admin Panel with authentication and a mentor list.
+- **Multi-Campaign Migration (DONE):** Successfully migrated the entire backend and frontend routing from a single-campaign to a multi-campaign architecture.
+- **Backward Compatibility (DONE):** Ensured old URLs () correctly redirect to the new structure ().
+
+**Earlier issues found/mentioned but not fixed**
+*   **Issue 1: Deployment Agent Failure**
+    *   The  failed with a  error. The agent bypassed this by performing a manual health check.
+    *   **Debug checklist:** This could be an issue with how environment variables are handled or a bug in the deployment agent itself. If deployment is needed again, this may recur.
+    *   **Why to solve this issue and what will be achieved with this?** To ensure smooth and automated deployments in the future.
+    *   **Should Test frontend/backend/both after fix:** N/A (Deployment issue)
+    *   **Is recurring issue?** Y (Potentially)
+
+**Code Architecture**
+
+
+**Key Technical Concepts**
+*   **Frontend:** React, React Router, Axios, TailwindCSS, shadcn/ui
+*   **Backend:** FastAPI, MongoDB, Motor (async driver), Pydantic
+*   **Architecture:** Full-stack, REST API, Multi-campaign model, Template-based frontend rendering.
+
+**key DB schema**
+*   : 
+*   : 
+*   : 
+*   : 
+*   : 
+*   : 
+
+**All files of reference**
+*   : The main component that will handle template switching.
+*   : The new, placeholder landing page to be built.
+*   : Defines the data structure for campaigns.
+*   : The script that handled the data migration.
+*   : Directory containing all components for the admin panel.
+
+**Critical Info for New Agent**
+*   The most important instruction is the user's PROMPT DEFINITIVO. The system **must** support different landing page UIs for different campaigns. This is not optional.
+*   The work is clearly structured by the user into **Phase 2** and **Phase 3**. Follow this order.
+*   Do not change the existing, functional landing page for the cpn campaign.
+*   All new admin panel features (Actions, CSV, Analytics) must be made campaign-aware, typically by adding a campaign selector dropdown.
+*   Backward compatibility for old  URLs is critical and is already implemented via a redirect.
+
+**documents and test_reports created in this job**
+*   
+*   
+*   
+*   
+
+**Last 10 User Messages and any pending HUMAN messages**
+10. User: Final definitive prompt to clarify multi-campaign means multi-template.
+9.  Agent: Understood. Will implement the template system. Started with backend models.
+8.  Agent: Updated campaigns with .
+7.  Agent: Updated public API to include .
+6.  Agent: Created new  placeholder file.
+5.  Agent: Created a wrapper for the existing CPN landing page.
+4.  User: (from previous prompt) Perfect, the core multi-campaign is OK... Now continue with FASE 2 and FASE 3
+3.  Agent: Acknowledges completion of multi-campaign backend and summarizes next steps.
+2.  User: (from previous prompt) Asks for the URL to test the admin panel.
+1.  Agent: Provides the login URL and credentials for the admin panel.
+
+**Project Health Check:**
+*   **Broken:** The frontend template-switching logic is incomplete. Visiting  will render the old landing page, not the new  template.
+*   **Mocked:** No data is currently mocked; it is all live from the backend.
+
+**3rd Party Integrations**
+*   None.
+
+**Testing status**
+*   **Testing agent used after significant changes:** YES (for frontend screenshots and basic navigation).
+*   **Troubleshoot agent used after agent stuck in loop:** NO
+*   **Test files created:** None.
+*   **Known regressions:** None.
+
+**Credentials to test flow:**
+*   **Admin Panel Login:**
+    *   URL: 
+    *   Password: 
+
+
+
+My summarie
+PROJECT SUMMARY – INVERSER MULTI-CAMPAIGN MARKETING PLATFORM
+
+GOAL
+Build a reusable marketing platform for InverSer that supports multiple products (campaigns), each with its own landing page, while sharing the same backend, admin panel, mentors, tracking and CSV system.
+
+CURRENT STATE (CONFIRMED WORKING)
+- Single backend (Node/Express + Mongo)
+- Single admin panel (React)
+- Single mentor system
+- Campaign-based system implemented (campaign_key)
+- Actions, links and tracking are campaign-aware
+- Public routing works: /:campaign/:slug
+- Legacy compatibility: /:slug redirects to /cpn/:slug
+- Two campaigns exist: cpn (Certificación NeuroCoaching) and suitex
+- Tracking stores events per campaign
+- Admin panel partially implemented
+- Frontend exists and is cloned from Lovable (LandingCPN)
+
+CRITICAL CLARIFICATION (NON-NEGOTIABLE)
+Multi-campaign DOES NOT mean “same landing with different buttons”.
+Multi-campaign means:
+- Each campaign can and must have its own landing (UI + copy + structure)
+- All landings are generated and maintained INSIDE the SAME Emergent project
+- No duplicated backend, admin or project
+
+FINAL ARCHITECTURE
+- One backend
+- One admin panel
+- One mentor system
+- One tracking system
+- One CSV system
+- Multiple landing templates per campaign
+
+IMPLEMENTATION REQUIREMENT – TEMPLATE SYSTEM
+1) campaigns collection must include:
+   - template_key (string)
+
+2) Frontend routing:
+   - /:campaign/:slug
+   - Load campaign → read template_key → render matching landing component
+
+3) Landing templates (created inside Emergent):
+   - LandingCPN:
+     - Existing NeuroCoaching certification landing
+     - Must NOT be modified
+   - LandingSuitex:
+     - New landing, different structure and copy
+     - SaaS / product-style landing
+     - Sections: Hero, Benefits, How it works, CTA (demo), For whom, Footer
+     - Uses action_key=demo
+
+4) Admin panel:
+   - Campaign CRUD must allow setting template_key
+   - Show warning if missing template_key
+   - Fallback to cpn allowed only as safety with visible warning
+
+5) Actions & links:
+   - Remain per campaign
+   - Landing renders only actions for its campaign
+
+6) Tracking:
+   - Remains unchanged
+   - All events store campaign_key
+
+DELIVERABLE TO CLOSE THIS PHASE
+- Template system implemented
+- LandingSuitex created inside the project
+- /cpn/noel-rivera renders LandingCPN
+- /suitex/noel-rivera renders LandingSuitex
+- No certification copy appears on Suitex
+- Legacy redirects still work
+
+FUTURE PHASES (PLANNED, NOT YET IMPLEMENTED)
+- Admin UI completion:
+  - Campaign CRUD UI
+  - Actions per campaign UI
+  - Mentor edit with campaign selector
+  - CSV import/export per campaign
+  - Analytics per campaign
+- Governance improvements:
+  - Link change history
+  - Mentor status per campaign
+  - Simple attribution via session/cookie (no PII)
+
+DEPLOYMENT STRATEGY
+- App is intended to be deployed on Emergent hosting for now
+- Handles only links + tracking (no PII leads)
+- Code must be kept exportable (GitHub) and data exportable (CSV)
+
+This summary is the authoritative reference for continuing the project in a new session.
+
+</analysis>
