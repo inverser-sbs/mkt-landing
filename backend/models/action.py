@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field, validator
-from typing import Optional
+from typing import Optional, List
 from datetime import datetime
 import re
 
@@ -11,6 +11,7 @@ class ActionBase(BaseModel):
     active: bool = True
     order: int = 0
     action_type: str = "url"  # Por ahora solo URL
+    display_slots: List[str] = Field(default_factory=lambda: ["cta"])  # Slots donde se muestra la acción
     
     @validator('action_key')
     def validate_action_key(cls, v):
@@ -29,6 +30,7 @@ class ActionUpdate(BaseModel):
     active: Optional[bool] = None
     order: Optional[int] = None
     action_type: Optional[str] = None
+    display_slots: Optional[List[str]] = None
 
 class Action(ActionBase):
     id: str
