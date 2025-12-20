@@ -48,6 +48,21 @@ export const TEMPLATE_SLOTS = {
       description: 'Botones más pequeños debajo del principal'
     },
     { 
+      key: 'awakening', 
+      label: 'Sección Despertar',
+      description: 'Botón en la sección "Es momento de despertar"'
+    },
+    { 
+      key: 'is_for_you', 
+      label: 'Sección ¿Es para ti?',
+      description: 'Botón en la sección de perfil ideal'
+    },
+    { 
+      key: 'why_inverser', 
+      label: 'Sección ¿Por qué InverSer?',
+      description: 'Botón en la sección de beneficios'
+    },
+    { 
       key: 'cta', 
       label: 'CTA Final',
       description: 'Sección de llamada a la acción al final'
@@ -83,41 +98,137 @@ export const TEMPLATE_SLOTS = {
 };
 
 // ============================================
-// BOTONES POR TEMPLATE (NUEVO)
+// BOTONES POR TEMPLATE
 // ============================================
 // Define los botones REALES que existen en cada template.
-// Cada botón tiene:
+// Cada botón debe corresponder a un CTA visible en el diseño.
 // - key: identificador único
 // - label_default: texto predeterminado del botón
 // - description: qué hace este botón (para el admin)
 // - allowed_slots: dónde puede aparecer este botón
+// - type: 'external_url' (abre URL del mentor) o 'internal' (scroll interno)
 // - icon: ícono sugerido (opcional)
 // - style: estilo visual (primary, secondary, outline)
 export const TEMPLATE_BUTTONS = {
   'cpn': [
+    // ===== HERO SECTION =====
     {
       key: 'agenda',
       label_default: 'Agendar Llamada',
-      description: 'Botón principal para agendar una llamada/cita con el mentor',
+      description: 'Botón principal del Hero para agendar una llamada/cita',
       allowed_slots: ['hero_primary', 'cta'],
+      type: 'external_url',
       icon: 'calendar',
       style: 'primary'
     },
     {
       key: 'whatsapp',
       label_default: 'Hablar por WhatsApp',
-      description: 'Contacto directo vía WhatsApp',
+      description: 'Contacto directo vía WhatsApp (Hero secundario)',
       allowed_slots: ['hero_secondary', 'cta', 'footer'],
+      type: 'external_url',
       icon: 'message-circle',
       style: 'secondary'
     },
+    // ===== AWAKENING SECTION =====
+    {
+      key: 'iniciar_transformacion',
+      label_default: 'Quiero Iniciar mi Transformación',
+      description: 'Botón en la sección "Es momento de despertar"',
+      allowed_slots: ['awakening', 'cta'],
+      type: 'external_url',
+      icon: 'sparkles',
+      style: 'primary'
+    },
+    // ===== IS FOR YOU SECTION =====
+    {
+      key: 'solicitar_entrevista',
+      label_default: 'Solicita tu Entrevista',
+      description: 'Botón en la sección "¿Es para ti?"',
+      allowed_slots: ['is_for_you', 'cta'],
+      type: 'external_url',
+      icon: 'user-check',
+      style: 'primary'
+    },
+    // ===== WHY INVERSER SECTION =====
+    {
+      key: 'solicitar_info',
+      label_default: 'Solicita Información',
+      description: 'Botón en la sección "¿Por qué InverSer?"',
+      allowed_slots: ['why_inverser', 'cta'],
+      type: 'external_url',
+      icon: 'info',
+      style: 'outline'
+    },
+    // ===== CTA / FOOTER =====
     {
       key: 'formulario',
       label_default: 'Aplicar / Registrarme',
       description: 'Formulario de aplicación o registro al programa',
       allowed_slots: ['cta', 'footer'],
+      type: 'external_url',
       icon: 'file-text',
       style: 'outline'
+    },
+    {
+      key: 'directorio',
+      label_default: 'Ver Directorio',
+      description: 'Acceso al directorio de coaches/mentores',
+      allowed_slots: ['footer'],
+      type: 'external_url',
+      icon: 'users',
+      style: 'outline'
+    },
+    // ===== FIXED CONTACT (Footer) =====
+    {
+      key: 'email_contacto',
+      label_default: 'info@inverser.us',
+      description: 'Email de contacto en el footer (fijo)',
+      allowed_slots: ['footer'],
+      type: 'external_url',
+      icon: 'mail',
+      style: 'link'
+    },
+    {
+      key: 'telefono_contacto',
+      label_default: '+1 786 954 7264',
+      description: 'Teléfono/WhatsApp de contacto en footer (fijo)',
+      allowed_slots: ['footer'],
+      type: 'external_url',
+      icon: 'phone',
+      style: 'link'
+    }
+  ],
+  'suitex': [
+    {
+      key: 'demo',
+      label_default: 'Agendar Demo',
+      description: 'Botón principal para solicitar una demostración del producto',
+      allowed_slots: ['hero_primary', 'cta', 'pricing'],
+      type: 'external_url',
+      icon: 'calendar',
+      style: 'primary'
+    },
+    {
+      key: 'whatsapp',
+      label_default: 'Contactar por WhatsApp',
+      description: 'Contacto directo para consultas rápidas',
+      allowed_slots: ['hero_secondary', 'cta'],
+      type: 'external_url',
+      icon: 'message-circle',
+      style: 'secondary'
+    },
+    {
+      key: 'prueba_gratis',
+      label_default: 'Prueba Gratis',
+      description: 'Acceso a prueba gratuita del producto',
+      allowed_slots: ['hero_secondary', 'pricing'],
+      type: 'external_url',
+      icon: 'zap',
+      style: 'outline'
+    }
+  ]
+};
     },
     {
       key: 'directorio',
