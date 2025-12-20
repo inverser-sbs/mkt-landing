@@ -12,10 +12,10 @@ Backend (.env):
 - ✅ MONGO_URL: Correctly configured (mongodb://localhost:27017)
 - ✅ DB_NAME: Configured (test_database)
 - ✅ CORS_ORIGINS: Set to "*" (ready for production)
-- ✅ FRONTEND_URL: Configured (https://multicampaign.preview.emergentagent.com)
+- ✅ FRONTEND_URL: Configured (https://actionflow-7.preview.emergentagent.com)
 
 Frontend (.env):
-- ✅ REACT_APP_BACKEND_URL: Correctly configured (https://multicampaign.preview.emergentagent.com)
+- ✅ REACT_APP_BACKEND_URL: Correctly configured (https://actionflow-7.preview.emergentagent.com)
 - ✅ WDS_SOCKET_PORT: Set to 443 (SSL ready)
 - ✅ ENABLE_HEALTH_CHECK: Disabled (false)
 ```
