@@ -352,6 +352,72 @@ const ActionsPage = () => {
     }
   };
 
+  // Retire action (soft delete)
+  const confirmRetire = (action) => {
+    setSelectedAction(action);
+    setRetireConfirmOpen(true);
+  };
+
+  const handleRetire = async () => {
+    if (!selectedAction) return;
+    
+    try {
+      await axios.post(`${BACKEND_URL}/api/admin/actions/${selectedAction.id}/retire`);
+      toast({ title: 'Archivado', description: 'Acción archivada correctamente' });
+      fetchActions(selectedCampaign.key);
+    } catch (error) {
+      console.error('Error retiring action:', error);
+      toast({
+        title: 'Error',
+        description: error.response?.data?.detail || 'No se pudo archivar la acción',
+        variant: 'destructive'
+      });
+    } finally {
+      setRetireConfirmOpen(false);
+      setSelectedAction(null);
+    }
+  };
+
+  // Replace action (migrate links)
+  const openReplaceModal = (action) => {
+    setSelectedAction(action);
+    setReplaceData({ newActionKey: '' });
+    setReplaceModalOpen(true);
+  };
+
+  const handleReplace = async () => {
+    if (!selectedAction || !replaceData.newActionKey || !selectedCampaign) return;
+    
+    setSaving(true);
+    try {
+      const result = await axios.post(`${BACKEND_URL}/api/admin/actions/replace`, {
+        campaign_key: selectedCampaign.key,
+        old_action_key: selectedAction.action_key,
+        new_action_key: replaceData.newActionKey,
+        migrate_links: true,
+        migrate_events: false
+      });
+      
+      toast({ 
+        title: 'Migración completada', 
+        description: `${result.data.links_migrated} enlaces migrados de "${selectedAction.action_key}" a "${replaceData.newActionKey}"`
+      });
+      
+      setReplaceModalOpen(false);
+      setSelectedAction(null);
+      fetchActions(selectedCampaign.key);
+    } catch (error) {
+      console.error('Error replacing action:', error);
+      toast({
+        title: 'Error',
+        description: error.response?.data?.detail || 'No se pudo realizar la migración',
+        variant: 'destructive'
+      });
+    } finally {
+      setSaving(false);
+    }
+  };
+
   const toggleActive = async (action) => {
     try {
       await axios.put(`${BACKEND_URL}/api/admin/actions/${action.id}`, {
