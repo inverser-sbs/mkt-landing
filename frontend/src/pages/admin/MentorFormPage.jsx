@@ -336,7 +336,7 @@ const MentorFormPage = () => {
               {displayPhoto ? (
                 <div className="relative">
                   <img
-                    src={displayPhoto.startsWith('data:') ? displayPhoto : `${BACKEND_URL}${displayPhoto}`}
+                    src={getImageUrl(displayPhoto)}
                     alt="Preview"
                     className="w-32 h-32 rounded-full object-cover border-4 border-gray-100"
                   />
