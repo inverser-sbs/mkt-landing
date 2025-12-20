@@ -605,6 +605,21 @@ const ActionsPage = () => {
         </Card>
       )}
 
+      {/* Toggle show retired + Actions List Header */}
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-lg font-semibold text-gray-900">
+          Botones Configurados ({actions.filter(a => a.status !== 'retired').length})
+        </h2>
+        <div className="flex items-center gap-2">
+          <Label htmlFor="show-retired" className="text-sm text-gray-600">Ver archivados</Label>
+          <Switch
+            id="show-retired"
+            checked={showRetired}
+            onCheckedChange={setShowRetired}
+          />
+        </div>
+      </div>
+
       {/* Actions List */}
       {actionsLoading ? (
         <div className="flex items-center justify-center py-12">
@@ -629,8 +644,10 @@ const ActionsPage = () => {
         <div className="space-y-3">
           {actions.map((action) => {
             const buttonInfo = getButtonInfo(action.button_key || action.action_key);
+            const isRetired = action.status === 'retired';
+            
             return (
-              <Card key={action.id} className="p-4 hover:shadow-md transition-shadow">
+              <Card key={action.id} className={`p-4 hover:shadow-md transition-shadow ${isRetired ? 'opacity-60 bg-gray-50' : ''}`}>
                 <div className="flex items-center gap-4">
                   <div className="text-gray-400 cursor-move">
                     <GripVertical className="w-5 h-5" />
@@ -642,13 +659,20 @@ const ActionsPage = () => {
                   
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <h3 className="font-semibold text-gray-900">{action.label}</h3>
+                      <h3 className={`font-semibold ${isRetired ? 'text-gray-500 line-through' : 'text-gray-900'}`}>{action.label}</h3>
                       <Badge variant="secondary" className="font-mono text-xs bg-purple-100 text-purple-700">
                         {action.button_key || action.action_key}
                       </Badge>
-                      <Badge variant={action.active ? "default" : "outline"}>
-                        {action.active ? 'Activa' : 'Inactiva'}
-                      </Badge>
+                      {isRetired ? (
+                        <Badge variant="outline" className="bg-gray-200 text-gray-600">
+                          <Archive className="w-3 h-3 mr-1" />
+                          Archivada
+                        </Badge>
+                      ) : (
+                        <Badge variant={action.active ? "default" : "outline"}>
+                          {action.active ? 'Activa' : 'Inactiva'}
+                        </Badge>
+                      )}
                     </div>
                     
                     {/* Button description */}
