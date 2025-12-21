@@ -9,15 +9,22 @@ ActionStatus = Literal["active", "inactive", "retired"]
 class ActionBase(BaseModel):
     campaign_key: str = Field(..., min_length=2, max_length=50)
     action_key: str = Field(..., min_length=1, max_length=50)
-    button_key: Optional[str] = Field(None, max_length=50)  # Botón del template
+    button_key: Optional[str] = Field(None, max_length=50)  # Botón del template (key única)
     label: str = Field(..., min_length=1, max_length=100)
     description: Optional[str] = None
-    internal_note: Optional[str] = Field(None, max_length=500)  # Admin/mentor note for clarity
+    internal_note: Optional[str] = Field(None, max_length=500)  # Nota visible para admin/mentor
     active: bool = True
     status: ActionStatus = "active"  # active, inactive, retired
     order: int = 0
     action_type: str = "url"  # Por ahora solo URL
-    display_slots: List[str] = Field(default_factory=lambda: ["cta"])  # Slots donde se muestra
+    
+    # OPCIÓN B: Slot único y fijo (determinado por el botón del template)
+    # El slot viene del TEMPLATE_BUTTONS y es SOLO LECTURA para el admin
+    slot: Optional[str] = Field(None, max_length=50)
+    
+    # DEPRECATED: Se mantiene por backward compatibility durante migración
+    # Nuevas acciones no deberían usar este campo
+    display_slots: Optional[List[str]] = Field(default=None)
     
     @validator('action_key')
     def validate_action_key(cls, v):
@@ -34,6 +41,15 @@ class ActionBase(BaseModel):
         if not re.match(pattern, v):
             raise ValueError('Button key must contain only lowercase letters, numbers, hyphens and underscores')
         return v.lower()
+    
+    @validator('slot')
+    def validate_slot(cls, v):
+        if v is None:
+            return v
+        pattern = r'^[a-z0-9_-]+$'
+        if not re.match(pattern, v):
+            raise ValueError('Slot must contain only lowercase letters, numbers, hyphens and underscores')
+        return v.lower()
 
 class ActionCreate(ActionBase):
     pass
@@ -42,11 +58,13 @@ class ActionUpdate(BaseModel):
     label: Optional[str] = Field(None, min_length=1, max_length=100)
     button_key: Optional[str] = Field(None, max_length=50)
     description: Optional[str] = None
-    internal_note: Optional[str] = Field(None, max_length=500)  # Admin/mentor note for clarity
+    internal_note: Optional[str] = Field(None, max_length=500)
     active: Optional[bool] = None
     status: Optional[ActionStatus] = None
     order: Optional[int] = None
     action_type: Optional[str] = None
+    slot: Optional[str] = Field(None, max_length=50)
+    # DEPRECATED
     display_slots: Optional[List[str]] = None
 
 class Action(ActionBase):
