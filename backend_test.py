@@ -17,7 +17,7 @@ import sys
 from typing import Dict, Any, List
 
 # Use the production URL from frontend/.env
-BASE_URL = "https://inverser-fixes.preview.emergentagent.com/api"
+BASE_URL = "https://landing-bugs.preview.emergentagent.com/api"
 
 class InverSerP0BugFixesTester:
     def __init__(self):

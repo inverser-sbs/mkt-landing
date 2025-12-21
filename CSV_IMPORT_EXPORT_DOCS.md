@@ -336,22 +336,22 @@ curl ".../template" -o template.csv
 
 ### Export
 ```
-GET https://inverser-fixes.preview.emergentagent.com/api/admin/csv/export
+GET https://landing-bugs.preview.emergentagent.com/api/admin/csv/export
 ```
 
 ### Import
 ```
-POST https://inverser-fixes.preview.emergentagent.com/api/admin/csv/import
+POST https://landing-bugs.preview.emergentagent.com/api/admin/csv/import
 ```
 
 ### Preview
 ```
-POST https://inverser-fixes.preview.emergentagent.com/api/admin/csv/preview
+POST https://landing-bugs.preview.emergentagent.com/api/admin/csv/preview
 ```
 
 ### Template
 ```
-GET https://inverser-fixes.preview.emergentagent.com/api/admin/csv/template
+GET https://landing-bugs.preview.emergentagent.com/api/admin/csv/template
 ```
 
 ---
