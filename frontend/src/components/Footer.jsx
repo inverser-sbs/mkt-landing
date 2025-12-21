@@ -24,10 +24,11 @@ const Footer = ({ mentorData, onActionClick }) => {
           {/* Logo and Description */}
           <div className="lg:col-span-1">
             <div className="mb-4">
-              <span className="text-2xl font-bold">
-                <span className="text-[#c4ff0f]">Inver</span>
-                <span className="text-white">ser</span>
-              </span>
+              <img 
+                src="https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/ux8tcoz0_logo-02.png" 
+                alt="InverSer" 
+                className="h-10 w-auto brightness-0 invert"
+              />
             </div>
             <p className="text-gray-400 text-sm leading-relaxed mb-4">
               Certificación Profesional en NeuroCoaching avalada por organizaciones internacionales.
