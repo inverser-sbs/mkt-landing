@@ -7,6 +7,7 @@ class MentorBase(BaseModel):
     first_name: str = Field(..., min_length=1, max_length=100)
     last_name: str = Field(..., min_length=1, max_length=100)
     email: Optional[str] = None
+    phone: Optional[str] = None  # Contact phone number
     slug: str = Field(..., min_length=3, max_length=50)
     photo_url: Optional[str] = None
     active: bool = True
