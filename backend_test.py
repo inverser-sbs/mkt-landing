@@ -19,12 +19,13 @@ from typing import Dict, Any, List
 # Use the production URL from frontend/.env
 BASE_URL = "https://actionflow-7.preview.emergentagent.com/api"
 
-class InverSerGlobalMentorsAPITester:
+class InverSerP0BugFixesTester:
     def __init__(self):
         self.session = requests.Session()
         self.base_url = BASE_URL
         self.test_mentor_id = None
         self.available_campaigns = []
+        self.test_action_id = None
         
     def test_connection(self):
         """Test basic API connectivity"""
