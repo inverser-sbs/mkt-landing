@@ -610,6 +610,9 @@ agent_communication:
       - working: true
         agent: "main"
         comment: "FASE A PARTE 1: Implementado sistema de mentores globales con asignación multi-campaña. Nuevos archivos: mentor_campaign.py (modelo), mentor_campaign_service.py (servicio). Endpoints: PUT /campaigns (bulk assign), POST/DELETE /campaigns/{key}, PUT /status. Tests pasaron."
+      - working: true
+        agent: "testing"
+        comment: "✅ COMPREHENSIVE BACKEND API TESTING COMPLETED: All Global Mentors multi-campaign assignment endpoints verified working perfectly. 1) GET /api/admin/mentors/{mentor_id}: Returns mentor with campaign assignments, status per campaign, and magic link indicators. Found mentor 'Noel Rivera' with 2 campaigns (cpn-active🔗, suitex-paused❌). 2) PUT /api/admin/mentors/{mentor_id}/campaigns: Bulk campaign assignment working with sync_mode support. Successfully assigned campaigns with proper response showing assigned/removed/errors arrays. 3) PUT /api/admin/mentors/{mentor_id}/campaigns/{campaign_key}/status: Status updates per campaign working correctly. Changed cpn status from active to paused successfully. 4) POST /api/admin/mentors/{mentor_id}/magic-link/{campaign_key}: Magic link generation working correctly for assigned campaigns, properly blocked for unassigned campaigns with clear error message. 5) Campaign Isolation: Verified operations on one campaign don't affect others - added mentor-program campaign without affecting cpn/suitex status. All API endpoints responding correctly with proper data structure and validation."
 
   - task: "Mentores Globales - Frontend Implementation"
     implemented: true
