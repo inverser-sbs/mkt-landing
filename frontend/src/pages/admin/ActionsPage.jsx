@@ -138,7 +138,8 @@ const ActionsPage = () => {
         ...prev,
         // Keep existing values if editing, otherwise use defaults
         label: selectedAction ? prev.label : (prev.label || defaultLabel),
-        display_slots: selectedAction ? prev.display_slots : [...selectedButton.allowed_slots]
+        // OPCIÓN B: slot único y fijo del botón
+        slot: selectedButton.slot
       }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
