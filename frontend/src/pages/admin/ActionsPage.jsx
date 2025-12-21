@@ -263,14 +263,14 @@ const ActionsPage = () => {
   const handleButtonSelect = (buttonKey) => {
     const button = getButtonByKey(templateKey, buttonKey);
     if (button) {
-      // Complete reset of form data for new button selection
+      // OPCIÓN B: Completar form con datos del botón (slot es fijo)
       setFormData(prev => ({
         ...prev,
         button_key: buttonKey,
-        action_key: buttonKey, // Always update action_key to match button_key
-        label: button.label_default, // Always reset label to default for new button
-        description: button.description || '', // Use button description if available
-        display_slots: [...button.allowed_slots] // Auto-select all allowed slots
+        action_key: buttonKey,
+        label: button.label_default,
+        description: button.description || '',
+        slot: button.slot  // OPCIÓN B: slot único y fijo
       }));
       
       // Clear related form errors
