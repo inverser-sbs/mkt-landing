@@ -6,6 +6,8 @@ import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
 import { Card } from '../../components/ui/card';
 import { Switch } from '../../components/ui/switch';
+import { Badge } from '../../components/ui/badge';
+import { Checkbox } from '../../components/ui/checkbox';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -26,7 +28,9 @@ import {
   Camera,
   X,
   AlertCircle,
-  CheckCircle2
+  CheckCircle2,
+  Globe,
+  Layers
 } from 'lucide-react';
 import { useToast } from '../../hooks/use-toast';
 import { Toaster } from '../../components/ui/toaster';
@@ -62,16 +66,31 @@ const MentorFormPage = () => {
   });
   const [formErrors, setFormErrors] = useState({});
   
+  // Campaign assignments
+  const [campaigns, setCampaigns] = useState([]);
+  const [selectedCampaigns, setSelectedCampaigns] = useState([]);
+  const [mentorCampaigns, setMentorCampaigns] = useState([]); // Current assignments with status
+  
   // Photo preview for new upload
   const [photoPreview, setPhotoPreview] = useState(null);
   const [pendingFile, setPendingFile] = useState(null);
 
-  // Fetch mentor data if editing
+  // Fetch campaigns and mentor data
   useEffect(() => {
+    fetchCampaigns();
     if (isEditing) {
       fetchMentor();
     }
   }, [id]);
+
+  const fetchCampaigns = async () => {
+    try {
+      const response = await axios.get(`${BACKEND_URL}/api/admin/campaigns`);
+      setCampaigns(response.data);
+    } catch (error) {
+      console.error('Error fetching campaigns:', error);
+    }
+  };
 
   const fetchMentor = async () => {
     try {
@@ -86,6 +105,12 @@ const MentorFormPage = () => {
         mentor_group: mentor.mentor_group || '',
         photo_url: mentor.photo_url || ''
       });
+      
+      // Set current campaign assignments
+      if (mentor.campaigns) {
+        setMentorCampaigns(mentor.campaigns);
+        setSelectedCampaigns(mentor.campaigns.map(c => c.campaign_key));
+      }
     } catch (error) {
       console.error('Error fetching mentor:', error);
       toast({
