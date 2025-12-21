@@ -600,7 +600,8 @@ const MentorsListPage = () => {
                 </div>
               </div>
             </Card>
-          ))}
+            );
+          })}
         </div>
       )}
 
