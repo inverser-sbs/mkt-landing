@@ -157,10 +157,20 @@ async def get_all_mentors(
         campaign_mentor_ids = await campaign_service.get_campaign_mentors(campaign_key)
         mentors = [m for m in mentors if m.id in campaign_mentor_ids]
     
-    # Enrich with campaign info
+    # Enrich with campaign info and correct public URLs
     result = []
     for mentor in mentors:
-        campaigns = await campaign_service.get_mentor_campaigns(mentor.id)
+        raw_campaigns = await campaign_service.get_mentor_campaigns(mentor.id)
+        
+        # Add public_url to each campaign
+        campaigns_with_url = []
+        for c in raw_campaigns:
+            c["public_url"] = build_public_url(mentor.slug, c["campaign_key"])
+            campaigns_with_url.append(c)
+        
+        # Default URL is first campaign's URL or just slug
+        default_url = campaigns_with_url[0]["public_url"] if campaigns_with_url else build_public_url(mentor.slug)
+        
         result.append(MentorWithCampaigns(
             id=mentor.id,
             first_name=mentor.first_name,
@@ -172,8 +182,8 @@ async def get_all_mentors(
             mentor_group=mentor.mentor_group,
             created_at=mentor.created_at,
             updated_at=mentor.updated_at,
-            public_url=mentor.public_url,
-            campaigns=campaigns
+            public_url=default_url,
+            campaigns=campaigns_with_url
         ))
     
     return result
