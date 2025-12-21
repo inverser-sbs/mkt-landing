@@ -641,8 +641,6 @@ async def delete_magic_link(
         "deleted": deleted,
         "message": "Magic link eliminado" if deleted else "No había magic link activo"
     }
-        return {"has_token": False}
-    return {"has_token": True, **info}
 
 
 @router.get("/{mentor_id}/magic-links")
