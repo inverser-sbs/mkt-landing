@@ -214,8 +214,10 @@ const ActionsPage = () => {
       errors.label = 'El texto del botón es requerido';
     }
 
-    if (formData.display_slots.length === 0) {
-      errors.display_slots = 'Selecciona al menos una ubicación';
+    // OPCIÓN B: Validar que hay un slot (viene automáticamente del botón)
+    if (!formData.slot && selectedButton) {
+      // Auto-asignar el slot del botón si no está definido
+      formData.slot = selectedButton.slot;
     }
     
     setFormErrors(errors);
