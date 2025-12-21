@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 """
-Backend API Testing for InverSer Global Mentors with Multi-Campaign Assignment
+Backend API Testing for InverSer P0 Bug Fixes - Admin Panel Stability
 
-Tests the following scenarios:
-1. GET /api/admin/mentors/{mentor_id} - Get mentor with campaigns
-2. PUT /api/admin/mentors/{mentor_id}/campaigns - Assign/update campaigns
-3. PUT /api/admin/mentors/{mentor_id}/campaigns/{campaign_key}/status - Update status in campaign
-4. POST /api/admin/mentors/{mentor_id}/magic-link/{campaign_key} - Magic link (only if assigned)
-5. Campaign Isolation - Verify operations on one campaign don't affect others
+Tests the following P0 bug fixes:
+1. Magic Link Complete Management - DELETE endpoint and improved error feedback
+2. Cleanup Orphans Campaign Isolation - campaign_key parameter filtering
+3. Action Delete Bug Fix - Valid link check improvements
+4. Magic Link Token Validation - Detailed error messages
 
 Admin Login: /login with password: inverser2024
 """
