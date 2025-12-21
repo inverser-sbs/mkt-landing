@@ -37,6 +37,7 @@ const CTASection = ({ mentorData, onActionClick }) => {
 
         {/* ============================================ */}
         {/* BUTTON ANCHOR - Posición fija: CTA Section */}
+        {/* REGLA: SIEMPRE visible, disabled si falta URL */}
         {/* ============================================ */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
           {/* ANCHOR: formulario_cta (CTA Final) */}
@@ -49,7 +50,6 @@ const CTASection = ({ mentorData, onActionClick }) => {
             onActionClick={onActionClick}
             variant="cta"
             size="lg"
-            hideIfNoUrl={true}
           />
         </div>
 
