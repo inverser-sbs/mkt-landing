@@ -286,23 +286,10 @@ const ActionsPage = () => {
     }
   };
 
-  const handleSlotToggle = (slotKey) => {
-    // Only allow toggling slots that are allowed for this button
-    if (selectedButton && !selectedButton.allowed_slots.includes(slotKey)) {
-      return;
-    }
-    
-    setFormData(prev => {
-      const currentSlots = prev.display_slots || [];
-      if (currentSlots.includes(slotKey)) {
-        return { ...prev, display_slots: currentSlots.filter(s => s !== slotKey) };
-      } else {
-        return { ...prev, display_slots: [...currentSlots, slotKey] };
-      }
-    });
-    if (formErrors.display_slots) {
-      setFormErrors(prev => ({ ...prev, display_slots: null }));
-    }
+  // OPCIÓN B: handleSlotToggle ya no es necesario (slot es fijo)
+  // Se mantiene como no-op por si hay referencias pendientes
+  const handleSlotToggle = () => {
+    // No-op: En Opción B el slot es fijo y viene del botón del template
   };
 
   const handleSubmit = async (e) => {
