@@ -281,8 +281,7 @@ const ActionsPage = () => {
         ...prev, 
         button_key: null,
         action_key: null,
-        label: null,
-        display_slots: null
+        label: null
       }));
     }
   };
