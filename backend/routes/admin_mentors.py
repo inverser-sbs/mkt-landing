@@ -505,7 +505,8 @@ async def get_mentor_links_for_campaign(
             "action_key": action.action_key,
             "label": action.label,
             "url": links.get(action.action_key, ""),
-            "active": action.active
+            "active": action.active,
+            "internal_note": action.internal_note  # Include internal note for admin visibility
         })
     
     return {
