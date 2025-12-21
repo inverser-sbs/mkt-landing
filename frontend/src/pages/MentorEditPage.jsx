@@ -49,6 +49,9 @@ const MentorEditPage = () => {
       setMentorData(response.data.mentor);
       setCampaignData(response.data.campaign);
       
+      // Store full action metadata (including internal_note)
+      setActions(response.data.actions);
+      
       // Initialize links state
       const initialLinks = {};
       response.data.actions.forEach(action => {
