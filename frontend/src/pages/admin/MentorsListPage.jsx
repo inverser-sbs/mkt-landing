@@ -212,12 +212,18 @@ const MentorsListPage = () => {
         `${BACKEND_URL}/api/admin/mentors/${mentor.id}/links/${selectedCampaign.key}`
       );
       
-      // Convert array to object
+      // Response structure: { is_assigned: bool, links: [{action_key, label, url, active}] }
+      const linksData = response.data.links || [];
+      
+      // Convert array to object for form state
       const linksObj = {};
-      response.data.forEach(link => {
+      linksData.forEach(link => {
         linksObj[link.action_key] = link.url || '';
       });
       setMentorLinks(linksObj);
+      
+      // Store the full links data for rendering labels
+      setAvailableActions(linksData);
     } catch (error) {
       console.error('Error fetching links:', error);
       toast({
