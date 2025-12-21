@@ -40,6 +40,7 @@ export const TEMPLATE_SLOTS = {
     { key: 'navbar', label: 'Navbar - Botón de Inscripción', description: 'Botón en el menú de navegación' },
     { key: 'hero_primary', label: 'Hero - Botón Principal', description: 'Botón grande y destacado en la sección principal' },
     { key: 'hero_secondary', label: 'Hero - Botón Secundario', description: 'Botón debajo del principal en el Hero' },
+    { key: 'hero_profile', label: 'Hero - Ver Perfil Mentor', description: 'Botón debajo de la foto del mentor' },
     { key: 'awakening', label: 'Sección Despertar', description: 'Botón en la sección "Es momento de despertar"' },
     { key: 'is_for_you', label: 'Sección ¿Es para ti?', description: 'Botón en la sección de perfil ideal' },
     { key: 'why_inverser', label: 'Sección ¿Por qué InverSer?', description: 'Botón en la sección de beneficios' },
@@ -92,6 +93,15 @@ export const TEMPLATE_BUTTONS = {
       description: 'Contacto directo vía WhatsApp en el Hero',
       link_type: 'mentor',  // Cada mentor pone su link de WhatsApp
       style: 'secondary'
+    },
+    // ===== HERO - PERFIL MENTOR =====
+    {
+      key: 'ver_perfil',
+      label_default: 'Ver perfil',
+      slot: 'hero_profile',
+      description: 'Botón debajo de la foto del mentor en el Hero',
+      link_type: 'mentor',  // Destino a definir posteriormente
+      style: 'outline'
     },
     // ===== AWAKENING SECTION =====
     {
