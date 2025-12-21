@@ -311,6 +311,7 @@ const ActionsPage = () => {
     setSaving(true);
     try {
       if (selectedAction) {
+        // OPCIÓN B: Enviar slot único
         await axios.put(`${BACKEND_URL}/api/admin/actions/${selectedAction.id}`, {
           label: formData.label,
           button_key: formData.button_key,
@@ -318,10 +319,11 @@ const ActionsPage = () => {
           internal_note: formData.internal_note || null,
           active: formData.active,
           order: formData.order,
-          display_slots: formData.display_slots
+          slot: formData.slot
         });
         toast({ title: 'Actualizado', description: 'Acción actualizada correctamente' });
       } else {
+        // OPCIÓN B: Enviar slot único
         await axios.post(`${BACKEND_URL}/api/admin/actions`, {
           campaign_key: selectedCampaign.key,
           action_key: formData.action_key,
@@ -331,7 +333,7 @@ const ActionsPage = () => {
           internal_note: formData.internal_note || null,
           active: formData.active,
           order: formData.order,
-          display_slots: formData.display_slots
+          slot: formData.slot
         });
         toast({ title: 'Creado', description: 'Acción creada correctamente' });
       }
