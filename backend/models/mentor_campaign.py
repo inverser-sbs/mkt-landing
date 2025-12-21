@@ -30,6 +30,7 @@ class MentorWithCampaigns(BaseModel):
     first_name: str
     last_name: str
     email: Optional[str] = None
+    phone: Optional[str] = None  # Contact phone number
     slug: str
     photo_url: Optional[str] = None
     active: bool = True
