@@ -549,7 +549,7 @@ const MentorFormPage = () => {
           {/* Active */}
           <div className="flex items-center justify-between mt-6 pt-4 border-t">
             <div>
-              <Label htmlFor="active">Estado activo</Label>
+              <Label htmlFor="active">Estado activo (global)</Label>
               <p className="text-xs text-gray-500">Los mentores inactivos no aparecen en las landings</p>
             </div>
             <Switch
@@ -558,6 +558,98 @@ const MentorFormPage = () => {
               onCheckedChange={(checked) => handleInputChange('active', checked)}
             />
           </div>
+        </Card>
+
+        {/* ==================== CAMPAIGN ASSIGNMENTS ==================== */}
+        <Card className="p-6">
+          <h2 className="text-lg font-semibold mb-4 flex items-center">
+            <Layers className="w-5 h-5 mr-2 text-[#7c3aed]" />
+            Asignar a Campañas
+          </h2>
+          
+          <p className="text-sm text-gray-600 mb-4">
+            Selecciona las campañas donde este mentor participará. Cada campaña tendrá su propia configuración de enlaces y magic links.
+          </p>
+
+          {campaigns.length === 0 ? (
+            <p className="text-center text-gray-500 py-4">
+              No hay campañas disponibles
+            </p>
+          ) : (
+            <div className="space-y-3">
+              {campaigns.map((campaign) => {
+                const isSelected = selectedCampaigns.includes(campaign.key);
+                const currentAssignment = mentorCampaigns.find(c => c.campaign_key === campaign.key);
+                
+                return (
+                  <div 
+                    key={campaign.key} 
+                    className={`flex items-center justify-between p-3 rounded-lg border ${
+                      isSelected ? 'bg-purple-50 border-purple-200' : 'bg-gray-50 border-gray-200'
+                    }`}
+                  >
+                    <div className="flex items-center space-x-3">
+                      <Checkbox
+                        id={`campaign-${campaign.key}`}
+                        checked={isSelected}
+                        onCheckedChange={() => handleCampaignToggle(campaign.key)}
+                      />
+                      <div>
+                        <Label 
+                          htmlFor={`campaign-${campaign.key}`}
+                          className="font-medium cursor-pointer"
+                        >
+                          {campaign.name}
+                        </Label>
+                        <p className="text-xs text-gray-500">
+                          /{campaign.key} • Template: {campaign.template_key}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center gap-2">
+                      {currentAssignment && (
+                        <>
+                          <Badge 
+                            variant="outline" 
+                            className={`text-xs ${
+                              currentAssignment.status === 'paused' ? 'bg-amber-50 text-amber-700' :
+                              currentAssignment.status === 'inactive' ? 'bg-red-50 text-red-700' :
+                              'bg-green-50 text-green-700'
+                            }`}
+                          >
+                            {currentAssignment.status === 'paused' ? 'Pausado' :
+                             currentAssignment.status === 'inactive' ? 'Inactivo' : 'Activo'}
+                          </Badge>
+                          {currentAssignment.has_magic_link && (
+                            <Badge variant="secondary" className="text-xs">
+                              🔗 Magic Link
+                            </Badge>
+                          )}
+                        </>
+                      )}
+                      {!campaign.active && (
+                        <Badge variant="outline" className="text-xs text-gray-400">
+                          Campaña inactiva
+                        </Badge>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+          
+          {selectedCampaigns.length > 0 && (
+            <p className="mt-4 text-sm text-gray-600">
+              <Globe className="w-4 h-4 inline mr-1" />
+              {selectedCampaigns.length} campaña{selectedCampaigns.length !== 1 ? 's' : ''} seleccionada{selectedCampaigns.length !== 1 ? 's' : ''}
+            </p>
+          )}
+          
+          <p className="mt-4 text-xs text-gray-500 bg-gray-50 p-3 rounded-md">
+            💡 Los enlaces y magic links se configuran por separado en la lista de mentores, seleccionando la campaña correspondiente.
+          </p>
         </Card>
 
         {/* ==================== ACTIONS ==================== */}
