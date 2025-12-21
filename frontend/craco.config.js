@@ -100,6 +100,26 @@ webpackConfig.devServer = (devServerConfig) => {
     };
   }
 
+  // ============================================
+  // FIX: Disable error overlay for ResizeObserver errors
+  // This is a known Radix UI issue (github.com/radix-ui/primitives/issues/2313)
+  // The error is benign and doesn't affect functionality
+  // ============================================
+  devServerConfig.client = {
+    ...devServerConfig.client,
+    overlay: {
+      errors: true,
+      warnings: false,
+      // Filter out ResizeObserver errors from the overlay
+      runtimeErrors: (error) => {
+        if (error && error.message && error.message.includes('ResizeObserver loop')) {
+          return false;
+        }
+        return true;
+      },
+    },
+  };
+
   return devServerConfig;
 };
 
