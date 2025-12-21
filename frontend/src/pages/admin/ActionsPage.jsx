@@ -261,16 +261,23 @@ const ActionsPage = () => {
   const handleButtonSelect = (buttonKey) => {
     const button = getButtonByKey(templateKey, buttonKey);
     if (button) {
+      // Complete reset of form data for new button selection
       setFormData(prev => ({
         ...prev,
         button_key: buttonKey,
-        action_key: prev.action_key || buttonKey, // Auto-fill action_key
-        label: prev.label || button.label_default, // Auto-fill label
+        action_key: prev.action_key || buttonKey, // Auto-fill action_key only if empty
+        label: button.label_default, // Always reset label to default for new button
+        description: '', // Reset description
         display_slots: [...button.allowed_slots] // Auto-select all allowed slots
       }));
-    }
-    if (formErrors.button_key) {
-      setFormErrors(prev => ({ ...prev, button_key: null }));
+      
+      // Clear related form errors
+      setFormErrors(prev => ({ 
+        ...prev, 
+        button_key: null,
+        label: null,
+        display_slots: null
+      }));
     }
   };
 
