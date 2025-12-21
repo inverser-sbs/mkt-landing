@@ -225,6 +225,8 @@ const ActionsPage = () => {
   const openModal = (action = null) => {
     if (action) {
       setSelectedAction(action);
+      // OPCIÓN B: slot viene del botón del template
+      const button = getButtonByKey(templateKey, action.button_key);
       setFormData({
         action_key: action.action_key,
         button_key: action.button_key || action.action_key,
@@ -233,7 +235,7 @@ const ActionsPage = () => {
         internal_note: action.internal_note || '',
         active: action.active,
         order: action.order || 0,
-        display_slots: action.display_slots || ['cta']
+        slot: button?.slot || action.slot || ''
       });
     } else {
       setSelectedAction(null);
@@ -245,7 +247,7 @@ const ActionsPage = () => {
         internal_note: '',
         active: true,
         order: actions.length,
-        display_slots: []
+        slot: ''
       });
     }
     setFormErrors({});
