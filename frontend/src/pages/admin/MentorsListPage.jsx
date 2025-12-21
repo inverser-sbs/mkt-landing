@@ -738,8 +738,10 @@ const MentorsListPage = () => {
             <DialogTitle>
               Magic Link para {selectedMentor?.first_name} {selectedMentor?.last_name}
             </DialogTitle>
-            <DialogDescription>
-              Campaña: <Badge variant="secondary">{selectedCampaign?.name}</Badge>
+            <DialogDescription asChild>
+              <div className="text-sm text-muted-foreground">
+                Campaña: <Badge variant="secondary">{selectedCampaign?.name}</Badge>
+              </div>
             </DialogDescription>
           </DialogHeader>
 
