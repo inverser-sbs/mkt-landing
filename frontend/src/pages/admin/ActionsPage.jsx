@@ -97,6 +97,7 @@ const ActionsPage = () => {
     button_key: '',
     label: '',
     description: '',
+    internal_note: '',  // Note for admin/mentor visibility
     active: true,
     order: 0,
     display_slots: []
