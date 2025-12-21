@@ -12,6 +12,7 @@ class ActionBase(BaseModel):
     button_key: Optional[str] = Field(None, max_length=50)  # Botón del template
     label: str = Field(..., min_length=1, max_length=100)
     description: Optional[str] = None
+    internal_note: Optional[str] = Field(None, max_length=500)  # Admin/mentor note for clarity
     active: bool = True
     status: ActionStatus = "active"  # active, inactive, retired
     order: int = 0
