@@ -8,6 +8,9 @@ const Footer = ({ mentorData, onActionClick }) => {
   // Preparar datos para ButtonAnchor
   const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
   const templateKey = 'cpn';
+  
+  // Año actual dinámico
+  const currentYear = new Date().getFullYear();
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -87,37 +90,30 @@ const Footer = ({ mentorData, onActionClick }) => {
             <h3 className="font-bold text-lg mb-4">Legal</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-400 hover:text-[#c4ff0f] transition-colors text-sm">
-                  Política de Privacidad
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-[#c4ff0f] transition-colors text-sm">
+                <a 
+                  href="https://inverser.us/terminos-condiciones/" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-[#c4ff0f] transition-colors text-sm"
+                >
                   Términos y Condiciones
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Mentor Section */}
+          {/* Mentor Section - Sin título "Tu Mentor" */}
           <div>
-            <h3 className="font-bold text-lg mb-4">
-              {mentor ? `Tu Mentor` : 'Mentor'}
-            </h3>
-            
-            {/* Mentor Name */}
+            {/* Mentor certificado como título principal */}
+            <p className="text-xs text-gray-500 mb-1">Mentor certificado</p>
             {mentor && (
-              <div className="mb-4">
-                <p className="text-xs text-gray-500 mb-1">Mentor certificado</p>
-                <p className="text-base font-medium text-white">
-                  {mentor.first_name} {mentor.last_name}
-                </p>
-              </div>
+              <p className="text-base font-medium text-white mb-4">
+                {mentor.first_name} {mentor.last_name}
+              </p>
             )}
             
             {/* ============================================ */}
             {/* BUTTON ANCHOR - Ir al perfil (Footer) */}
-            {/* Mismo sistema que todos los botones */}
             {/* ============================================ */}
             <ButtonAnchor
               buttonKey="ir_perfil_footer"
@@ -132,10 +128,13 @@ const Footer = ({ mentorData, onActionClick }) => {
           </div>
         </div>
 
-        {/* Bottom Bar */}
+        {/* Bottom Bar - Copyright dinámico */}
         <div className="border-t border-gray-700 pt-8 text-center">
-          <p className="text-gray-400 text-sm">
-            © 2024 InverSer SBS. Todos los derechos reservados.
+          <p className="text-gray-400 text-sm font-medium">
+            2009–{currentYear} INVERSER SBS LLC
+          </p>
+          <p className="text-gray-500 text-xs mt-1">
+            Todos los derechos reservados
           </p>
         </div>
       </div>
