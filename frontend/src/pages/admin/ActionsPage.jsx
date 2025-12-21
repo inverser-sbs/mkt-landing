@@ -129,16 +129,22 @@ const ActionsPage = () => {
     }
   }, [selectedCampaign, showRetired]);
 
-  // Reset slots when button changes
+  // Reset form data when button changes (to ensure clean state)
   useEffect(() => {
-    if (formData.button_key && selectedButton) {
-      // Auto-select all allowed slots for this button
+    if (formData.button_key && selectedButton && modalOpen) {
+      // Only update if we're in the modal and have a selected button
+      // This ensures proper re-render when switching between buttons
+      const defaultLabel = selectedButton.label_default || formData.button_key;
+      
       setFormData(prev => ({
         ...prev,
-        display_slots: [...selectedButton.allowed_slots]
+        // Keep existing values if editing, otherwise use defaults
+        label: selectedAction ? prev.label : (prev.label || defaultLabel),
+        display_slots: selectedAction ? prev.display_slots : [...selectedButton.allowed_slots]
       }));
     }
-  }, [formData.button_key]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formData.button_key, modalOpen]);
 
   const fetchCampaigns = async () => {
     try {
