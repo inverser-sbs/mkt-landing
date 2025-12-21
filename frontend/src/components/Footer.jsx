@@ -1,11 +1,14 @@
 import React from 'react';
-import { Mail, Phone } from 'lucide-react';
+import { Mail, Phone, Users } from 'lucide-react';
 import ButtonAnchor, { prepareAnchorData } from './ButtonAnchor';
 
 const Footer = ({ mentorData, onActionClick }) => {
   // Preparar datos para los anchors
   const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
   const templateKey = 'cpn';
+  
+  // Datos del mentor para mostrar contacto
+  const mentor = mentorData?.mentor || null;
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -44,8 +47,7 @@ const Footer = ({ mentorData, onActionClick }) => {
               onActionClick={onActionClick}
               variant="ghost"
               size="sm"
-              hideIfNoUrl={false}
-              className="text-gray-400 hover:text-[#c4ff0f]"
+              className="text-gray-400 hover:text-[#c4ff0f] justify-start px-0"
             />
           </div>
 
@@ -113,31 +115,72 @@ const Footer = ({ mentorData, onActionClick }) => {
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Contact - Mentor-specific if available */}
           <div>
-            <h3 className="font-bold text-lg mb-4">Contacto</h3>
+            <h3 className="font-bold text-lg mb-4">
+              {mentor ? `Contacta a ${mentor.first_name}` : 'Contacto'}
+            </h3>
             <ul className="space-y-3">
-              <li>
-                <a
-                  href="mailto:info@inverser.us"
-                  className="flex items-center space-x-2 text-gray-400 hover:text-[#c4ff0f] transition-colors text-sm"
-                >
-                  <Mail className="w-4 h-4" />
-                  <span>info@inverser.us</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://wa.me/17869547264"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center space-x-2 text-gray-400 hover:text-[#c4ff0f] transition-colors text-sm"
-                >
-                  <Phone className="w-4 h-4" />
-                  <span>+1 786 954 7264</span>
-                </a>
-              </li>
+              {/* Mentor Email */}
+              {mentor?.email ? (
+                <li>
+                  <a
+                    href={`mailto:${mentor.email}`}
+                    className="flex items-center space-x-2 text-gray-400 hover:text-[#c4ff0f] transition-colors text-sm"
+                  >
+                    <Mail className="w-4 h-4" />
+                    <span>{mentor.email}</span>
+                  </a>
+                </li>
+              ) : (
+                <li>
+                  <a
+                    href="mailto:info@inverser.us"
+                    className="flex items-center space-x-2 text-gray-400 hover:text-[#c4ff0f] transition-colors text-sm"
+                  >
+                    <Mail className="w-4 h-4" />
+                    <span>info@inverser.us</span>
+                  </a>
+                </li>
+              )}
+              
+              {/* Mentor Phone */}
+              {mentor?.phone ? (
+                <li>
+                  <a
+                    href={`https://wa.me/${mentor.phone.replace(/[^0-9]/g, '')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-2 text-gray-400 hover:text-[#c4ff0f] transition-colors text-sm"
+                  >
+                    <Phone className="w-4 h-4" />
+                    <span>{mentor.phone}</span>
+                  </a>
+                </li>
+              ) : (
+                <li>
+                  <a
+                    href="https://wa.me/17869547264"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-2 text-gray-400 hover:text-[#c4ff0f] transition-colors text-sm"
+                  >
+                    <Phone className="w-4 h-4" />
+                    <span>+1 786 954 7264</span>
+                  </a>
+                </li>
+              )}
             </ul>
+            
+            {/* Mentor Card if available */}
+            {mentor && (
+              <div className="mt-4 pt-4 border-t border-gray-700">
+                <p className="text-xs text-gray-500 mb-2">Tu mentor certificado</p>
+                <p className="text-sm font-medium text-white">
+                  {mentor.first_name} {mentor.last_name}
+                </p>
+              </div>
+            )}
           </div>
         </div>
 
