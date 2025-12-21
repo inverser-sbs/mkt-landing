@@ -108,10 +108,14 @@ async def create_mentor(
                 campaigns.append({
                     "campaign_key": campaign_key,
                     "status": "active",
-                    "has_magic_link": False
+                    "has_magic_link": False,
+                    "public_url": build_public_url(mentor.slug, campaign_key)
                 })
             except ValueError:
                 pass  # Skip invalid campaigns
+        
+        # Build default public_url (first campaign or just slug)
+        default_url = campaigns[0]["public_url"] if campaigns else build_public_url(mentor.slug)
         
         return MentorWithCampaigns(
             id=mentor.id,
@@ -124,7 +128,7 @@ async def create_mentor(
             mentor_group=mentor.mentor_group,
             created_at=mentor.created_at,
             updated_at=mentor.updated_at,
-            public_url=mentor.public_url,
+            public_url=default_url,
             campaigns=campaigns
         )
     except ValueError as e:
