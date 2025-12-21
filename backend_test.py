@@ -633,26 +633,24 @@ class InverSerP0BugFixesTester:
 
 def main():
     """Main test execution"""
-    tester = InverSerGlobalMentorsAPITester()
+    tester = InverSerP0BugFixesTester()
     
     print("=" * 70)
-    print("InverSer Global Mentors Multi-Campaign Assignment - Backend API Testing")
+    print("InverSer P0 Bug Fixes Testing - Admin Panel Stability")
     print("=" * 70)
     
-    success = tester.run_comprehensive_test()
+    success = tester.run_p0_bug_fixes_test()
     
     print("\n" + "=" * 70)
     if success:
-        print("✅ ALL TESTS COMPLETED")
-        print("\nKey findings:")
-        print("- API endpoints are accessible")
-        print("- Mentor retrieval with campaign info works")
-        print("- Campaign assignment/update functionality works")
-        print("- Status updates per campaign work")
-        print("- Magic link generation respects campaign assignment")
-        print("- Campaign isolation is maintained")
+        print("✅ ALL P0 BUG FIXES VERIFIED WORKING")
+        print("\nKey P0 fixes tested:")
+        print("- Magic Link Complete Management (DELETE endpoint)")
+        print("- Cleanup Orphans Campaign Isolation (campaign_key parameter)")
+        print("- Action Delete Valid Link Check (improved validation)")
+        print("- Magic Link Token Validation (detailed error messages)")
     else:
-        print("❌ SOME TESTS FAILED")
+        print("❌ SOME P0 BUG FIXES NEED ATTENTION")
         print("Check the output above for specific issues")
     print("=" * 70)
 
