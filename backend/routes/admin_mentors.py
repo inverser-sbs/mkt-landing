@@ -176,6 +176,7 @@ async def get_all_mentors(
             first_name=mentor.first_name,
             last_name=mentor.last_name,
             email=mentor.email,
+            phone=getattr(mentor, 'phone', None),
             slug=mentor.slug,
             photo_url=mentor.photo_url,
             active=mentor.active,
