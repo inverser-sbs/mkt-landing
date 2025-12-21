@@ -665,27 +665,38 @@ const MentorsListPage = () => {
             </div>
           ) : (
             <div className="space-y-4 py-4">
-              {Object.keys(mentorLinks).length === 0 ? (
-                <p className="text-center text-gray-500 py-4">
-                  No hay acciones configuradas para esta campaña
-                </p>
+              {availableActions.length === 0 ? (
+                <div className="text-center py-4">
+                  <AlertCircle className="w-8 h-8 mx-auto text-amber-500 mb-2" />
+                  <p className="text-gray-600">No hay acciones configuradas para esta campaña</p>
+                  <p className="text-sm text-gray-500 mt-1">
+                    Ve a <span className="font-medium">Gestión de Acciones</span> para configurar botones primero.
+                  </p>
+                </div>
               ) : (
-                Object.entries(mentorLinks).map(([actionKey, url]) => (
-                  <div key={actionKey} className="space-y-2">
-                    <Label className="capitalize">{actionKey.replace(/-|_/g, ' ')}</Label>
+                availableActions.map((action) => (
+                  <div key={action.action_key} className="space-y-2">
+                    <Label className="flex items-center gap-2">
+                      <span>{action.label}</span>
+                      {!action.active && (
+                        <span className="text-xs text-amber-600 bg-amber-50 px-2 py-0.5 rounded">
+                          Inactivo
+                        </span>
+                      )}
+                    </Label>
                     <div className="flex gap-2">
                       <Input
                         type="url"
                         placeholder="https://..."
-                        value={url}
-                        onChange={(e) => handleLinkChange(actionKey, e.target.value)}
+                        value={mentorLinks[action.action_key] || ''}
+                        onChange={(e) => handleLinkChange(action.action_key, e.target.value)}
                         className="font-mono text-sm"
                       />
-                      {url && (
+                      {mentorLinks[action.action_key] && (
                         <Button
                           variant="outline"
                           size="icon"
-                          onClick={() => window.open(url, '_blank')}
+                          onClick={() => window.open(mentorLinks[action.action_key], '_blank')}
                           title="Abrir enlace"
                         >
                           <ExternalLink className="w-4 h-4" />
