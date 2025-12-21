@@ -665,9 +665,9 @@ agent_communication:
 
   - task: "P0 Bug Fix - Actions Button Change State Reset"
     implemented: true
-    working: true
+    working: false
     file: "/app/frontend/src/pages/admin/ActionsPage.jsx"
-    stuck_count: 0
+    stuck_count: 1
     priority: "critical"
     needs_retesting: false
     status_history:
@@ -677,6 +677,9 @@ agent_communication:
       - working: "NA"
         agent: "testing"
         comment: "Frontend testing not performed as per system limitations. This is a frontend-specific bug fix that requires UI interaction testing which is outside the scope of backend API testing."
+      - working: false
+        agent: "testing"
+        comment: "PARTIAL FIX: Label changes correctly when switching buttons (✅ 'Agendar Llamada' → 'Quiero Iniciar mi Transformación'), but slots do NOT change (❌ both buttons show 3 slots selected). The form reset is incomplete - slots should update based on the new button's allowed_slots configuration."
 
   - task: "P0 Bug Fix - ResizeObserver Error on Mentor Create"
     implemented: true
@@ -692,6 +695,9 @@ agent_communication:
       - working: "NA"
         agent: "testing"
         comment: "Frontend testing not performed as per system limitations. This is a frontend-specific bug fix related to UI component lifecycle that requires browser testing which is outside the scope of backend API testing."
+      - working: true
+        agent: "testing"
+        comment: "✅ COMPREHENSIVE TESTING COMPLETED: Created new mentor 'Test Automation' with slug 'test-automation-1766313431492'. Successfully redirected to /admin after form submission. NO ResizeObserver errors found in console logs. Smooth navigation without UI crashes. Bug fix working correctly."
 
   - task: "P0 Bug Fix - Cleanup Orphans Campaign Isolation"
     implemented: true
