@@ -97,6 +97,7 @@ const HeroSection = ({ mentorData, onActionClick }) => {
 
           {/* ============================================ */}
           {/* BUTTON ANCHORS - Posición fija en el diseño */}
+          {/* REGLA: SIEMPRE visibles, disabled si falta URL */}
           {/* ============================================ */}
           <div className="flex flex-col sm:flex-row gap-4 mb-8 animate-slide-up" style={{ animationDelay: '0.2s' }}>
             {/* ANCHOR: agenda_hero (Hero Primary) */}
@@ -109,7 +110,6 @@ const HeroSection = ({ mentorData, onActionClick }) => {
               onActionClick={onActionClick}
               variant="primary"
               size="lg"
-              hideIfNoUrl={true}
             />
             
             {/* ANCHOR: whatsapp_hero (Hero Secondary) */}
@@ -122,7 +122,6 @@ const HeroSection = ({ mentorData, onActionClick }) => {
               onActionClick={onActionClick}
               variant="secondary"
               size="lg"
-              hideIfNoUrl={true}
             />
           </div>
 
