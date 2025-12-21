@@ -413,12 +413,14 @@ class InverSerP0BugFixesTester:
             
             if response.status_code == 200:
                 result = response.json()
+                deleted_info = result.get('deleted', {})
                 print(f"   ✅ Cleanup completed for campaign '{campaign_b}':")
-                print(f"      - Campaign key: {result.get('campaign_key', 'N/A')}")
+                print(f"      - Message: {result.get('message', 'N/A')}")
+                print(f"      - Campaign key: {deleted_info.get('campaign_key', 'N/A')}")
                 
                 # Verify response includes correct campaign_key
-                if result.get('campaign_key') != campaign_b:
-                    print(f"   ❌ Expected campaign_key='{campaign_b}' but got '{result.get('campaign_key')}'")
+                if deleted_info.get('campaign_key') != campaign_b:
+                    print(f"   ❌ Expected campaign_key='{campaign_b}' but got '{deleted_info.get('campaign_key')}'")
                     return False
                 else:
                     print(f"   ✅ Campaign isolation verified - cleanup scoped to '{campaign_b}'")
