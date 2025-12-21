@@ -58,6 +58,7 @@ const IsForYouSection = ({ mentorData, onActionClick }) => {
           
           {/* ============================================ */}
           {/* BUTTON ANCHOR - Posición fija: Is For You */}
+          {/* REGLA: SIEMPRE visible, disabled si falta URL */}
           {/* ============================================ */}
           <ButtonAnchor
             buttonKey="solicitar_entrevista"
@@ -68,7 +69,6 @@ const IsForYouSection = ({ mentorData, onActionClick }) => {
             onActionClick={onActionClick}
             variant="cta"
             size="lg"
-            hideIfNoUrl={true}
           />
         </div>
       </div>
