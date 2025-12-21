@@ -53,20 +53,21 @@ const BUTTON_ICONS = {
 };
 
 // Estilos por variante - Estado ACTIVO (con URL)
+// REGLA: Todos los botones tienen el MISMO efecto hover (scale-105 + shadow)
 const VARIANT_STYLES = {
   primary: "bg-[#c4ff0f] text-gray-900 hover:bg-[#b3ef00] font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl",
-  secondary: "border-2 border-[#7c3aed] text-[#7c3aed] hover:bg-[#7c3aed] hover:text-white transition-all duration-300",
-  outline: "border-2 border-white text-white hover:bg-white hover:text-[#7c3aed] transition-all duration-300",
-  ghost: "text-[#7c3aed] hover:bg-purple-50 transition-all duration-300",
-  cta: "bg-[#c4ff0f] text-gray-900 hover:bg-[#b3ef00] font-semibold transition-all duration-300 hover:scale-105"
+  secondary: "bg-[#c4ff0f] text-gray-900 hover:bg-[#b3ef00] font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl",
+  outline: "bg-[#c4ff0f] text-gray-900 hover:bg-[#b3ef00] font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl",
+  ghost: "bg-[#c4ff0f]/80 text-gray-900 hover:bg-[#b3ef00] font-medium transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg",
+  cta: "bg-[#c4ff0f] text-gray-900 hover:bg-[#b3ef00] font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
 };
 
 // Estilos por variante - Estado DISABLED (sin URL)
 const DISABLED_STYLES = {
   primary: "bg-gray-200 text-gray-400 font-semibold cursor-not-allowed",
-  secondary: "border-2 border-gray-300 text-gray-400 cursor-not-allowed",
-  outline: "border-2 border-gray-400 text-gray-400 cursor-not-allowed",
-  ghost: "text-gray-400 cursor-not-allowed",
+  secondary: "bg-gray-200 text-gray-400 font-semibold cursor-not-allowed",
+  outline: "bg-gray-200 text-gray-400 font-semibold cursor-not-allowed",
+  ghost: "bg-gray-100 text-gray-400 font-medium cursor-not-allowed",
   cta: "bg-gray-200 text-gray-400 font-semibold cursor-not-allowed"
 };
 

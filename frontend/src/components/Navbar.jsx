@@ -31,9 +31,9 @@ const Navbar = ({ mentorData, onActionClick }) => {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
     }`}>
-      <div className="container mx-auto px-4 py-4">
+      <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo - Alineado con contenido del Hero */}
+          {/* Logo - Alineado con contenido del Hero (ml-4 md:ml-8 igual que HeroSection) */}
           <div className="flex items-center ml-4 md:ml-8">
             <img 
               src="https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/ux8tcoz0_logo-02.png" 
