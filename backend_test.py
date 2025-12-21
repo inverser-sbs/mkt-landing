@@ -425,64 +425,78 @@ class InverSerGlobalMentorsAPITester:
             return None
     
     def run_comprehensive_test(self):
-        """Run comprehensive test of action deletion bug fix"""
-        print("🚀 Starting comprehensive action deletion bug fix test...\n")
+        """Run comprehensive test of Global Mentors multi-campaign assignment"""
+        print("🚀 Starting comprehensive Global Mentors multi-campaign assignment test...\n")
         
         # Test 1: Basic connectivity
         if not self.test_connection():
             return False
         
         # Test 2: Get campaigns
-        campaigns = self.get_campaigns()
-        if not campaigns:
+        self.available_campaigns = self.get_campaigns()
+        if not self.available_campaigns:
             print("❌ No campaigns found - cannot proceed with testing")
             return False
         
-        # Use first campaign for testing
-        test_campaign = campaigns[0]
-        campaign_key = test_campaign.get('key')
-        print(f"\n🎯 Using campaign '{campaign_key}' for testing")
+        print(f"\n📋 Available campaigns for testing:")
+        for campaign in self.available_campaigns:
+            print(f"   - {campaign.get('name')} (key: {campaign.get('key')})")
         
-        # Test 3: Get existing actions
-        actions = self.get_actions_for_campaign(campaign_key)
-        
-        # Test 4: Get mentors (to understand link context)
+        # Test 3: Get mentors
         mentors = self.get_mentors()
+        if not mentors or not self.test_mentor_id:
+            print("❌ No mentors found - cannot proceed with testing")
+            return False
         
-        # Test 5: Test cleanup orphans functionality
-        cleanup_result = self.test_cleanup_orphans()
+        # Test 4: Get mentor with campaigns (initial state)
+        print(f"\n=== TESTING MENTOR {self.test_mentor_id} ===")
+        initial_mentor = self.test_get_mentor_with_campaigns(self.test_mentor_id)
+        if not initial_mentor:
+            print("❌ Failed to get initial mentor state")
+            return False
         
-        # Test 6: Create a test action for deletion testing
-        test_action = self.create_test_action(campaign_key)
-        if not test_action:
-            print("❌ Cannot create test action - using existing action for testing")
-            if actions:
-                test_action = actions[0]
-            else:
-                print("❌ No actions available for testing")
-                return False
+        # Test 5: Campaign assignment/update
+        if len(self.available_campaigns) >= 2:
+            # Test assigning to first two campaigns
+            test_campaigns = [c['key'] for c in self.available_campaigns[:2]]
+            assignment_result = self.test_assign_campaigns(
+                self.test_mentor_id, 
+                test_campaigns, 
+                sync_mode=True
+            )
+            
+            if assignment_result:
+                # Test 6: Update status in one campaign
+                first_campaign = test_campaigns[0]
+                status_result = self.test_update_campaign_status(
+                    self.test_mentor_id,
+                    first_campaign,
+                    "paused"
+                )
+                
+                # Test 7: Generate magic link for assigned campaign
+                if status_result:
+                    magic_result = self.test_magic_link_generation(
+                        self.test_mentor_id,
+                        first_campaign
+                    )
+                
+                # Test 8: Try magic link for unassigned campaign (should fail)
+                if len(self.available_campaigns) >= 3:
+                    unassigned_campaign = self.available_campaigns[2]['key']
+                    self.test_magic_link_for_unassigned_campaign(
+                        self.test_mentor_id,
+                        unassigned_campaign
+                    )
         
-        action_id = test_action.get('id')
+        # Test 9: Campaign isolation
+        isolation_result = self.test_campaign_isolation(self.test_mentor_id)
         
-        # Test 7: Test link count endpoint
-        link_count = self.test_action_link_count(action_id)
+        # Test 10: Final state verification
+        print(f"\n📊 Final mentor state:")
+        final_mentor = self.test_get_mentor_with_campaigns(self.test_mentor_id)
         
-        # Test 8: Test normal delete (should be blocked if valid links exist)
-        delete_success = self.test_delete_action_normal(action_id)
-        
-        # Test 9: If normal delete was blocked, test force delete
-        if not delete_success and link_count and link_count.get('valid', 0) > 0:
-            print(f"\n⚠️  Normal delete was blocked due to {link_count.get('valid')} valid links")
-            print("   Testing force delete...")
-            force_delete_success = self.test_delete_action_force(action_id)
-            if force_delete_success:
-                print("✅ Force delete worked as expected")
-            else:
-                print("❌ Force delete failed unexpectedly")
-        elif delete_success:
-            print("✅ Normal delete worked (no valid links blocking)")
-        
-        print("\n🎉 Comprehensive test completed!")
+        print("\n🎉 Comprehensive Global Mentors test completed!")
         return True
 
 def main():
