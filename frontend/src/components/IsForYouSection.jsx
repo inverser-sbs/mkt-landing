@@ -1,8 +1,12 @@
 import React from 'react';
 import { Check } from 'lucide-react';
-import { Button } from './ui/button';
+import ButtonAnchor, { prepareAnchorData } from './ButtonAnchor';
 
-const IsForYouSection = () => {
+const IsForYouSection = ({ mentorData, onActionClick }) => {
+  // Preparar datos para los anchors
+  const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
+  const templateKey = 'cpn';
+
   const points = [
     'Te sientes estancado y sin avances en tu vida',
     'Buscas dejar un legado y causar un impacto en el mundo',
@@ -11,13 +15,6 @@ const IsForYouSection = () => {
     'Quieres una vida de mayor impacto y más tiempo libre',
     'Deseas aumentar tus ingresos y alcanzar libertad financiera',
   ];
-
-  const scrollToCTA = () => {
-    const element = document.getElementById('cta');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <section id="programa" className="py-20 px-4 sm:px-6 lg:px-8 bg-[#faf8f5]">
@@ -58,12 +55,21 @@ const IsForYouSection = () => {
             Con garantía de resultados + un team maravilloso que estará lado a lado contigo para
             impulsarte a lograr tus metas.
           </p>
-          <Button
-            onClick={scrollToCTA}
-            className="bg-[#c4ff0f] text-gray-900 hover:bg-[#b3ef00] font-semibold px-8 py-6 text-lg transition-all duration-300 hover:scale-105"
-          >
-            Solicita tu Entrevista
-          </Button>
+          
+          {/* ============================================ */}
+          {/* BUTTON ANCHOR - Posición fija: Is For You */}
+          {/* ============================================ */}
+          <ButtonAnchor
+            buttonKey="solicitar_entrevista"
+            templateKey={templateKey}
+            actions={actions}
+            mentorLinks={mentorLinks}
+            campaignLinks={campaignLinks}
+            onActionClick={onActionClick}
+            variant="cta"
+            size="lg"
+            hideIfNoUrl={true}
+          />
         </div>
       </div>
     </section>
