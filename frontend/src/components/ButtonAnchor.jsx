@@ -44,6 +44,7 @@ const BUTTON_ICONS = {
   'solicitar_info': FileText,
   'formulario_cta': MessageCircle,
   'directorio': Users,
+  'ver_perfil': Users,
   // Suitex
   'demo_hero': Calendar,
   'prueba_cta': ArrowRight,
