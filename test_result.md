@@ -182,13 +182,12 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Action Slots System - Backend Model"
-    - "Action Slots System - Template Registry" 
-    - "Action Slots System - Admin UI"
-    - "Action Slots System - Landing Templates"
+    - "P0 Bug Fix - Magic Link Complete Management"
+    - "P0 Bug Fix - Cleanup Orphans Campaign Isolation" 
+    - "P0 Bug Fix - Action Delete Valid Link Check"
   stuck_tasks: []
   test_all: false
-  test_priority: "high_first"
+  test_priority: "critical_first"
 
 agent_communication:
   - agent: "main"
