@@ -20,6 +20,17 @@ router = APIRouter(prefix="/api/admin/mentors", tags=["admin-mentors"])
 UPLOAD_DIR = Path("/app/backend/uploads/mentors")
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
+def get_frontend_url():
+    """Get FRONTEND_URL dynamically"""
+    return os.environ.get('FRONTEND_URL', 'http://localhost:3000')
+
+def build_public_url(slug: str, campaign_key: str = None) -> str:
+    """Build public URL for mentor landing page"""
+    frontend_url = get_frontend_url()
+    if campaign_key:
+        return f"{frontend_url}/{campaign_key}/{slug}"
+    return f"{frontend_url}/{slug}"
+
 async def get_db():
     from server import db
     return db
