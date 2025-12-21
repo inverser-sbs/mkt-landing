@@ -182,9 +182,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "P0 Bug Fix - Magic Link Complete Management"
-    - "P0 Bug Fix - Cleanup Orphans Campaign Isolation" 
-    - "P0 Bug Fix - Action Delete Valid Link Check"
+    - "P1 Feature - Internal Note Visible in Link Edit"
   stuck_tasks: []
   test_all: false
   test_priority: "critical_first"
