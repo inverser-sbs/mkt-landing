@@ -265,9 +265,9 @@ const ActionsPage = () => {
       setFormData(prev => ({
         ...prev,
         button_key: buttonKey,
-        action_key: prev.action_key || buttonKey, // Auto-fill action_key only if empty
+        action_key: buttonKey, // Always update action_key to match button_key
         label: button.label_default, // Always reset label to default for new button
-        description: '', // Reset description
+        description: button.description || '', // Use button description if available
         display_slots: [...button.allowed_slots] // Auto-select all allowed slots
       }));
       
@@ -275,6 +275,7 @@ const ActionsPage = () => {
       setFormErrors(prev => ({ 
         ...prev, 
         button_key: null,
+        action_key: null,
         label: null,
         display_slots: null
       }));
