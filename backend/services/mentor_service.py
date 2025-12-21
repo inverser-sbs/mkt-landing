@@ -5,7 +5,9 @@ from typing import Optional, List
 from uuid import uuid4
 import os
 
-FRONTEND_URL = os.environ.get('FRONTEND_URL', 'http://localhost:3000')
+def get_frontend_url():
+    """Get FRONTEND_URL dynamically to ensure it reads the current env value"""
+    return os.environ.get('FRONTEND_URL', 'http://localhost:3000')
 
 class MentorService:
     def __init__(self, db: AsyncIOMotorDatabase):
@@ -17,7 +19,9 @@ class MentorService:
         # Use existing 'id' field if present, otherwise generate from _id
         if "id" not in mentor:
             mentor["id"] = str(mentor["_id"])
-        mentor["public_url"] = f"{FRONTEND_URL}/{mentor['slug']}"
+        # Get FRONTEND_URL dynamically
+        frontend_url = get_frontend_url()
+        mentor["public_url"] = f"{frontend_url}/{mentor['slug']}"
         return mentor
     
     async def create_mentor(self, mentor_data: MentorCreate) -> Mentor:
@@ -32,7 +36,9 @@ class MentorService:
         mentor_dict["updated_at"] = datetime.utcnow()
         
         await self.collection.insert_one(mentor_dict)
-        mentor_dict["public_url"] = f"{FRONTEND_URL}/{mentor_data.slug}"
+        # Get FRONTEND_URL dynamically
+        frontend_url = get_frontend_url()
+        mentor_dict["public_url"] = f"{frontend_url}/{mentor_data.slug}"
         
         return Mentor(**mentor_dict)
     
