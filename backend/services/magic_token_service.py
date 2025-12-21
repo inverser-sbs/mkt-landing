@@ -122,3 +122,41 @@ class MagicTokenService:
                 "is_expired": token_doc["expires_at"] < datetime.utcnow()
             })
         return tokens
+    
+    async def delete_token(self, mentor_id: str, campaign_key: str) -> bool:
+        """
+        Delete/invalidate all magic tokens for a mentor+campaign.
+        Returns True if any tokens were invalidated.
+        """
+        result = await self.collection.update_many(
+            {"mentor_id": mentor_id, "campaign_key": campaign_key, "is_valid": True},
+            {"$set": {"is_valid": False}}
+        )
+        return result.modified_count > 0
+    
+    async def get_detailed_validation(self, mentor_id: str, campaign_key: str, token: str) -> dict:
+        """
+        Get detailed validation result with specific error reason.
+        Returns dict with 'valid' boolean and 'reason' string.
+        """
+        token_hash = self._hash_token(token)
+        
+        # Check if token exists at all (any state)
+        any_token = await self.collection.find_one({
+            "mentor_id": mentor_id,
+            "campaign_key": campaign_key,
+            "token_hash": token_hash
+        })
+        
+        if not any_token:
+            return {"valid": False, "reason": "token_not_found"}
+        
+        # Check if token is invalidated
+        if not any_token.get("is_valid", False):
+            return {"valid": False, "reason": "token_invalidated"}
+        
+        # Check expiration
+        if any_token["expires_at"] < datetime.utcnow():
+            return {"valid": False, "reason": "token_expired", "expired_at": any_token["expires_at"]}
+        
+        return {"valid": True, "reason": "ok"}
