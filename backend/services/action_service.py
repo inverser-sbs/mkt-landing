@@ -256,9 +256,13 @@ class ActionService:
             "total": valid + orphan + empty_url
         }
     
-    async def cleanup_orphan_data(self) -> dict:
+    async def cleanup_orphan_data(self, campaign_key: str = None) -> dict:
         """
-        Clean up orphan data across the system.
+        Clean up orphan data.
+        
+        If campaign_key is provided, only cleans data for that campaign.
+        Otherwise, cleans ALL orphan data globally (use with caution).
+        
         Removes:
         - mentor_links with non-existent mentor_id
         - mentor_links with empty URLs
@@ -274,11 +278,17 @@ class ActionService:
         result = {
             "orphan_links_deleted": 0,
             "empty_url_links_deleted": 0,
-            "orphan_tokens_deleted": 0
+            "orphan_tokens_deleted": 0,
+            "campaign_key": campaign_key or "all"
         }
         
+        # Build query filter
+        link_query = {}
+        if campaign_key:
+            link_query["campaign_key"] = campaign_key
+        
         # Find and delete orphan mentor_links
-        async for link in self.db.mentor_links.find({}):
+        async for link in self.db.mentor_links.find(link_query):
             should_delete = False
             
             # Check if mentor exists
@@ -293,8 +303,13 @@ class ActionService:
             if should_delete:
                 await self.db.mentor_links.delete_one({"_id": link["_id"]})
         
+        # Build token query filter
+        token_query = {}
+        if campaign_key:
+            token_query["campaign_key"] = campaign_key
+        
         # Find and delete orphan magic_tokens
-        async for token in self.db.magic_tokens.find({}):
+        async for token in self.db.magic_tokens.find(token_query):
             if token.get("mentor_id") not in mentor_ids:
                 await self.db.magic_tokens.delete_one({"_id": token["_id"]})
                 result["orphan_tokens_deleted"] += 1
