@@ -60,8 +60,9 @@ class MagicTokenService:
         if not mentor:
             raise ValueError("Mentor not found")
         
-        # Magic link now includes campaign_key
-        magic_link = f"{FRONTEND_URL}/edit/{campaign_key}/{mentor['slug']}?token={token}"
+        # Build magic link URL - get FRONTEND_URL at runtime
+        frontend_url = get_frontend_url()
+        magic_link = f"{frontend_url}/edit/{campaign_key}/{mentor['slug']}?token={token}"
         
         return MagicTokenResponse(
             magic_link=magic_link,
