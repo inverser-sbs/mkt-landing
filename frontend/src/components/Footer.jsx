@@ -27,29 +27,13 @@ const Footer = ({ mentorData, onActionClick }) => {
               <img 
                 src="https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/ux8tcoz0_logo-02.png" 
                 alt="InverSer" 
-                className="h-10 w-auto brightness-0 invert"
+                className="h-12 w-auto brightness-0 invert"
               />
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed mb-4">
+            <p className="text-gray-400 text-sm leading-relaxed">
               Certificación Profesional en NeuroCoaching avalada por organizaciones internacionales.
               Transforma tu vida HOY.
             </p>
-            
-            {/* ============================================ */}
-            {/* BUTTON ANCHOR - Posición fija: Footer */}
-            {/* Este es un botón con link_type="fixed" */}
-            {/* ============================================ */}
-            <ButtonAnchor
-              buttonKey="directorio"
-              templateKey={templateKey}
-              actions={actions}
-              mentorLinks={mentorLinks}
-              campaignLinks={campaignLinks}
-              onActionClick={onActionClick}
-              variant="ghost"
-              size="sm"
-              className="text-gray-400 hover:text-[#c4ff0f] justify-start px-0"
-            />
           </div>
 
           {/* Quick Links */}
