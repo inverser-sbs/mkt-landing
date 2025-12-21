@@ -455,11 +455,20 @@ const MentorsListPage = () => {
       {filteredMentors.length === 0 ? (
         <Card className="p-12 text-center">
           <p className="text-gray-500">No se encontraron mentores</p>
+          {filterByCampaign && (
+            <p className="text-sm text-gray-400 mt-2">
+              Desactiva el filtro para ver todos los mentores
+            </p>
+          )}
         </Card>
       ) : (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredMentors.map((mentor) => (
-            <Card key={mentor.id} className="p-4 hover:shadow-lg transition-shadow">
+          {filteredMentors.map((mentor) => {
+            const isInCampaign = isMentorInCampaign(mentor);
+            const campaignStatus = getMentorCampaignStatus(mentor);
+            
+            return (
+            <Card key={mentor.id} className={`p-4 hover:shadow-lg transition-shadow ${!isInCampaign && selectedCampaign ? 'opacity-75 border-dashed' : ''}`}>
               <div className="flex items-start space-x-4">
                 {/* Photo */}
                 <div className="flex-shrink-0">
@@ -484,11 +493,52 @@ const MentorsListPage = () => {
                   <p className="text-sm text-gray-500 truncate">
                     /{selectedCampaign?.key || 'cpn'}/{mentor.slug}
                   </p>
-                  <div className="mt-2">
-                    <Badge variant={mentor.active ? "default" : "outline"}>
+                  <div className="mt-2 flex flex-wrap gap-1">
+                    {/* Global status badge */}
+                    <Badge variant={mentor.active ? "default" : "outline"} className="text-xs">
                       {mentor.active ? 'Activo' : 'Inactivo'}
                     </Badge>
+                    
+                    {/* Campaign assignment badge */}
+                    {selectedCampaign && (
+                      isInCampaign ? (
+                        <Badge variant="secondary" className={`text-xs ${
+                          campaignStatus === 'paused' ? 'bg-amber-100 text-amber-700' :
+                          campaignStatus === 'inactive' ? 'bg-red-100 text-red-700' :
+                          'bg-green-100 text-green-700'
+                        }`}>
+                          {campaignStatus === 'paused' ? '⏸️ Pausado' :
+                           campaignStatus === 'inactive' ? '🔴 Inactivo' :
+                           '✅ Asignado'}
+                        </Badge>
+                      ) : (
+                        <Badge variant="outline" className="text-xs text-gray-400">
+                          No asignado
+                        </Badge>
+                      )
+                    )}
                   </div>
+                  
+                  {/* Campaign list badges */}
+                  {mentor.campaigns && mentor.campaigns.length > 0 && (
+                    <div className="mt-2 flex flex-wrap gap-1">
+                      {mentor.campaigns.slice(0, 3).map((c) => (
+                        <Badge 
+                          key={c.campaign_key} 
+                          variant="outline" 
+                          className={`text-xs ${c.campaign_key === selectedCampaign?.key ? 'border-purple-300 bg-purple-50' : ''}`}
+                        >
+                          {c.campaign_key}
+                          {c.has_magic_link && <Wand2 className="w-2 h-2 ml-1" />}
+                        </Badge>
+                      ))}
+                      {mentor.campaigns.length > 3 && (
+                        <Badge variant="outline" className="text-xs">
+                          +{mentor.campaigns.length - 3}
+                        </Badge>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -521,9 +571,9 @@ const MentorsListPage = () => {
                   <Button
                     onClick={() => openMagicLinkModal(mentor)}
                     size="sm"
-                    variant="outline"
+                    variant={isInCampaign ? "outline" : "secondary"}
                     disabled={!selectedCampaign}
-                    title="Generar magic link"
+                    title={isInCampaign ? "Generar magic link" : "Primero asigna el mentor a esta campaña"}
                   >
                     <Wand2 className="w-4 h-4 mr-1" />
                     Magic Link
