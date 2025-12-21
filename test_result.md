@@ -700,11 +700,14 @@ agent_communication:
     file: "/app/backend/services/action_service.py"
     stuck_count: 0
     priority: "critical"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: true
         agent: "main"
         comment: "cleanup_orphan_data() now accepts optional campaign_key parameter. When provided, only cleans data for that specific campaign. Frontend updated to always pass selectedCampaign.key. Isolation tests passed."
+      - working: true
+        agent: "testing"
+        comment: "✅ COMPREHENSIVE P0 BUG FIX TESTING COMPLETED: Cleanup Orphans Campaign Isolation verified working perfectly. 1) POST /api/admin/actions/cleanup-orphans?campaign_key=cpn - Campaign-specific cleanup working correctly, returns proper message 'Limpieza completada para campaña cpn' and campaign_key='cpn' in response. 2) POST /api/admin/actions/cleanup-orphans?campaign_key=suitex - Second campaign cleanup working independently, returns campaign_key='suitex'. 3) Campaign Isolation Verified - Each cleanup operation properly scoped to specified campaign, no cross-campaign data affected. 4) Response Structure Correct - API returns detailed breakdown (orphan_links_deleted, empty_url_links_deleted, orphan_tokens_deleted) with proper campaign identification. Campaign isolation working perfectly - cleanup operations are completely separated by campaign_key parameter."
 
   - agent: "main"
     message: "P0 BUG FIXES COMPLETADOS: 1) Magic Link con opción eliminar + mejor feedback de errores, 2) Actions cambio de botón hace reset completo del formulario, 3) ResizeObserver fix con delay antes de navigate, 4) Cleanup-orphans ahora filtrado por campaign_key. Todos los tests de aislamiento pasaron. Screenshots verificados."
