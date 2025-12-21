@@ -547,9 +547,9 @@ class InverSerP0BugFixesTester:
             print(f"❌ Error getting actions: {e}")
             return []
     
-    def run_comprehensive_test(self):
-        """Run comprehensive test of Global Mentors multi-campaign assignment"""
-        print("🚀 Starting comprehensive Global Mentors multi-campaign assignment test...\n")
+    def run_p0_bug_fixes_test(self):
+        """Run comprehensive test of P0 bug fixes for InverSer admin panel stability"""
+        print("🚀 Starting P0 Bug Fixes Testing for InverSer Admin Panel Stability...\n")
         
         # Test 1: Basic connectivity
         if not self.test_connection():
@@ -571,56 +571,65 @@ class InverSerP0BugFixesTester:
             print("❌ No mentors found - cannot proceed with testing")
             return False
         
-        # Test 4: Get mentor with campaigns (initial state)
-        print(f"\n=== TESTING MENTOR {self.test_mentor_id} ===")
-        initial_mentor = self.test_get_mentor_with_campaigns(self.test_mentor_id)
-        if not initial_mentor:
-            print("❌ Failed to get initial mentor state")
+        # Use first available campaign for testing
+        test_campaign = self.available_campaigns[0]['key']
+        print(f"\n🎯 Using campaign '{test_campaign}' for P0 bug fix testing")
+        
+        # Ensure mentor is assigned to test campaign
+        print(f"\n📌 Ensuring mentor {self.test_mentor_id} is assigned to campaign {test_campaign}...")
+        assignment_result = self.test_assign_campaigns(
+            self.test_mentor_id, 
+            [test_campaign], 
+            sync_mode=False
+        )
+        
+        if not assignment_result:
+            print("❌ Failed to assign mentor to test campaign")
             return False
         
-        # Test 5: Campaign assignment/update
-        if len(self.available_campaigns) >= 2:
-            # Test assigning to first two campaigns
-            test_campaigns = [c['key'] for c in self.available_campaigns[:2]]
-            assignment_result = self.test_assign_campaigns(
-                self.test_mentor_id, 
-                test_campaigns, 
-                sync_mode=True
-            )
-            
-            if assignment_result:
-                # Test 6: Update status in one campaign
-                first_campaign = test_campaigns[0]
-                status_result = self.test_update_campaign_status(
-                    self.test_mentor_id,
-                    first_campaign,
-                    "paused"
-                )
-                
-                # Test 7: Generate magic link for assigned campaign
-                if status_result:
-                    magic_result = self.test_magic_link_generation(
-                        self.test_mentor_id,
-                        first_campaign
-                    )
-                
-                # Test 8: Try magic link for unassigned campaign (should fail)
-                if len(self.available_campaigns) >= 3:
-                    unassigned_campaign = self.available_campaigns[2]['key']
-                    self.test_magic_link_for_unassigned_campaign(
-                        self.test_mentor_id,
-                        unassigned_campaign
-                    )
+        # P0 Bug Fix Tests
+        print(f"\n" + "="*70)
+        print("STARTING P0 BUG FIX TESTS")
+        print("="*70)
         
-        # Test 9: Campaign isolation
-        isolation_result = self.test_campaign_isolation(self.test_mentor_id)
+        test_results = []
         
-        # Test 10: Final state verification
-        print(f"\n📊 Final mentor state:")
-        final_mentor = self.test_get_mentor_with_campaigns(self.test_mentor_id)
+        # Test P0 Bug Fix #1: Magic Link Complete Management
+        result1 = self.test_magic_link_complete_management(self.test_mentor_id, test_campaign)
+        test_results.append(("Magic Link Complete Management", result1))
         
-        print("\n🎉 Comprehensive Global Mentors test completed!")
-        return True
+        # Test P0 Bug Fix #4: Cleanup Orphans Campaign Isolation
+        result4 = self.test_cleanup_orphans_campaign_isolation()
+        test_results.append(("Cleanup Orphans Campaign Isolation", result4))
+        
+        # Test Action Delete Valid Link Check
+        result_action = self.test_action_delete_valid_link_check(test_campaign)
+        test_results.append(("Action Delete Valid Link Check", result_action))
+        
+        # Summary
+        print(f"\n" + "="*70)
+        print("P0 BUG FIX TEST RESULTS SUMMARY")
+        print("="*70)
+        
+        passed = 0
+        failed = 0
+        
+        for test_name, result in test_results:
+            status = "✅ PASSED" if result else "❌ FAILED"
+            print(f"{status} - {test_name}")
+            if result:
+                passed += 1
+            else:
+                failed += 1
+        
+        print(f"\nOverall Results: {passed} passed, {failed} failed")
+        
+        if failed == 0:
+            print("🎉 ALL P0 BUG FIXES VERIFIED WORKING!")
+        else:
+            print("⚠️  Some P0 bug fixes need attention")
+        
+        return failed == 0
 
 def main():
     """Main test execution"""
