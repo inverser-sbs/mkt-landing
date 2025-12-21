@@ -1,8 +1,12 @@
 import React from 'react';
 import { Award, Monitor, Users, Globe, Trophy } from 'lucide-react';
-import { Button } from './ui/button';
+import ButtonAnchor, { prepareAnchorData } from './ButtonAnchor';
 
-const WhyInverserSection = () => {
+const WhyInverserSection = ({ mentorData, onActionClick }) => {
+  // Preparar datos para los anchors
+  const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
+  const templateKey = 'cpn';
+
   const benefits = [
     { icon: Award, text: 'Reconocimiento internacional avalado por GCF' },
     { icon: Monitor, text: 'Plataforma 100% online y flexible' },
@@ -10,13 +14,6 @@ const WhyInverserSection = () => {
     { icon: Globe, text: 'Acceso a comunidad de coaches y networking' },
     { icon: Trophy, text: 'Certificación profesional de alto prestigio' },
   ];
-
-  const scrollToCTA = () => {
-    const element = document.getElementById('cta');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
@@ -51,13 +48,21 @@ const WhyInverserSection = () => {
           ))}
         </div>
 
+        {/* ============================================ */}
+        {/* BUTTON ANCHOR - Posición fija: Why InverSer */}
+        {/* ============================================ */}
         <div className="text-center">
-          <Button
-            onClick={scrollToCTA}
-            className="bg-[#c4ff0f] text-gray-900 hover:bg-[#b3ef00] font-semibold px-8 py-6 text-lg transition-all duration-300 hover:scale-105"
-          >
-            Solicita Información
-          </Button>
+          <ButtonAnchor
+            buttonKey="solicitar_info"
+            templateKey={templateKey}
+            actions={actions}
+            mentorLinks={mentorLinks}
+            campaignLinks={campaignLinks}
+            onActionClick={onActionClick}
+            variant="primary"
+            size="lg"
+            hideIfNoUrl={true}
+          />
         </div>
       </div>
     </section>
