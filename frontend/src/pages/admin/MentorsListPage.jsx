@@ -794,6 +794,26 @@ const MentorsListPage = () => {
                 Esto invalidará cualquier magic link anterior para esta campaña.
               </p>
             </div>
+            
+            {/* Delete Magic Link option */}
+            {mentorMagicLink?.has_token && !mentorMagicLink.is_expired && (
+              <div className="border-t pt-4 mt-4">
+                <Label className="text-red-600">Eliminar Magic Link</Label>
+                <p className="text-xs text-gray-500 mt-1 mb-2">
+                  El mentor ya no podrá usar el link de edición actual. Deberás generar uno nuevo si lo necesita.
+                </p>
+                <Button
+                  onClick={deleteMagicLink}
+                  disabled={generatingMagicLink}
+                  variant="outline"
+                  className="text-red-600 border-red-300 hover:bg-red-50"
+                >
+                  {generatingMagicLink && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+                  <Trash2 className="w-4 h-4 mr-2" />
+                  Eliminar Magic Link
+                </Button>
+              </div>
+            )}
           </div>
 
           <DialogFooter>
