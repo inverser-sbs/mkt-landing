@@ -88,7 +88,17 @@ class InverSerGlobalMentorsAPITester:
                 mentors = response.json()
                 print(f"✅ Found {len(mentors)} mentors:")
                 for mentor in mentors:
-                    print(f"   - {mentor.get('name')} {mentor.get('lastname')} (id: {mentor.get('id')})")
+                    campaigns_info = ""
+                    if mentor.get('campaigns'):
+                        campaign_keys = [c.get('campaign_key') for c in mentor['campaigns']]
+                        campaigns_info = f" (campaigns: {', '.join(campaign_keys)})"
+                    print(f"   - {mentor.get('first_name')} {mentor.get('last_name')} (id: {mentor.get('id')}){campaigns_info}")
+                
+                # Store first mentor for testing
+                if mentors:
+                    self.test_mentor_id = mentors[0].get('id')
+                    print(f"📌 Using mentor ID '{self.test_mentor_id}' for testing")
+                
                 return mentors
             else:
                 print(f"❌ Failed to get mentors: {response.status_code}")
@@ -96,6 +106,202 @@ class InverSerGlobalMentorsAPITester:
         except Exception as e:
             print(f"❌ Error getting mentors: {e}")
             return []
+    
+    def test_get_mentor_with_campaigns(self, mentor_id: str):
+        """Test GET /api/admin/mentors/{mentor_id}"""
+        print(f"\n🔍 Testing GET mentor with campaigns for ID: {mentor_id}...")
+        try:
+            response = self.session.get(f"{self.base_url}/admin/mentors/{mentor_id}")
+            if response.status_code == 200:
+                mentor = response.json()
+                print(f"✅ Mentor retrieved successfully:")
+                print(f"   - Name: {mentor.get('first_name')} {mentor.get('last_name')}")
+                print(f"   - Slug: {mentor.get('slug')}")
+                print(f"   - Active: {mentor.get('active')}")
+                
+                campaigns = mentor.get('campaigns', [])
+                print(f"   - Campaigns ({len(campaigns)}):")
+                for campaign in campaigns:
+                    status = campaign.get('status', 'unknown')
+                    has_magic = campaign.get('has_magic_link', False)
+                    magic_indicator = "🔗" if has_magic else "❌"
+                    print(f"     • {campaign.get('campaign_key')} - {status} {magic_indicator}")
+                
+                return mentor
+            else:
+                print(f"❌ Failed to get mentor: {response.status_code}")
+                if response.text:
+                    print(f"   Error: {response.text}")
+                return None
+        except Exception as e:
+            print(f"❌ Error getting mentor: {e}")
+            return None
+    
+    def test_assign_campaigns(self, mentor_id: str, campaign_keys: List[str], sync_mode: bool = True):
+        """Test PUT /api/admin/mentors/{mentor_id}/campaigns"""
+        print(f"\n🎯 Testing campaign assignment for mentor {mentor_id}...")
+        print(f"   Campaigns to assign: {campaign_keys}")
+        print(f"   Sync mode: {sync_mode}")
+        
+        try:
+            payload = {
+                "campaign_keys": campaign_keys,
+                "sync_mode": sync_mode
+            }
+            response = self.session.put(
+                f"{self.base_url}/admin/mentors/{mentor_id}/campaigns",
+                json=payload
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                print(f"✅ Campaign assignment successful:")
+                print(f"   - Assigned: {result.get('assigned', [])}")
+                print(f"   - Removed: {result.get('removed', [])}")
+                print(f"   - Errors: {result.get('errors', [])}")
+                
+                campaigns = result.get('campaigns', [])
+                print(f"   - Current campaigns ({len(campaigns)}):")
+                for campaign in campaigns:
+                    status = campaign.get('status', 'unknown')
+                    has_magic = campaign.get('has_magic_link', False)
+                    magic_indicator = "🔗" if has_magic else "❌"
+                    print(f"     • {campaign.get('campaign_key')} - {status} {magic_indicator}")
+                
+                return result
+            else:
+                print(f"❌ Failed to assign campaigns: {response.status_code}")
+                if response.text:
+                    print(f"   Error: {response.text}")
+                return None
+        except Exception as e:
+            print(f"❌ Error assigning campaigns: {e}")
+            return None
+    
+    def test_update_campaign_status(self, mentor_id: str, campaign_key: str, status: str):
+        """Test PUT /api/admin/mentors/{mentor_id}/campaigns/{campaign_key}/status"""
+        print(f"\n⚙️  Testing status update for mentor {mentor_id} in campaign {campaign_key}...")
+        print(f"   New status: {status}")
+        
+        try:
+            payload = {"status": status}
+            response = self.session.put(
+                f"{self.base_url}/admin/mentors/{mentor_id}/campaigns/{campaign_key}/status",
+                json=payload
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                print(f"✅ Status update successful:")
+                print(f"   - Mentor ID: {result.get('mentor_id')}")
+                print(f"   - Campaign: {result.get('campaign_key')}")
+                print(f"   - New Status: {result.get('status')}")
+                return result
+            else:
+                print(f"❌ Failed to update status: {response.status_code}")
+                if response.text:
+                    print(f"   Error: {response.text}")
+                return None
+        except Exception as e:
+            print(f"❌ Error updating status: {e}")
+            return None
+    
+    def test_magic_link_generation(self, mentor_id: str, campaign_key: str):
+        """Test POST /api/admin/mentors/{mentor_id}/magic-link/{campaign_key}"""
+        print(f"\n🔗 Testing magic link generation for mentor {mentor_id} in campaign {campaign_key}...")
+        
+        try:
+            response = self.session.post(
+                f"{self.base_url}/admin/mentors/{mentor_id}/magic-link/{campaign_key}?days_valid=30"
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                print(f"✅ Magic link generated successfully:")
+                print(f"   - Token: {result.get('token', 'N/A')[:20]}...")
+                print(f"   - URL: {result.get('url', 'N/A')}")
+                print(f"   - Expires: {result.get('expires_at', 'N/A')}")
+                return result
+            else:
+                print(f"❌ Failed to generate magic link: {response.status_code}")
+                if response.text:
+                    print(f"   Error: {response.text}")
+                return None
+        except Exception as e:
+            print(f"❌ Error generating magic link: {e}")
+            return None
+    
+    def test_magic_link_for_unassigned_campaign(self, mentor_id: str, campaign_key: str):
+        """Test magic link generation for unassigned campaign (should fail)"""
+        print(f"\n🚫 Testing magic link generation for UNASSIGNED campaign {campaign_key}...")
+        
+        try:
+            response = self.session.post(
+                f"{self.base_url}/admin/mentors/{mentor_id}/magic-link/{campaign_key}?days_valid=30"
+            )
+            
+            if response.status_code == 400:
+                print(f"✅ Magic link correctly blocked for unassigned campaign:")
+                print(f"   - Status: {response.status_code}")
+                print(f"   - Error: {response.text}")
+                return True
+            else:
+                print(f"❌ Magic link should have been blocked but got: {response.status_code}")
+                return False
+        except Exception as e:
+            print(f"❌ Error testing unassigned magic link: {e}")
+            return False
+    
+    def test_campaign_isolation(self, mentor_id: str):
+        """Test that operations on one campaign don't affect others"""
+        print(f"\n🔒 Testing campaign isolation for mentor {mentor_id}...")
+        
+        # Get initial state
+        initial_mentor = self.test_get_mentor_with_campaigns(mentor_id)
+        if not initial_mentor:
+            print("❌ Cannot test isolation - failed to get initial mentor state")
+            return False
+        
+        initial_campaigns = {c['campaign_key']: c for c in initial_mentor.get('campaigns', [])}
+        print(f"   Initial campaigns: {list(initial_campaigns.keys())}")
+        
+        # Test 1: Assign to new campaign, verify others unchanged
+        if len(self.available_campaigns) >= 2:
+            test_campaign = None
+            for campaign in self.available_campaigns:
+                if campaign['key'] not in initial_campaigns:
+                    test_campaign = campaign['key']
+                    break
+            
+            if test_campaign:
+                print(f"   Testing assignment to new campaign: {test_campaign}")
+                
+                # Assign to new campaign (don't sync - should preserve others)
+                result = self.test_assign_campaigns(mentor_id, [test_campaign], sync_mode=False)
+                if result:
+                    # Verify other campaigns unchanged
+                    updated_mentor = self.test_get_mentor_with_campaigns(mentor_id)
+                    if updated_mentor:
+                        updated_campaigns = {c['campaign_key']: c for c in updated_mentor.get('campaigns', [])}
+                        
+                        # Check that original campaigns are still there
+                        isolation_ok = True
+                        for orig_key, orig_campaign in initial_campaigns.items():
+                            if orig_key in updated_campaigns:
+                                if updated_campaigns[orig_key]['status'] != orig_campaign['status']:
+                                    print(f"   ❌ Campaign {orig_key} status changed unexpectedly")
+                                    isolation_ok = False
+                            else:
+                                print(f"   ❌ Campaign {orig_key} was removed unexpectedly")
+                                isolation_ok = False
+                        
+                        if isolation_ok:
+                            print(f"   ✅ Campaign isolation verified - other campaigns unchanged")
+                        
+                        return isolation_ok
+        
+        print("   ⚠️  Skipping isolation test - insufficient campaigns available")
+        return True
     
     def test_action_link_count(self, action_id: str):
         """Test GET /api/admin/actions/{action_id}/link-count"""
