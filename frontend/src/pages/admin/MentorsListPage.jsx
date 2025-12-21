@@ -40,7 +40,8 @@ import {
   UserPen,
   Globe,
   Filter,
-  Users
+  Users,
+  Trash2
 } from 'lucide-react';
 import { useToast } from '../../hooks/use-toast';
 import { Toaster } from '../../components/ui/toaster';
