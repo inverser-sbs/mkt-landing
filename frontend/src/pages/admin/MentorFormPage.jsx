@@ -235,6 +235,18 @@ const MentorFormPage = () => {
     }
   };
 
+  // ==================== CAMPAIGN HANDLING ====================
+  
+  const handleCampaignToggle = (campaignKey) => {
+    setSelectedCampaigns(prev => {
+      if (prev.includes(campaignKey)) {
+        return prev.filter(k => k !== campaignKey);
+      } else {
+        return [...prev, campaignKey];
+      }
+    });
+  };
+
   // ==================== FORM SUBMIT ====================
 
   const handleSubmit = async (e) => {
@@ -246,14 +258,15 @@ const MentorFormPage = () => {
     try {
       let mentorId = id;
 
-      // Prepare data (exclude photo_url, it's handled separately)
+      // Prepare data with campaign_keys
       const dataToSend = {
         first_name: formData.first_name.trim(),
         last_name: formData.last_name.trim(),
         email: formData.email.trim() || null,
         slug: formData.slug.trim(),
         active: formData.active,
-        mentor_group: formData.mentor_group.trim() || null
+        mentor_group: formData.mentor_group.trim() || null,
+        campaign_keys: selectedCampaigns
       };
 
       if (isEditing) {
