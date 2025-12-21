@@ -46,8 +46,15 @@ class MagicTokenService:
         
         await self.collection.insert_one(token_dict)
         
-        # Get mentor slug
-        mentor = await self.db.mentors.find_one({"_id": ObjectId(mentor_id)})
+        # Get mentor slug - try by 'id' field first, then by ObjectId
+        mentor = await self.db.mentors.find_one({"id": mentor_id})
+        if not mentor:
+            # Fallback to ObjectId for backward compatibility
+            try:
+                mentor = await self.db.mentors.find_one({"_id": ObjectId(mentor_id)})
+            except:
+                pass
+        
         if not mentor:
             raise ValueError("Mentor not found")
         
