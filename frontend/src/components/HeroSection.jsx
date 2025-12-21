@@ -113,7 +113,8 @@ const HeroSection = ({ mentorData, onActionClick }) => {
             {/* ============================================ */}
             {/* BUTTON ANCHORS - Pirámide bajo la foto */}
             {/* Orden: Ver perfil (pequeño) → Agendar cita → WhatsApp */}
-            {/* Colores: Solo verde y morado */}
+            {/* Color: VERDE para los 3 botones */}
+            {/* Hover: MISMO efecto para los 3 (scale + shadow) */}
             {/* ============================================ */}
             <div className="mt-6 flex flex-col items-center gap-3 w-full max-w-sm">
               {/* Ver perfil - botón pequeño */}
@@ -126,7 +127,6 @@ const HeroSection = ({ mentorData, onActionClick }) => {
                 onActionClick={onActionClick}
                 variant="ghost"
                 size="sm"
-                className="text-[#7c3aed] hover:bg-purple-50"
               />
               
               {/* Agendar cita y WhatsApp - botones principales */}
