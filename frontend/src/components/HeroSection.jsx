@@ -19,165 +19,155 @@ const HeroSection = ({ mentorData, onActionClick }) => {
   const templateKey = 'cpn';
 
   return (
-    <section id="inicio" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-      {/* Animated Background Gradient */}
+    <section id="inicio" className="pt-24 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#faf8f5] via-purple-50/30 to-green-50/20"></div>
       
-      {/* Abstract Neural Network Background */}
-      <div className="absolute right-0 top-0 w-1/2 h-full opacity-40 hidden lg:block">
-        <div 
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='800' height='800' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23c4ff0f;stop-opacity:0.3' /%3E%3Cstop offset='50%25' style='stop-color:%237c3aed;stop-opacity:0.4' /%3E%3Cstop offset='100%25' style='stop-color:%23a855f7;stop-opacity:0.2' /%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='400' cy='200' r='150' fill='none' stroke='url(%23g1)' stroke-width='2' opacity='0.6'/%3E%3Ccircle cx='500' cy='400' r='120' fill='none' stroke='url(%23g1)' stroke-width='2' opacity='0.5'/%3E%3Ccircle cx='300' cy='500' r='100' fill='none' stroke='url(%23g1)' stroke-width='2' opacity='0.4'/%3E%3Cline x1='400' y1='200' x2='500' y2='400' stroke='%237c3aed' stroke-width='1.5' opacity='0.3'/%3E%3Cline x1='500' y1='400' x2='300' y2='500' stroke='%23c4ff0f' stroke-width='1.5' opacity='0.3'/%3E%3Ccircle cx='400' cy='200' r='8' fill='%23c4ff0f' opacity='0.8'/%3E%3Ccircle cx='500' cy='400' r='8' fill='%237c3aed' opacity='0.8'/%3E%3Ccircle cx='300' cy='500' r='8' fill='%23c4ff0f' opacity='0.8'/%3E%3C/svg%3E")`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            maskImage: 'linear-gradient(to left, black 30%, transparent 90%)',
-            WebkitMaskImage: 'linear-gradient(to left, black 30%, transparent 90%)'
-          }}
-        ></div>
-      </div>
-
-      {/* Floating Particles Effect */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-float"
-            style={{
-              background: i % 3 === 0 ? '#c4ff0f' : i % 3 === 1 ? '#7c3aed' : '#a855f7',
-              width: `${Math.random() * 100 + 50}px`,
-              height: `${Math.random() * 100 + 50}px`,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${Math.random() * 10 + 10}s`
-            }}
-          />
-        ))}
-      </div>
-
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl">
-          {/* Rating */}
-          <div className="flex items-center space-x-2 mb-6 animate-fade-in">
-            <div className="flex space-x-1">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <Star key={i} className="w-5 h-5 fill-[#c4ff0f] text-[#c4ff0f]" />
-              ))}
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          {/* ============================================ */}
+          {/* LEFT COLUMN - Content */}
+          {/* ============================================ */}
+          <div className="space-y-6">
+            {/* Rating */}
+            <div className="flex items-center space-x-2">
+              <div className="flex space-x-1">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <Star key={i} className="w-5 h-5 fill-[#c4ff0f] text-[#c4ff0f]" />
+                ))}
+              </div>
+              <span className="text-sm text-gray-600">(+100 valoraciones)</span>
             </div>
-            <span className="text-sm text-gray-600">(+100 valoraciones)</span>
+
+            {/* Badge */}
+            <Badge className="bg-purple-100 text-[#7c3aed] border-purple-200 hover:bg-purple-100">
+              <Award className="w-4 h-4 mr-2" />
+              Avalada por GCF y Universidad Global de Florida
+            </Badge>
+
+            {/* Main Heading */}
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+              <span className="text-gray-900">Certificación Profesional</span>
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7c3aed] via-purple-500 to-[#7c3aed]">
+                Neurocoaching <span className="font-serif italic">&</span> Mentor Program
+              </span>
+            </h1>
+
+            {/* Description */}
+            <p className="text-lg md:text-xl text-gray-700">
+              <span className="font-semibold text-gray-900">Transforma tu vida y la de otros</span> mientras
+              construyes una carrera con propósito. Únete a la comunidad de coaches que ya están
+              generando impacto y resultados extraordinarios.
+            </p>
+
+            <p className="text-base text-gray-600">
+              Forma parte ya de la Comunidad de Formación más completa. Con tu registro podrás
+              solicitar tu entrevista.
+            </p>
+
+            {/* ============================================ */}
+            {/* BUTTON ANCHORS - Posición fija en el diseño */}
+            {/* REGLA: SIEMPRE visibles, disabled si falta URL */}
+            {/* ============================================ */}
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              {/* ANCHOR: agenda_hero (Hero Primary) */}
+              <ButtonAnchor
+                buttonKey="agenda_hero"
+                templateKey={templateKey}
+                actions={actions}
+                mentorLinks={mentorLinks}
+                campaignLinks={campaignLinks}
+                onActionClick={onActionClick}
+                variant="primary"
+                size="lg"
+              />
+              
+              {/* ANCHOR: whatsapp_hero (Hero Secondary) */}
+              <ButtonAnchor
+                buttonKey="whatsapp_hero"
+                templateKey={templateKey}
+                actions={actions}
+                mentorLinks={mentorLinks}
+                campaignLinks={campaignLinks}
+                onActionClick={onActionClick}
+                variant="secondary"
+                size="lg"
+              />
+            </div>
+
+            {/* Fire Alert */}
+            <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
+              <p className="text-sm text-gray-700">
+                🔥 <span className="font-semibold">Oportunidad única:</span> Formación + acceso de
+                por vida a la membresía de Coaches NeuroEvolutivos con Acreditación Internacional.
+              </p>
+            </div>
           </div>
 
-          {/* Badge */}
-          <Badge className="bg-purple-100 text-[#7c3aed] border-purple-200 hover:bg-purple-100 mb-8 animate-fade-in" style={{ animationDelay: '0.1s' }}>
-            <Award className="w-4 h-4 mr-2" />
-            Avalada por GCF y Universidad Global de Florida
-          </Badge>
-
-          {/* Main Heading */}
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-slide-up">
-            <span className="text-gray-900">Certificación Profesional</span>
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7c3aed] via-purple-500 to-[#7c3aed]">
-              Neurocoaching <span className="font-serif italic">&</span> Mentor Program
-            </span>
-          </h1>
-
-          {/* Description */}
-          <p className="text-lg md:text-xl text-gray-700 mb-4 max-w-2xl animate-slide-up" style={{ animationDelay: '0.1s' }}>
-            <span className="font-semibold text-gray-900">Transforma tu vida y la de otros</span> mientras
-            construyes una carrera con propósito. Únete a la comunidad de coaches que ya están
-            generando impacto y resultados extraordinarios.
-          </p>
-
-          <p className="text-base text-gray-600 mb-8 max-w-2xl animate-slide-up" style={{ animationDelay: '0.15s' }}>
-            Forma parte ya de la Comunidad de Formación más completa. Con tu registro podrás
-            solicitar tu entrevista.
-          </p>
-
           {/* ============================================ */}
-          {/* MENTOR PHOTO + NAME */}
+          {/* RIGHT COLUMN - Mentor Photo */}
           {/* ============================================ */}
-          {mentor.first_name && mentor.first_name !== 'Nuestro' && (
-            <div className="flex items-center space-x-4 mb-8 animate-slide-up" style={{ animationDelay: '0.18s' }}>
+          <div className="relative flex flex-col items-center">
+            {/* Photo Container */}
+            <div className="relative w-full max-w-[400px] h-[400px] bg-gradient-to-br from-purple-100 via-green-50 to-purple-50 rounded-3xl overflow-hidden shadow-xl">
               {mentor.photo_url ? (
                 <img
                   src={getImageUrl(mentor.photo_url)}
                   alt={`${mentor.first_name} ${mentor.last_name}`}
-                  className="w-14 h-14 rounded-full border-3 border-[#c4ff0f] shadow-lg object-cover"
+                  className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#7c3aed] to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                  {mentor.first_name[0]}{mentor.last_name?.[0] || ''}
+                /* Placeholder when no photo */
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-full h-full bg-gradient-to-br from-[#c4ff0f]/20 via-[#7c3aed]/20 to-purple-300/30">
+                    <svg
+                      className="w-full h-full opacity-40"
+                      viewBox="0 0 400 400"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M200 50 C250 50, 280 80, 280 130 C280 160, 270 180, 250 190 L250 250 C250 280, 230 300, 200 300 C170 300, 150 280, 150 250 L150 190 C130 180, 120 160, 120 130 C120 80, 150 50, 200 50 Z"
+                        stroke="#7c3aed"
+                        strokeWidth="2"
+                        fill="none"
+                        opacity="0.6"
+                      />
+                      <circle cx="200" cy="120" r="60" stroke="#c4ff0f" strokeWidth="2" fill="none" opacity="0.8" />
+                      <circle cx="170" cy="110" r="8" fill="#7c3aed" opacity="0.6" />
+                      <circle cx="230" cy="110" r="8" fill="#7c3aed" opacity="0.6" />
+                    </svg>
+                  </div>
                 </div>
               )}
-              <div>
-                <p className="text-sm text-gray-500">Agenda con tu mentor</p>
+              
+              {/* Decorative border */}
+              <div className="absolute inset-0 rounded-3xl border-4 border-[#c4ff0f]/30 pointer-events-none"></div>
+            </div>
+
+            {/* Mentor Name (if available) */}
+            {mentor.first_name && mentor.first_name !== 'Nuestro' && (
+              <div className="mt-4 text-center">
                 <p className="font-semibold text-gray-900 text-lg">{mentor.first_name} {mentor.last_name}</p>
+                <p className="text-sm text-gray-500">Tu mentor certificado</p>
               </div>
-            </div>
-          )}
+            )}
 
-          {/* ============================================ */}
-          {/* BUTTON ANCHORS - Posición fija en el diseño */}
-          {/* REGLA: SIEMPRE visibles, disabled si falta URL */}
-          {/* ============================================ */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-8 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-            {/* ANCHOR: agenda_hero (Hero Primary) */}
-            <ButtonAnchor
-              buttonKey="agenda_hero"
-              templateKey={templateKey}
-              actions={actions}
-              mentorLinks={mentorLinks}
-              campaignLinks={campaignLinks}
-              onActionClick={onActionClick}
-              variant="primary"
-              size="lg"
-            />
-            
-            {/* ANCHOR: whatsapp_hero (Hero Secondary) */}
-            <ButtonAnchor
-              buttonKey="whatsapp_hero"
-              templateKey={templateKey}
-              actions={actions}
-              mentorLinks={mentorLinks}
-              campaignLinks={campaignLinks}
-              onActionClick={onActionClick}
-              variant="secondary"
-              size="lg"
-            />
-          </div>
-
-          {/* Fire Alert */}
-          <div className="bg-gradient-to-r from-orange-50 to-orange-100 border-l-4 border-orange-400 rounded-lg p-4 mb-8 animate-slide-up" style={{ animationDelay: '0.25s' }}>
-            <p className="text-sm font-medium text-gray-800">
-              🔥 <span className="font-bold">Oportunidad única:</span> Formación + acceso de
-              por vida a la membresía de Coaches NeuroEvolutivos con Acreditación Internacional.
-            </p>
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-6 animate-slide-up" style={{ animationDelay: '0.3s' }}>
-            <div className="text-center sm:text-left">
-              <div className="flex items-center gap-2 justify-center sm:justify-start mb-1">
-                <div className="w-2 h-2 rounded-full bg-[#c4ff0f] animate-pulse"></div>
-                <span className="text-3xl md:text-4xl font-display font-bold text-gray-900">280</span>
-              </div>
-              <span className="text-sm text-gray-600">Días de formación</span>
-            </div>
-            <div className="text-center sm:text-left">
-              <div className="flex items-center gap-2 justify-center sm:justify-start mb-1">
-                <div className="w-2 h-2 rounded-full bg-[#7c3aed] animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-                <span className="text-3xl md:text-4xl font-display font-bold text-gray-900">+100</span>
-              </div>
-              <span className="text-sm text-gray-600">Coaches certificados</span>
-            </div>
-            <div className="text-center sm:text-left">
-              <div className="flex items-center gap-2 justify-center sm:justify-start mb-1">
-                <div className="w-2 h-2 rounded-full bg-[#c4ff0f] animate-pulse" style={{ animationDelay: '1s' }}></div>
-                <span className="text-3xl md:text-4xl font-display font-bold text-gray-900">95%</span>
-              </div>
-              <span className="text-sm text-gray-600">Tasa de éxito</span>
+            {/* ============================================ */}
+            {/* BUTTON ANCHOR - Ver perfil (debajo de la foto) */}
+            {/* ============================================ */}
+            <div className="mt-4">
+              <ButtonAnchor
+                buttonKey="ver_perfil"
+                templateKey={templateKey}
+                actions={actions}
+                mentorLinks={mentorLinks}
+                campaignLinks={campaignLinks}
+                onActionClick={onActionClick}
+                variant="outline"
+                size="sm"
+              />
             </div>
           </div>
         </div>
