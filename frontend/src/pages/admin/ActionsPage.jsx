@@ -1000,14 +1000,14 @@ const ActionsPage = () => {
                   Este botón puede aparecer en las siguientes ubicaciones del template:
                 </p>
 
-                <div className="space-y-2 border rounded-lg p-3">
+                <div className="space-y-2 border rounded-lg p-3" key={`slots-${formData.button_key}`}>
                   {availableSlots.map((slot) => {
                     const isAllowed = selectedButton?.allowed_slots.includes(slot.key);
                     const isChecked = formData.display_slots.includes(slot.key);
                     
                     return (
                       <div 
-                        key={slot.key}
+                        key={`${formData.button_key}-${slot.key}`}
                         className={`
                           flex items-start space-x-3 p-2 rounded-md transition-colors
                           ${!isAllowed 
