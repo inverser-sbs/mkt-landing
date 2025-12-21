@@ -399,18 +399,27 @@ const ActionsPage = () => {
 
   // Cleanup orphan data
   const handleCleanupOrphans = async () => {
+    if (!selectedCampaign) {
+      toast({
+        title: 'Error',
+        description: 'Selecciona una campaña primero',
+        variant: 'destructive'
+      });
+      return;
+    }
+    
     setCleaningOrphans(true);
     try {
-      const response = await axios.post(`${BACKEND_URL}/api/admin/actions/cleanup-orphans`);
+      const response = await axios.post(
+        `${BACKEND_URL}/api/admin/actions/cleanup-orphans?campaign_key=${selectedCampaign.key}`
+      );
       const deleted = response.data.deleted;
       toast({
         title: 'Limpieza completada',
-        description: `Eliminados: ${deleted.orphan_links_deleted} links huérfanos, ${deleted.empty_url_links_deleted} links vacíos, ${deleted.orphan_tokens_deleted} tokens huérfanos`
+        description: `Campaña "${selectedCampaign.name}": ${deleted.orphan_links_deleted} links huérfanos, ${deleted.empty_url_links_deleted} links vacíos, ${deleted.orphan_tokens_deleted} tokens huérfanos eliminados`
       });
       // Refresh actions to update counts
-      if (selectedCampaign) {
-        fetchActions(selectedCampaign.key);
-      }
+      fetchActions(selectedCampaign.key);
     } catch (error) {
       console.error('Error cleaning orphans:', error);
       toast({
