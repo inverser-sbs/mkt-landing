@@ -316,6 +316,7 @@ const ActionsPage = () => {
           label: formData.label,
           button_key: formData.button_key,
           description: formData.description || null,
+          internal_note: formData.internal_note || null,
           active: formData.active,
           order: formData.order,
           display_slots: formData.display_slots
@@ -328,6 +329,7 @@ const ActionsPage = () => {
           button_key: formData.button_key,
           label: formData.label,
           description: formData.description || null,
+          internal_note: formData.internal_note || null,
           active: formData.active,
           order: formData.order,
           display_slots: formData.display_slots
