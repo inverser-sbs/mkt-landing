@@ -46,6 +46,7 @@ export const TEMPLATE_SLOTS = {
     { key: 'why_inverser', label: 'Sección ¿Por qué InverSer?', description: 'Botón en la sección de beneficios' },
     { key: 'partner', label: 'Sección Partner Program', description: 'Botón para unirse como partner' },
     { key: 'cta', label: 'CTA Final', description: 'Sección de llamada a la acción al final' },
+    { key: 'footer_profile', label: 'Footer - Ir al Perfil', description: 'Botón en el footer para acceder al perfil del mentor' }
   ],
   'suitex': [
     { key: 'hero_primary', label: 'Hero - Botón Principal', description: 'Botón de Demo/Acción principal en el Hero' },
@@ -147,6 +148,15 @@ export const TEMPLATE_BUTTONS = {
       link_type: 'mentor',
       style: 'primary'
     },
+    // ===== FOOTER =====
+    {
+      key: 'ir_perfil_footer',
+      label_default: 'Ir al perfil',
+      slot: 'footer_profile',
+      description: 'Botón en el footer para acceder al perfil del mentor',
+      link_type: 'mentor',
+      style: 'ghost'
+    }
   ],
   'suitex': [
     {
