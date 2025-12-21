@@ -1,9 +1,13 @@
 import React from 'react';
-import { Mail, Phone } from 'lucide-react';
+import ButtonAnchor, { prepareAnchorData } from './ButtonAnchor';
 
-const Footer = ({ mentorData }) => {
+const Footer = ({ mentorData, onActionClick }) => {
   // Datos del mentor para mostrar contacto
   const mentor = mentorData?.mentor || null;
+  
+  // Preparar datos para ButtonAnchor
+  const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
+  const templateKey = 'cpn';
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -95,72 +99,36 @@ const Footer = ({ mentorData }) => {
             </ul>
           </div>
 
-          {/* Contact - Mentor-specific if available */}
+          {/* Mentor Section */}
           <div>
             <h3 className="font-bold text-lg mb-4">
-              {mentor ? `Contacta a ${mentor.first_name}` : 'Contacto'}
+              {mentor ? `Tu Mentor` : 'Mentor'}
             </h3>
-            <ul className="space-y-3">
-              {/* Mentor Email */}
-              {mentor?.email ? (
-                <li>
-                  <a
-                    href={`mailto:${mentor.email}`}
-                    className="flex items-center space-x-2 text-gray-400 hover:text-[#c4ff0f] transition-colors text-sm"
-                  >
-                    <Mail className="w-4 h-4" />
-                    <span>{mentor.email}</span>
-                  </a>
-                </li>
-              ) : (
-                <li>
-                  <a
-                    href="mailto:info@inverser.us"
-                    className="flex items-center space-x-2 text-gray-400 hover:text-[#c4ff0f] transition-colors text-sm"
-                  >
-                    <Mail className="w-4 h-4" />
-                    <span>info@inverser.us</span>
-                  </a>
-                </li>
-              )}
-              
-              {/* Mentor Phone */}
-              {mentor?.phone ? (
-                <li>
-                  <a
-                    href={`https://wa.me/${mentor.phone.replace(/[^0-9]/g, '')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-2 text-gray-400 hover:text-[#c4ff0f] transition-colors text-sm"
-                  >
-                    <Phone className="w-4 h-4" />
-                    <span>{mentor.phone}</span>
-                  </a>
-                </li>
-              ) : (
-                <li>
-                  <a
-                    href="https://wa.me/17869547264"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-2 text-gray-400 hover:text-[#c4ff0f] transition-colors text-sm"
-                  >
-                    <Phone className="w-4 h-4" />
-                    <span>+1 786 954 7264</span>
-                  </a>
-                </li>
-              )}
-            </ul>
             
-            {/* Mentor Card if available */}
+            {/* Mentor Name */}
             {mentor && (
-              <div className="mt-4 pt-4 border-t border-gray-700">
-                <p className="text-xs text-gray-500 mb-2">Tu mentor certificado</p>
-                <p className="text-sm font-medium text-white">
+              <div className="mb-4">
+                <p className="text-xs text-gray-500 mb-1">Mentor certificado</p>
+                <p className="text-base font-medium text-white">
                   {mentor.first_name} {mentor.last_name}
                 </p>
               </div>
             )}
+            
+            {/* ============================================ */}
+            {/* BUTTON ANCHOR - Ir al perfil (Footer) */}
+            {/* Mismo sistema que todos los botones */}
+            {/* ============================================ */}
+            <ButtonAnchor
+              buttonKey="ir_perfil_footer"
+              templateKey={templateKey}
+              actions={actions}
+              mentorLinks={mentorLinks}
+              campaignLinks={campaignLinks}
+              onActionClick={onActionClick}
+              variant="ghost"
+              size="sm"
+            />
           </div>
         </div>
 
