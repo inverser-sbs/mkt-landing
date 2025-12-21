@@ -42,6 +42,7 @@ class ActionUpdate(BaseModel):
     label: Optional[str] = Field(None, min_length=1, max_length=100)
     button_key: Optional[str] = Field(None, max_length=50)
     description: Optional[str] = None
+    internal_note: Optional[str] = Field(None, max_length=500)  # Admin/mentor note for clarity
     active: Optional[bool] = None
     status: Optional[ActionStatus] = None
     order: Optional[int] = None
