@@ -306,11 +306,45 @@ const MentorsListPage = () => {
         title: 'Magic Link Generado',
         description: 'El link ha sido copiado al portapapeles'
       });
+      
+      // Refresh mentor list to update magic link badge
+      fetchMentors();
     } catch (error) {
       console.error('Error generating magic link:', error);
+      const detail = error.response?.data?.detail || 'No se pudo generar el magic link';
       toast({
         title: 'Error',
-        description: 'No se pudo generar el magic link',
+        description: detail,
+        variant: 'destructive'
+      });
+    } finally {
+      setGeneratingMagicLink(false);
+    }
+  };
+
+  const deleteMagicLink = async () => {
+    if (!selectedMentor || !selectedCampaign) return;
+    
+    setGeneratingMagicLink(true);
+    try {
+      await axios.delete(
+        `${BACKEND_URL}/api/admin/mentors/${selectedMentor.id}/magic-link/${selectedCampaign.key}`
+      );
+      
+      setMentorMagicLink(null);
+      
+      toast({
+        title: 'Magic Link Eliminado',
+        description: 'El mentor ya no puede usar el link de edición anterior'
+      });
+      
+      // Refresh mentor list to update magic link badge
+      fetchMentors();
+    } catch (error) {
+      console.error('Error deleting magic link:', error);
+      toast({
+        title: 'Error',
+        description: 'No se pudo eliminar el magic link',
         variant: 'destructive'
       });
     } finally {
