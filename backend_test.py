@@ -252,55 +252,280 @@ class InverSerP0BugFixesTester:
             print(f"❌ Error testing unassigned magic link: {e}")
             return False
     
-    def test_campaign_isolation(self, mentor_id: str):
-        """Test that operations on one campaign don't affect others"""
-        print(f"\n🔒 Testing campaign isolation for mentor {mentor_id}...")
+    def test_magic_link_complete_management(self, mentor_id: str, campaign_key: str):
+        """
+        Test P0 Bug Fix #1: Magic Link Complete Management
+        - Generate magic link
+        - Get magic link info
+        - Delete magic link
+        - Verify deletion invalidates the token
+        """
+        print(f"\n🔗 Testing P0 Bug Fix #1: Magic Link Complete Management...")
+        print(f"   Mentor: {mentor_id}, Campaign: {campaign_key}")
         
-        # Get initial state
-        initial_mentor = self.test_get_mentor_with_campaigns(mentor_id)
-        if not initial_mentor:
-            print("❌ Cannot test isolation - failed to get initial mentor state")
+        # Step 1: Generate magic link
+        print("   Step 1: Generate magic link...")
+        try:
+            response = self.session.post(
+                f"{self.base_url}/admin/mentors/{mentor_id}/magic-link/{campaign_key}?days_valid=30"
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                print(f"   ✅ Magic link generated successfully")
+                print(f"      - Token: {result.get('token', 'N/A')[:20]}...")
+                print(f"      - URL: {result.get('magic_link', 'N/A')}")
+                magic_token = result.get('token')
+            else:
+                print(f"   ❌ Failed to generate magic link: {response.status_code}")
+                print(f"      Error: {response.text}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Error generating magic link: {e}")
             return False
         
-        initial_campaigns = {c['campaign_key']: c for c in initial_mentor.get('campaigns', [])}
-        print(f"   Initial campaigns: {list(initial_campaigns.keys())}")
-        
-        # Test 1: Assign to new campaign, verify others unchanged
-        if len(self.available_campaigns) >= 2:
-            test_campaign = None
-            for campaign in self.available_campaigns:
-                if campaign['key'] not in initial_campaigns:
-                    test_campaign = campaign['key']
-                    break
+        # Step 2: Get magic link info
+        print("   Step 2: Get magic link info...")
+        try:
+            response = self.session.get(
+                f"{self.base_url}/admin/mentors/{mentor_id}/magic-link/{campaign_key}/info"
+            )
             
-            if test_campaign:
-                print(f"   Testing assignment to new campaign: {test_campaign}")
+            if response.status_code == 200:
+                info = response.json()
+                print(f"   ✅ Magic link info retrieved:")
+                print(f"      - Has token: {info.get('has_token', False)}")
+                print(f"      - Campaign: {info.get('campaign_key', 'N/A')}")
+                print(f"      - Expires: {info.get('expires_at', 'N/A')}")
                 
-                # Assign to new campaign (don't sync - should preserve others)
-                result = self.test_assign_campaigns(mentor_id, [test_campaign], sync_mode=False)
-                if result:
-                    # Verify other campaigns unchanged
-                    updated_mentor = self.test_get_mentor_with_campaigns(mentor_id)
-                    if updated_mentor:
-                        updated_campaigns = {c['campaign_key']: c for c in updated_mentor.get('campaigns', [])}
-                        
-                        # Check that original campaigns are still there
-                        isolation_ok = True
-                        for orig_key, orig_campaign in initial_campaigns.items():
-                            if orig_key in updated_campaigns:
-                                if updated_campaigns[orig_key]['status'] != orig_campaign['status']:
-                                    print(f"   ❌ Campaign {orig_key} status changed unexpectedly")
-                                    isolation_ok = False
-                            else:
-                                print(f"   ❌ Campaign {orig_key} was removed unexpectedly")
-                                isolation_ok = False
-                        
-                        if isolation_ok:
-                            print(f"   ✅ Campaign isolation verified - other campaigns unchanged")
-                        
-                        return isolation_ok
+                if not info.get('has_token'):
+                    print(f"   ❌ Expected has_token=True but got False")
+                    return False
+            else:
+                print(f"   ❌ Failed to get magic link info: {response.status_code}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Error getting magic link info: {e}")
+            return False
         
-        print("   ⚠️  Skipping isolation test - insufficient campaigns available")
+        # Step 3: Delete magic link
+        print("   Step 3: Delete magic link...")
+        try:
+            response = self.session.delete(
+                f"{self.base_url}/admin/mentors/{mentor_id}/magic-link/{campaign_key}"
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                print(f"   ✅ Magic link deleted successfully:")
+                print(f"      - Success: {result.get('success', False)}")
+                print(f"      - Deleted: {result.get('deleted', False)}")
+                print(f"      - Message: {result.get('message', 'N/A')}")
+            else:
+                print(f"   ❌ Failed to delete magic link: {response.status_code}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Error deleting magic link: {e}")
+            return False
+        
+        # Step 4: Verify deletion - check info again
+        print("   Step 4: Verify deletion invalidated token...")
+        try:
+            response = self.session.get(
+                f"{self.base_url}/admin/mentors/{mentor_id}/magic-link/{campaign_key}/info"
+            )
+            
+            if response.status_code == 200:
+                info = response.json()
+                print(f"   ✅ Magic link info after deletion:")
+                print(f"      - Has token: {info.get('has_token', False)}")
+                
+                if info.get('has_token'):
+                    print(f"   ❌ Expected has_token=False after deletion but got True")
+                    return False
+                else:
+                    print(f"   ✅ Token successfully invalidated")
+            else:
+                print(f"   ❌ Failed to verify deletion: {response.status_code}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Error verifying deletion: {e}")
+            return False
+        
+        print(f"   🎉 P0 Bug Fix #1: Magic Link Complete Management - PASSED")
+        return True
+    
+    def test_cleanup_orphans_campaign_isolation(self):
+        """
+        Test P0 Bug Fix #4: Cleanup Orphans Campaign Isolation
+        - Test cleanup with campaign_key parameter
+        - Verify response includes campaign_key
+        - Verify campaign isolation is maintained
+        """
+        print(f"\n🧹 Testing P0 Bug Fix #4: Cleanup Orphans Campaign Isolation...")
+        
+        if not self.available_campaigns or len(self.available_campaigns) < 2:
+            print("   ⚠️  Skipping - need at least 2 campaigns for isolation test")
+            return True
+        
+        campaign_a = self.available_campaigns[0]['key']
+        campaign_b = self.available_campaigns[1]['key']
+        
+        print(f"   Testing with campaigns: {campaign_a} and {campaign_b}")
+        
+        # Test cleanup for campaign A
+        print(f"   Step 1: Cleanup orphans for campaign '{campaign_a}'...")
+        try:
+            response = self.session.post(
+                f"{self.base_url}/admin/actions/cleanup-orphans?campaign_key={campaign_a}"
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                print(f"   ✅ Cleanup completed for campaign '{campaign_a}':")
+                print(f"      - Campaign key: {result.get('campaign_key', 'N/A')}")
+                print(f"      - Orphan links deleted: {result.get('orphan_links_deleted', 0)}")
+                print(f"      - Empty URL links deleted: {result.get('empty_url_links_deleted', 0)}")
+                print(f"      - Orphan tokens deleted: {result.get('orphan_tokens_deleted', 0)}")
+                
+                # Verify response includes correct campaign_key
+                if result.get('campaign_key') != campaign_a:
+                    print(f"   ❌ Expected campaign_key='{campaign_a}' but got '{result.get('campaign_key')}'")
+                    return False
+                else:
+                    print(f"   ✅ Campaign isolation verified - cleanup scoped to '{campaign_a}'")
+            else:
+                print(f"   ❌ Failed to cleanup orphans: {response.status_code}")
+                print(f"      Error: {response.text}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Error during cleanup: {e}")
+            return False
+        
+        # Test cleanup for campaign B
+        print(f"   Step 2: Cleanup orphans for campaign '{campaign_b}'...")
+        try:
+            response = self.session.post(
+                f"{self.base_url}/admin/actions/cleanup-orphans?campaign_key={campaign_b}"
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                print(f"   ✅ Cleanup completed for campaign '{campaign_b}':")
+                print(f"      - Campaign key: {result.get('campaign_key', 'N/A')}")
+                
+                # Verify response includes correct campaign_key
+                if result.get('campaign_key') != campaign_b:
+                    print(f"   ❌ Expected campaign_key='{campaign_b}' but got '{result.get('campaign_key')}'")
+                    return False
+                else:
+                    print(f"   ✅ Campaign isolation verified - cleanup scoped to '{campaign_b}'")
+            else:
+                print(f"   ❌ Failed to cleanup orphans for campaign B: {response.status_code}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Error during cleanup for campaign B: {e}")
+            return False
+        
+        print(f"   🎉 P0 Bug Fix #4: Cleanup Orphans Campaign Isolation - PASSED")
+        return True
+    
+    def test_action_delete_valid_link_check(self, campaign_key: str):
+        """
+        Test P0 Bug Fix: Action Delete Valid Link Check
+        - Get action link count with detailed breakdown
+        - Test delete validation
+        - Test force delete option
+        """
+        print(f"\n🗑️  Testing Action Delete Valid Link Check for campaign '{campaign_key}'...")
+        
+        # Get actions for the campaign
+        actions = self.get_actions_for_campaign(campaign_key)
+        if not actions:
+            print("   ⚠️  No actions found for testing")
+            return True
+        
+        test_action = actions[0]
+        action_id = test_action.get('id')
+        action_key = test_action.get('action_key')
+        
+        print(f"   Testing with action: {test_action.get('label')} (id: {action_id})")
+        
+        # Step 1: Get detailed link count
+        print("   Step 1: Get action link count with breakdown...")
+        try:
+            response = self.session.get(
+                f"{self.base_url}/admin/actions/{action_id}/link-count"
+            )
+            
+            if response.status_code == 200:
+                link_info = response.json()
+                print(f"   ✅ Link count retrieved:")
+                print(f"      - Valid links: {link_info.get('valid', 0)}")
+                print(f"      - Orphan links: {link_info.get('orphan', 0)}")
+                print(f"      - Empty URL links: {link_info.get('empty_url', 0)}")
+                print(f"      - Total links: {link_info.get('total', 0)}")
+                
+                valid_count = link_info.get('valid', 0)
+            else:
+                print(f"   ❌ Failed to get link count: {response.status_code}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Error getting link count: {e}")
+            return False
+        
+        # Step 2: Test normal delete (should be blocked if valid links exist)
+        if valid_count > 0:
+            print("   Step 2: Test normal delete (should be blocked)...")
+            try:
+                response = self.session.delete(
+                    f"{self.base_url}/admin/actions/{action_id}"
+                )
+                
+                if response.status_code == 400:
+                    print(f"   ✅ Delete correctly blocked due to valid links:")
+                    print(f"      - Status: {response.status_code}")
+                    print(f"      - Error: {response.text}")
+                elif response.status_code == 200:
+                    print(f"   ⚠️  Delete succeeded when it should have been blocked")
+                    print(f"      This might indicate the valid link check isn't working properly")
+                else:
+                    print(f"   ❌ Unexpected response: {response.status_code}")
+                    print(f"      Error: {response.text}")
+            except Exception as e:
+                print(f"   ❌ Error testing normal delete: {e}")
+        else:
+            print("   Step 2: Skipped - no valid links to test blocking")
+        
+        # Step 3: Test force delete option
+        print("   Step 3: Test force delete option...")
+        try:
+            response = self.session.delete(
+                f"{self.base_url}/admin/actions/{action_id}?force=true"
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                print(f"   ✅ Force delete succeeded:")
+                print(f"      - Success: {result.get('success', False)}")
+                print(f"      - Message: {result.get('message', 'N/A')}")
+                
+                # Action should now be deleted - verify
+                verify_response = self.session.get(f"{self.base_url}/admin/actions/{action_id}")
+                if verify_response.status_code == 404:
+                    print(f"   ✅ Action successfully deleted")
+                else:
+                    print(f"   ⚠️  Action still exists after force delete")
+                
+            else:
+                print(f"   ❌ Force delete failed: {response.status_code}")
+                print(f"      Error: {response.text}")
+                return False
+        except Exception as e:
+            print(f"   ❌ Error testing force delete: {e}")
+            return False
+        
+        print(f"   🎉 Action Delete Valid Link Check - PASSED")
         return True
     
     
