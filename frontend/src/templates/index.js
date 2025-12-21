@@ -37,11 +37,13 @@ export const DEFAULT_TEMPLATE_KEY = 'cpn';
 // Ubicaciones visuales fijas en cada landing
 export const TEMPLATE_SLOTS = {
   'cpn': [
+    { key: 'navbar', label: 'Navbar - Botón de Inscripción', description: 'Botón en el menú de navegación' },
     { key: 'hero_primary', label: 'Hero - Botón Principal', description: 'Botón grande y destacado en la sección principal' },
     { key: 'hero_secondary', label: 'Hero - Botón Secundario', description: 'Botón debajo del principal en el Hero' },
     { key: 'awakening', label: 'Sección Despertar', description: 'Botón en la sección "Es momento de despertar"' },
     { key: 'is_for_you', label: 'Sección ¿Es para ti?', description: 'Botón en la sección de perfil ideal' },
     { key: 'why_inverser', label: 'Sección ¿Por qué InverSer?', description: 'Botón en la sección de beneficios' },
+    { key: 'partner', label: 'Sección Partner Program', description: 'Botón para unirse como partner' },
     { key: 'cta', label: 'CTA Final', description: 'Sección de llamada a la acción al final' },
     { key: 'footer', label: 'Footer', description: 'Área de contacto en el pie de página' }
   ],
