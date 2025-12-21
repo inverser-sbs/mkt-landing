@@ -893,11 +893,10 @@ const ActionsPage = () => {
                           <p className="font-medium text-gray-900">{button.label_default}</p>
                           <p className="text-xs text-gray-500">{button.description}</p>
                           <div className="flex gap-1 mt-1">
-                            {button.allowed_slots.map(slot => (
-                              <span key={slot} className="text-xs bg-gray-200 px-1.5 py-0.5 rounded">
-                                {slot}
-                              </span>
-                            ))}
+                            {/* OPCIÓN B: slot único */}
+                            <span className="text-xs bg-gray-200 px-1.5 py-0.5 rounded">
+                              {button.slot}
+                            </span>
                           </div>
                         </div>
                         {isSelected && <CheckCircle2 className="w-5 h-5 text-[#7c3aed]" />}
