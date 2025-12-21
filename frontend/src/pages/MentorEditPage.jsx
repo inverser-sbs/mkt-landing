@@ -178,13 +178,6 @@ const MentorEditPage = () => {
     );
   }
 
-  // Get actions from response
-  const actions = mentorData ? Object.keys(links).map(key => ({
-    action_key: key,
-    label: key, // Will be overwritten by actual data
-    current_url: links[key]
-  })) : [];
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#faf8f5] to-purple-50 py-12 px-4">
       <Toaster />
