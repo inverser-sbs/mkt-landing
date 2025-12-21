@@ -54,9 +54,16 @@ async def get_actions(
         )
 
 @router.post("/cleanup-orphans")
-async def cleanup_orphan_data(db: AsyncIOMotorDatabase = Depends(get_db)):
+async def cleanup_orphan_data(
+    campaign_key: str = Query(None, description="Campaign to clean. If not provided, cleans ALL campaigns (use carefully)"),
+    db: AsyncIOMotorDatabase = Depends(get_db)
+):
     """
     Admin maintenance tool: Clean up orphan data.
+    
+    IMPORTANT: By default this cleans data for the specified campaign only.
+    If no campaign_key is provided, it cleans ALL campaigns globally.
+    
     Removes:
     - mentor_links with non-existent mentor_id
     - mentor_links with empty URLs  
@@ -65,9 +72,9 @@ async def cleanup_orphan_data(db: AsyncIOMotorDatabase = Depends(get_db)):
     This prevents stale data from blocking action deletion.
     """
     service = ActionService(db)
-    result = await service.cleanup_orphan_data()
+    result = await service.cleanup_orphan_data(campaign_key=campaign_key)
     return {
-        "message": "Limpieza completada",
+        "message": f"Limpieza completada para {'campaña ' + campaign_key if campaign_key else 'TODAS las campañas'}",
         "deleted": result
     }
 
