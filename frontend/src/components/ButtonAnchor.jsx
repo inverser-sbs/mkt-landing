@@ -2,9 +2,15 @@
  * ButtonAnchor - Sistema de Anclaje de Botones
  * =============================================
  * 
+ * REGLA FUNDAMENTAL (InverSer):
+ * - Los botones SIEMPRE se renderizan en su posición fija del diseño
+ * - NUNCA se ocultan por falta de URL
+ * - Si falta URL → botón visible pero DISABLED con indicador visual
+ * - El layout de la landing es INMUTABLE
+ * 
  * ARQUITECTURA:
  * - Cada ButtonAnchor es un punto fijo en el diseño del template
- * - El anchor resuelve: label (de action o default), URL (de mentor o fixed), y estado (habilitado/deshabilitado)
+ * - El anchor resuelve: label (de action o default), URL (de mentor o fixed), y estado
  * - NO crea botones nuevos, solo RENDERIZA el botón definido en el diseño
  * 
  * PROPS:
@@ -13,15 +19,21 @@
  * - mentorLinks: objeto con URLs del mentor { action_key: url }
  * - campaignLinks: objeto con URLs fijas de la campaña (para link_type="fixed")
  * - onActionClick: callback opcional para tracking
- * - variant: 'primary' | 'secondary' | 'outline' | 'ghost' (estilo visual)
+ * - variant: 'primary' | 'secondary' | 'outline' | 'ghost' | 'cta' (estilo visual)
  * - className: clases adicionales
- * - hideIfNoUrl: si true, oculta el botón si no hay URL disponible
+ * - size: 'sm' | 'default' | 'lg'
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from './ui/button';
-import { Calendar, Phone, MessageCircle, ExternalLink, ArrowRight, FileText, Users } from 'lucide-react';
+import { Calendar, Phone, MessageCircle, ExternalLink, ArrowRight, FileText, Users, AlertCircle } from 'lucide-react';
 import { getButtonByKey } from '../templates';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from './ui/tooltip';
 
 // Mapeo de iconos por button_key
 const BUTTON_ICONS = {
@@ -40,13 +52,22 @@ const BUTTON_ICONS = {
   'default': ExternalLink
 };
 
-// Estilos por variante
+// Estilos por variante - Estado ACTIVO (con URL)
 const VARIANT_STYLES = {
   primary: "bg-[#c4ff0f] text-gray-900 hover:bg-[#b3ef00] font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl",
   secondary: "border-2 border-[#7c3aed] text-[#7c3aed] hover:bg-[#7c3aed] hover:text-white transition-all duration-300",
   outline: "border-2 border-white text-white hover:bg-white hover:text-[#7c3aed] transition-all duration-300",
   ghost: "text-[#7c3aed] hover:bg-purple-50 transition-all duration-300",
   cta: "bg-[#c4ff0f] text-gray-900 hover:bg-[#b3ef00] font-semibold transition-all duration-300 hover:scale-105"
+};
+
+// Estilos por variante - Estado DISABLED (sin URL)
+const DISABLED_STYLES = {
+  primary: "bg-gray-200 text-gray-400 font-semibold cursor-not-allowed",
+  secondary: "border-2 border-gray-300 text-gray-400 cursor-not-allowed",
+  outline: "border-2 border-gray-400 text-gray-400 cursor-not-allowed",
+  ghost: "text-gray-400 cursor-not-allowed",
+  cta: "bg-gray-200 text-gray-400 font-semibold cursor-not-allowed"
 };
 
 const ButtonAnchor = ({
@@ -58,15 +79,22 @@ const ButtonAnchor = ({
   onActionClick,
   variant = 'primary',
   className = '',
-  hideIfNoUrl = true,
-  size = 'default' // 'default' | 'sm' | 'lg'
+  size = 'default'
 }) => {
+  const [showTooltip, setShowTooltip] = useState(false);
+
   // 1. Obtener la definición del botón del template
   const buttonDef = getButtonByKey(templateKey, buttonKey);
   
   if (!buttonDef) {
     console.warn(`ButtonAnchor: buttonKey "${buttonKey}" not found in template "${templateKey}"`);
-    return null;
+    // NUNCA retornar null - siempre renderizar algo para mantener el layout
+    return (
+      <Button disabled className="bg-red-100 text-red-500 cursor-not-allowed">
+        <AlertCircle className="w-4 h-4 mr-2" />
+        Botón no configurado
+      </Button>
+    );
   }
 
   // 2. Buscar la acción configurada para este botón
@@ -87,21 +115,29 @@ const ButtonAnchor = ({
     url = mentorLinks[buttonKey] || action?.url || null;
   }
   
-  // 5. Determinar si el botón está habilitado
+  // 5. Determinar estados
   const isActionActive = action ? action.active !== false : true;
-  const hasUrl = !!url;
+  const hasUrl = !!url && url.trim() !== '';
+  const isRetired = action?.status === 'retired';
   
-  // 6. Decidir si renderizar
-  if (hideIfNoUrl && !hasUrl && linkType === 'mentor') {
-    // Para botones de mentor, ocultar si no hay URL
-    return null;
-  }
+  // 6. REGLA FUNDAMENTAL: SIEMPRE renderizar, NUNCA ocultar
+  // Solo excepción: si la acción está "retired" Y no existe en el template actual
+  // Pero incluso retired se renderiza como disabled para no romper el layout
   
-  // 7. Obtener icono
+  // 7. Determinar si el botón está funcional
+  const isClickable = hasUrl && isActionActive && !isRetired;
+  
+  // 8. Obtener icono
   const Icon = BUTTON_ICONS[buttonKey] || BUTTON_ICONS['default'];
   
-  // 8. Manejar click
-  const handleClick = () => {
+  // 9. Manejar click
+  const handleClick = (e) => {
+    if (!isClickable) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+    
     if (onActionClick) {
       onActionClick(buttonKey, { label, url, action });
     }
@@ -110,32 +146,72 @@ const ButtonAnchor = ({
     }
   };
   
-  // 9. Determinar estilos
-  const variantStyle = VARIANT_STYLES[variant] || VARIANT_STYLES.primary;
+  // 10. Determinar estilos según estado
+  const getButtonStyles = () => {
+    if (!isClickable) {
+      return DISABLED_STYLES[variant] || DISABLED_STYLES.primary;
+    }
+    return VARIANT_STYLES[variant] || VARIANT_STYLES.primary;
+  };
+  
   const sizeClasses = {
     sm: 'px-4 py-2 text-sm',
     default: 'px-8 py-4 text-base',
     lg: 'px-10 py-6 text-lg'
   };
   
-  // 10. Estado deshabilitado
-  const isDisabled = !hasUrl && linkType === 'mentor';
+  // 11. Mensaje de tooltip según estado
+  const getTooltipMessage = () => {
+    if (isRetired) return "Este botón está archivado";
+    if (!isActionActive) return "Este botón está desactivado";
+    if (!hasUrl) return "Enlace no configurado";
+    return null;
+  };
   
-  return (
+  const tooltipMessage = getTooltipMessage();
+  
+  // 12. Renderizar botón (SIEMPRE visible)
+  const buttonElement = (
     <Button
       onClick={handleClick}
-      disabled={isDisabled || !isActionActive}
+      aria-disabled={!isClickable}
       className={`
-        ${variantStyle}
+        ${getButtonStyles()}
         ${sizeClasses[size]}
         ${className}
-        ${isDisabled ? 'opacity-50 cursor-not-allowed' : ''}
+        ${!isClickable ? 'pointer-events-auto' : ''}
       `}
     >
+      {!hasUrl && !isRetired && (
+        <AlertCircle className="w-4 h-4 mr-2 text-current opacity-70" />
+      )}
       <Icon className="w-5 h-5 mr-2" />
       {label}
     </Button>
   );
+  
+  // 13. Si necesita tooltip (estado incompleto), envolverlo
+  if (tooltipMessage) {
+    return (
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span className="inline-block">
+              {buttonElement}
+            </span>
+          </TooltipTrigger>
+          <TooltipContent side="bottom" className="bg-gray-900 text-white text-sm px-3 py-2">
+            <div className="flex items-center gap-2">
+              <AlertCircle className="w-4 h-4" />
+              {tooltipMessage}
+            </div>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    );
+  }
+  
+  return buttonElement;
 };
 
 export default ButtonAnchor;
