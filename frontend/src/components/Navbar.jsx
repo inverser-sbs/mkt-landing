@@ -34,11 +34,12 @@ const Navbar = ({ mentorData, onActionClick }) => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <span className="text-2xl font-bold">
-              <span className={`transition-colors duration-300 ${isScrolled ? 'text-[#7c3aed]' : 'text-[#c4ff0f]'}`}>Inver</span>
-              <span className={`transition-colors duration-300 ${isScrolled ? 'text-gray-900' : 'text-gray-800'}`}>ser</span>
-            </span>
+          <div className="flex items-center">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/ux8tcoz0_logo-02.png" 
+              alt="InverSer" 
+              className="h-10 w-auto"
+            />
           </div>
 
           {/* Desktop Navigation */}
