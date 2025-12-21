@@ -382,15 +382,17 @@ class InverSerP0BugFixesTester:
             
             if response.status_code == 200:
                 result = response.json()
+                deleted_info = result.get('deleted', {})
                 print(f"   ✅ Cleanup completed for campaign '{campaign_a}':")
-                print(f"      - Campaign key: {result.get('campaign_key', 'N/A')}")
-                print(f"      - Orphan links deleted: {result.get('orphan_links_deleted', 0)}")
-                print(f"      - Empty URL links deleted: {result.get('empty_url_links_deleted', 0)}")
-                print(f"      - Orphan tokens deleted: {result.get('orphan_tokens_deleted', 0)}")
+                print(f"      - Message: {result.get('message', 'N/A')}")
+                print(f"      - Campaign key: {deleted_info.get('campaign_key', 'N/A')}")
+                print(f"      - Orphan links deleted: {deleted_info.get('orphan_links_deleted', 0)}")
+                print(f"      - Empty URL links deleted: {deleted_info.get('empty_url_links_deleted', 0)}")
+                print(f"      - Orphan tokens deleted: {deleted_info.get('orphan_tokens_deleted', 0)}")
                 
                 # Verify response includes correct campaign_key
-                if result.get('campaign_key') != campaign_a:
-                    print(f"   ❌ Expected campaign_key='{campaign_a}' but got '{result.get('campaign_key')}'")
+                if deleted_info.get('campaign_key') != campaign_a:
+                    print(f"   ❌ Expected campaign_key='{campaign_a}' but got '{deleted_info.get('campaign_key')}'")
                     return False
                 else:
                     print(f"   ✅ Campaign isolation verified - cleanup scoped to '{campaign_a}'")
