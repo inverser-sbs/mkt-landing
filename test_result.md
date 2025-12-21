@@ -774,3 +774,30 @@ agent_communication:
 
   - agent: "main"
     message: "P0/P1 FIXES COMPLETED: 1) Magic Link now uses correct preview domain (fixed .env parsing + runtime URL function). 2) ResizeObserver error suppressed globally + navigation delay added. 3) Action ID interno now updates when switching buttons. All verified via screenshots and curl tests."
+
+  - task: "P0-1 Bug Fix - ResizeObserver Error Definitive Fix"
+    implemented: true
+    working: true
+    file: "/app/frontend/public/index.html, /app/frontend/src/index.js"
+    stuck_count: 0
+    priority: "critical"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "DEFINITIVE FIX: Moved ResizeObserver polyfill to public/index.html to execute BEFORE React loads. The polyfill wraps ResizeObserver callbacks in requestAnimationFrame to prevent loop detection. Also intercepts error events in capture phase to prevent React Error Overlay. Manual tests verified: 1) Create mentor - NO error, 2) Open magic link - NO error, 3) Open modals - NO error."
+
+  - task: "P1 Feature - Internal Note Visible in Link Edit"
+    implemented: true
+    working: true
+    file: "/app/backend/models/action.py, /app/frontend/src/pages/admin/MentorsListPage.jsx, /app/frontend/src/pages/MentorEditPage.jsx, /app/frontend/src/pages/admin/ActionsPage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "IMPLEMENTED: internal_note field added to Action model. Shows in: 1) Admin Links Modal - gray background with lightbulb icon, 2) Magic Link Edit Page - blue background with lightbulb, 3) Actions Page - new field in create/edit modal with explanation. Backend endpoint updated to include internal_note in response."
+
+  - agent: "main"
+    message: "P0-1 ResizeObserver BUG FIXED DEFINITIVELY: Polyfill moved to index.html to execute before React. All manual tests passed - no error overlay on mentor create or magic link open. P1 Feature internal_note IMPLEMENTED: visible in Admin Links modal and Magic Link edit page. Actions Page has new field to edit internal_note. Please test both: 1) Create mentor, open magic link - verify NO ResizeObserver error, 2) Check Links modal shows internal note, 3) Check Magic Link page shows internal note."
