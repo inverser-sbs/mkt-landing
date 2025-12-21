@@ -622,6 +622,29 @@ async def get_magic_link_info(
     return {"has_token": True, **info}
 
 
+@router.delete("/{mentor_id}/magic-link/{campaign_key}")
+async def delete_magic_link(
+    mentor_id: str,
+    campaign_key: str,
+    db: AsyncIOMotorDatabase = Depends(get_db)
+):
+    """
+    Delete/invalidate magic link for a specific mentor+campaign.
+    The mentor will no longer be able to use any previous magic links for this campaign.
+    """
+    token_service = MagicTokenService(db)
+    
+    deleted = await token_service.delete_token(mentor_id, campaign_key)
+    
+    return {
+        "success": True,
+        "deleted": deleted,
+        "message": "Magic link eliminado" if deleted else "No había magic link activo"
+    }
+        return {"has_token": False}
+    return {"has_token": True, **info}
+
+
 @router.get("/{mentor_id}/magic-links")
 async def get_all_magic_links(
     mentor_id: str,
