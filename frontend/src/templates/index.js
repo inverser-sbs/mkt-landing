@@ -65,6 +65,15 @@ export const TEMPLATE_SLOTS = {
 // - style: estilo visual (primary, secondary, outline, link)
 export const TEMPLATE_BUTTONS = {
   'cpn': [
+    // ===== NAVBAR/HEADER =====
+    {
+      key: 'inscribete_nav',
+      label_default: 'Inscríbete Ahora',
+      slot: 'navbar',
+      description: 'Botón del menú principal para inscripción rápida',
+      link_type: 'mentor',  // Cada mentor define su URL de inscripción
+      style: 'primary'
+    },
     // ===== HERO SECTION =====
     {
       key: 'agenda_hero',
@@ -108,6 +117,15 @@ export const TEMPLATE_BUTTONS = {
       description: 'Botón en la sección "¿Por qué InverSer?"',
       link_type: 'mentor',
       style: 'outline'
+    },
+    // ===== PARTNER SECTION =====
+    {
+      key: 'partner_cta',
+      label_default: 'Conviértete en Partner',
+      slot: 'partner',
+      description: 'Botón para unirse al programa de partners',
+      link_type: 'mentor',  // Cada mentor puede personalizar o usar la misma URL
+      style: 'primary'
     },
     // ===== CTA FINAL =====
     {
