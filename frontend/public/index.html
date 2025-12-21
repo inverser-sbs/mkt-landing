@@ -19,6 +19,77 @@
         Learn how to configure a non-root public URL by running `npm run build`.
         -->
         <title>Emergent | Fullstack App</title>
+        <!-- CRITICAL: ResizeObserver fix must load BEFORE React -->
+        <script>
+            // ============================================
+            // ResizeObserver Loop Error - DEFINITIVE FIX
+            // ============================================
+            // This error is a known issue with Radix UI components.
+            // Reference: https://github.com/radix-ui/primitives/issues/2313
+            // This MUST run before React loads to intercept the error.
+            
+            (function() {
+                'use strict';
+                
+                // 1. Patch ResizeObserver to defer callbacks
+                var NativeResizeObserver = window.ResizeObserver;
+                window.ResizeObserver = function PatchedResizeObserver(callback) {
+                    var wrappedCallback = function(entries, observer) {
+                        window.requestAnimationFrame(function() {
+                            callback(entries, observer);
+                        });
+                    };
+                    return new NativeResizeObserver(wrappedCallback);
+                };
+                // Copy static properties
+                window.ResizeObserver.prototype = NativeResizeObserver.prototype;
+                
+                // 2. Intercept error events in capture phase
+                var errorFilter = function(event) {
+                    var msg = '';
+                    if (event.message) msg = event.message;
+                    else if (event.reason && event.reason.message) msg = event.reason.message;
+                    
+                    if (msg.indexOf('ResizeObserver loop') !== -1) {
+                        event.stopImmediatePropagation();
+                        event.stopPropagation();
+                        event.preventDefault();
+                        return false;
+                    }
+                };
+                window.addEventListener('error', errorFilter, true);
+                window.addEventListener('unhandledrejection', errorFilter, true);
+                
+                // 3. Filter console output
+                var nativeError = console.error;
+                var nativeWarn = console.warn;
+                console.error = function() {
+                    var msg = Array.prototype.join.call(arguments, ' ');
+                    if (msg.indexOf('ResizeObserver loop') !== -1) return;
+                    return nativeError.apply(console, arguments);
+                };
+                console.warn = function() {
+                    var msg = Array.prototype.join.call(arguments, ' ');
+                    if (msg.indexOf('ResizeObserver loop') !== -1) return;
+                    return nativeWarn.apply(console, arguments);
+                };
+                
+                // 4. Intercept future error listeners to filter ResizeObserver errors
+                var nativeAddEventListener = window.addEventListener.bind(window);
+                window.addEventListener = function(type, listener, options) {
+                    if (type === 'error' && typeof listener === 'function') {
+                        var filteredListener = function(event) {
+                            if (event && event.message && event.message.indexOf('ResizeObserver loop') !== -1) {
+                                return; // Don't call original listener
+                            }
+                            return listener.apply(this, arguments);
+                        };
+                        return nativeAddEventListener(type, filteredListener, options);
+                    }
+                    return nativeAddEventListener(type, listener, options);
+                };
+            })();
+        </script>
         <script src="https://assets.emergent.sh/scripts/emergent-main.js"></script>
         <!--
         These two scripts have been added for the Visual Edits, please do not edit or remove them
