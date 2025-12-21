@@ -91,16 +91,16 @@ const ActionsPage = () => {
     newActionKey: ''
   });
 
-  // Form state
+  // Form state - OPCIÓN B: slot único
   const [formData, setFormData] = useState({
     action_key: '',
     button_key: '',
     label: '',
     description: '',
-    internal_note: '',  // Note for admin/mentor visibility
+    internal_note: '',
     active: true,
     order: 0,
-    display_slots: []
+    slot: ''  // OPCIÓN B: slot único (viene del botón del template)
   });
   const [formErrors, setFormErrors] = useState({});
 
@@ -109,13 +109,10 @@ const ActionsPage = () => {
   const availableSlots = getSlotsForTemplate(templateKey);
   const availableButtons = getButtonsForTemplate(templateKey);
   
-  // Get allowed slots based on selected button
+  // OPCIÓN B: El slot viene del botón seleccionado (solo lectura)
   const selectedButton = formData.button_key 
     ? getButtonByKey(templateKey, formData.button_key) 
     : null;
-  const allowedSlots = formData.button_key 
-    ? getAllowedSlotsForButton(templateKey, formData.button_key)
-    : availableSlots;
 
   // Load campaigns on mount
   useEffect(() => {
