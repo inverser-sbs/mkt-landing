@@ -303,126 +303,24 @@ class InverSerGlobalMentorsAPITester:
         print("   ⚠️  Skipping isolation test - insufficient campaigns available")
         return True
     
-    def test_action_link_count(self, action_id: str):
-        """Test GET /api/admin/actions/{action_id}/link-count"""
-        print(f"\n🔍 Testing link count for action {action_id}...")
-        try:
-            response = self.session.get(f"{self.base_url}/admin/actions/{action_id}/link-count")
-            if response.status_code == 200:
-                data = response.json()
-                print(f"✅ Link count retrieved:")
-                print(f"   - Valid links: {data.get('valid', 0)}")
-                print(f"   - Orphan links: {data.get('orphan', 0)}")
-                print(f"   - Empty URL links: {data.get('empty_url', 0)}")
-                print(f"   - Total links: {data.get('total', 0)}")
-                
-                # Determine if action can be safely deleted
-                valid_count = data.get('valid', 0)
-                if valid_count == 0:
-                    print(f"   ✅ Action can be safely deleted (no valid links)")
-                else:
-                    print(f"   ⚠️  Action has {valid_count} valid links - deletion will be blocked")
-                
-                return data
-            else:
-                print(f"❌ Failed to get link count: {response.status_code}")
-                if response.text:
-                    print(f"   Error: {response.text}")
-                return None
-        except Exception as e:
-            print(f"❌ Error getting link count: {e}")
-            return None
     
-    def test_cleanup_orphans(self):
-        """Test POST /api/admin/actions/cleanup-orphans"""
-        print(f"\n🧹 Testing cleanup orphans...")
+    def get_actions_for_campaign(self, campaign_key: str):
+        """Get actions for a specific campaign"""
+        print(f"\n🎯 Getting actions for campaign '{campaign_key}'...")
         try:
-            response = self.session.post(f"{self.base_url}/admin/actions/cleanup-orphans")
+            response = self.session.get(f"{self.base_url}/admin/actions?campaign_key={campaign_key}")
             if response.status_code == 200:
-                data = response.json()
-                print(f"✅ Cleanup completed:")
-                deleted = data.get('deleted', {})
-                print(f"   - Orphan links deleted: {deleted.get('orphan_links_deleted', 0)}")
-                print(f"   - Empty URL links deleted: {deleted.get('empty_url_links_deleted', 0)}")
-                print(f"   - Orphan tokens deleted: {deleted.get('orphan_tokens_deleted', 0)}")
-                return data
+                actions = response.json()
+                print(f"✅ Found {len(actions)} actions:")
+                for action in actions:
+                    print(f"   - {action.get('label')} (key: {action.get('action_key')}, id: {action.get('id')})")
+                return actions
             else:
-                print(f"❌ Failed to cleanup orphans: {response.status_code}")
-                if response.text:
-                    print(f"   Error: {response.text}")
-                return None
+                print(f"❌ Failed to get actions: {response.status_code}")
+                return []
         except Exception as e:
-            print(f"❌ Error during cleanup: {e}")
-            return None
-    
-    def test_delete_action_normal(self, action_id: str):
-        """Test DELETE /api/admin/actions/{action_id} (normal delete)"""
-        print(f"\n🗑️  Testing normal delete for action {action_id}...")
-        try:
-            response = self.session.delete(f"{self.base_url}/admin/actions/{action_id}")
-            if response.status_code == 200:
-                data = response.json()
-                print(f"✅ Action deleted successfully: {data.get('message')}")
-                return True
-            elif response.status_code == 400:
-                # Expected if there are valid links
-                error_text = response.text
-                print(f"⚠️  Delete blocked (expected): {error_text}")
-                return False
-            else:
-                print(f"❌ Unexpected error during delete: {response.status_code}")
-                if response.text:
-                    print(f"   Error: {response.text}")
-                return False
-        except Exception as e:
-            print(f"❌ Error during delete: {e}")
-            return False
-    
-    def test_delete_action_force(self, action_id: str):
-        """Test DELETE /api/admin/actions/{action_id}?force=true (force delete)"""
-        print(f"\n💥 Testing force delete for action {action_id}...")
-        try:
-            response = self.session.delete(f"{self.base_url}/admin/actions/{action_id}?force=true")
-            if response.status_code == 200:
-                data = response.json()
-                print(f"✅ Action force deleted successfully: {data.get('message')}")
-                return True
-            else:
-                print(f"❌ Force delete failed: {response.status_code}")
-                if response.text:
-                    print(f"   Error: {response.text}")
-                return False
-        except Exception as e:
-            print(f"❌ Error during force delete: {e}")
-            return False
-    
-    def create_test_action(self, campaign_key: str):
-        """Create a test action for deletion testing"""
-        print(f"\n➕ Creating test action for campaign '{campaign_key}'...")
-        test_action = {
-            "campaign_key": campaign_key,
-            "action_key": "test_delete_action",
-            "label": "Test Delete Action",
-            "description": "Action created for testing deletion functionality",
-            "active": True,
-            "order": 999,
-            "display_slots": ["cta"]
-        }
-        
-        try:
-            response = self.session.post(f"{self.base_url}/admin/actions", json=test_action)
-            if response.status_code == 200:
-                action = response.json()
-                print(f"✅ Test action created: {action.get('label')} (id: {action.get('id')})")
-                return action
-            else:
-                print(f"❌ Failed to create test action: {response.status_code}")
-                if response.text:
-                    print(f"   Error: {response.text}")
-                return None
-        except Exception as e:
-            print(f"❌ Error creating test action: {e}")
-            return None
+            print(f"❌ Error getting actions: {e}")
+            return []
     
     def run_comprehensive_test(self):
         """Run comprehensive test of Global Mentors multi-campaign assignment"""
