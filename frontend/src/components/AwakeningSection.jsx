@@ -1,13 +1,10 @@
 import React from 'react';
-import { Button } from './ui/button';
+import ButtonAnchor, { prepareAnchorData } from './ButtonAnchor';
 
-const AwakeningSection = () => {
-  const scrollToCTA = () => {
-    const element = document.getElementById('cta');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+const AwakeningSection = ({ mentorData, onActionClick }) => {
+  // Preparar datos para los anchors
+  const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
+  const templateKey = 'cpn';
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
@@ -41,12 +38,21 @@ const AwakeningSection = () => {
             Es momento de <span className="font-bold">darle sentido a tu vida</span>. ¡Casi 2 décadas
             CAMBIANDO VIDAS! Sé parte de una comunidad que crece, evoluciona y se expande.
           </p>
-          <Button
-            onClick={scrollToCTA}
-            className="bg-[#c4ff0f] text-gray-900 hover:bg-[#b3ef00] font-semibold px-8 py-6 text-lg transition-all duration-300 hover:scale-105"
-          >
-            Quiero Iniciar mi Transformación →
-          </Button>
+          
+          {/* ============================================ */}
+          {/* BUTTON ANCHOR - Posición fija: Awakening */}
+          {/* ============================================ */}
+          <ButtonAnchor
+            buttonKey="iniciar_transformacion"
+            templateKey={templateKey}
+            actions={actions}
+            mentorLinks={mentorLinks}
+            campaignLinks={campaignLinks}
+            onActionClick={onActionClick}
+            variant="primary"
+            size="lg"
+            hideIfNoUrl={true}
+          />
         </div>
       </div>
     </section>
