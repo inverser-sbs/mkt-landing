@@ -46,7 +46,6 @@ export const TEMPLATE_SLOTS = {
     { key: 'why_inverser', label: 'Sección ¿Por qué InverSer?', description: 'Botón en la sección de beneficios' },
     { key: 'partner', label: 'Sección Partner Program', description: 'Botón para unirse como partner' },
     { key: 'cta', label: 'CTA Final', description: 'Sección de llamada a la acción al final' },
-    { key: 'footer', label: 'Footer', description: 'Área de contacto en el pie de página' }
   ],
   'suitex': [
     { key: 'hero_primary', label: 'Hero - Botón Principal', description: 'Botón de Demo/Acción principal en el Hero' },
@@ -148,16 +147,6 @@ export const TEMPLATE_BUTTONS = {
       link_type: 'mentor',
       style: 'primary'
     },
-    // ===== FOOTER =====
-    {
-      key: 'directorio',
-      label_default: 'Ver Directorio',
-      slot: 'footer',
-      description: 'Acceso al directorio de coaches/mentores certificados',
-      link_type: 'fixed',  // URL fija de la campaña, no depende del mentor
-      fixed_url: 'https://inverser.com/directorio',  // URL por defecto
-      style: 'outline'
-    }
   ],
   'suitex': [
     {
