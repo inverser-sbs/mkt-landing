@@ -684,6 +684,12 @@ const MentorsListPage = () => {
                         </span>
                       )}
                     </Label>
+                    {/* Internal Note - visible to admin */}
+                    {action.internal_note && (
+                      <p className="text-xs text-gray-500 italic bg-gray-50 px-2 py-1 rounded">
+                        💡 {action.internal_note}
+                      </p>
+                    )}
                     <div className="flex gap-2">
                       <Input
                         type="url"
