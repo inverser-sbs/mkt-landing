@@ -36,6 +36,6 @@ class MentorWithCampaigns(BaseModel):
     mentor_group: Optional[str] = None
     created_at: datetime
     updated_at: datetime
-    public_url: str
-    # Campaign assignments
-    campaigns: list = Field(default_factory=list)  # List of {campaign_key, status, has_magic_link}
+    public_url: str  # Default URL (first campaign or base slug)
+    # Campaign assignments with their own public_url
+    campaigns: list = Field(default_factory=list)  # List of {campaign_key, status, has_magic_link, public_url}
