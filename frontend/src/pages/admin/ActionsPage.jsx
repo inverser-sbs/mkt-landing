@@ -771,15 +771,13 @@ const ActionsPage = () => {
                       <p className="text-xs text-gray-500 mt-1">{buttonInfo.description}</p>
                     )}
                     
-                    {/* Slots Display */}
+                    {/* Slot Display - OPCIÓN B: slot único */}
                     <div className="flex items-center gap-1 mt-2 flex-wrap">
                       <MapPin className="w-3 h-3 text-gray-400" />
                       <span className="text-xs text-gray-500">Ubicación:</span>
-                      {getSlotLabels(action.display_slots).map((label, idx) => (
-                        <Badge key={idx} variant="outline" className="text-xs bg-purple-50 border-purple-200 text-purple-700">
-                          {label}
-                        </Badge>
-                      ))}
+                      <Badge variant="outline" className="text-xs bg-purple-50 border-purple-200 text-purple-700">
+                        {getSlotLabel(action.slot || getButtonInfo(action.button_key)?.slot)}
+                      </Badge>
                     </div>
                   </div>
                   
