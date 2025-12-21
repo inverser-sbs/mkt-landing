@@ -501,27 +501,28 @@ class InverSerGlobalMentorsAPITester:
 
 def main():
     """Main test execution"""
-    tester = InverSerAPITester()
+    tester = InverSerGlobalMentorsAPITester()
     
-    print("=" * 60)
-    print("InverSer Action Deletion Bug Fix - Backend API Testing")
-    print("=" * 60)
+    print("=" * 70)
+    print("InverSer Global Mentors Multi-Campaign Assignment - Backend API Testing")
+    print("=" * 70)
     
     success = tester.run_comprehensive_test()
     
-    print("\n" + "=" * 60)
+    print("\n" + "=" * 70)
     if success:
         print("✅ ALL TESTS COMPLETED")
         print("\nKey findings:")
         print("- API endpoints are accessible")
-        print("- Link count endpoint provides detailed breakdown")
-        print("- Cleanup orphans functionality works")
-        print("- Delete logic properly validates valid links")
-        print("- Force delete bypasses validation as expected")
+        print("- Mentor retrieval with campaign info works")
+        print("- Campaign assignment/update functionality works")
+        print("- Status updates per campaign work")
+        print("- Magic link generation respects campaign assignment")
+        print("- Campaign isolation is maintained")
     else:
         print("❌ SOME TESTS FAILED")
         print("Check the output above for specific issues")
-    print("=" * 60)
+    print("=" * 70)
 
 if __name__ == "__main__":
     main()
