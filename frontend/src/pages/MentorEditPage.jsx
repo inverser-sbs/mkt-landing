@@ -57,17 +57,32 @@ const MentorEditPage = () => {
     } catch (err) {
       console.error('Error fetching mentor data:', err);
       
-      if (err.response?.status === 401) {
-        setError('Token inválido o expirado. Por favor, solicite un nuevo link de edición a su administrador.');
-      } else if (err.response?.status === 404) {
-        const detail = err.response?.data?.detail || '';
-        if (detail.includes('Campaign')) {
-          setError('Campaña no encontrada o inactiva.');
+      const status = err.response?.status;
+      const detail = err.response?.data?.detail || '';
+      
+      if (status === 401) {
+        // Token validation failed - provide specific message
+        if (detail.includes('expired')) {
+          setError('Tu token ha expirado. Por favor, solicita un nuevo link de edición a tu administrador.');
+        } else if (detail.includes('invalidated')) {
+          setError('Este link de edición ha sido revocado. Por favor, solicita uno nuevo a tu administrador.');
         } else {
-          setError('Mentor no encontrado.');
+          setError('Token inválido o expirado. Por favor, solicita un nuevo link de edición a tu administrador.');
         }
+      } else if (status === 404) {
+        if (detail.includes('Campaign')) {
+          setError('La campaña no está disponible o ha sido desactivada. Contacta a tu administrador.');
+        } else if (detail.includes('Mentor')) {
+          setError('Perfil de mentor no encontrado. Contacta a tu administrador.');
+        } else if (detail.includes('not assigned')) {
+          setError('No tienes acceso a esta campaña. Contacta a tu administrador para que te asigne.');
+        } else {
+          setError('Recurso no encontrado. Verifica que el link sea correcto.');
+        }
+      } else if (status === 400) {
+        setError(detail || 'Solicitud inválida. Verifica que el link sea correcto.');
       } else {
-        setError('Error al cargar los datos. Por favor, intente nuevamente.');
+        setError('Error al cargar los datos. Por favor, intenta nuevamente más tarde.');
       }
     } finally {
       setLoading(false);
