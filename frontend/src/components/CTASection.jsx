@@ -1,30 +1,14 @@
 import React from 'react';
-import { Button } from './ui/button';
-import { CheckCircle, Calendar, Phone, MessageCircle } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
+import ButtonAnchor, { prepareAnchorData } from './ButtonAnchor';
 
 const CTASection = ({ mentorData, onActionClick }) => {
-  const actions = mentorData?.actions || [];
+  // Preparar datos para los anchors
+  const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
   const mentor = mentorData?.mentor || null;
-
-  const handleActionClick = (action) => {
-    if (onActionClick) {
-      onActionClick(action.action_key);
-    }
-    window.open(action.url, '_blank');
-  };
-
-  const getActionIcon = (actionKey) => {
-    switch (actionKey) {
-      case 'agenda':
-        return Calendar;
-      case 'whatsapp':
-        return Phone;
-      case 'formulario':
-        return MessageCircle;
-      default:
-        return MessageCircle;
-    }
-  };
+  
+  // Template key
+  const templateKey = 'cpn';
 
   return (
     <section id="cta" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#7c3aed] via-purple-600 to-purple-700">
@@ -51,23 +35,22 @@ const CTASection = ({ mentorData, onActionClick }) => {
           </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10 flex-wrap">
-          {actions.map((action) => {
-            const Icon = getActionIcon(action.action_key);
-            return (
-              <Button
-                key={action.action_key}
-                onClick={() => handleActionClick(action)}
-                className="bg-[#c4ff0f] text-gray-900 hover:bg-[#b3ef00] font-semibold px-10 py-7 text-lg transition-all duration-300 hover:scale-105"
-              >
-                <Icon className="w-5 h-5 mr-2" />
-                {action.label}
-              </Button>
-            );
-          })}
-          {actions.length === 0 && (
-            <p className="text-white opacity-75 italic">Acciones no disponibles</p>
-          )}
+        {/* ============================================ */}
+        {/* BUTTON ANCHOR - Posición fija: CTA Section */}
+        {/* ============================================ */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
+          {/* ANCHOR: formulario_cta (CTA Final) */}
+          <ButtonAnchor
+            buttonKey="formulario_cta"
+            templateKey={templateKey}
+            actions={actions}
+            mentorLinks={mentorLinks}
+            campaignLinks={campaignLinks}
+            onActionClick={onActionClick}
+            variant="cta"
+            size="lg"
+            hideIfNoUrl={true}
+          />
         </div>
 
         <div className="mt-12 bg-white/10 backdrop-blur-sm rounded-2xl p-8">
