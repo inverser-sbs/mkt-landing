@@ -288,7 +288,10 @@ const MentorFormPage = () => {
         description: `Mentor ${isEditing ? 'actualizado' : 'creado'} correctamente`
       });
 
-      navigate('/admin');
+      // Small delay before navigation to allow toast to render and state to settle
+      setTimeout(() => {
+        navigate('/admin');
+      }, 100);
     } catch (error) {
       console.error('Error saving mentor:', error);
       const errorMsg = error.response?.data?.detail || 'No se pudo guardar el mentor';
@@ -297,8 +300,7 @@ const MentorFormPage = () => {
         description: errorMsg,
         variant: 'destructive'
       });
-    } finally {
-      setSaving(false);
+      setSaving(false);  // Only reset saving on error, not on success (navigation handles it)
     }
   };
 
