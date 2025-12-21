@@ -7,7 +7,9 @@ import hashlib
 from bson import ObjectId
 import os
 
-FRONTEND_URL = os.environ.get('FRONTEND_URL', 'http://localhost:3000')
+def get_frontend_url():
+    """Get frontend URL from environment, with fallback"""
+    return os.environ.get('FRONTEND_URL', 'http://localhost:3000')
 
 class MagicTokenService:
     def __init__(self, db: AsyncIOMotorDatabase):
