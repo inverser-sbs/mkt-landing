@@ -620,11 +620,14 @@ agent_communication:
     file: "/app/frontend/src/pages/admin/MentorFormPage.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: true
         agent: "main"
         comment: "FASE A PARTE 1: Formulario de mentor con checkboxes de campañas. Lista de mentores muestra badges de campañas asignadas y estado por campaña. Toggle 'Solo asignados a esta campaña' funciona. Screenshots verificados."
+      - working: "NA"
+        agent: "testing"
+        comment: "Frontend testing not performed as per system limitations. Backend API integration verified working correctly - all mentor campaign assignment endpoints functional. Frontend implementation should work correctly with the verified backend APIs."
 
   - task: "Campaign Isolation Tests"
     implemented: true
