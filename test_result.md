@@ -640,6 +640,9 @@ agent_communication:
       - working: true
         agent: "main"
         comment: "FASE A PARTE 2: Creado test_campaign_isolation.py con 3 tests: 1) Force delete isolation, 2) Cleanup orphans isolation, 3) Replace action isolation. TODOS PASARON. El sistema está correctamente aislado por campaign_key."
+      - working: true
+        agent: "testing"
+        comment: "✅ CAMPAIGN ISOLATION VERIFIED: Comprehensive testing confirmed campaign isolation working correctly. During mentor campaign assignment testing, verified that operations on one campaign don't affect others. Added mentor to 'mentor-program' campaign without affecting existing 'cpn' (paused status maintained) and 'suitex' (active status maintained) campaigns. Campaign-specific operations (status updates, magic link generation) properly scoped to individual campaigns. Backend properly maintains separation between campaign data."
 
   - agent: "main"
     message: "FASE A COMPLETADA: 1) Mentores globales implementados con asignación multi-campaña via checkboxes. 2) Tests de aislamiento por campaign_key pasaron (force delete, cleanup, replace). Frontend actualizado con badges de campañas y filtro. Por favor verificar el flujo completo en /admin."
