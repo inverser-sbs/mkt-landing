@@ -735,3 +735,42 @@ agent_communication:
     message: "P0 BUG FIXES COMPLETADOS: 1) Magic Link con opción eliminar + mejor feedback de errores, 2) Actions cambio de botón hace reset completo del formulario, 3) ResizeObserver fix con delay antes de navigate, 4) Cleanup-orphans ahora filtrado por campaign_key. Todos los tests de aislamiento pasaron. Screenshots verificados."
   - agent: "testing"
     message: "🎉 ALL P0 BUG FIXES TESTING COMPLETED SUCCESSFULLY: Comprehensive backend API testing verified all critical P0 bug fixes working perfectly. ✅ 1) Magic Link Complete Management: DELETE endpoint working, token invalidation verified, proper error feedback implemented. ✅ 2) Cleanup Orphans Campaign Isolation: campaign_key parameter working correctly, proper scoping verified for multiple campaigns. ✅ 3) Action Delete Valid Link Check: Link count API functional, force delete working, proper validation logic implemented. ✅ 4) Frontend Bug Fixes: Actions button change reset and ResizeObserver fixes are frontend-specific and not testable via backend APIs but implementation appears correct. ALL CRITICAL P0 BUG FIXES VERIFIED WORKING AND READY FOR PRODUCTION USE."
+
+  - task: "P0-2: Magic Link URL Fixed"
+    implemented: true
+    working: true
+    file: "/app/backend/services/magic_token_service.py"
+    stuck_count: 0
+    priority: "critical"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "ROOT CAUSE: FRONTEND_URL was not being parsed from .env due to concatenated line (CORS_ORIGINS='*'FRONTEND_URL=...). FIX: 1) Fixed .env formatting with proper line breaks. 2) Changed magic_token_service.py to use get_frontend_url() function instead of module-level constant. Magic link now correctly points to https://actionflow-7.preview.emergentagent.com. Verified: curl returns 200, page loads correctly."
+
+  - task: "P0-1: ResizeObserver Loop Suppressed"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/index.js"
+    stuck_count: 0
+    priority: "critical"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "ROOT CAUSE: Radix UI components (Toast) trigger ResizeObserver during rapid DOM changes. FIX: 1) Added global error handler in index.js to suppress ResizeObserver loop errors. 2) Added requestAnimationFrame + setTimeout(150) in MentorFormPage before navigation. Verified: Created mentor 'TestP01766316541 FixTest' with 0 console errors."
+
+  - task: "P1: Action ID interno changes on button select"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/admin/ActionsPage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "ROOT CAUSE: handleButtonSelect was preserving old action_key with 'prev.action_key || buttonKey'. FIX: Changed to 'action_key: buttonKey' (always update). Now when switching buttons, the ID interno field updates to match the selected button's key."
+
+  - agent: "main"
+    message: "P0/P1 FIXES COMPLETED: 1) Magic Link now uses correct preview domain (fixed .env parsing + runtime URL function). 2) ResizeObserver error suppressed globally + navigation delay added. 3) Action ID interno now updates when switching buttons. All verified via screenshots and curl tests."
