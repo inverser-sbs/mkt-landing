@@ -514,19 +514,17 @@ const ActionsPage = () => {
     }
   };
 
-  // Helper to get slot labels
-  const getSlotLabels = (slotKeys) => {
-    if (!slotKeys || slotKeys.length === 0) return ['Sin ubicación'];
-    return slotKeys.map(key => {
-      const slot = availableSlots.find(s => s.key === key);
-      return slot ? slot.label.replace('Hero - ', '').replace('CTA ', '') : key;
-    });
+  // Helper to get slot label (OPCIÓN B: slot único)
+  const getSlotLabel = (slotKey) => {
+    if (!slotKey) return 'Sin ubicación';
+    const slot = availableSlots.find(s => s.key === slotKey);
+    return slot ? slot.label.replace('Hero - ', '').replace('CTA ', '') : slotKey;
   };
 
   // Helper to get button info
   const getButtonInfo = (buttonKey) => {
     const button = getButtonByKey(templateKey, buttonKey);
-    return button || { label_default: buttonKey, description: '' };
+    return button || { label_default: buttonKey, description: '', slot: null };
   };
 
   // Check which buttons are already configured
