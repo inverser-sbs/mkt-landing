@@ -33,12 +33,12 @@ const Navbar = ({ mentorData, onActionClick }) => {
     }`}>
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center">
+          {/* Logo - Alineado con contenido del Hero */}
+          <div className="flex items-center ml-4 md:ml-8">
             <img 
               src="https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/ux8tcoz0_logo-02.png" 
               alt="InverSer" 
-              className="h-10 w-auto"
+              className="h-12 md:h-14 w-auto"
             />
           </div>
 
