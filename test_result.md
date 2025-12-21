@@ -648,3 +648,54 @@ agent_communication:
     message: "FASE A COMPLETADA: 1) Mentores globales implementados con asignación multi-campaña via checkboxes. 2) Tests de aislamiento por campaign_key pasaron (force delete, cleanup, replace). Frontend actualizado con badges de campañas y filtro. Por favor verificar el flujo completo en /admin."
   - agent: "testing"
     message: "🎉 GLOBAL MENTORS MULTI-CAMPAIGN ASSIGNMENT TESTING COMPLETED SUCCESSFULLY: Comprehensive backend API testing verified all review_request requirements working perfectly. ✅ 1) GET /api/admin/mentors/{mentor_id}: Returns mentor with campaign assignments, status per campaign, magic link indicators - found 'Noel Rivera' with cpn(active🔗) and suitex(paused❌). ✅ 2) PUT /api/admin/mentors/{mentor_id}/campaigns: Bulk assignment with sync_mode working - assigned campaigns with proper response arrays. ✅ 3) PUT /api/admin/mentors/{mentor_id}/campaigns/{campaign_key}/status: Status updates per campaign working - changed cpn from active to paused successfully. ✅ 4) POST /api/admin/mentors/{mentor_id}/magic-link/{campaign_key}: Magic link generation working for assigned campaigns, properly blocked for unassigned with clear error. ✅ 5) Campaign Isolation: Verified operations on one campaign don't affect others - added mentor-program without affecting cpn/suitex status. ALL BACKEND API ENDPOINTS FUNCTIONAL AND READY FOR PRODUCTION USE. Frontend testing not performed due to system limitations but backend integration verified working correctly."
+
+  - task: "P0 Bug Fix - Magic Link Complete Management"
+    implemented: true
+    working: true
+    file: "/app/backend/services/magic_token_service.py"
+    stuck_count: 0
+    priority: "critical"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Added delete_token() method and detailed validation. New DELETE endpoint for magic links. Frontend modal now shows 'Eliminar Magic Link' option. Improved error messages for expired/invalid/revoked tokens."
+
+  - task: "P0 Bug Fix - Actions Button Change State Reset"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/admin/ActionsPage.jsx"
+    stuck_count: 0
+    priority: "critical"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Fixed handleButtonSelect to do complete form reset when switching buttons. Label now resets to default, display_slots auto-populate with allowed_slots. useEffect dependency updated."
+
+  - task: "P0 Bug Fix - ResizeObserver Error on Mentor Create"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/admin/MentorFormPage.jsx"
+    stuck_count: 0
+    priority: "critical"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Added setTimeout delay before navigation to allow state to settle. Moved setSaving(false) to only run on error, not on success. This prevents the ResizeObserver loop by ensuring clean component unmount."
+
+  - task: "P0 Bug Fix - Cleanup Orphans Campaign Isolation"
+    implemented: true
+    working: true
+    file: "/app/backend/services/action_service.py"
+    stuck_count: 0
+    priority: "critical"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "cleanup_orphan_data() now accepts optional campaign_key parameter. When provided, only cleans data for that specific campaign. Frontend updated to always pass selectedCampaign.key. Isolation tests passed."
+
+  - agent: "main"
+    message: "P0 BUG FIXES COMPLETADOS: 1) Magic Link con opción eliminar + mejor feedback de errores, 2) Actions cambio de botón hace reset completo del formulario, 3) ResizeObserver fix con delay antes de navigate, 4) Cleanup-orphans ahora filtrado por campaign_key. Todos los tests de aislamiento pasaron. Screenshots verificados."
