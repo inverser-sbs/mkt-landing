@@ -50,6 +50,7 @@ const WhyInverserSection = ({ mentorData, onActionClick }) => {
 
         {/* ============================================ */}
         {/* BUTTON ANCHOR - Posición fija: Why InverSer */}
+        {/* REGLA: SIEMPRE visible, disabled si falta URL */}
         {/* ============================================ */}
         <div className="text-center">
           <ButtonAnchor
@@ -61,7 +62,6 @@ const WhyInverserSection = ({ mentorData, onActionClick }) => {
             onActionClick={onActionClick}
             variant="primary"
             size="lg"
-            hideIfNoUrl={true}
           />
         </div>
       </div>
