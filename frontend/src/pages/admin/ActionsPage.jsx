@@ -1010,61 +1010,31 @@ const ActionsPage = () => {
             )}
 
             {/* ============================================ */}
-            {/* PASO 3: Seleccionar Ubicaciones (Slots) */}
+            {/* PASO 3: Ubicación (SOLO LECTURA - Opción B) */}
             {/* ============================================ */}
-            {formData.button_key && (
+            {formData.button_key && selectedButton && (
               <div className="space-y-3">
                 <div className="flex items-center gap-2 text-sm font-semibold text-gray-700">
                   <span className="w-6 h-6 rounded-full bg-[#7c3aed] text-white flex items-center justify-center text-xs">3</span>
-                  ¿Dónde aparece este botón?
+                  Ubicación del Botón
                 </div>
 
-                <p className="text-xs text-gray-500">
-                  Este botón puede aparecer en las siguientes ubicaciones del template:
-                </p>
-
-                <div className="space-y-2 border rounded-lg p-3" key={`slots-${formData.button_key}`}>
-                  {availableSlots.map((slot) => {
-                    const isAllowed = selectedButton?.allowed_slots.includes(slot.key);
-                    const isChecked = formData.display_slots.includes(slot.key);
-                    
-                    return (
-                      <div 
-                        key={`${formData.button_key}-${slot.key}`}
-                        className={`
-                          flex items-start space-x-3 p-2 rounded-md transition-colors
-                          ${!isAllowed 
-                            ? 'opacity-40 cursor-not-allowed' 
-                            : isChecked 
-                              ? 'bg-purple-50 border border-purple-200' 
-                              : 'hover:bg-gray-50'
-                          }
-                        `}
-                      >
-                        <Checkbox
-                          id={`slot-${formData.button_key}-${slot.key}`}
-                          checked={isChecked}
-                          onCheckedChange={() => handleSlotToggle(slot.key)}
-                          disabled={!isAllowed}
-                        />
-                        <div className="flex-1">
-                          <label 
-                            htmlFor={`slot-${formData.button_key}-${slot.key}`}
-                            className={`text-sm font-medium block ${!isAllowed ? 'text-gray-400' : 'cursor-pointer'}`}
-                          >
-                            {slot.label}
-                            {!isAllowed && <span className="text-xs text-gray-400 ml-2">(no disponible para este botón)</span>}
-                          </label>
-                          <p className="text-xs text-gray-500">{slot.description}</p>
-                        </div>
-                      </div>
-                    );
-                  })}
+                <div className="border rounded-lg p-4 bg-gray-50">
+                  <div className="flex items-center gap-3">
+                    <MapPin className="w-5 h-5 text-[#7c3aed]" />
+                    <div>
+                      <p className="font-medium text-gray-900">
+                        {availableSlots.find(s => s.key === selectedButton.slot)?.label || selectedButton.slot}
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        {availableSlots.find(s => s.key === selectedButton.slot)?.description || 'Ubicación fija definida por el diseño'}
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-xs text-gray-400 mt-2 italic">
+                    La ubicación es fija y está determinada por el diseño del template.
+                  </p>
                 </div>
-                
-                {formErrors.display_slots && (
-                  <p className="text-sm text-red-500">{formErrors.display_slots}</p>
-                )}
               </div>
             )}
 
