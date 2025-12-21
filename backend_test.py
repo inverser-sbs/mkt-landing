@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """
-Backend API Testing for InverSer Action Deletion Bug Fix
+Backend API Testing for InverSer Global Mentors with Multi-Campaign Assignment
 
 Tests the following scenarios:
-1. Delete Dialog Information - GET /api/admin/actions/{action_id}/link-count
-2. Cleanup Orphans Button - POST /api/admin/actions/cleanup-orphans  
-3. Force Delete Flow - DELETE /api/admin/actions/{action_id}?force=true
+1. GET /api/admin/mentors/{mentor_id} - Get mentor with campaigns
+2. PUT /api/admin/mentors/{mentor_id}/campaigns - Assign/update campaigns
+3. PUT /api/admin/mentors/{mentor_id}/campaigns/{campaign_key}/status - Update status in campaign
+4. POST /api/admin/mentors/{mentor_id}/magic-link/{campaign_key} - Magic link (only if assigned)
+5. Campaign Isolation - Verify operations on one campaign don't affect others
 
 Admin Login: /login with password: inverser2024
 """
