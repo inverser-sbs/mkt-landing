@@ -61,7 +61,7 @@ export const TEMPLATE_SLOTS = {
 // - label_default: texto visible en la landing
 // - slot: ubicación FIJA (solo lectura para el admin)
 // - description: explicación para el admin/mentor
-// - type: 'external_url' (abre URL) o 'internal' (scroll)
+// - link_type: 'mentor' (URL por mentor) o 'fixed' (URL fija de campaña)
 // - style: estilo visual (primary, secondary, outline, link)
 export const TEMPLATE_BUTTONS = {
   'cpn': [
@@ -71,7 +71,7 @@ export const TEMPLATE_BUTTONS = {
       label_default: 'Agendar Llamada',
       slot: 'hero_primary',
       description: 'Botón principal del Hero para agendar una llamada con el mentor',
-      type: 'external_url',
+      link_type: 'mentor',  // Cada mentor pone su URL de Calendly
       style: 'primary'
     },
     {
@@ -79,7 +79,7 @@ export const TEMPLATE_BUTTONS = {
       label_default: 'Hablar por WhatsApp',
       slot: 'hero_secondary',
       description: 'Contacto directo vía WhatsApp en el Hero',
-      type: 'external_url',
+      link_type: 'mentor',  // Cada mentor pone su link de WhatsApp
       style: 'secondary'
     },
     // ===== AWAKENING SECTION =====
@@ -88,7 +88,7 @@ export const TEMPLATE_BUTTONS = {
       label_default: 'Quiero Iniciar mi Transformación',
       slot: 'awakening',
       description: 'Botón en la sección "Es momento de despertar"',
-      type: 'external_url',
+      link_type: 'mentor',
       style: 'primary'
     },
     // ===== IS FOR YOU SECTION =====
@@ -97,7 +97,7 @@ export const TEMPLATE_BUTTONS = {
       label_default: 'Solicita tu Entrevista',
       slot: 'is_for_you',
       description: 'Botón en la sección "¿Es para ti?"',
-      type: 'external_url',
+      link_type: 'mentor',
       style: 'primary'
     },
     // ===== WHY INVERSER SECTION =====
@@ -106,7 +106,7 @@ export const TEMPLATE_BUTTONS = {
       label_default: 'Solicita Información',
       slot: 'why_inverser',
       description: 'Botón en la sección "¿Por qué InverSer?"',
-      type: 'external_url',
+      link_type: 'mentor',
       style: 'outline'
     },
     // ===== CTA FINAL =====
@@ -115,7 +115,7 @@ export const TEMPLATE_BUTTONS = {
       label_default: 'Aplicar al Programa',
       slot: 'cta',
       description: 'Botón principal de conversión en la sección CTA final',
-      type: 'external_url',
+      link_type: 'mentor',
       style: 'primary'
     },
     // ===== FOOTER =====
@@ -124,7 +124,8 @@ export const TEMPLATE_BUTTONS = {
       label_default: 'Ver Directorio',
       slot: 'footer',
       description: 'Acceso al directorio de coaches/mentores certificados',
-      type: 'external_url',
+      link_type: 'fixed',  // URL fija de la campaña, no depende del mentor
+      fixed_url: 'https://inverser.com/directorio',  // URL por defecto
       style: 'outline'
     }
   ],
@@ -134,7 +135,7 @@ export const TEMPLATE_BUTTONS = {
       label_default: 'Agendar Demo',
       slot: 'hero_primary',
       description: 'Botón principal para solicitar una demostración del producto',
-      type: 'external_url',
+      link_type: 'mentor',
       style: 'primary'
     },
     {
@@ -142,7 +143,7 @@ export const TEMPLATE_BUTTONS = {
       label_default: 'Contactar por WhatsApp',
       slot: 'hero_secondary',
       description: 'Contacto directo para consultas rápidas',
-      type: 'external_url',
+      link_type: 'mentor',
       style: 'secondary'
     },
     {
@@ -150,7 +151,8 @@ export const TEMPLATE_BUTTONS = {
       label_default: 'Empezar Prueba Gratis',
       slot: 'cta',
       description: 'Acceso a prueba gratuita en la sección CTA',
-      type: 'external_url',
+      link_type: 'fixed',
+      fixed_url: 'https://suitex.com/trial',
       style: 'primary'
     },
     {
@@ -158,7 +160,8 @@ export const TEMPLATE_BUTTONS = {
       label_default: 'Comprar Ahora',
       slot: 'pricing',
       description: 'Botón de compra en la sección de precios',
-      type: 'external_url',
+      link_type: 'fixed',
+      fixed_url: 'https://suitex.com/pricing',
       style: 'primary'
     }
   ]
