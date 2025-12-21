@@ -235,20 +235,20 @@ const MentorEditPage = () => {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            {Object.entries(links).length === 0 ? (
+            {actions.length === 0 ? (
               <div className="text-center py-8 text-gray-500">
                 <p>No hay acciones configuradas para esta campaña.</p>
               </div>
             ) : (
-              Object.entries(links).map(([actionKey, url]) => (
-                <div key={actionKey} className="space-y-2">
+              actions.map((action) => (
+                <div key={action.action_key} className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <label className="text-sm font-semibold text-gray-900 capitalize">
-                      {actionKey.replace(/-/g, ' ').replace(/_/g, ' ')}
+                    <label className="text-sm font-semibold text-gray-900">
+                      {action.label || action.action_key.replace(/-/g, ' ').replace(/_/g, ' ')}
                     </label>
-                    {url && (
+                    {links[action.action_key] && (
                       <a
-                        href={url}
+                        href={links[action.action_key]}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-xs text-[#7c3aed] hover:underline flex items-center"
@@ -259,15 +259,22 @@ const MentorEditPage = () => {
                     )}
                   </div>
                   
+                  {/* Internal Note - helps mentor understand what this action is for */}
+                  {action.internal_note && (
+                    <p className="text-xs text-gray-500 italic bg-blue-50 px-3 py-1.5 rounded border-l-2 border-blue-400">
+                      💡 {action.internal_note}
+                    </p>
+                  )}
+                  
                   <Input
                     type="url"
                     placeholder="https://ejemplo.com/tu-enlace"
-                    value={url}
-                    onChange={(e) => handleLinkChange(actionKey, e.target.value)}
+                    value={links[action.action_key] || ''}
+                    onChange={(e) => handleLinkChange(action.action_key, e.target.value)}
                     className="font-mono text-sm"
                   />
                   
-                  {url && !url.startsWith('http') && (
+                  {links[action.action_key] && !links[action.action_key].startsWith('http') && (
                     <p className="text-xs text-amber-600">
                       ⚠️ La URL debe empezar con http:// o https://
                     </p>
