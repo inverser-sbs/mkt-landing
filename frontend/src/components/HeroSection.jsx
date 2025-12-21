@@ -96,6 +96,29 @@ const HeroSection = ({ mentorData, onActionClick }) => {
           </p>
 
           {/* ============================================ */}
+          {/* MENTOR PHOTO + NAME */}
+          {/* ============================================ */}
+          {mentor.first_name && mentor.first_name !== 'Nuestro' && (
+            <div className="flex items-center space-x-4 mb-8 animate-slide-up" style={{ animationDelay: '0.18s' }}>
+              {mentor.photo_url ? (
+                <img
+                  src={getImageUrl(mentor.photo_url)}
+                  alt={`${mentor.first_name} ${mentor.last_name}`}
+                  className="w-14 h-14 rounded-full border-3 border-[#c4ff0f] shadow-lg object-cover"
+                />
+              ) : (
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#7c3aed] to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                  {mentor.first_name[0]}{mentor.last_name?.[0] || ''}
+                </div>
+              )}
+              <div>
+                <p className="text-sm text-gray-500">Agenda con tu mentor</p>
+                <p className="font-semibold text-gray-900 text-lg">{mentor.first_name} {mentor.last_name}</p>
+              </div>
+            </div>
+          )}
+
+          {/* ============================================ */}
           {/* BUTTON ANCHORS - Posición fija en el diseño */}
           {/* REGLA: SIEMPRE visibles, disabled si falta URL */}
           {/* ============================================ */}
