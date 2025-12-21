@@ -1,7 +1,12 @@
 import React from 'react';
 import { Mail, Phone } from 'lucide-react';
+import ButtonAnchor, { prepareAnchorData } from './ButtonAnchor';
 
-const Footer = () => {
+const Footer = ({ mentorData, onActionClick }) => {
+  // Preparar datos para los anchors
+  const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
+  const templateKey = 'cpn';
+
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
@@ -21,10 +26,27 @@ const Footer = () => {
                 <span className="text-white">ser</span>
               </span>
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed">
+            <p className="text-gray-400 text-sm leading-relaxed mb-4">
               Certificación Profesional en NeuroCoaching avalada por organizaciones internacionales.
               Transforma tu vida HOY.
             </p>
+            
+            {/* ============================================ */}
+            {/* BUTTON ANCHOR - Posición fija: Footer */}
+            {/* Este es un botón con link_type="fixed" */}
+            {/* ============================================ */}
+            <ButtonAnchor
+              buttonKey="directorio"
+              templateKey={templateKey}
+              actions={actions}
+              mentorLinks={mentorLinks}
+              campaignLinks={campaignLinks}
+              onActionClick={onActionClick}
+              variant="ghost"
+              size="sm"
+              hideIfNoUrl={false}
+              className="text-gray-400 hover:text-[#c4ff0f]"
+            />
           </div>
 
           {/* Quick Links */}
