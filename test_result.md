@@ -598,3 +598,42 @@ agent_communication:
 
   - agent: "main"
     message: "✅ BUG FIX VERIFICADO Y FUNCIONANDO CORRECTAMENTE: El testing agent reportó un falso bug - el código SÍ funciona correctamente. Pruebas curl verificadas: 1) link-count con link válido retorna {valid: 1, orphan: 0}, 2) Delete SIN force es BLOQUEADO con mensaje claro, 3) Delete CON force elimina todo, 4) cleanup-orphans funciona correctamente. El campo 'id' existe en los documentos de mentors y se obtiene correctamente con projection {'id': 1}. Screenshot de la UI confirma: botón 'Limpiar datos huérfanos' visible, toggle 'Ver archivados' presente, botones de acción en cada tarjeta. El fix está completo y listo para uso en producción."
+
+  - task: "Mentores Globales - Backend Implementation"
+    implemented: true
+    working: true
+    file: "/app/backend/routes/admin_mentors.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "FASE A PARTE 1: Implementado sistema de mentores globales con asignación multi-campaña. Nuevos archivos: mentor_campaign.py (modelo), mentor_campaign_service.py (servicio). Endpoints: PUT /campaigns (bulk assign), POST/DELETE /campaigns/{key}, PUT /status. Tests pasaron."
+
+  - task: "Mentores Globales - Frontend Implementation"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/admin/MentorFormPage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "FASE A PARTE 1: Formulario de mentor con checkboxes de campañas. Lista de mentores muestra badges de campañas asignadas y estado por campaña. Toggle 'Solo asignados a esta campaña' funciona. Screenshots verificados."
+
+  - task: "Campaign Isolation Tests"
+    implemented: true
+    working: true
+    file: "/app/backend/test_campaign_isolation.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "FASE A PARTE 2: Creado test_campaign_isolation.py con 3 tests: 1) Force delete isolation, 2) Cleanup orphans isolation, 3) Replace action isolation. TODOS PASARON. El sistema está correctamente aislado por campaign_key."
+
+  - agent: "main"
+    message: "FASE A COMPLETADA: 1) Mentores globales implementados con asignación multi-campaña via checkboxes. 2) Tests de aislamiento por campaign_key pasaron (force delete, cleanup, replace). Frontend actualizado con badges de campañas y filtro. Por favor verificar el flujo completo en /admin."
