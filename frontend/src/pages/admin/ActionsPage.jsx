@@ -980,13 +980,29 @@ const ActionsPage = () => {
 
                   {/* Description */}
                   <div className="space-y-2">
-                    <Label htmlFor="description">Nota interna (opcional)</Label>
+                    <Label htmlFor="description">Descripción (opcional)</Label>
                     <Input
                       id="description"
                       value={formData.description}
                       onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                      placeholder="Nota para el equipo admin"
+                      placeholder="Descripción pública del botón"
                     />
+                  </div>
+
+                  {/* Internal Note - visible to admin and mentor */}
+                  <div className="space-y-2">
+                    <Label htmlFor="internal_note">
+                      Nota Interna (visible para admin y mentor)
+                    </Label>
+                    <Input
+                      id="internal_note"
+                      value={formData.internal_note}
+                      onChange={(e) => setFormData({ ...formData, internal_note: e.target.value })}
+                      placeholder="Ej: Aquí el mentor debe colocar su enlace de Calendly"
+                    />
+                    <p className="text-xs text-gray-500">
+                      💡 Esta nota aparece en el panel de edición de enlaces para ayudar al admin y mentor a entender qué URL deben colocar.
+                    </p>
                   </div>
                 </div>
               </div>
