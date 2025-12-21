@@ -233,6 +233,7 @@ const ActionsPage = () => {
         button_key: action.button_key || action.action_key,
         label: action.label,
         description: action.description || '',
+        internal_note: action.internal_note || '',
         active: action.active,
         order: action.order || 0,
         display_slots: action.display_slots || ['cta']
@@ -244,6 +245,7 @@ const ActionsPage = () => {
         button_key: '',
         label: '',
         description: '',
+        internal_note: '',
         active: true,
         order: actions.length,
         display_slots: []
