@@ -662,6 +662,9 @@ agent_communication:
       - working: true
         agent: "testing"
         comment: "✅ COMPREHENSIVE P0 BUG FIX TESTING COMPLETED: Magic Link Complete Management verified working perfectly. 1) POST /api/admin/mentors/{id}/magic-link/{campaign_key} - Generate working correctly, returns token and URL. 2) GET /api/admin/mentors/{id}/magic-link/{campaign_key}/info - Info retrieval working, shows has_token=true, campaign_key, expires_at. 3) DELETE /api/admin/mentors/{id}/magic-link/{campaign_key} - Delete working correctly, returns success=true, deleted=true, proper message. 4) Token Invalidation Verified - After deletion, subsequent info check shows has_token=false, confirming token invalidation. All endpoints responding correctly with proper error handling and campaign isolation."
+      - working: true
+        agent: "testing"
+        comment: "✅ FRONTEND UI TESTING COMPLETED: Magic Link modal opens correctly, shows 'Eliminar Magic Link' section and button when token exists. Generated new magic link successfully, delete button appeared, clicked delete and token was successfully removed (modal showed 'No hay magic link activo' after deletion). Complete delete functionality working in both backend API and frontend UI."
 
   - task: "P0 Bug Fix - Actions Button Change State Reset"
     implemented: true
