@@ -1,48 +1,22 @@
 import React from 'react';
-import { Button } from './ui/button';
-import { Star, Award, Phone, Calendar, MessageCircle } from 'lucide-react';
+import { Star, Award } from 'lucide-react';
 import { Badge } from './ui/badge';
 import { getImageUrl } from '../utils/imageUrl';
-import { getActionsForSlot } from '../utils/slotHelpers';
+import ButtonAnchor, { prepareAnchorData } from './ButtonAnchor';
 
 const HeroSection = ({ mentorData, onActionClick }) => {
-  // If no mentor data, use default (generic landing)
+  // Preparar datos del mentor
   const mentor = mentorData?.mentor || {
     first_name: 'Nuestro',
     last_name: 'Equipo',
     photo_url: null
   };
   
-  const actions = mentorData?.actions || [];
+  // Preparar datos para los anchors
+  const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
   
-  // Filter actions by slot
-  const primaryActions = getActionsForSlot(actions, 'hero_primary');
-  const secondaryActions = getActionsForSlot(actions, 'hero_secondary');
-  
-  // If no slot-specific actions, fallback to showing first 2 actions
-  const hasSlotActions = primaryActions.length > 0 || secondaryActions.length > 0;
-  const displayPrimary = hasSlotActions ? primaryActions : actions.slice(0, 1);
-  const displaySecondary = hasSlotActions ? secondaryActions : actions.slice(1, 2);
-
-  const handleActionClick = (action) => {
-    if (onActionClick) {
-      onActionClick(action.action_key);
-    }
-    window.open(action.url, '_blank');
-  };
-
-  const getActionIcon = (actionKey) => {
-    switch (actionKey) {
-      case 'agenda':
-        return Calendar;
-      case 'whatsapp':
-        return Phone;
-      case 'formulario':
-        return MessageCircle;
-      default:
-        return Phone;
-    }
-  };
+  // Template key (para buscar definiciones de botones)
+  const templateKey = 'cpn';
 
   return (
     <section id="inicio" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
@@ -121,41 +95,35 @@ const HeroSection = ({ mentorData, onActionClick }) => {
             solicitar tu entrevista.
           </p>
 
-          {/* CTAs - Primary and Secondary Actions */}
+          {/* ============================================ */}
+          {/* BUTTON ANCHORS - Posición fija en el diseño */}
+          {/* ============================================ */}
           <div className="flex flex-col sm:flex-row gap-4 mb-8 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-            {/* Primary Actions (hero_primary slot) */}
-            {displayPrimary.map((action) => {
-              const Icon = getActionIcon(action.action_key);
-              return (
-                <Button
-                  key={action.action_key}
-                  onClick={() => handleActionClick(action)}
-                  className="bg-[#c4ff0f] text-gray-900 hover:bg-[#b3ef00] font-semibold px-10 py-7 text-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
-                >
-                  <Icon className="w-5 h-5 mr-2" />
-                  {action.label}
-                </Button>
-              );
-            })}
+            {/* ANCHOR: agenda_hero (Hero Primary) */}
+            <ButtonAnchor
+              buttonKey="agenda_hero"
+              templateKey={templateKey}
+              actions={actions}
+              mentorLinks={mentorLinks}
+              campaignLinks={campaignLinks}
+              onActionClick={onActionClick}
+              variant="primary"
+              size="lg"
+              hideIfNoUrl={true}
+            />
             
-            {/* Secondary Actions (hero_secondary slot) */}
-            {displaySecondary.map((action) => {
-              const Icon = getActionIcon(action.action_key);
-              return (
-                <Button
-                  key={action.action_key}
-                  onClick={() => handleActionClick(action)}
-                  className="border-2 border-[#7c3aed] text-[#7c3aed] hover:bg-[#7c3aed] hover:text-white px-10 py-7 text-lg transition-all duration-300"
-                >
-                  <Icon className="w-5 h-5 mr-2" />
-                  {action.label}
-                </Button>
-              );
-            })}
-            
-            {displayPrimary.length === 0 && displaySecondary.length === 0 && (
-              <p className="text-gray-600 italic">No hay acciones disponibles</p>
-            )}
+            {/* ANCHOR: whatsapp_hero (Hero Secondary) */}
+            <ButtonAnchor
+              buttonKey="whatsapp_hero"
+              templateKey={templateKey}
+              actions={actions}
+              mentorLinks={mentorLinks}
+              campaignLinks={campaignLinks}
+              onActionClick={onActionClick}
+              variant="secondary"
+              size="lg"
+              hideIfNoUrl={true}
+            />
           </div>
 
           {/* Fire Alert */}
@@ -178,33 +146,19 @@ const HeroSection = ({ mentorData, onActionClick }) => {
             <div className="text-center sm:text-left">
               <div className="flex items-center gap-2 justify-center sm:justify-start mb-1">
                 <div className="w-2 h-2 rounded-full bg-[#7c3aed] animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-                <span className="text-3xl md:text-4xl font-display font-bold text-gray-900">3</span>
+                <span className="text-3xl md:text-4xl font-display font-bold text-gray-900">+100</span>
               </div>
-              <span className="text-sm text-gray-600">Niveles evolutivos</span>
+              <span className="text-sm text-gray-600">Coaches certificados</span>
             </div>
             <div className="text-center sm:text-left">
               <div className="flex items-center gap-2 justify-center sm:justify-start mb-1">
                 <div className="w-2 h-2 rounded-full bg-[#c4ff0f] animate-pulse" style={{ animationDelay: '1s' }}></div>
-                <span className="text-3xl md:text-4xl font-display font-bold text-gray-900">100%</span>
+                <span className="text-3xl md:text-4xl font-display font-bold text-gray-900">95%</span>
               </div>
-              <span className="text-sm text-gray-600">Online y flexible</span>
+              <span className="text-sm text-gray-600">Tasa de éxito</span>
             </div>
           </div>
         </div>
-
-        {/* Mentor Photo (Right side for desktop) */}
-        {mentor.photo_url && (
-          <div className="hidden lg:block absolute right-12 top-1/2 -translate-y-1/2">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#c4ff0f]/20 to-[#7c3aed]/20 blur-3xl"></div>
-              <img 
-                src={getImageUrl(mentor.photo_url)}
-                alt={`${mentor.first_name} ${mentor.last_name}`}
-                className="relative w-96 h-96 object-cover rounded-full border-4 border-white shadow-2xl"
-              />
-            </div>
-          </div>
-        )}
       </div>
     </section>
   );
