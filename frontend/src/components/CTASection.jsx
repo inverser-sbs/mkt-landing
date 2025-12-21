@@ -1,5 +1,4 @@
 import React from 'react';
-import { CheckCircle } from 'lucide-react';
 import ButtonAnchor, { prepareAnchorData } from './ButtonAnchor';
 
 const CTASection = ({ mentorData, onActionClick }) => {
