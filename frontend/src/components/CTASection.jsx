@@ -52,17 +52,6 @@ const CTASection = ({ mentorData, onActionClick }) => {
             size="lg"
           />
         </div>
-
-        <div className="mt-12 bg-white/10 backdrop-blur-sm rounded-2xl p-8">
-          <div className="flex items-center justify-center space-x-2 mb-4">
-            <CheckCircle className="w-6 h-6 text-[#c4ff0f]" />
-            <p className="text-lg font-bold">Oportunidad única Garantizada con Acreditación Internacional</p>
-          </div>
-          <p className="text-sm opacity-90">
-            Team de apoyo y ventajas incomparables. Única formación con verdadera vocación de
-            acompañarte a lograr metas.
-          </p>
-        </div>
       </div>
     </section>
   );
