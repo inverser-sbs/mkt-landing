@@ -288,10 +288,13 @@ const MentorFormPage = () => {
         description: `Mentor ${isEditing ? 'actualizado' : 'creado'} correctamente`
       });
 
-      // Small delay before navigation to allow toast to render and state to settle
-      setTimeout(() => {
-        navigate('/admin');
-      }, 100);
+      // Wait for DOM to stabilize before navigation
+      // This prevents ResizeObserver issues with Toast component
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          navigate('/admin');
+        }, 150);
+      });
     } catch (error) {
       console.error('Error saving mentor:', error);
       const errorMsg = error.response?.data?.detail || 'No se pudo guardar el mentor';
