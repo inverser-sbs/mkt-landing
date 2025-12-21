@@ -2,6 +2,7 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 from models.mentor import Mentor, MentorCreate, MentorUpdate
 from datetime import datetime
 from typing import Optional, List
+from uuid import uuid4
 import os
 
 FRONTEND_URL = os.environ.get('FRONTEND_URL', 'http://localhost:3000')
@@ -11,6 +12,14 @@ class MentorService:
         self.db = db
         self.collection = db.mentors
     
+    def _prepare_mentor(self, mentor: dict) -> dict:
+        """Prepare mentor document for response"""
+        # Use existing 'id' field if present, otherwise generate from _id
+        if "id" not in mentor:
+            mentor["id"] = str(mentor["_id"])
+        mentor["public_url"] = f"{FRONTEND_URL}/{mentor['slug']}"
+        return mentor
+    
     async def create_mentor(self, mentor_data: MentorCreate) -> Mentor:
         # Check if slug already exists
         existing = await self.collection.find_one({"slug": mentor_data.slug})
@@ -18,12 +27,11 @@ class MentorService:
             raise ValueError(f"Slug '{mentor_data.slug}' already exists")
         
         mentor_dict = mentor_data.dict()
+        mentor_dict["id"] = str(uuid4())  # Generate UUID for id
         mentor_dict["created_at"] = datetime.utcnow()
         mentor_dict["updated_at"] = datetime.utcnow()
         
-        result = await self.collection.insert_one(mentor_dict)
-        mentor_dict["id"] = str(result.inserted_id)
-        mentor_dict["_id"] = result.inserted_id
+        await self.collection.insert_one(mentor_dict)
         mentor_dict["public_url"] = f"{FRONTEND_URL}/{mentor_data.slug}"
         
         return Mentor(**mentor_dict)
@@ -33,19 +41,28 @@ class MentorService:
         if not mentor:
             return None
         
-        mentor["id"] = str(mentor["_id"])
-        mentor["public_url"] = f"{FRONTEND_URL}/{slug}"
+        mentor = self._prepare_mentor(mentor)
         return Mentor(**mentor)
     
     async def get_mentor_by_id(self, mentor_id: str) -> Optional[Mentor]:
-        from bson import ObjectId
-        mentor = await self.collection.find_one({"_id": ObjectId(mentor_id)})
-        if not mentor:
-            return None
+        """Get mentor by UUID id field (not _id)"""
+        # First try by 'id' field (UUID)
+        mentor = await self.collection.find_one({"id": mentor_id})
+        if mentor:
+            mentor = self._prepare_mentor(mentor)
+            return Mentor(**mentor)
         
-        mentor["id"] = str(mentor["_id"])
-        mentor["public_url"] = f"{FRONTEND_URL}/{mentor['slug']}"
-        return Mentor(**mentor)
+        # Fallback: try by ObjectId for backward compatibility
+        from bson import ObjectId
+        try:
+            mentor = await self.collection.find_one({"_id": ObjectId(mentor_id)})
+            if mentor:
+                mentor = self._prepare_mentor(mentor)
+                return Mentor(**mentor)
+        except:
+            pass
+        
+        return None
     
     async def get_all_mentors(self, active_only: bool = False, group: Optional[str] = None) -> List[Mentor]:
         query = {}
@@ -56,36 +73,53 @@ class MentorService:
         
         mentors = []
         async for mentor in self.collection.find(query):
-            mentor["id"] = str(mentor["_id"])
-            mentor["public_url"] = f"{FRONTEND_URL}/{mentor['slug']}"
+            mentor = self._prepare_mentor(mentor)
             mentors.append(Mentor(**mentor))
         
         return mentors
     
     async def update_mentor(self, mentor_id: str, mentor_data: MentorUpdate) -> Optional[Mentor]:
-        from bson import ObjectId
-        
         update_dict = {k: v for k, v in mentor_data.dict(exclude_unset=True).items() if v is not None}
         
         if "slug" in update_dict:
             # Check if new slug already exists
             existing = await self.collection.find_one({
                 "slug": update_dict["slug"],
-                "_id": {"$ne": ObjectId(mentor_id)}
+                "id": {"$ne": mentor_id}
             })
             if existing:
                 raise ValueError(f"Slug '{update_dict['slug']}' already exists")
         
         if update_dict:
             update_dict["updated_at"] = datetime.utcnow()
-            await self.collection.update_one(
-                {"_id": ObjectId(mentor_id)},
+            result = await self.collection.update_one(
+                {"id": mentor_id},
                 {"$set": update_dict}
             )
+            
+            # Fallback to ObjectId if not found by id
+            if result.matched_count == 0:
+                from bson import ObjectId
+                try:
+                    await self.collection.update_one(
+                        {"_id": ObjectId(mentor_id)},
+                        {"$set": update_dict}
+                    )
+                except:
+                    pass
         
         return await self.get_mentor_by_id(mentor_id)
     
     async def delete_mentor(self, mentor_id: str) -> bool:
+        # Try by id field first
+        result = await self.collection.delete_one({"id": mentor_id})
+        if result.deleted_count > 0:
+            return True
+        
+        # Fallback to ObjectId
         from bson import ObjectId
-        result = await self.collection.delete_one({"_id": ObjectId(mentor_id)})
-        return result.deleted_count > 0
+        try:
+            result = await self.collection.delete_one({"_id": ObjectId(mentor_id)})
+            return result.deleted_count > 0
+        except:
+            return False
