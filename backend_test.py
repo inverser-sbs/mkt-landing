@@ -606,8 +606,17 @@ class InverSerP0BugFixesTester:
         result4 = self.test_cleanup_orphans_campaign_isolation()
         test_results.append(("Cleanup Orphans Campaign Isolation", result4))
         
+        # Use mentor-program campaign for action testing since it has actions
+        action_test_campaign = "mentor-program"
+        for campaign in self.available_campaigns:
+            if campaign['key'] == 'mentor-program':
+                action_test_campaign = campaign['key']
+                break
+        
+        print(f"\n🎯 Using campaign '{action_test_campaign}' for action delete testing")
+        
         # Test Action Delete Valid Link Check
-        result_action = self.test_action_delete_valid_link_check(test_campaign)
+        result_action = self.test_action_delete_valid_link_check(action_test_campaign)
         test_results.append(("Action Delete Valid Link Check", result_action))
         
         # Summary
