@@ -41,6 +41,7 @@ const AwakeningSection = ({ mentorData, onActionClick }) => {
           
           {/* ============================================ */}
           {/* BUTTON ANCHOR - Posición fija: Awakening */}
+          {/* REGLA: SIEMPRE visible, disabled si falta URL */}
           {/* ============================================ */}
           <ButtonAnchor
             buttonKey="iniciar_transformacion"
@@ -51,7 +52,6 @@ const AwakeningSection = ({ mentorData, onActionClick }) => {
             onActionClick={onActionClick}
             variant="primary"
             size="lg"
-            hideIfNoUrl={true}
           />
         </div>
       </div>
