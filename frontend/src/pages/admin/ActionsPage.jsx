@@ -1019,14 +1019,14 @@ const ActionsPage = () => {
                         `}
                       >
                         <Checkbox
-                          id={`slot-${slot.key}`}
+                          id={`slot-${formData.button_key}-${slot.key}`}
                           checked={isChecked}
                           onCheckedChange={() => handleSlotToggle(slot.key)}
                           disabled={!isAllowed}
                         />
                         <div className="flex-1">
                           <label 
-                            htmlFor={`slot-${slot.key}`}
+                            htmlFor={`slot-${formData.button_key}-${slot.key}`}
                             className={`text-sm font-medium block ${!isAllowed ? 'text-gray-400' : 'cursor-pointer'}`}
                           >
                             {slot.label}
