@@ -25,6 +25,7 @@ const MentorEditPage = () => {
   const [mentorData, setMentorData] = useState(null);
   const [campaignData, setCampaignData] = useState(null);
   const [links, setLinks] = useState({});
+  const [actions, setActions] = useState([]); // Store full action metadata including internal_note
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
