@@ -1,12 +1,7 @@
 import React from 'react';
-import { Mail, Phone, Users } from 'lucide-react';
-import ButtonAnchor, { prepareAnchorData } from './ButtonAnchor';
+import { Mail, Phone } from 'lucide-react';
 
-const Footer = ({ mentorData, onActionClick }) => {
-  // Preparar datos para los anchors
-  const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
-  const templateKey = 'cpn';
-  
+const Footer = ({ mentorData }) => {
   // Datos del mentor para mostrar contacto
   const mentor = mentorData?.mentor || null;
 
