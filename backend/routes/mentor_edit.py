@@ -59,6 +59,7 @@ async def get_mentor_edit_data(
             "action_key": action.action_key,
             "label": action.label,
             "description": action.description,
+            "internal_note": action.internal_note,  # Add internal note for mentor visibility
             "current_url": links.get(action.action_key, "")
         })
     
