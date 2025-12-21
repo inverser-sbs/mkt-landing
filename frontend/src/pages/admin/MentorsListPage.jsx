@@ -21,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../../components/ui/select';
+import { Switch } from '../../components/ui/switch';
 import { 
   Plus, 
   Search, 
@@ -36,7 +37,10 @@ import {
   Layers,
   CheckCircle2,
   AlertCircle,
-  UserPen
+  UserPen,
+  Globe,
+  Filter,
+  Users
 } from 'lucide-react';
 import { useToast } from '../../hooks/use-toast';
 import { Toaster } from '../../components/ui/toaster';
@@ -52,6 +56,7 @@ const MentorsListPage = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterActive, setFilterActive] = useState('all');
+  const [filterByCampaign, setFilterByCampaign] = useState(false); // New: filter mentors by campaign assignment
   
   // Modal states
   const [linksModalOpen, setLinksModalOpen] = useState(false);
@@ -73,11 +78,11 @@ const MentorsListPage = () => {
     fetchMentors();
   }, []);
 
-  // Filter mentors when search/filter changes
+  // Filter mentors when search/filter/campaign changes
   useEffect(() => {
     filterMentors();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchTerm, filterActive, mentors]);
+  }, [searchTerm, filterActive, mentors, filterByCampaign, selectedCampaign]);
 
   const fetchCampaigns = async () => {
     try {
@@ -114,6 +119,13 @@ const MentorsListPage = () => {
   const filterMentors = () => {
     let filtered = [...mentors];
 
+    // Filter by campaign assignment
+    if (filterByCampaign && selectedCampaign) {
+      filtered = filtered.filter(m => 
+        m.campaigns && m.campaigns.some(c => c.campaign_key === selectedCampaign.key)
+      );
+    }
+
     if (filterActive === 'active') {
       filtered = filtered.filter(m => m.active);
     } else if (filterActive === 'inactive') {
@@ -139,6 +151,19 @@ const MentorsListPage = () => {
       setSelectedCampaign(campaign);
       localStorage.setItem(STORAGE_KEY, key);
     }
+  };
+
+  // Check if mentor is assigned to selected campaign
+  const isMentorInCampaign = (mentor) => {
+    if (!selectedCampaign || !mentor.campaigns) return false;
+    return mentor.campaigns.some(c => c.campaign_key === selectedCampaign.key);
+  };
+
+  // Get mentor's status in selected campaign
+  const getMentorCampaignStatus = (mentor) => {
+    if (!selectedCampaign || !mentor.campaigns) return null;
+    const assignment = mentor.campaigns.find(c => c.campaign_key === selectedCampaign.key);
+    return assignment?.status || null;
   };
 
   const toggleActive = async (mentor) => {
