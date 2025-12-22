@@ -18,13 +18,14 @@ class LoginResponse(BaseModel):
 def get_valid_passwords() -> list:
     """
     Get list of valid passwords from environment variables.
-    Priority: ADMIN_PASSWORDS (comma-separated) > ADMIN_PASSWORD (single)
+    Priority: ADMIN_PASSWORDS (pipe-separated) > ADMIN_PASSWORD (single)
+    Uses pipe '|' as delimiter to support passwords with commas
     """
     # Try multi-password first
     admin_passwords = os.environ.get('ADMIN_PASSWORDS', '')
     if admin_passwords:
-        # Split by comma and strip whitespace
-        return [p.strip() for p in admin_passwords.split(',') if p.strip()]
+        # Split by pipe and strip whitespace
+        return [p.strip() for p in admin_passwords.split('|') if p.strip()]
     
     # Fallback to single password
     single_password = os.environ.get('ADMIN_PASSWORD', '')
