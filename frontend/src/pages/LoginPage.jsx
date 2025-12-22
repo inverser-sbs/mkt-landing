@@ -3,23 +3,28 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/card';
+import { Card, CardContent, CardHeader, CardDescription } from '../components/ui/card';
 import { AlertCircle } from 'lucide-react';
 
 const LoginPage = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setLoading(true);
 
-    if (login(password)) {
+    const success = await login(password);
+    setLoading(false);
+    
+    if (success) {
       navigate('/admin');
     } else {
-      setError('Contraseña incorrecta');
+      setError('Credenciales inválidas');
     }
   };
 
@@ -27,14 +32,14 @@ const LoginPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-[#faf8f5] to-purple-50 flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <div className="mb-4">
-            <span className="text-3xl font-display font-bold">
-              <span className="text-[#c4ff0f]">Inver</span>
-              <span className="text-[#7c3aed]">ser</span>
-            </span>
+          <div className="mb-4 flex justify-center">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/ux8tcoz0_logo-02.png" 
+              alt="InverSer" 
+              className="h-14 w-auto"
+            />
           </div>
-          <CardTitle className="text-2xl">Panel de Administración</CardTitle>
-          <CardDescription>Ingresa tu contraseña para acceder</CardDescription>
+          <CardDescription className="text-base">Ingresa tu contraseña para acceder</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -46,6 +51,7 @@ const LoginPage = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 className="text-lg py-6"
                 autoFocus
+                disabled={loading}
               />
             </div>
 
@@ -59,13 +65,10 @@ const LoginPage = () => {
             <Button
               type="submit"
               className="w-full bg-[#7c3aed] hover:bg-purple-700 text-white py-6 text-lg"
+              disabled={loading}
             >
-              Iniciar Sesión
+              {loading ? 'Verificando...' : 'Iniciar Sesión'}
             </Button>
-
-            <p className="text-xs text-center text-gray-500 mt-4">
-              Contraseña de demo: <code className="bg-gray-100 px-2 py-1 rounded">inverser2024</code>
-            </p>
           </form>
         </CardContent>
       </Card>
