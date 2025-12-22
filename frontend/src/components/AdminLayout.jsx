@@ -54,11 +54,11 @@ const AdminLayout = ({ children }) => {
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
             
-            <span className="text-2xl font-display font-bold">
-              <span className="text-[#c4ff0f]">Inver</span>
-              <span className="text-[#7c3aed]">ser</span>
-            </span>
-            <span className="hidden md:inline text-sm text-gray-500">Panel Admin</span>
+            <img 
+              src="https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/ux8tcoz0_logo-02.png" 
+              alt="InverSer" 
+              className="h-10 w-auto"
+            />
           </div>
 
           <Button
