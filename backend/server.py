@@ -16,6 +16,7 @@ from routes.tracking import router as tracking_router
 from routes.mentor_edit import router as mentor_edit_router
 from routes.admin_csv import router as admin_csv_router
 from routes.admin_campaigns import router as admin_campaigns_router
+from routes.auth import router as auth_router
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -42,6 +43,7 @@ app.include_router(tracking_router)
 app.include_router(mentor_edit_router)
 app.include_router(admin_csv_router)
 app.include_router(admin_campaigns_router)
+app.include_router(auth_router)
 
 # Add CORS middleware
 app.add_middleware(
