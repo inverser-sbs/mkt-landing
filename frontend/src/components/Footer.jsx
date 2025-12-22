@@ -131,7 +131,15 @@ const Footer = ({ mentorData, onActionClick }) => {
         {/* Bottom Bar - Copyright dinámico */}
         <div className="border-t border-gray-700 pt-8 text-center">
           <p className="text-gray-400 text-sm font-medium">
-            2009–{currentYear} INVERSER SBS LLC
+            2009–{currentYear}{' '}
+            <a 
+              href="https://inverser.us" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-[#c4ff0f] transition-colors"
+            >
+              INVERSER SBS LLC
+            </a>
           </p>
           <p className="text-gray-500 text-xs mt-1">
             Todos los derechos reservados
