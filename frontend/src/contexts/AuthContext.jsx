@@ -17,20 +17,37 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     // Check if user is authenticated on mount
     const authToken = localStorage.getItem('admin_auth');
-    if (authToken === 'inverser_admin_2024') {
+    if (authToken === 'inverser_admin_authenticated') {
       setIsAuthenticated(true);
     }
     setLoading(false);
   }, []);
 
-  const login = (password) => {
-    // Simple password check - In production, this would call an API
-    if (password === 'inverser2024') {
-      localStorage.setItem('admin_auth', 'inverser_admin_2024');
-      setIsAuthenticated(true);
-      return true;
+  const login = async (password) => {
+    try {
+      const backendUrl = process.env.REACT_APP_BACKEND_URL || '';
+      const response = await fetch(`${backendUrl}/api/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.success) {
+          localStorage.setItem('admin_auth', data.token);
+          setIsAuthenticated(true);
+          return true;
+        }
+      }
+      return false;
+    } catch (error) {
+      // Silently fail - don't expose error details
+      console.error('Login error');
+      return false;
     }
-    return false;
   };
 
   const logout = () => {
