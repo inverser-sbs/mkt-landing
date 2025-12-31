@@ -66,6 +66,11 @@ logger = logging.getLogger(__name__)
 async def root():
     return {"message": "InverSer Marketing System API", "version": "1.0.0"}
 
+# Health check endpoint for Docker/Kubernetes
+@app.get("/api/health")
+async def health_check():
+    return {"status": "healthy", "service": "inverser-backend"}
+
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
