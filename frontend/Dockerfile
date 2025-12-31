@@ -1,6 +1,7 @@
 # ================================
 # InverSer Frontend - Production Dockerfile
 # Multi-stage build: Node build + Nginx serve
+# Supports: yarn (preferred) or npm fallback
 # ================================
 
 # Stage 1: Build
@@ -12,17 +13,32 @@ WORKDIR /app
 ARG REACT_APP_BACKEND_URL
 ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
 
-# Copy package files
-COPY package.json yarn.lock ./
+# Copy package files (handle both yarn and npm)
+COPY package.json ./
+COPY yarn.lock* package-lock.json* ./
 
 # Install dependencies
-RUN yarn install --frozen-lockfile
+# Priority: yarn.lock > package-lock.json > npm install
+RUN if [ -f yarn.lock ]; then \
+      echo "Using Yarn..." && \
+      yarn install --frozen-lockfile; \
+    elif [ -f package-lock.json ]; then \
+      echo "Using npm ci..." && \
+      npm ci; \
+    else \
+      echo "No lockfile found, using npm install..." && \
+      npm install; \
+    fi
 
 # Copy source code
 COPY . .
 
 # Build the application (CRA with CRACO outputs to /build)
-RUN yarn build
+RUN if [ -f yarn.lock ]; then \
+      yarn build; \
+    else \
+      npm run build; \
+    fi
 
 # Stage 2: Serve with Nginx
 FROM nginx:alpine
