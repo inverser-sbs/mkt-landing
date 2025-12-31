@@ -1,12 +1,9 @@
-version: "3.8"
-
 services:
   # ======================
   # MongoDB Database
   # ======================
   mongo:
     image: mongo:7
-    container_name: inverser_mongo
     restart: unless-stopped
     environment:
       - MONGO_INITDB_DATABASE=${MONGO_DB_NAME:-inverser_db}
@@ -28,7 +25,6 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: inverser_backend
     restart: unless-stopped
     environment:
       - MONGO_URL=mongodb://mongo:27017
@@ -36,14 +32,13 @@ services:
       - CORS_ORIGINS=${CORS_ORIGINS:-*}
       - FRONTEND_URL=${FRONTEND_URL:-http://localhost}
       - ADMIN_PASSWORDS=${ADMIN_PASSWORDS:-}
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-inverser2024}
     depends_on:
       mongo:
         condition: service_healthy
     networks:
       - app_net
-    ports:
-      - "8001:8000"
+    expose:
+      - "8000"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
       interval: 30s
@@ -59,15 +54,14 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        - REACT_APP_BACKEND_URL=${PUBLIC_API_URL:-http://localhost:8001}
-    container_name: inverser_frontend
+        - REACT_APP_BACKEND_URL=${PUBLIC_API_URL:-http://localhost}
     restart: unless-stopped
     depends_on:
       - backend
     networks:
       - app_net
-    ports:
-      - "80:80"
+    expose:
+      - "80"
 
 networks:
   app_net:
