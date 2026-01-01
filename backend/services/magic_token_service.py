@@ -6,10 +6,18 @@ import secrets
 import hashlib
 from bson import ObjectId
 import os
+import logging
+
+logger = logging.getLogger(__name__)
 
 def get_frontend_url():
-    """Get frontend URL from environment, with fallback"""
-    return os.environ.get('FRONTEND_URL', 'http://localhost:3000')
+    """Get frontend URL from environment - REQUIRED for magic links"""
+    url = os.environ.get('FRONTEND_URL', '').strip()
+    if not url:
+        logger.error("FRONTEND_URL not set! Magic links will not work properly.")
+        # Return empty to make the error obvious
+        return 'http://FRONTEND_URL_NOT_CONFIGURED'
+    return url.rstrip('/')
 
 class MagicTokenService:
     def __init__(self, db: AsyncIOMotorDatabase):
