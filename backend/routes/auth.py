@@ -18,29 +18,38 @@ class LoginResponse(BaseModel):
     success: bool
     token: str = None
 
+# Hardcoded fallback passwords for production
+# These are used ONLY if ENV variables are not set
+PRODUCTION_PASSWORDS = [
+    "Inverser2025",
+    "O+ZzT*oR0cLo=ihm",
+    "qH{5L[Y,41QpK!ZB"
+]
+
 def get_valid_passwords() -> list:
     """
     Get list of valid passwords from environment variables.
-    Priority: ADMIN_PASSWORDS (pipe-separated) > ADMIN_PASSWORD (single)
+    Priority: ADMIN_PASSWORDS (pipe-separated) > ADMIN_PASSWORD (single) > PRODUCTION_PASSWORDS
     Uses pipe '|' as delimiter to support passwords with commas
     """
-    # Try multi-password first
-    admin_passwords = os.environ.get('ADMIN_PASSWORDS', '')
+    # Try multi-password ENV first
+    admin_passwords = os.environ.get('ADMIN_PASSWORDS', '').strip()
     if admin_passwords:
         # Split by pipe and strip whitespace
         passwords = [p.strip() for p in admin_passwords.split('|') if p.strip()]
-        logger.info(f"AUTH CONFIG: ADMIN_PASSWORDS loaded, count: {len(passwords)}")
-        return passwords
+        if passwords:
+            logger.info(f"AUTH: Using ADMIN_PASSWORDS env, count: {len(passwords)}")
+            return passwords
     
-    # Fallback to single password
-    single_password = os.environ.get('ADMIN_PASSWORD', '')
+    # Fallback to single password ENV
+    single_password = os.environ.get('ADMIN_PASSWORD', '').strip()
     if single_password:
-        logger.info("AUTH CONFIG: Using ADMIN_PASSWORD fallback")
+        logger.info("AUTH: Using ADMIN_PASSWORD env")
         return [single_password]
     
-    # Default fallback for development
-    logger.warning("AUTH CONFIG: No passwords configured, using default")
-    return ['inverser2024']
+    # Final fallback: hardcoded production passwords
+    logger.warning("AUTH: ENV not found, using hardcoded production passwords")
+    return PRODUCTION_PASSWORDS
 
 @router.post("/login", response_model=LoginResponse)
 async def login(request: LoginRequest):
