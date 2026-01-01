@@ -72,42 +72,6 @@ async def root():
 async def health_check():
     return {"status": "healthy", "service": "inverser-backend"}
 
-# Debug endpoint to check uploads directory
-@app.get("/api/debug/uploads")
-async def debug_uploads():
-    """Check what files exist in uploads directory"""
-    import os
-    uploads_path = "/app/backend/uploads/mentors"
-    try:
-        if os.path.exists(uploads_path):
-            files = os.listdir(uploads_path)
-            return {
-                "path": uploads_path,
-                "exists": True,
-                "file_count": len(files),
-                "files": files[:10]  # First 10 files
-            }
-        else:
-            return {
-                "path": uploads_path,
-                "exists": False,
-                "file_count": 0,
-                "files": []
-            }
-    except Exception as e:
-        return {"error": str(e)}
-
-
-# Debug endpoint to check magic link base URL configuration
-@app.get("/api/debug/magic-base")
-async def debug_magic_base():
-    """
-    Check environment variables for magic link generation.
-    Does NOT expose secrets - only URL configuration.
-    """
-    from services.magic_token_service import get_magic_base_info
-    return get_magic_base_info()
-
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
