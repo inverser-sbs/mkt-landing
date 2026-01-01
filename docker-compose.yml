@@ -54,7 +54,8 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        - REACT_APP_BACKEND_URL=${PUBLIC_API_URL:-http://localhost}
+        # Empty string = use same origin (nginx proxies /api to backend)
+        - REACT_APP_BACKEND_URL=
     restart: unless-stopped
     depends_on:
       - backend
