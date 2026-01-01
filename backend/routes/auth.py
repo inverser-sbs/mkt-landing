@@ -70,3 +70,23 @@ async def login(request: LoginRequest):
         status_code=401,
         detail="Credenciales inválidas"
     )
+
+@router.get("/debug-env")
+async def debug_env():
+    """
+    Diagnostic endpoint - shows ENV config status WITHOUT exposing actual values.
+    REMOVE THIS IN PRODUCTION AFTER DEBUGGING.
+    """
+    admin_passwords = os.environ.get('ADMIN_PASSWORDS', '')
+    admin_password = os.environ.get('ADMIN_PASSWORD', '')
+    
+    return {
+        "ADMIN_PASSWORDS_exists": bool(admin_passwords),
+        "ADMIN_PASSWORDS_length": len(admin_passwords) if admin_passwords else 0,
+        "ADMIN_PASSWORDS_has_pipe": '|' in admin_passwords if admin_passwords else False,
+        "ADMIN_PASSWORDS_parsed_count": len([p.strip() for p in admin_passwords.split('|') if p.strip()]) if admin_passwords else 0,
+        "ADMIN_PASSWORD_exists": bool(admin_password),
+        "ADMIN_PASSWORD_length": len(admin_password) if admin_password else 0,
+        "FRONTEND_URL": os.environ.get('FRONTEND_URL', 'NOT SET'),
+        "CORS_ORIGINS": os.environ.get('CORS_ORIGINS', 'NOT SET'),
+    }
