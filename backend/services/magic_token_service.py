@@ -10,14 +10,38 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-def get_frontend_url():
-    """Get frontend URL from environment - REQUIRED for magic links"""
+def get_frontend_url() -> str:
+    """
+    Get frontend URL from environment - REQUIRED for magic links.
+    Returns empty string if not configured (caller must handle).
+    """
+    # Try FRONTEND_URL first, then PUBLIC_API_URL as fallback
     url = os.environ.get('FRONTEND_URL', '').strip()
     if not url:
-        logger.error("FRONTEND_URL not set! Magic links will not work properly.")
-        # Return empty to make the error obvious
-        return 'http://FRONTEND_URL_NOT_CONFIGURED'
-    return url.rstrip('/')
+        url = os.environ.get('PUBLIC_API_URL', '').strip()
+    
+    if url:
+        url = url.rstrip('/')
+    
+    return url
+
+
+def get_magic_base_info() -> dict:
+    """
+    Debug helper: returns info about magic link base URL configuration.
+    Does NOT expose secrets.
+    """
+    frontend_url = os.environ.get('FRONTEND_URL', '').strip()
+    public_api_url = os.environ.get('PUBLIC_API_URL', '').strip()
+    computed_base = get_frontend_url()
+    
+    return {
+        "FRONTEND_URL_exists": bool(frontend_url),
+        "FRONTEND_URL_value": frontend_url if frontend_url else None,
+        "PUBLIC_API_URL_exists": bool(public_api_url),
+        "PUBLIC_API_URL_value": public_api_url if public_api_url else None,
+        "computed_magic_base": computed_base if computed_base else None
+    }
 
 class MagicTokenService:
     def __init__(self, db: AsyncIOMotorDatabase):
@@ -70,6 +94,12 @@ class MagicTokenService:
         
         # Build magic link URL - get FRONTEND_URL at runtime
         frontend_url = get_frontend_url()
+        
+        # CRITICAL: Do NOT generate links with localhost or empty base
+        if not frontend_url or not frontend_url.startswith(('http://', 'https://')):
+            logger.error(f"FRONTEND_URL not configured or invalid: '{frontend_url}'")
+            raise ValueError("FRONTEND_URL not configured. Cannot generate magic link.")
+        
         magic_link = f"{frontend_url}/edit/{campaign_key}/{mentor['slug']}?token={token}"
         
         return MagicTokenResponse(
