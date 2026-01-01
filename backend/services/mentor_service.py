@@ -4,10 +4,17 @@ from datetime import datetime
 from typing import Optional, List
 from uuid import uuid4
 import os
+import logging
+
+logger = logging.getLogger(__name__)
 
 def get_frontend_url():
-    """Get FRONTEND_URL dynamically to ensure it reads the current env value"""
-    return os.environ.get('FRONTEND_URL', 'http://localhost:3000')
+    """Get FRONTEND_URL dynamically - REQUIRED for public URLs"""
+    url = os.environ.get('FRONTEND_URL', '').strip()
+    if not url:
+        logger.error("FRONTEND_URL not set! Public URLs will not work properly.")
+        return 'http://FRONTEND_URL_NOT_CONFIGURED'
+    return url.rstrip('/')
 
 class MentorService:
     def __init__(self, db: AsyncIOMotorDatabase):
