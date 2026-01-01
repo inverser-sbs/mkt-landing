@@ -29,18 +29,17 @@ def get_valid_passwords() -> list:
     if admin_passwords:
         # Split by pipe and strip whitespace
         passwords = [p.strip() for p in admin_passwords.split('|') if p.strip()]
-        # DIAGNOSTIC LOG (NO SENSITIVE DATA)
-        logger.info(f"AUTH CONFIG: ADMIN_PASSWORDS exists, contains '|': {'|' in admin_passwords}, parsed count: {len(passwords)}, lengths: {[len(p) for p in passwords]}")
+        logger.info(f"AUTH CONFIG: ADMIN_PASSWORDS loaded, count: {len(passwords)}")
         return passwords
     
     # Fallback to single password
     single_password = os.environ.get('ADMIN_PASSWORD', '')
     if single_password:
-        logger.info(f"AUTH CONFIG: Using ADMIN_PASSWORD fallback, length: {len(single_password)}")
+        logger.info("AUTH CONFIG: Using ADMIN_PASSWORD fallback")
         return [single_password]
     
-    # Default fallback for development (will be overridden in production)
-    logger.warning("AUTH CONFIG: No ADMIN_PASSWORDS or ADMIN_PASSWORD found, using default")
+    # Default fallback for development
+    logger.warning("AUTH CONFIG: No passwords configured, using default")
     return ['inverser2024']
 
 @router.post("/login", response_model=LoginResponse)
@@ -51,9 +50,6 @@ async def login(request: LoginRequest):
     """
     valid_passwords = get_valid_passwords()
     
-    # DIAGNOSTIC LOG (NO SENSITIVE DATA - only lengths)
-    logger.info(f"LOGIN ATTEMPT: received password length: {len(request.password)}, valid password lengths: {[len(p) for p in valid_passwords]}")
-    
     # Check if password matches any valid password
     if request.password in valid_passwords:
         logger.info("LOGIN SUCCESS")
@@ -62,31 +58,8 @@ async def login(request: LoginRequest):
             token="inverser_admin_authenticated"
         )
     
-    # Log mismatch details (NO ACTUAL VALUES)
-    logger.warning(f"LOGIN FAILED: password length {len(request.password)} did not match any of {len(valid_passwords)} valid passwords")
-    
-    # Generic error message - no hints about password validity
+    logger.warning("LOGIN FAILED: invalid credentials")
     raise HTTPException(
         status_code=401,
         detail="Credenciales inválidas"
     )
-
-@router.get("/debug-env")
-async def debug_env():
-    """
-    Diagnostic endpoint - shows ENV config status WITHOUT exposing actual values.
-    REMOVE THIS IN PRODUCTION AFTER DEBUGGING.
-    """
-    admin_passwords = os.environ.get('ADMIN_PASSWORDS', '')
-    admin_password = os.environ.get('ADMIN_PASSWORD', '')
-    
-    return {
-        "ADMIN_PASSWORDS_exists": bool(admin_passwords),
-        "ADMIN_PASSWORDS_length": len(admin_passwords) if admin_passwords else 0,
-        "ADMIN_PASSWORDS_has_pipe": '|' in admin_passwords if admin_passwords else False,
-        "ADMIN_PASSWORDS_parsed_count": len([p.strip() for p in admin_passwords.split('|') if p.strip()]) if admin_passwords else 0,
-        "ADMIN_PASSWORD_exists": bool(admin_password),
-        "ADMIN_PASSWORD_length": len(admin_password) if admin_password else 0,
-        "FRONTEND_URL": os.environ.get('FRONTEND_URL', 'NOT SET'),
-        "CORS_ORIGINS": os.environ.get('CORS_ORIGINS', 'NOT SET'),
-    }
