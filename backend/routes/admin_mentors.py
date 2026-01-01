@@ -21,8 +21,12 @@ UPLOAD_DIR = Path("/app/backend/uploads/mentors")
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 def get_frontend_url():
-    """Get FRONTEND_URL dynamically"""
-    return os.environ.get('FRONTEND_URL', 'http://localhost:3000')
+    """Get FRONTEND_URL dynamically - REQUIRED for public URLs"""
+    url = os.environ.get('FRONTEND_URL', '').strip()
+    if not url:
+        logging.error("FRONTEND_URL not set! Public URLs will not work properly.")
+        return 'http://FRONTEND_URL_NOT_CONFIGURED'
+    return url.rstrip('/')
 
 def build_public_url(slug: str, campaign_key: str = None) -> str:
     """Build public URL for mentor landing page"""
