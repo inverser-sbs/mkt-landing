@@ -76,3 +76,5 @@ networks:
 volumes:
   mongo_data:
     driver: local
+  uploads_data:
+    driver: local
