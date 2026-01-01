@@ -35,6 +35,8 @@ services:
       - CORS_ORIGINS=${CORS_ORIGINS:-*}
       - ADMIN_PASSWORDS=${ADMIN_PASSWORDS:-}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-}
+    volumes:
+      - uploads_data:/app/backend/uploads
     depends_on:
       mongo:
         condition: service_healthy
