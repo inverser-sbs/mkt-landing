@@ -26,23 +26,6 @@ def get_frontend_url() -> str:
     return url
 
 
-def get_magic_base_info() -> dict:
-    """
-    Debug helper: returns info about magic link base URL configuration.
-    Does NOT expose secrets.
-    """
-    frontend_url = os.environ.get('FRONTEND_URL', '').strip()
-    public_api_url = os.environ.get('PUBLIC_API_URL', '').strip()
-    computed_base = get_frontend_url()
-    
-    return {
-        "FRONTEND_URL_exists": bool(frontend_url),
-        "FRONTEND_URL_value": frontend_url if frontend_url else None,
-        "PUBLIC_API_URL_exists": bool(public_api_url),
-        "PUBLIC_API_URL_value": public_api_url if public_api_url else None,
-        "computed_magic_base": computed_base if computed_base else None
-    }
-
 class MagicTokenService:
     def __init__(self, db: AsyncIOMotorDatabase):
         self.db = db
