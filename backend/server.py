@@ -19,7 +19,8 @@ from routes.admin_campaigns import router as admin_campaigns_router
 from routes.auth import router as auth_router
 
 ROOT_DIR = Path(__file__).parent
-load_dotenv(ROOT_DIR / '.env')
+# Load .env but DO NOT override system environment variables (from docker-compose)
+load_dotenv(ROOT_DIR / '.env', override=False)
 
 # MongoDB connection
 mongo_url = os.environ['MONGO_URL']
