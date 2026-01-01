@@ -28,10 +28,13 @@ services:
     restart: unless-stopped
     environment:
       - MONGO_URL=mongodb://mongo:27017
-      - DB_NAME=${MONGO_DB_NAME:-inverser_db}
-      - CORS_ORIGINS=${CORS_ORIGINS:-*}
-      - FRONTEND_URL=${FRONTEND_URL:-http://localhost}
-      - ADMIN_PASSWORDS=${ADMIN_PASSWORDS:-}
+      - MONGO_DB_NAME=${MONGO_DB_NAME}
+      - DB_NAME=${MONGO_DB_NAME}
+      - FRONTEND_URL=${FRONTEND_URL}
+      - PUBLIC_API_URL=${PUBLIC_API_URL}
+      - CORS_ORIGINS=${CORS_ORIGINS}
+      - ADMIN_PASSWORDS=${ADMIN_PASSWORDS}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
     depends_on:
       mongo:
         condition: service_healthy
