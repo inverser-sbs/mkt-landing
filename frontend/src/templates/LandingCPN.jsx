@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
 import AwakeningSection from '../components/AwakeningSection';
@@ -32,6 +32,12 @@ import Footer from '../components/Footer';
  * - Footer: directorio
  */
 const LandingCPN = ({ mentorData, onActionClick }) => {
+  // Set page title to campaign name
+  useEffect(() => {
+    const campaignName = mentorData?.campaign?.name || 'Certificación NeuroCoaching';
+    document.title = campaignName;
+  }, [mentorData]);
+
   return (
     <div className="min-h-screen bg-[#faf8f5]">
       <Navbar mentorData={mentorData} onActionClick={onActionClick} />
