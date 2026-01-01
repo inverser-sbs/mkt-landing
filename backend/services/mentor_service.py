@@ -8,13 +8,20 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-def get_frontend_url():
-    """Get FRONTEND_URL dynamically - REQUIRED for public URLs"""
+def get_frontend_url() -> str:
+    """
+    Get FRONTEND_URL dynamically - REQUIRED for public URLs.
+    Returns empty string if not configured (caller must handle).
+    """
+    # Try FRONTEND_URL first, then PUBLIC_API_URL as fallback
     url = os.environ.get('FRONTEND_URL', '').strip()
     if not url:
-        logger.error("FRONTEND_URL not set! Public URLs will not work properly.")
-        return 'http://FRONTEND_URL_NOT_CONFIGURED'
-    return url.rstrip('/')
+        url = os.environ.get('PUBLIC_API_URL', '').strip()
+    
+    if url:
+        url = url.rstrip('/')
+    
+    return url
 
 class MentorService:
     def __init__(self, db: AsyncIOMotorDatabase):
