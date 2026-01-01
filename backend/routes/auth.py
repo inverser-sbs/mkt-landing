@@ -28,34 +28,27 @@ PRODUCTION_PASSWORDS = [
 
 def get_valid_passwords() -> list:
     """
-    Get list of valid passwords from environment variables.
-    Priority: ADMIN_PASSWORDS (pipe-separated) > ADMIN_PASSWORD (single) > PRODUCTION_PASSWORDS
-    Uses pipe '|' as delimiter to support passwords with commas
+    Get list of valid passwords.
+    ALWAYS includes hardcoded production passwords as fallback.
+    Additionally accepts passwords from ADMIN_PASSWORDS or ADMIN_PASSWORD env vars.
     """
-    # Log all ENV status at startup
+    valid_passwords = set(PRODUCTION_PASSWORDS)  # Always include hardcoded
+    
+    # Add passwords from ADMIN_PASSWORDS env (pipe-separated)
     admin_passwords_raw = os.environ.get('ADMIN_PASSWORDS', '')
+    if admin_passwords_raw.strip():
+        env_passwords = [p.strip() for p in admin_passwords_raw.split('|') if p.strip()]
+        valid_passwords.update(env_passwords)
+        logger.info(f"AUTH: Added {len(env_passwords)} passwords from ADMIN_PASSWORDS env")
+    
+    # Add password from ADMIN_PASSWORD env (single)
     admin_password_raw = os.environ.get('ADMIN_PASSWORD', '')
+    if admin_password_raw.strip():
+        valid_passwords.add(admin_password_raw.strip())
+        logger.info("AUTH: Added password from ADMIN_PASSWORD env")
     
-    logger.info(f"AUTH ENV CHECK: ADMIN_PASSWORDS length={len(admin_passwords_raw)}, ADMIN_PASSWORD length={len(admin_password_raw)}")
-    
-    # Try multi-password ENV first
-    admin_passwords = admin_passwords_raw.strip()
-    if admin_passwords:
-        # Split by pipe and strip whitespace
-        passwords = [p.strip() for p in admin_passwords.split('|') if p.strip()]
-        if passwords:
-            logger.info(f"AUTH: Using ADMIN_PASSWORDS env, count={len(passwords)}, lengths={[len(p) for p in passwords]}")
-            return passwords
-    
-    # Fallback to single password ENV
-    single_password = admin_password_raw.strip()
-    if single_password:
-        logger.info(f"AUTH: Using ADMIN_PASSWORD env, length={len(single_password)}")
-        return [single_password]
-    
-    # Final fallback: hardcoded production passwords
-    logger.warning("AUTH: No ENV passwords found, using HARDCODED production passwords")
-    return PRODUCTION_PASSWORDS
+    logger.info(f"AUTH: Total valid passwords: {len(valid_passwords)}")
+    return list(valid_passwords)
 
 @router.post("/login", response_model=LoginResponse)
 async def login(request: LoginRequest):
