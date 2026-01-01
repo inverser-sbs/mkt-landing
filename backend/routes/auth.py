@@ -71,3 +71,19 @@ async def login(request: LoginRequest):
         status_code=401,
         detail="Credenciales inválidas"
     )
+
+@router.get("/version")
+async def auth_version():
+    """
+    Debug endpoint to verify which code version is running.
+    DELETE THIS AFTER CONFIRMING DEPLOY WORKS.
+    """
+    valid_passwords = get_valid_passwords()
+    return {
+        "version": "2025-01-01-v3-hardcoded-always",
+        "hardcoded_count": len(PRODUCTION_PASSWORDS),
+        "total_valid_count": len(valid_passwords),
+        "hardcoded_lengths": [len(p) for p in PRODUCTION_PASSWORDS],
+        "env_ADMIN_PASSWORDS_set": bool(os.environ.get('ADMIN_PASSWORDS', '').strip()),
+        "env_ADMIN_PASSWORD_set": bool(os.environ.get('ADMIN_PASSWORD', '').strip()),
+    }
