@@ -32,23 +32,29 @@ def get_valid_passwords() -> list:
     Priority: ADMIN_PASSWORDS (pipe-separated) > ADMIN_PASSWORD (single) > PRODUCTION_PASSWORDS
     Uses pipe '|' as delimiter to support passwords with commas
     """
+    # Log all ENV status at startup
+    admin_passwords_raw = os.environ.get('ADMIN_PASSWORDS', '')
+    admin_password_raw = os.environ.get('ADMIN_PASSWORD', '')
+    
+    logger.info(f"AUTH ENV CHECK: ADMIN_PASSWORDS length={len(admin_passwords_raw)}, ADMIN_PASSWORD length={len(admin_password_raw)}")
+    
     # Try multi-password ENV first
-    admin_passwords = os.environ.get('ADMIN_PASSWORDS', '').strip()
+    admin_passwords = admin_passwords_raw.strip()
     if admin_passwords:
         # Split by pipe and strip whitespace
         passwords = [p.strip() for p in admin_passwords.split('|') if p.strip()]
         if passwords:
-            logger.info(f"AUTH: Using ADMIN_PASSWORDS env, count: {len(passwords)}")
+            logger.info(f"AUTH: Using ADMIN_PASSWORDS env, count={len(passwords)}, lengths={[len(p) for p in passwords]}")
             return passwords
     
     # Fallback to single password ENV
-    single_password = os.environ.get('ADMIN_PASSWORD', '').strip()
+    single_password = admin_password_raw.strip()
     if single_password:
-        logger.info("AUTH: Using ADMIN_PASSWORD env")
+        logger.info(f"AUTH: Using ADMIN_PASSWORD env, length={len(single_password)}")
         return [single_password]
     
     # Final fallback: hardcoded production passwords
-    logger.warning("AUTH: ENV not found, using hardcoded production passwords")
+    logger.warning("AUTH: No ENV passwords found, using HARDCODED production passwords")
     return PRODUCTION_PASSWORDS
 
 @router.post("/login", response_model=LoginResponse)
