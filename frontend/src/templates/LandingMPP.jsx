@@ -583,7 +583,7 @@ const KommunitySection = () => (
           </h2>
           
           <p className="text-lg text-gray-700 leading-relaxed">
-            En InverSer creemos que la comunidad no es un accesorio: es el tejido vivo de la transformación. Por eso no hablamos de "foro". Hablamos de <strong>KOMMUNITY</strong>, con "K" de kinética, de conexión, de conocimiento compartido.
+            En InverSer creemos que la comunidad no es un accesorio: es el tejido vivo de la transformación. Por eso no hablamos de &ldquo;foro&rdquo;. Hablamos de <strong>KOMMUNITY</strong>, con &ldquo;K&rdquo; de kinética, de conexión, de conocimiento compartido.
           </p>
           
           <p className="text-gray-600">
@@ -591,7 +591,7 @@ const KommunitySection = () => (
           </p>
           
           <blockquote className="border-l-4 border-[#c4ff0f] pl-6 text-gray-600 italic">
-            "Cuando compartes desde tu verdad, no solo enseñas: invitas a otros a ser más ellos mismos."
+            &ldquo;Cuando compartes desde tu verdad, no solo enseñas: invitas a otros a ser más ellos mismos.&rdquo;
           </blockquote>
         </div>
       </div>
