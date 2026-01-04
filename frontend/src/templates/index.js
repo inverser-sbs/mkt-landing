@@ -101,7 +101,7 @@ export const TEMPLATE_BUTTONS = {
     },
     {
       key: 'whatsapp_hero',
-      label_default: 'Hablar por WhatsApp',
+      label_default: 'WhatsApp',
       slot: 'hero_secondary',
       description: 'Contacto directo vía WhatsApp en el Hero',
       link_type: 'mentor',  // Cada mentor pone su link de WhatsApp

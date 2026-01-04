@@ -83,8 +83,8 @@ const HeroSection = ({ mentorData, onActionClick }) => {
             {/* Glow effect behind card */}
             <div className="absolute -inset-1 bg-gradient-to-br from-[#7c3aed]/40 to-[#c4ff0f]/40 rounded-3xl blur-2xl opacity-50" />
             
-            {/* Card con fondo sólido y borde visible */}
-            <div className="relative bg-white rounded-3xl border-2 border-[#7c3aed]/20 shadow-2xl p-8 text-center max-w-sm w-full">
+            {/* Card con fondo sólido y borde visible - ancho como MPP */}
+            <div className="relative bg-white rounded-3xl border-2 border-[#7c3aed]/20 shadow-2xl p-8 text-center w-full" style={{ maxWidth: '360px' }}>
               {/* Photo Container - CIRCULAR reducido */}
               <div className="relative w-36 h-36 mx-auto mb-6">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#7c3aed] to-[#c4ff0f] rounded-full p-[3px]">
