@@ -226,19 +226,28 @@ const HeroMPP = ({ mentorData, onActionClick }) => {
 };
 
 // ============================================
-// ECOSISTEMA - CONTENIDO COMPLETO
+// ECOSISTEMA - CONTENIDO COMPLETO CON FONDO
 // ============================================
 const IntroEcosistemaSection = () => (
-  <section id="ecosistema" className="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#faf8f5]">
-    <div className="max-w-4xl mx-auto">
+  <section id="ecosistema" className="relative py-24 md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    {/* Imagen de fondo sutil */}
+    <div className="absolute inset-0">
+      <div 
+        className="absolute inset-0 bg-cover bg-center opacity-[0.03]"
+        style={{ backgroundImage: `url(https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1920&q=80)` }}
+      />
+      <div className="absolute inset-0 bg-[#faf8f5]" />
+    </div>
+    
+    <div className="relative z-10 max-w-4xl mx-auto">
       {/* Header */}
-      <div className="text-center mb-16">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7c3aed]/10 mb-8">
+      <div className="text-center mb-12">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7c3aed]/10 mb-6">
           <Target className="w-4 h-4 text-[#7c3aed]" />
           <span className="text-sm font-body text-[#7c3aed] font-medium">El Ecosistema</span>
         </div>
         
-        <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-semibold text-gray-900 leading-tight">
+        <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-900 leading-tight">
           Aquí no vienes a consumir contenidos.
           <br />
           <span className="text-[#7c3aed]">Vienes a habitar un ecosistema.</span>
@@ -246,8 +255,8 @@ const IntroEcosistemaSection = () => (
       </div>
       
       {/* Contenido completo */}
-      <div className="space-y-8 font-body text-lg md:text-xl text-gray-600 leading-[1.8]">
-        <p className="first-letter:text-7xl first-letter:font-heading first-letter:font-bold first-letter:text-[#7c3aed] first-letter:float-left first-letter:mr-4 first-letter:mt-2">
+      <div className="space-y-6 font-body text-base md:text-lg text-gray-600 leading-[1.8]">
+        <p className="first-letter:text-6xl first-letter:font-heading first-letter:font-bold first-letter:text-[#7c3aed] first-letter:float-left first-letter:mr-3 first-letter:mt-1">
           Vivimos en un tiempo vertiginoso. La Inteligencia Artificial avanza sin pausa, automatiza procesos, optimiza decisiones y redefine el trabajo. Pero mientras la tecnología crece, algo queda en riesgo: la <strong className="text-gray-900 font-semibold">capacidad humana de comprender, sostener y acompañar procesos emocionales y vitales</strong>.
         </p>
         
@@ -256,9 +265,9 @@ const IntroEcosistemaSection = () => (
         </p>
         
         {/* Quote destacado */}
-        <blockquote className="relative py-10 my-12">
+        <blockquote className="relative py-8 my-10">
           <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#7c3aed] to-[#c4ff0f] rounded-full" />
-          <p className="pl-8 font-heading text-2xl md:text-3xl lg:text-4xl font-medium text-gray-900 italic leading-snug">
+          <p className="pl-6 font-heading text-xl md:text-2xl lg:text-3xl font-medium text-gray-900 italic leading-snug">
             &ldquo;InverSer evoluciona desde ahí. Desde años de experiencia real en el mundo digital, en la formación de coaches, en procesos profundos de transformación humana.&rdquo;
           </p>
         </blockquote>
@@ -267,7 +276,7 @@ const IntroEcosistemaSection = () => (
           No somos una plataforma más. No somos un marketplace de servicios. <strong className="text-gray-900 font-semibold">Somos un ecosistema para mentores conscientes</strong>. Un lugar donde la tecnología no deshumaniza, sino que amplifica tu capacidad de impacto.
         </p>
         
-        <p className="text-center font-heading text-2xl md:text-3xl font-medium text-gray-900 py-8 leading-relaxed">
+        <p className="text-center font-heading text-xl md:text-2xl font-medium text-gray-900 py-6 leading-relaxed">
           Hoy, InverSer se expresa con más claridad en ese punto donde{' '}
           <span className="text-[#7c3aed]">la tecnología necesita conciencia</span>.
           <br />
