@@ -945,6 +945,175 @@ const CTAFinalSection = ({ mentorData, onActionClick }) => {
 };
 
 // ============================================
+// FAQ SECTION
+// ============================================
+const FAQSection = () => {
+  const [openIndex, setOpenIndex] = React.useState(null);
+
+  const faqs = [
+    {
+      question: "¿Qué es exactamente el Mentor & Partner Program?",
+      answer: "No es un curso ni una certificación aislada. El Mentor & Partner Program es un ecosistema de empoderamiento para mentores, diseñado para que puedas ejercer, escalar y sostener tu rol de acompañamiento humano con estructura, herramientas, comunidad y proyección real en la era digital."
+    },
+    {
+      question: "¿Por qué hablan de \"ecosistema\" y no de programa tradicional?",
+      answer: `Porque el Mentor & Partner Program no está diseñado para que tú vengas a hacer un programa, sino para que acompañes a otros en distintos procesos de transformación.
+
+Aquí no existe una única certificación ni una sola propuesta formativa. El mentor accede a un conjunto de programas —como la Certificación Profesional de NeuroCoaching y los que se irán sumando— desde los cuales puede formar, mentorear y acompañar, siempre apalancado en la infraestructura de InverSer.
+
+A esto se suman todas las capas que sostienen tu rol: herramientas tecnológicas, inteligencia artificial aplicada, espacios de comunidad, sistemas de reservas, salas de encuentros, modelos de monetización y soporte estratégico.
+
+Por eso hablamos de ecosistema: porque no es un programa aislado, sino un medio completo para ejercer el mentoring en sus distintas expresiones —formación, sesiones de coaching, mentoría, consultoría empresarial— sin que tengas que construir todo desde cero.`
+    },
+    {
+      question: "¿Qué diferencia a este programa de otros espacios de mentoring?",
+      answer: `La diferencia principal es que aquí no solo te formamos como mentor: te acompañamos a ejercer como mentor.
+
+Muchos espacios de mentoring se quedan en la formación: te dicen qué hacer, cómo hacerlo y te entregan contenidos valiosos. Eso no está mal, pero suele dejarte solo cuando llega el momento de llevarlo a la práctica.
+
+En InverSer damos un paso más. Aquí no solo accedes a formación, sino a un ecosistema completo de apoyo. Te entregamos herramientas reales, infraestructura digital, modelos probados y programas ya diseñados, validados y acreditados —como la Certificación Profesional de NeuroCoaching y los que se irán sumando— para que puedas acompañar procesos desde el primer momento.
+
+No te decimos únicamente "esto es lo que podrías hacer". Te decimos: "aquí está todo para que lo hagas".
+
+Además, el ecosistema no limita tu práctica a los programas de InverSer. También puedes utilizar estas herramientas para acompañar con tus propios programas, servicios de coaching, mentoría o consultoría empresarial, siempre apalancado en una estructura tecnológica, humana y estratégica sólida.
+
+Por eso nos diferenciamos del resto del mercado: porque no existe hoy un espacio de mentoring que integre, en un solo entorno, formación, acompañamiento, herramientas, productos listos para el mercado y sistemas de monetización.
+
+Aquí no te dejamos con ideas. Te damos el medio para llevarlas a la acción.`
+    },
+    {
+      question: "¿A quién está dirigido este programa?",
+      answer: "A coaches, mentores y profesionales del acompañamiento que sienten que su experiencia puede ir más lejos. Personas que quieren impactar, crecer y evolucionar sin perder humanidad, y que entienden que el futuro del mentoring es colaborativo y sistémico."
+    },
+    {
+      question: "¿Necesito venir de InverSer o haber hecho una certificación previa?",
+      answer: "No necesariamente. Valoramos la trayectoria, la conciencia y la alineación con la filosofía de InverSer. Por eso existe un proceso de aplicación y entrevista: para conocernos y asegurarnos de que este ecosistema es coherente para ambas partes."
+    },
+    {
+      question: "¿Qué rol tengo dentro del ecosistema como mentor?",
+      answer: "Tu rol es acompañar procesos humanos: formar, mentorear, sostener conversaciones, guiar recorridos de transformación. InverSer se encarga de la infraestructura, las herramientas y los sistemas para que tú puedas enfocarte en lo esencial: el acompañamiento."
+    },
+    {
+      question: "¿Cómo funciona el sistema de Partner / afiliados?",
+      answer: `El sistema de Partner del Mentor & Partner Program está diseñado para que tu rol como mentor sea sostenible, escalable y económicamente viable.
+
+La monetización no se basa en un único modelo, sino en varias vías complementarias:
+
+1. Monetización por tu rol como mentor: Cada vez que acompañas a mentíes dentro de certificaciones como la Certificación Profesional de NeuroCoaching generas ingresos por tu labor directa.
+
+2. Monetización como mentor supervisor: Cuando algunas de las personas que tú acompañaste deciden convertirse en mentores dentro del ecosistema, sigues generando ingresos por los mentees que ellos acompañen.
+
+3. Invitación directa de otros mentores: Puedes invitar a otros profesionales del coaching y del acompañamiento para que se postulen al ecosistema. Si son aprobados, generas ingresos por ellos y también por un segundo nivel.
+
+4. Monetización por productos y servicios del ecosistema: Todos los productos y servicios digitales que InverSer desarrolle estarán integrados en este modelo de afiliación.
+
+Gracias a este sistema, muchos mentores descubren que su membresía prácticamente se paga sola.`
+    },
+    {
+      question: "¿Qué incluye el Plan Pioneros?",
+      answer: `El Plan Pioneros es una etapa inicial y temporal del Mentor & Partner Program. No es un plan permanente, sino el primer momento de apertura del ecosistema.
+
+Esta etapa nace con una intención muy clara: rodearnos de profesionales alineados, con experiencia real, que quieran crecer junto a InverSer y, al mismo tiempo, nutrir el ecosistema con su mirada, su práctica y su conocimiento.
+
+Como pionero, accedes al ecosistema completo mediante un setup inicial y participas activamente en un proceso de co-creación y evolución.
+
+A cambio de ese compromiso temprano, los pioneros reciben condiciones preferenciales, entre ellas una membresía futura con descuento permanente.
+
+El Plan Pioneros es, en esencia, un acuerdo ganar–ganar: InverSer crece contigo, y tú creces siendo parte de la construcción desde el inicio.`
+    },
+    {
+      question: "¿Hay una membresía mensual?",
+      answer: "Sí. Tras la etapa inicial, el ecosistema funcionará con una membresía. Los pioneros accederán a esta membresía con un descuento aproximado del 40% respecto al precio estándar, como reconocimiento por haber sido parte de la construcción inicial."
+    },
+    {
+      question: "¿Puedo usar las herramientas de InverSer para mis proyectos personales?",
+      answer: "Sí. Muchas de las herramientas del ecosistema pueden utilizarse también para tus propios proyectos, siempre desde un uso responsable. InverSer no te limita: te potencia."
+    },
+    {
+      question: "¿Qué tipo de herramientas voy a encontrar dentro del ecosistema?",
+      answer: "Desde plataformas de proyectos, e-learning, comunidad, reservas de sesiones, salas de encuentro, inteligencia artificial aplicada, hasta un Toolbox profesional con dinámicas, plantillas, bibliotecas y recursos avanzados para tu práctica como mentor."
+    },
+    {
+      question: "¿Qué pasa después de completar el formulario de aplicación?",
+      answer: `Revisamos tu perfil y, si hay alineación, te invitamos a una conversación.
+
+Ese encuentro es un espacio para conocernos, resolver tus dudas, profundizar en tu momento profesional y confirmar si este ecosistema es adecuado para ti.
+
+Si ambas partes estamos de acuerdo, el siguiente paso es realizar un pago único de incorporación (setup inicial del ecosistema). Este pago permite configurar tu llave de acceso, tu espacio dentro de InverSer y habilitar todas las herramientas.
+
+Durante la etapa de Pioneros no se cobra membresía. Esta fase inicial está pensada para que el primer equipo de mentores y InverSer podamos alinearnos y fortalecer el ecosistema antes de iniciar formalmente la membresía.
+
+El valor del setup es un importe especial y accesible para los pioneros, precisamente porque son quienes nos acompañan en esta primera etapa de construcción y crecimiento compartido.`
+    }
+  ];
+
+  const toggleFAQ = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  return (
+    <section id="faq" className="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#faf8f5]">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7c3aed]/10 mb-6">
+            <HelpCircle className="w-4 h-4 text-[#7c3aed]" />
+            <span className="text-sm font-body text-[#7c3aed] font-medium">FAQ</span>
+          </div>
+          
+          <h2 className="font-heading text-4xl md:text-5xl font-semibold text-gray-900 leading-tight mb-4">
+            Preguntas{' '}
+            <span className="text-[#7c3aed]">Frecuentes</span>
+          </h2>
+          
+          <p className="font-body text-lg text-gray-600 max-w-2xl mx-auto">
+            Todo lo que necesitas saber sobre el Mentor & Partner Program
+          </p>
+        </div>
+
+        {/* FAQ Accordion */}
+        <div className="space-y-4">
+          {faqs.map((faq, index) => (
+            <div 
+              key={index}
+              className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
+            >
+              <button
+                onClick={() => toggleFAQ(index)}
+                className="w-full px-6 py-5 flex items-center justify-between text-left"
+              >
+                <span className="font-body font-semibold text-gray-900 pr-4">
+                  {faq.question}
+                </span>
+                <ChevronDown 
+                  className={`w-5 h-5 text-[#7c3aed] flex-shrink-0 transition-transform duration-300 ${
+                    openIndex === index ? 'rotate-180' : ''
+                  }`}
+                />
+              </button>
+              
+              <div 
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  openIndex === index ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
+                }`}
+              >
+                <div className="px-6 pb-6">
+                  <div className="border-t border-gray-100 pt-4">
+                    <p className="font-body text-gray-600 leading-relaxed whitespace-pre-line">
+                      {faq.answer}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ============================================
 // FOOTER
 // ============================================
 const FooterMPP = ({ mentorData, onActionClick }) => {
