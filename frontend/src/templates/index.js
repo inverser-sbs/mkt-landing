@@ -20,6 +20,7 @@
 
 import LandingCPN from './LandingCPN';
 import LandingSuitex from './LandingSuitex';
+import LandingMPP from './LandingMPP';
 
 // ============================================
 // TEMPLATE REGISTRY - Componentes
@@ -27,6 +28,7 @@ import LandingSuitex from './LandingSuitex';
 export const TEMPLATE_REGISTRY = {
   'cpn': LandingCPN,
   'suitex': LandingSuitex,
+  'mpp': LandingMPP,
 };
 
 export const DEFAULT_TEMPLATE_KEY = 'cpn';
