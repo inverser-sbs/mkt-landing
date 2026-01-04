@@ -10,6 +10,8 @@ module.exports = {
   		fontFamily: {
   			'display': ['Playfair Display', 'serif'],
   			'sans': ['Inter', 'sans-serif'],
+  			'heading': ['Cormorant Garamond', 'Georgia', 'serif'],
+  			'body': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
