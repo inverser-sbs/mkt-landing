@@ -10,6 +10,7 @@ import LevelsSection from '../components/LevelsSection';
 import CommunitySection from '../components/CommunitySection';
 import PartnerSection from '../components/PartnerSection';
 import AccreditationsSection from '../components/AccreditationsSection';
+import TestimonialsSection from '../components/TestimonialsSection';
 import FAQSection from '../components/FAQSection';
 import CTASection from '../components/CTASection';
 import Footer from '../components/Footer';
@@ -51,6 +52,7 @@ const LandingCPN = ({ mentorData, onActionClick }) => {
       <CommunitySection />
       <PartnerSection mentorData={mentorData} onActionClick={onActionClick} />
       <AccreditationsSection />
+      <TestimonialsSection />
       <FAQSection />
       <CTASection mentorData={mentorData} onActionClick={onActionClick} />
       <Footer mentorData={mentorData} onActionClick={onActionClick} />
