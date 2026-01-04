@@ -77,85 +77,87 @@ const HeroSection = ({ mentorData, onActionClick }) => {
           </div>
 
           {/* ============================================ */}
-          {/* RIGHT COLUMN - Mentor Photo + Buttons */}
+          {/* RIGHT COLUMN - Mentor Card (estilo MPP) */}
           {/* ============================================ */}
-          <div className="relative flex flex-col items-center">
-            {/* Photo Container - CIRCULAR */}
-            <div className="relative w-[350px] h-[350px] md:w-[400px] md:h-[400px] rounded-full overflow-hidden shadow-2xl border-4 border-[#c4ff0f]/40">
-              {mentor.photo_url ? (
-                <img
-                  src={getImageUrl(mentor.photo_url)}
-                  alt={`${mentor.first_name} ${mentor.last_name}`}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                /* Placeholder when no photo */
-                <div className="w-full h-full bg-gradient-to-br from-[#7c3aed]/20 via-purple-100 to-[#c4ff0f]/20 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#7c3aed] to-purple-500 flex items-center justify-center">
-                      <span className="text-4xl text-white font-bold">
-                        {mentor.first_name?.[0] || 'I'}{mentor.last_name?.[0] || 'S'}
-                      </span>
-                    </div>
+          <div className="relative flex justify-center lg:justify-end">
+            {/* Glow effect behind card */}
+            <div className="absolute -inset-4 bg-gradient-to-br from-[#7c3aed]/20 to-[#c4ff0f]/20 rounded-3xl blur-2xl opacity-60" />
+            
+            {/* Card con glassmorphism */}
+            <div className="relative bg-white/70 backdrop-blur-xl rounded-3xl border border-gray-200/50 shadow-xl p-8 text-center max-w-sm w-full">
+              {/* Photo Container - CIRCULAR reducido */}
+              <div className="relative w-36 h-36 mx-auto mb-6">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#7c3aed] to-[#c4ff0f] rounded-full p-[3px]">
+                  <div className="w-full h-full rounded-full overflow-hidden bg-white">
+                    {mentor.photo_url ? (
+                      <img
+                        src={getImageUrl(mentor.photo_url)}
+                        alt={`${mentor.first_name} ${mentor.last_name}`}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      /* Placeholder when no photo */
+                      <div className="w-full h-full bg-gradient-to-br from-[#7c3aed]/10 via-purple-50 to-[#c4ff0f]/10 flex items-center justify-center">
+                        <span className="text-3xl text-[#7c3aed] font-bold">
+                          {mentor.first_name?.[0] || 'I'}{mentor.last_name?.[0] || 'S'}
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </div>
-              )}
-            </div>
-
-            {/* Mentor Name (if available) */}
-            {mentor.first_name && mentor.first_name !== 'Nuestro' && (
-              <div className="mt-4 text-center">
-                <p className="font-semibold text-gray-900 text-xl">{mentor.first_name} {mentor.last_name}</p>
-                <p className="text-sm text-gray-500">Tu mentor certificado</p>
               </div>
-            )}
 
-            {/* ============================================ */}
-            {/* BUTTON ANCHORS - Pirámide bajo la foto */}
-            {/* Orden: Ver perfil (pequeño) → Agendar cita → WhatsApp */}
-            {/* Color: VERDE para los 3 botones */}
-            {/* Hover: MISMO efecto para los 3 (scale + shadow) */}
-            {/* ============================================ */}
-            <div className="mt-6 flex flex-col items-center gap-3 w-full max-w-sm">
-              {/* Ver perfil - botón pequeño */}
-              <ButtonAnchor
-                buttonKey="ver_perfil"
-                templateKey={templateKey}
-                actions={actions}
-                mentorLinks={mentorLinks}
-                campaignLinks={campaignLinks}
-                onActionClick={onActionClick}
-                variant="ghost"
-                size="sm"
-              />
-              
-              {/* Agendar cita y WhatsApp - botones principales */}
-              <div className="flex flex-col sm:flex-row gap-3 w-full">
-                {/* ANCHOR: agenda_hero (Hero Primary) */}
-                <ButtonAnchor
-                  buttonKey="agenda_hero"
-                  templateKey={templateKey}
-                  actions={actions}
-                  mentorLinks={mentorLinks}
-                  campaignLinks={campaignLinks}
-                  onActionClick={onActionClick}
-                  variant="primary"
-                  size="default"
-                  className="flex-1"
-                />
+              {/* Mentor Name */}
+              <p className="font-semibold text-gray-900 text-2xl mb-1">
+                {mentor.first_name && mentor.first_name !== 'Nuestro' 
+                  ? `${mentor.first_name} ${mentor.last_name}` 
+                  : 'Tu Mentor'}
+              </p>
+              <p className="text-sm text-[#7c3aed] font-medium mb-6">Tu mentor certificado</p>
+
+              {/* ============================================ */}
+              {/* BUTTON ANCHORS - Pirámide dentro del card */}
+              {/* ============================================ */}
+              <div className="space-y-3">
+                {/* Ver perfil - arriba centrado */}
+                <div className="flex justify-center">
+                  <ButtonAnchor
+                    buttonKey="ver_perfil"
+                    templateKey={templateKey}
+                    actions={actions}
+                    mentorLinks={mentorLinks}
+                    campaignLinks={campaignLinks}
+                    onActionClick={onActionClick}
+                    variant="ghost"
+                    size="sm"
+                  />
+                </div>
                 
-                {/* ANCHOR: whatsapp_hero (Hero Secondary) */}
-                <ButtonAnchor
-                  buttonKey="whatsapp_hero"
-                  templateKey={templateKey}
-                  actions={actions}
-                  mentorLinks={mentorLinks}
-                  campaignLinks={campaignLinks}
-                  onActionClick={onActionClick}
-                  variant="secondary"
-                  size="default"
-                  className="flex-1"
-                />
+                {/* Agendar cita y WhatsApp - lado a lado */}
+                <div className="flex gap-2">
+                  <ButtonAnchor
+                    buttonKey="agenda_hero"
+                    templateKey={templateKey}
+                    actions={actions}
+                    mentorLinks={mentorLinks}
+                    campaignLinks={campaignLinks}
+                    onActionClick={onActionClick}
+                    variant="primary"
+                    size="sm"
+                    className="flex-1"
+                  />
+                  <ButtonAnchor
+                    buttonKey="whatsapp_hero"
+                    templateKey={templateKey}
+                    actions={actions}
+                    mentorLinks={mentorLinks}
+                    campaignLinks={campaignLinks}
+                    onActionClick={onActionClick}
+                    variant="secondary"
+                    size="sm"
+                    className="flex-1"
+                  />
+                </div>
               </div>
             </div>
           </div>
