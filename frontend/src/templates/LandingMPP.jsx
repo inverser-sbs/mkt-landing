@@ -291,18 +291,18 @@ const IntroEcosistemaSection = () => (
       </div>
       
       {/* Tres pilares */}
-      <div className="grid md:grid-cols-3 gap-8 mt-20">
+      <div className="grid md:grid-cols-3 gap-6 mt-16">
         {[
           { icon: Heart, text: 'Estructura sin rigidez', desc: 'Flexibilidad que respeta tu estilo' },
           { icon: Zap, text: 'Herramientas sin frialdad', desc: 'Tecnología con alma y propósito' },
           { icon: Users, text: 'Comunidad sin competencia', desc: 'Crecimiento compartido y genuino' }
         ].map((item, idx) => (
           <div key={idx} className="text-center group">
-            <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-[#7c3aed]/10 to-[#c4ff0f]/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-              <item.icon className="w-9 h-9 text-[#7c3aed]" />
+            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#7c3aed]/10 to-[#c4ff0f]/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <item.icon className="w-8 h-8 text-[#7c3aed]" />
             </div>
-            <p className="font-heading text-xl font-semibold text-gray-900 mb-2">{item.text}</p>
-            <p className="font-body text-gray-500">{item.desc}</p>
+            <p className="font-heading text-lg font-semibold text-gray-900 mb-1">{item.text}</p>
+            <p className="font-body text-sm text-gray-500">{item.desc}</p>
           </div>
         ))}
       </div>
