@@ -57,7 +57,7 @@ export const TEMPLATE_SLOTS = {
     { key: 'pricing', label: 'Pricing', description: 'Botón en la sección de precios' }
   ],
   'mpp': [
-    { key: 'navbar', label: 'Navbar - Agendar', description: 'Botón en el menú de navegación' },
+    { key: 'navbar', label: 'Navbar - Postular', description: 'Botón en el menú de navegación' },
     { key: 'hero_primary', label: 'Hero - Agendar Llamada', description: 'Botón principal en el Hero' },
     { key: 'hero_secondary', label: 'Hero - WhatsApp', description: 'Botón secundario en el Hero' },
     { key: 'hero_profile', label: 'Hero - Ver Perfil', description: 'Botón debajo de la foto del mentor' },
