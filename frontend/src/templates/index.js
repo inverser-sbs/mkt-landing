@@ -212,9 +212,9 @@ export const TEMPLATE_BUTTONS = {
     // ===== NAVBAR =====
     {
       key: 'agendar_mpp',
-      label_default: 'Agendar Llamada',
+      label_default: 'Quiero Postularme',
       slot: 'navbar',
-      description: 'Botón del navbar y Hero para agendar llamada con el mentor',
+      description: 'Botón del navbar y Hero para postularse al programa',
       link_type: 'mentor',
       style: 'primary'
     },
