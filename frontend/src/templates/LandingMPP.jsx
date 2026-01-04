@@ -817,7 +817,7 @@ const IPartnerSection = ({ mentorData, onActionClick }) => {
             </ul>
             
             <blockquote className="border-l-4 border-[#c4ff0f] pl-6 text-white/70 italic">
-              "En InverSer, tu impacto también puede sostenerte."
+              &ldquo;En InverSer, tu impacto también puede sostenerte.&rdquo;
             </blockquote>
             
             <ButtonAnchor
