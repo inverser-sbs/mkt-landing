@@ -170,37 +170,44 @@ const HeroMPP = ({ mentorData, onActionClick }) => {
                 </p>
                 <p className="font-body text-[#c4ff0f] text-sm mb-6">Team Líder</p>
                 
+                {/* Botones en pirámide: Ver Perfil arriba, los otros dos lado a lado */}
                 <div className="space-y-3">
-                  <ButtonAnchor
-                    buttonKey="ver_perfil_mpp"
-                    templateKey="mpp"
-                    actions={actions}
-                    mentorLinks={mentorLinks}
-                    campaignLinks={campaignLinks}
-                    onActionClick={onActionClick}
-                    variant="ghost"
-                    size="sm"
-                  />
-                  <ButtonAnchor
-                    buttonKey="agendar_mpp"
-                    templateKey="mpp"
-                    actions={actions}
-                    mentorLinks={mentorLinks}
-                    campaignLinks={campaignLinks}
-                    onActionClick={onActionClick}
-                    variant="primary"
-                    size="default"
-                  />
-                  <ButtonAnchor
-                    buttonKey="whatsapp_mpp"
-                    templateKey="mpp"
-                    actions={actions}
-                    mentorLinks={mentorLinks}
-                    campaignLinks={campaignLinks}
-                    onActionClick={onActionClick}
-                    variant="secondary"
-                    size="default"
-                  />
+                  {/* Ver Perfil - arriba centrado */}
+                  <div className="flex justify-center">
+                    <ButtonAnchor
+                      buttonKey="ver_perfil_mpp"
+                      templateKey="mpp"
+                      actions={actions}
+                      mentorLinks={mentorLinks}
+                      campaignLinks={campaignLinks}
+                      onActionClick={onActionClick}
+                      variant="ghost"
+                      size="sm"
+                    />
+                  </div>
+                  {/* Agendar y WhatsApp - lado a lado */}
+                  <div className="flex gap-2">
+                    <ButtonAnchor
+                      buttonKey="agendar_mpp"
+                      templateKey="mpp"
+                      actions={actions}
+                      mentorLinks={mentorLinks}
+                      campaignLinks={campaignLinks}
+                      onActionClick={onActionClick}
+                      variant="primary"
+                      size="sm"
+                    />
+                    <ButtonAnchor
+                      buttonKey="whatsapp_mpp"
+                      templateKey="mpp"
+                      actions={actions}
+                      mentorLinks={mentorLinks}
+                      campaignLinks={campaignLinks}
+                      onActionClick={onActionClick}
+                      variant="secondary"
+                      size="sm"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
