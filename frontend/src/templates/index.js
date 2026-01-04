@@ -206,6 +206,71 @@ export const TEMPLATE_BUTTONS = {
       fixed_url: 'https://suitex.com/pricing',
       style: 'primary'
     }
+  ],
+  // ===== MPP - MENTOR & PARTNER PROGRAM =====
+  'mpp': [
+    // ===== NAVBAR =====
+    {
+      key: 'agendar_mpp',
+      label_default: 'Agendar Llamada',
+      slot: 'navbar',
+      description: 'Botón del navbar y Hero para agendar llamada con el mentor',
+      link_type: 'mentor',
+      style: 'primary'
+    },
+    // ===== HERO SECTION =====
+    {
+      key: 'whatsapp_mpp',
+      label_default: 'WhatsApp',
+      slot: 'hero_secondary',
+      description: 'Contacto directo vía WhatsApp',
+      link_type: 'mentor',
+      style: 'secondary'
+    },
+    {
+      key: 'ver_perfil_mpp',
+      label_default: 'Ver perfil',
+      slot: 'hero_profile',
+      description: 'Botón debajo de la foto del mentor para ver su perfil completo',
+      link_type: 'mentor',
+      style: 'ghost'
+    },
+    // ===== CERTIFICACIÓN SECTION =====
+    {
+      key: 'ver_certificacion_mpp',
+      label_default: 'Conocer la Certificación',
+      slot: 'certificacion',
+      description: 'Botón para ver detalles de la certificación NeuroCoaching',
+      link_type: 'mentor',
+      style: 'primary'
+    },
+    // ===== PARTNER SECTION =====
+    {
+      key: 'email_mpp',
+      label_default: 'Contactar por Email',
+      slot: 'partner',
+      description: 'Botón de contacto por email en la sección de monetización',
+      link_type: 'mentor',
+      style: 'primary'
+    },
+    // ===== CTA FINAL =====
+    {
+      key: 'aplicar_mpp',
+      label_default: 'Aplicar al Programa',
+      slot: 'cta_primary',
+      description: 'Botón principal de conversión en el CTA final',
+      link_type: 'mentor',
+      style: 'primary'
+    },
+    // ===== FOOTER =====
+    {
+      key: 'ir_perfil_footer_mpp',
+      label_default: 'Ir al perfil',
+      slot: 'footer_profile',
+      description: 'Botón en el footer para acceder al perfil del mentor',
+      link_type: 'mentor',
+      style: 'ghost'
+    }
   ]
 };
 
