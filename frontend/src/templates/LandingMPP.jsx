@@ -66,7 +66,7 @@ const NavbarMPP = ({ mentorData, onActionClick }) => {
             <a href="#comunidad" className="hover:text-[#c4ff0f] transition-all duration-300">Comunidad</a>
           </div>
           <ButtonAnchor
-            buttonKey="agendar_mpp"
+            buttonKey="postular_nav_mpp"
             templateKey="mpp"
             actions={actions}
             mentorLinks={mentorLinks}

@@ -50,7 +50,8 @@ const BUTTON_ICONS = {
   'prueba_cta': ArrowRight,
   'comprar_pricing': ExternalLink,
   // MPP - Mentor & Partner Program
-  'agendar_mpp': ArrowRight,
+  'postular_nav_mpp': ArrowRight,
+  'agendar_mpp': Calendar,
   'whatsapp_mpp': Phone,
   'ver_perfil_mpp': Users,
   'ver_certificacion_mpp': FileText,

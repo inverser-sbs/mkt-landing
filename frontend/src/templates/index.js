@@ -211,14 +211,22 @@ export const TEMPLATE_BUTTONS = {
   'mpp': [
     // ===== NAVBAR =====
     {
-      key: 'agendar_mpp',
+      key: 'postular_nav_mpp',
       label_default: 'Quiero Postularme',
       slot: 'navbar',
-      description: 'Botón del navbar y Hero para postularse al programa',
+      description: 'Botón del navbar para postularse al programa',
       link_type: 'mentor',
       style: 'primary'
     },
     // ===== HERO SECTION =====
+    {
+      key: 'agendar_mpp',
+      label_default: 'Agendar Llamada',
+      slot: 'hero_primary',
+      description: 'Botón en el card del mentor para agendar llamada',
+      link_type: 'mentor',
+      style: 'primary'
+    },
     {
       key: 'whatsapp_mpp',
       label_default: 'WhatsApp',
