@@ -2,14 +2,16 @@
  * LandingMPP - Landing para Mentor & Partner Program (Plan Pioneros)
  * campaign_key: mpp
  * 
- * VERSIÓN 3: Diseño visual integrado y profesional
+ * VERSIÓN 4: Copywriting completo + Tipografía elegante
  * 
- * FILOSOFÍA DE DISEÑO:
- * - Imágenes como ambiente, no como bloques
- * - Overlays y gradientes para integración
- * - Espacios de respiración visual
- * - Momentos emocionales con fondos inmersivos
- * - Elegancia a través de la sutileza
+ * TIPOGRAFÍAS:
+ * - Cormorant Garamond: Headings (elegante, serif clásica)
+ * - Plus Jakarta Sans: Body (moderna, profesional, legible)
+ * 
+ * FILOSOFÍA:
+ * - Contenido completo que enamora y vende
+ * - Diseño visual inmersivo (mantenido de v3)
+ * - Tipografía que transmite profesionalismo y elegancia
  */
 
 import React, { useEffect } from 'react';
@@ -26,7 +28,7 @@ import { getImageUrl } from '../utils/imageUrl';
 import ButtonAnchor, { prepareAnchorData } from '../components/ButtonAnchor';
 
 // ============================================
-// IMÁGENES DE AMBIENTE (FONDOS INMERSIVOS)
+// IMÁGENES DE AMBIENTE
 // ============================================
 const IMAGES = {
   heroAmbient: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1920&q=80',
@@ -47,7 +49,7 @@ const LogoMPP = () => (
 );
 
 // ============================================
-// NAVBAR - Elegante y minimalista
+// NAVBAR
 // ============================================
 const NavbarMPP = ({ mentorData, onActionClick }) => {
   const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
@@ -57,7 +59,7 @@ const NavbarMPP = ({ mentorData, onActionClick }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           <LogoMPP />
-          <div className="hidden md:flex items-center space-x-8 text-sm text-white/70">
+          <div className="hidden md:flex items-center space-x-8 text-sm font-body text-white/70">
             <a href="#ecosistema" className="hover:text-[#c4ff0f] transition-all duration-300">Ecosistema</a>
             <a href="#certificacion" className="hover:text-[#c4ff0f] transition-all duration-300">Certificación</a>
             <a href="#herramientas" className="hover:text-[#c4ff0f] transition-all duration-300">Herramientas</a>
@@ -80,7 +82,7 @@ const NavbarMPP = ({ mentorData, onActionClick }) => {
 };
 
 // ============================================
-// HERO SECTION - Inmersivo con imagen de ambiente
+// HERO SECTION
 // ============================================
 const HeroMPP = ({ mentorData, onActionClick }) => {
   const mentor = mentorData?.mentor || {
@@ -95,18 +97,17 @@ const HeroMPP = ({ mentorData, onActionClick }) => {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Imagen de fondo con tratamiento */}
+      {/* Imagen de fondo */}
       <div className="absolute inset-0">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${IMAGES.heroAmbient})` }}
         />
-        {/* Overlay gradiente para integración */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#031730] via-[#031730]/95 to-[#031730]/80" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#031730] via-transparent to-[#031730]/50" />
       </div>
       
-      {/* Elementos decorativos sutiles */}
+      {/* Elementos decorativos */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 -left-32 w-96 h-96 bg-[#7c3aed]/20 rounded-full filter blur-[150px]" />
         <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-[#c4ff0f]/10 rounded-full filter blur-[150px]" />
@@ -114,14 +115,14 @@ const HeroMPP = ({ mentorData, onActionClick }) => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-24 pb-16">
         <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 items-center">
-          {/* Contenido principal - 3 columnas */}
+          {/* Contenido principal */}
           <div className="lg:col-span-3 space-y-8">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
               <Sparkles className="w-4 h-4 text-[#c4ff0f]" />
-              <span className="text-sm text-white/80">Plan Pioneros</span>
+              <span className="text-sm font-body text-white/80">Plan Pioneros</span>
             </div>
             
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.1] tracking-tight">
+            <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-semibold leading-[1.05] tracking-tight">
               <span className="text-white">Mentor</span>
               <span className="text-[#c4ff0f]"> & </span>
               <span className="text-white">Partner</span>
@@ -131,25 +132,22 @@ const HeroMPP = ({ mentorData, onActionClick }) => {
               </span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-white/70 leading-relaxed max-w-2xl font-light">
-              Un <span className="text-white font-normal">ecosistema de empoderamiento</span> donde tu experiencia, tu criterio y tu vocación se amplifican.
+            <p className="font-body text-xl md:text-2xl text-white/80 leading-relaxed max-w-2xl">
+              Bienvenido a una nueva dimensión del mentoring. Un <span className="text-[#c4ff0f] font-medium">ecosistema de empoderamiento</span> donde tu experiencia, tu criterio y tu vocación se amplifican.
             </p>
             
-            <p className="text-lg text-white/50 max-w-xl">
-              No es un curso. No es una certificación aislada. Es una infraestructura completa para ejercer tu rol de mentor con profundidad.
+            <p className="font-body text-lg text-white/50 max-w-xl leading-relaxed">
+              No es un curso. No es una certificación aislada. Es una <span className="text-white/70">infraestructura completa</span> para que puedas ejercer tu rol de mentor con profundidad, respaldo y proyección.
             </p>
           </div>
           
-          {/* Mentor card - 2 columnas */}
+          {/* Mentor card */}
           <div className="lg:col-span-2 flex justify-center lg:justify-end">
             <div className="relative">
-              {/* Glow effect */}
               <div className="absolute -inset-1 bg-gradient-to-br from-[#7c3aed]/40 to-[#c4ff0f]/40 rounded-3xl blur-2xl opacity-50" />
               
-              {/* Card */}
               <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 p-8 text-center">
-                {/* Foto */}
-                <div className="relative w-40 h-40 mx-auto mb-6">
+                <div className="relative w-36 h-36 mx-auto mb-6">
                   <div className="absolute inset-0 bg-gradient-to-br from-[#7c3aed] to-[#c4ff0f] rounded-full p-[3px]">
                     <div className="w-full h-full rounded-full overflow-hidden bg-[#031730]">
                       {mentor.photo_url ? (
@@ -160,20 +158,18 @@ const HeroMPP = ({ mentorData, onActionClick }) => {
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center">
-                          <Users className="w-16 h-16 text-white/30" />
+                          <Users className="w-14 h-14 text-white/30" />
                         </div>
                       )}
                     </div>
                   </div>
                 </div>
                 
-                {/* Info */}
-                <p className="text-xl font-semibold text-white mb-1">
+                <p className="font-heading text-2xl font-semibold text-white mb-1">
                   {hasMentor ? `${mentor.first_name} ${mentor.last_name}` : 'Tu Mentor'}
                 </p>
-                <p className="text-[#c4ff0f] text-sm mb-6">Team Líder</p>
+                <p className="font-body text-[#c4ff0f] text-sm mb-6">Team Líder</p>
                 
-                {/* Botones */}
                 <div className="space-y-3">
                   <ButtonAnchor
                     buttonKey="ver_perfil_mpp"
@@ -212,7 +208,7 @@ const HeroMPP = ({ mentorData, onActionClick }) => {
         </div>
       </div>
       
-      {/* Indicador de scroll */}
+      {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
         <div className="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center p-2">
           <div className="w-1 h-2 bg-white/40 rounded-full" />
@@ -223,66 +219,74 @@ const HeroMPP = ({ mentorData, onActionClick }) => {
 };
 
 // ============================================
-// ECOSISTEMA - Diseño editorial elegante
+// ECOSISTEMA - CONTENIDO COMPLETO
 // ============================================
 const IntroEcosistemaSection = () => (
   <section id="ecosistema" className="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#faf8f5]">
     <div className="max-w-4xl mx-auto">
-      {/* Header elegante */}
+      {/* Header */}
       <div className="text-center mb-16">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7c3aed]/10 mb-8">
           <Target className="w-4 h-4 text-[#7c3aed]" />
-          <span className="text-sm text-[#7c3aed] font-medium">El Ecosistema</span>
+          <span className="text-sm font-body text-[#7c3aed] font-medium">El Ecosistema</span>
         </div>
         
-        <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight">
+        <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-semibold text-gray-900 leading-tight">
           Aquí no vienes a consumir contenidos.
           <br />
           <span className="text-[#7c3aed]">Vienes a habitar un ecosistema.</span>
         </h2>
       </div>
       
-      {/* Contenido con tipografía editorial */}
-      <div className="space-y-8 text-lg md:text-xl text-gray-600 leading-relaxed">
-        <p className="first-letter:text-6xl first-letter:font-bold first-letter:text-[#7c3aed] first-letter:float-left first-letter:mr-3 first-letter:mt-1">
-          Vivimos en un tiempo vertiginoso. La Inteligencia Artificial avanza sin pausa, automatiza procesos, optimiza decisiones y redefine el trabajo. Pero mientras la tecnología crece, algo queda en riesgo: la <strong className="text-gray-900">capacidad humana de comprender, sostener y acompañar procesos emocionales y vitales</strong>.
+      {/* Contenido completo */}
+      <div className="space-y-8 font-body text-lg md:text-xl text-gray-600 leading-[1.8]">
+        <p className="first-letter:text-7xl first-letter:font-heading first-letter:font-bold first-letter:text-[#7c3aed] first-letter:float-left first-letter:mr-4 first-letter:mt-2">
+          Vivimos en un tiempo vertiginoso. La Inteligencia Artificial avanza sin pausa, automatiza procesos, optimiza decisiones y redefine el trabajo. Pero mientras la tecnología crece, algo queda en riesgo: la <strong className="text-gray-900 font-semibold">capacidad humana de comprender, sostener y acompañar procesos emocionales y vitales</strong>.
         </p>
         
         <p>
-          Las personas no solo necesitan respuestas. Necesitan presencia. Necesitan alguien que les ayude a ver lo que aún no ven. Alguien que no les dé fórmulas, sino que les acompañe en el camino de descubrir las propias.
+          Las personas no solo necesitan respuestas. Necesitan presencia. Necesitan alguien que les ayude a ver lo que aún no ven. Alguien que no les dé fórmulas, sino que les acompañe en el camino de descubrir las propias. Ese rol —el del mentor, el coach, el acompañante consciente— <strong className="text-gray-900 font-semibold">no puede ser reemplazado por una máquina</strong>. Pero sí puede ser potenciado por la tecnología adecuada.
         </p>
         
         {/* Quote destacado */}
-        <blockquote className="relative py-8 my-12">
+        <blockquote className="relative py-10 my-12">
           <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#7c3aed] to-[#c4ff0f] rounded-full" />
-          <p className="pl-8 text-2xl md:text-3xl font-light text-gray-900 italic">
-            InverSer evoluciona desde ahí. Desde años de experiencia real en el mundo digital, en la formación de coaches, en procesos profundos de transformación humana.
+          <p className="pl-8 font-heading text-2xl md:text-3xl lg:text-4xl font-medium text-gray-900 italic leading-snug">
+            &ldquo;InverSer evoluciona desde ahí. Desde años de experiencia real en el mundo digital, en la formación de coaches, en procesos profundos de transformación humana.&rdquo;
           </p>
         </blockquote>
         
         <p>
-          Ese rol —el del mentor, el coach, el acompañante consciente— no puede ser reemplazado por una máquina. Pero sí puede ser <strong className="text-gray-900">potenciado por la tecnología adecuada</strong>.
+          No somos una plataforma más. No somos un marketplace de servicios. <strong className="text-gray-900 font-semibold">Somos un ecosistema para mentores conscientes</strong>. Un lugar donde la tecnología no deshumaniza, sino que amplifica tu capacidad de impacto.
         </p>
         
-        <p className="text-center text-2xl font-medium text-gray-900 py-8">
+        <p className="text-center font-heading text-2xl md:text-3xl font-medium text-gray-900 py-8 leading-relaxed">
           Hoy, InverSer se expresa con más claridad en ese punto donde{' '}
           <span className="text-[#7c3aed]">la tecnología necesita conciencia</span>.
+          <br />
+          Donde la información necesita sentido.
+          <br />
+          Y donde las personas necesitan mentores preparados para este nuevo mundo.
+        </p>
+        
+        <p>
+          Si eres coach, terapeuta, formador, consultor, líder de equipos o simplemente una persona con vocación de acompañar a otros… <strong className="text-gray-900 font-semibold">este es tu lugar</strong>. Aquí encontrarás estructura sin rigidez, herramientas sin frialdad, comunidad sin competencia. Un espacio donde tu experiencia se vuelve legado. Y donde cada mentee que acompañas se convierte en semilla de una transformación mayor.
         </p>
       </div>
       
-      {/* Tres pilares - diseño minimalista */}
-      <div className="grid md:grid-cols-3 gap-8 mt-16">
+      {/* Tres pilares */}
+      <div className="grid md:grid-cols-3 gap-8 mt-20">
         {[
-          { icon: Heart, text: 'Estructura sin rigidez', desc: 'Flexibilidad con propósito' },
-          { icon: Zap, text: 'Herramientas sin frialdad', desc: 'Tecnología con alma' },
-          { icon: Users, text: 'Comunidad sin competencia', desc: 'Crecimiento compartido' }
+          { icon: Heart, text: 'Estructura sin rigidez', desc: 'Flexibilidad que respeta tu estilo' },
+          { icon: Zap, text: 'Herramientas sin frialdad', desc: 'Tecnología con alma y propósito' },
+          { icon: Users, text: 'Comunidad sin competencia', desc: 'Crecimiento compartido y genuino' }
         ].map((item, idx) => (
           <div key={idx} className="text-center group">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#7c3aed]/10 to-[#c4ff0f]/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-              <item.icon className="w-7 h-7 text-[#7c3aed]" />
+            <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-[#7c3aed]/10 to-[#c4ff0f]/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <item.icon className="w-9 h-9 text-[#7c3aed]" />
             </div>
-            <p className="font-semibold text-gray-900 mb-1">{item.text}</p>
-            <p className="text-sm text-gray-500">{item.desc}</p>
+            <p className="font-heading text-xl font-semibold text-gray-900 mb-2">{item.text}</p>
+            <p className="font-body text-gray-500">{item.desc}</p>
           </div>
         ))}
       </div>
@@ -291,7 +295,7 @@ const IntroEcosistemaSection = () => (
 );
 
 // ============================================
-// CERTIFICACIÓN - Layout asimétrico elegante
+// CERTIFICACIÓN - CONTENIDO COMPLETO
 // ============================================
 const CertificacionSection = ({ mentorData, onActionClick }) => {
   const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
@@ -300,45 +304,54 @@ const CertificacionSection = ({ mentorData, onActionClick }) => {
     <section id="certificacion" className="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="max-w-3xl mb-16">
+        <div className="max-w-4xl mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FF9100]/10 mb-6">
             <Award className="w-4 h-4 text-[#FF9100]" />
-            <span className="text-sm text-[#FF9100] font-medium">El Corazón de tu Impacto</span>
+            <span className="text-sm font-body text-[#FF9100] font-medium">El Corazón de tu Impacto</span>
           </div>
           
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
+          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-semibold text-gray-900 leading-tight mb-8">
             Certifica con Propósito.
             <br />
             <span className="text-[#7c3aed]">Escala tu Mentoría.</span>
           </h2>
           
-          <p className="text-xl text-gray-600 leading-relaxed">
+          <p className="font-body text-xl md:text-2xl text-gray-600 leading-relaxed">
             ¿Y si pudieras acompañar a otros en un viaje de transformación… con un programa ya creado, avalado y listo para escalar?
           </p>
         </div>
         
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20">
           {/* Contenido */}
           <div className="space-y-8">
-            <div className="prose prose-lg max-w-none text-gray-600">
+            <div className="font-body text-lg text-gray-600 leading-[1.8] space-y-6">
               <p>
-                En InverSer no vienes a aprender de cero. Vienes a convertirte en un <strong className="text-gray-900">canal de expansión</strong>. Como Mentor & Partner, tendrás acceso a una certificación profesional de NeuroCoaching completamente lista para entregar a tus aprendices.
+                En InverSer no vienes a aprender de cero. Vienes a convertirte en un <strong className="text-gray-900 font-semibold">canal de expansión</strong>. Como Mentor & Partner, tendrás acceso a una certificación profesional de NeuroCoaching completamente lista para entregar a tus aprendices.
               </p>
               
               <p>
-                No tienes que crear los contenidos. No tienes que diseñar los ejercicios. No tienes que montar una plataforma. <strong className="text-gray-900">Todo eso ya existe</strong>. Tu rol es el más importante: acompañar, guiar, estar presente.
+                No tienes que crear los contenidos. No tienes que diseñar los ejercicios. No tienes que montar una plataforma. <strong className="text-gray-900 font-semibold">Todo eso ya existe</strong>. Tu rol es el más importante: acompañar, guiar, estar presente. Ser el faro que ilumina el camino de transformación.
+              </p>
+              
+              <p>
+                Este no es un programa teórico. Es una <strong className="text-gray-900 font-semibold">arquitectura viva</strong> construida desde la experiencia real, con metodologías probadas y un sistema de acompañamiento que te permite escalar sin perder profundidad.
               </p>
             </div>
             
-            {/* Acreditaciones - diseño limpio */}
+            {/* Acreditaciones */}
             <div className="pt-8 border-t border-gray-100">
-              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">Programa avalado por</p>
-              <div className="flex flex-wrap gap-4">
-                {['Global Coaching Federation', 'Florida Global University', 'Centro de Educación y Liderazgo'].map((name, idx) => (
-                  <span key={idx} className="text-sm text-gray-500 flex items-center gap-2">
+              <p className="font-body text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">Programa avalado por</p>
+              <div className="space-y-3">
+                {[
+                  'Global Coaching Federation (GCF)',
+                  'Florida Global University',
+                  'Centro de Educación y Liderazgo',
+                  'Confederación Interamericana de Coaching'
+                ].map((name, idx) => (
+                  <div key={idx} className="flex items-center gap-3 font-body text-sm text-gray-600">
                     <Award className="w-4 h-4 text-[#7c3aed]" />
                     {name}
-                  </span>
+                  </div>
                 ))}
               </div>
             </div>
@@ -355,37 +368,46 @@ const CertificacionSection = ({ mentorData, onActionClick }) => {
             />
           </div>
           
-          {/* Card de beneficios - diseño premium */}
+          {/* Card de beneficios */}
           <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-br from-[#7c3aed]/5 to-[#c4ff0f]/5 rounded-3xl" />
             <div className="relative bg-[#031730] rounded-2xl p-8 md:p-10 text-white">
-              <h3 className="text-xl font-bold mb-8 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-[#c4ff0f]/20 flex items-center justify-center">
-                  <Zap className="w-5 h-5 text-[#c4ff0f]" />
+              <h3 className="font-heading text-2xl font-semibold mb-8 flex items-center gap-3">
+                <div className="w-12 h-12 rounded-xl bg-[#c4ff0f]/20 flex items-center justify-center">
+                  <Zap className="w-6 h-6 text-[#c4ff0f]" />
                 </div>
                 ¿Qué obtienes exactamente?
               </h3>
               
-              <ul className="space-y-5">
+              <ul className="space-y-5 font-body">
                 {[
-                  'Certificación en 3 niveles: Junior, Senior y Máster',
-                  '1500 Horas de Evolución y Transformación',
-                  'Plataforma completa para tus mentees',
-                  'Método PEDALEAR: transformación con estructura',
-                  'Tu propia landing personalizada',
-                  'Acceso al ecosistema completo InverSer'
+                  'Certificación estructurada en 3 niveles: Junior, Senior y Máster',
+                  '1500 Horas de Evolución y Transformación profunda',
+                  'Plataforma completamente desarrollada para tus mentees',
+                  'Método PEDALEAR: ciclo de transformación con estructura',
+                  'Método CRECE+: crecimiento continuo a través de conexión',
+                  'Tu propia landing personalizada para invitar prospectos',
+                  'Acceso al ecosistema completo de herramientas InverSer'
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-start gap-4">
                     <CheckCircle className="w-5 h-5 text-[#c4ff0f] flex-shrink-0 mt-0.5" />
-                    <span className="text-white/80">{item}</span>
+                    <span className="text-white/85">{item}</span>
                   </li>
                 ))}
               </ul>
               
-              <div className="mt-10 pt-8 border-t border-white/10">
-                <p className="text-sm text-white/60">
-                  <span className="text-[#c4ff0f] font-medium">Monetización con sentido:</span> Comercializa esta certificación y quédate con la mayor parte del ingreso. No trabajas para InverSer. Eres dueño de tu mentoría.
-                </p>
+              <div className="mt-10 pt-8 border-t border-white/10 space-y-4">
+                <div className="bg-white/5 rounded-xl p-5">
+                  <p className="font-body text-sm text-white/70 leading-relaxed">
+                    <span className="text-[#c4ff0f] font-medium">Tu rol:</span> Acompañar, guiar, estar presente. La tecnología, los contenidos, la infraestructura… ya están cubiertos por InverSer. Tú te enfocas en lo que mejor sabes hacer: <strong className="text-white">transformar vidas</strong>.
+                  </p>
+                </div>
+                
+                <div className="bg-[#c4ff0f]/10 rounded-xl p-5 border border-[#c4ff0f]/20">
+                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                    <span className="text-[#c4ff0f] font-medium">💰 Monetización con sentido:</span> Comercializa esta certificación y quédate con la mayor parte del ingreso. No trabajas para InverSer. <strong className="text-white">Eres dueño de tu mentoría</strong>. Nosotros solo te damos las herramientas para que tu impacto sea sostenible.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -396,11 +418,10 @@ const CertificacionSection = ({ mentorData, onActionClick }) => {
 };
 
 // ============================================
-// SECCIÓN STATEMENT - Fondo inmersivo
+// STATEMENT SECTION
 // ============================================
 const StatementSection = () => (
   <section className="relative py-32 md:py-40 overflow-hidden">
-    {/* Imagen de fondo con tratamiento */}
     <div className="absolute inset-0">
       <div 
         className="absolute inset-0 bg-cover bg-center bg-fixed"
@@ -410,55 +431,68 @@ const StatementSection = () => (
       <div className="absolute inset-0 bg-gradient-to-r from-[#7c3aed]/20 to-transparent" />
     </div>
     
-    <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <p className="text-2xl md:text-4xl lg:text-5xl font-light text-white leading-relaxed">
-        Si eres coach, terapeuta, formador, consultor o una persona con vocación de acompañar a otros…
-        <br /><br />
-        <span className="font-semibold text-[#c4ff0f]">este es tu lugar.</span>
+    <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p className="font-heading text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium text-white leading-[1.3]">
+        Si eres coach, terapeuta, formador, consultor, líder de equipos o una persona con vocación de acompañar a otros…
+      </p>
+      <p className="font-heading text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-[#c4ff0f] mt-8">
+        este es tu lugar.
       </p>
     </div>
   </section>
 );
 
 // ============================================
-// HERRAMIENTAS - Grid elegante con iconografía
+// HERRAMIENTAS COMPLETO
 // ============================================
-const HerramientasGestionSection = () => {
+const HerramientasSection = () => {
   const tools = [
     {
       icon: Calendar,
       title: 'iCalendar',
-      description: 'Organiza tu jornada de forma clara y alineada con tu energía. Sincroniza calendarios, gestiona disponibilidad.',
+      subtitle: 'Tu tiempo es tu activo más valioso',
+      description: 'No se trata solo de agendar. Se trata de organizar tu jornada de forma clara, respetuosa contigo y alineada con tu energía. iCalendar te permite sincronizar Google Calendar, Outlook y otros servicios, pero sobre todo, te da el control.',
+      features: ['Sesiones 1 a 1 o grupales', 'Espacios VIP monetizables', 'Tú decides tu disponibilidad'],
       color: '#7c3aed'
     },
     {
       icon: Layout,
       title: 'iProjects',
-      description: 'Cada mentee como un proyecto de transformación. Tableros, sprints y seguimiento visual del progreso.',
+      subtitle: 'Cada mentee es un proyecto de transformación',
+      description: 'Un proceso de mentoría no es un servicio puntual. Es un viaje. Y cada viaje merece ser gestionado como lo que es: un proyecto de transformación profunda con inicio, desarrollo y florecimiento.',
+      features: ['Tableros por mentee', 'Sprints método PEDALEAR', 'Plantillas personalizables'],
       color: '#FF9100'
     },
     {
       icon: Heart,
       title: 'iCRM',
-      description: 'El corazón digital de tus relaciones. Cada contacto tiene rostro, historia y camino propio.',
+      subtitle: 'Relaciones que transforman',
+      description: 'El CRM de InverSer no es una hoja de cálculo fría. Es el corazón digital de tus relaciones significativas. Cada mentee tiene rostro, voz, historia y camino. Aquí los honras.',
+      features: ['Fichas con hilo emocional', 'Registro de revelaciones', 'Gestión por equipos'],
       color: '#1A8314'
     },
     {
       icon: BookOpen,
       title: 'iLearning',
-      description: 'Tu campus vivo. Accede a módulos de formación y crea tus propios contenidos.',
+      subtitle: 'Tu sabiduría merece un escenario',
+      description: 'iLearning es más que un LMS: es tu campus vivo. Aquí tienes acceso a todos los módulos de formación, pero también puedes crear los tuyos propios y monetizarlos.',
+      features: ['Acceso completo como mentor', 'Crea tus propios cursos', 'Monetiza tu conocimiento'],
       color: '#7c3aed'
     },
     {
       icon: Video,
       title: 'WebMeet',
-      description: 'Salas virtuales hasta 1.000 asistentes. Graba, comparte pantalla, colabora.',
+      subtitle: 'Espacios sin distancia',
+      description: 'Tu espacio de encuentro generativo. Reserva tu sala virtual sin necesidad de Zoom o Meet externos. Comparte pantalla, graba sesiones, usa pizarras colaborativas.',
+      features: ['Hasta 1.000 asistentes', 'Grabación incluida', 'Pizarras colaborativas'],
       color: '#FF9100'
     },
     {
       icon: Send,
       title: 'IConnect',
-      description: 'Mensajería inteligente estilo Slack. Canales, menciones, todo centralizado.',
+      subtitle: 'Conversaciones que acercan',
+      description: 'Sistema de mensajería inteligente estilo Slack. Canales por proyecto, menciones, archivos adjuntos. Todo en un solo lugar, sin perderte entre correos.',
+      features: ['Canales y menciones', 'Widget para tu web', 'Todo centralizado'],
       color: '#1A8314'
     }
   ];
@@ -467,38 +501,48 @@ const HerramientasGestionSection = () => {
     <section id="herramientas" className="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#faf8f5]">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
+        <div className="max-w-3xl mx-auto text-center mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7c3aed]/10 mb-6">
             <Briefcase className="w-4 h-4 text-[#7c3aed]" />
-            <span className="text-sm text-[#7c3aed] font-medium">Herramientas</span>
+            <span className="text-sm font-body text-[#7c3aed] font-medium">Herramientas</span>
           </div>
           
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
+          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-semibold text-gray-900 leading-tight mb-8">
             Tu infraestructura de{' '}
             <span className="text-[#7c3aed]">acompañamiento</span>
           </h2>
           
-          <p className="text-xl text-gray-600">
-            Un ecosistema que te sostiene mientras tú sostienes a otros.
+          <p className="font-body text-xl text-gray-600 leading-relaxed">
+            Un ecosistema que te sostiene mientras tú sostienes a otros. Herramientas diseñadas no desde la eficiencia fría, sino desde la comprensión profunda de lo que significa acompañar procesos humanos.
           </p>
         </div>
         
-        {/* Grid de herramientas - diseño limpio */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {tools.map((tool, idx) => (
             <div 
               key={idx} 
-              className="group bg-white rounded-2xl p-8 border border-gray-100 hover:border-transparent hover:shadow-xl transition-all duration-500"
+              className="group bg-white rounded-2xl p-8 border border-gray-100 hover:border-transparent hover:shadow-2xl transition-all duration-500"
             >
               <div 
-                className="w-14 h-14 rounded-2xl mb-6 flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+                className="w-16 h-16 rounded-2xl mb-6 flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
                 style={{ backgroundColor: `${tool.color}10` }}
               >
-                <tool.icon className="w-7 h-7" style={{ color: tool.color }} />
+                <tool.icon className="w-8 h-8" style={{ color: tool.color }} />
               </div>
               
-              <h3 className="text-xl font-bold text-gray-900 mb-3">{tool.title}</h3>
-              <p className="text-gray-600 leading-relaxed">{tool.description}</p>
+              <h3 className="font-heading text-2xl font-semibold text-gray-900 mb-2">{tool.title}</h3>
+              <p className="font-body text-sm text-[#7c3aed] mb-4">{tool.subtitle}</p>
+              <p className="font-body text-gray-600 leading-relaxed mb-6">{tool.description}</p>
+              
+              <ul className="space-y-2">
+                {tool.features.map((feature, fidx) => (
+                  <li key={fidx} className="flex items-center gap-2 font-body text-sm text-gray-500">
+                    <ChevronRight className="w-4 h-4 text-[#c4ff0f]" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
@@ -508,11 +552,10 @@ const HerramientasGestionSection = () => {
 };
 
 // ============================================
-// IA SECTION - Diseño futurista pero humano
+// IA SECTION COMPLETO
 // ============================================
 const IASection = () => (
   <section className="relative py-24 md:py-32 overflow-hidden">
-    {/* Fondo con gradiente y textura */}
     <div className="absolute inset-0 bg-[#031730]">
       <div 
         className="absolute inset-0 opacity-20 bg-cover bg-center"
@@ -526,50 +569,57 @@ const IASection = () => (
         <div className="space-y-8">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
             <Brain className="w-4 h-4 text-[#c4ff0f]" />
-            <span className="text-sm text-white/80">iTeam IA</span>
+            <span className="text-sm font-body text-white/80">iTeam IA</span>
           </div>
           
-          <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight">
+          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-semibold text-white leading-tight">
             Inteligencia Artificial
             <br />
             <span className="text-[#c4ff0f]">con alma</span>
           </h2>
           
-          <p className="text-xl text-white/70 leading-relaxed">
-            El mundo necesita mentores conscientes, capaces de tender puentes entre lo tecnológico y lo humano. Hemos creado una IA que acompaña sin reemplazar.
-          </p>
+          <div className="space-y-6 font-body text-lg text-white/70 leading-relaxed">
+            <p>
+              Estamos entrando en una nueva revolución: la de la inteligencia artificial. Y el mundo necesita <strong className="text-white">mentores conscientes</strong>, capaces de tender puentes entre lo tecnológico y lo humano.
+            </p>
+            
+            <p>
+              Nosotros hemos creado algo diferente. No una IA que sustituye, sino <strong className="text-white">una IA que acompaña</strong>. Un equipo de agentes especializados, entrenados con nuestros valores, que te asisten sin reemplazarte.
+            </p>
+          </div>
           
           {/* MIA Card */}
           <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
             <div className="flex items-center gap-4 mb-4">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#c4ff0f] flex items-center justify-center">
-                <Sparkles className="w-6 h-6 text-white" />
+              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#c4ff0f] flex items-center justify-center">
+                <Sparkles className="w-7 h-7 text-white" />
               </div>
               <div>
-                <p className="font-semibold text-white">MIA</p>
-                <p className="text-sm text-white/50">Mentora de Inteligencia Artificial</p>
+                <p className="font-heading text-xl font-semibold text-white">Conoce a MIA</p>
+                <p className="font-body text-sm text-white/50">Mentora de Inteligencia Artificial</p>
               </div>
             </div>
-            <p className="text-white/60 text-sm leading-relaxed">
-              Entrenada con los valores y filosofía del NeuroCoaching Evolutivo. Tu asistente consciente.
+            <p className="font-body text-white/60 leading-relaxed">
+              MIA ha sido entrenada con los contenidos, valores y filosofía del NeuroCoaching Evolutivo. Puede sugerirte ideas, resolver dudas de tus mentees y conectarte con el contenido formativo de manera ágil. No es un chatbot genérico. Es tu asistente consciente.
             </p>
           </div>
           
-          <blockquote className="border-l-2 border-[#c4ff0f] pl-6 text-white/70 italic text-lg">
-            &ldquo;El mentor del futuro no teme a la IA. La guía. La humaniza.&rdquo;
+          <blockquote className="border-l-2 border-[#c4ff0f] pl-6 font-heading text-xl text-white/70 italic">
+            &ldquo;El mentor del futuro no teme a la IA. La guía. La humaniza. La transforma en aliada del crecimiento humano.&rdquo;
           </blockquote>
         </div>
         
-        {/* Capacidades de MIA */}
+        {/* Capacidades */}
         <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 md:p-10 border border-white/10">
-          <h3 className="text-xl font-bold text-white mb-8">¿Qué puede hacer MIA por ti?</h3>
-          <div className="space-y-4">
+          <h3 className="font-heading text-2xl font-semibold text-white mb-8">¿Qué puede hacer MIA por ti?</h3>
+          <div className="space-y-4 font-body">
             {[
-              'Sugerirte ideas para sesiones',
-              'Resolver dudas de tus mentees',
-              'Conectarte con el contenido formativo',
+              'Sugerirte ideas para sesiones o actividades',
+              'Resolver dudas frecuentes de tus mentees',
+              'Conectarte con el contenido formativo adecuado',
+              'Ayudarte a sostener el espíritu InverSer',
               'Diseñar campañas de comunicación',
-              'Planificar y ordenar ideas',
+              'Ordenar ideas y planificar sesiones',
               'Escribir textos alineados a tu voz'
             ].map((item, idx) => (
               <div key={idx} className="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
@@ -585,11 +635,10 @@ const IASection = () => (
 );
 
 // ============================================
-// KOMMUNITY - Fondo inmersivo con overlay
+// KOMMUNITY COMPLETO
 // ============================================
 const KommunitySection = () => (
   <section id="comunidad" className="relative py-24 md:py-32 overflow-hidden">
-    {/* Fondo con imagen */}
     <div className="absolute inset-0">
       <div 
         className="absolute inset-0 bg-cover bg-center"
@@ -604,46 +653,50 @@ const KommunitySection = () => (
         <div className="space-y-8">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FF9100]/10">
             <Users className="w-4 h-4 text-[#FF9100]" />
-            <span className="text-sm text-[#FF9100] font-medium">KOMMUNITY</span>
+            <span className="text-sm font-body text-[#FF9100] font-medium">KOMMUNITY</span>
           </div>
           
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight">
+          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-semibold text-gray-900 leading-tight">
             Neuronas que se conectan,
             <br />
             <span className="text-[#7c3aed]">almas que co-crean</span>
           </h2>
           
-          <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
+          <div className="space-y-6 font-body text-lg text-gray-600 leading-relaxed">
             <p>
-              La comunidad no es un accesorio: es el <strong className="text-gray-900">tejido vivo de la transformación</strong>. Por eso hablamos de KOMMUNITY, con &ldquo;K&rdquo; de kinética, de conexión, de conocimiento compartido.
+              En InverSer creemos que la comunidad no es un accesorio: es el <strong className="text-gray-900 font-semibold">tejido vivo de la transformación</strong>. Por eso no hablamos de &ldquo;foro&rdquo;. Hablamos de <span className="text-[#7c3aed] font-semibold">KOMMUNITY</span>, con &ldquo;K&rdquo; de kinética, de conexión, de conocimiento compartido.
             </p>
             
             <p>
-              Cada mentor, cada mentee, se convierte en una neurona viva dentro de una red mayor. Lo que uno aprende, ilumina a otros.
+              Aquí no vienes a opinar. Vienes a <strong className="text-gray-900 font-semibold">co-crear una conciencia colectiva</strong>. Cada mentor, cada mentee, se convierte en una neurona viva dentro de una red mayor. Lo que uno aprende, ilumina a otros. Lo que uno comparte, inspira a muchos.
+            </p>
+            
+            <p>
+              Una red que no extrae, sino que nutre. Comunicarte, conocerte, vincularte. No como estrategia de networking vacío, sino como práctica de <strong className="text-gray-900 font-semibold">humanidad en red</strong>.
             </p>
           </div>
           
-          <blockquote className="border-l-4 border-[#c4ff0f] pl-6 text-gray-500 italic text-lg">
+          <blockquote className="border-l-4 border-[#c4ff0f] pl-6 font-heading text-xl text-gray-500 italic">
             &ldquo;Cuando compartes desde tu verdad, no solo enseñas: invitas a otros a ser más ellos mismos.&rdquo;
           </blockquote>
         </div>
         
         {/* Grid visual */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-5">
           {[
-            { icon: MessageSquare, label: 'Hilos profundos', color: '#7c3aed' },
-            { icon: Users, label: 'Co-creación', color: '#FF9100' },
-            { icon: Heart, label: 'Luces y sombras', color: '#1A8314' },
+            { icon: MessageSquare, label: 'Hilos de conversación profunda', color: '#7c3aed' },
+            { icon: Users, label: 'Co-creación colectiva', color: '#FF9100' },
+            { icon: Heart, label: 'Compartir luces y sombras', color: '#1A8314' },
             { icon: Sparkles, label: 'Conciencia circular', color: '#c4ff0f' }
           ].map((item, idx) => (
-            <div key={idx} className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow text-center">
+            <div key={idx} className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 text-center">
               <div 
-                className="w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center"
+                className="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center"
                 style={{ backgroundColor: `${item.color}15` }}
               >
-                <item.icon className="w-6 h-6" style={{ color: item.color }} />
+                <item.icon className="w-7 h-7" style={{ color: item.color }} />
               </div>
-              <p className="font-medium text-gray-800 text-sm">{item.label}</p>
+              <p className="font-body font-medium text-gray-800">{item.label}</p>
             </div>
           ))}
         </div>
@@ -653,7 +706,7 @@ const KommunitySection = () => (
 );
 
 // ============================================
-// TOOLBOX - Diseño compacto y elegante
+// TOOLBOX COMPLETO
 // ============================================
 const ToolboxSection = () => (
   <section className="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-white">
@@ -663,42 +716,44 @@ const ToolboxSection = () => (
         <div className="space-y-8">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7c3aed]/10">
             <Briefcase className="w-4 h-4 text-[#7c3aed]" />
-            <span className="text-sm text-[#7c3aed] font-medium">TOOLBOX</span>
+            <span className="text-sm font-body text-[#7c3aed] font-medium">TOOLBOX</span>
           </div>
           
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight">
+          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-semibold text-gray-900 leading-tight">
             Tu caja de herramientas
             <br />
             <span className="text-[#7c3aed]">profesional</span>
           </h2>
           
-          <p className="text-xl text-gray-600 leading-relaxed">
-            No creemos en formar mentores solo desde el conocimiento. Creemos en formar mentores <strong className="text-gray-900">capaces de intervenir, acompañar y transformar</strong> en contextos reales.
-          </p>
-          
-          <p className="text-gray-500">
-            El Toolbox no te dice qué hacer. Te da con qué hacerlo. Es tu apoyo silencioso, tu respaldo profesional.
-          </p>
+          <div className="space-y-6 font-body text-lg text-gray-600 leading-relaxed">
+            <p>
+              En InverSer no creemos en formar mentores solo desde el conocimiento. Creemos en formar mentores <strong className="text-gray-900 font-semibold">capaces de intervenir, acompañar y transformar</strong> en contextos reales. Por eso, te entregamos una caja de herramientas viva.
+            </p>
+            
+            <p>
+              El Toolbox no te dice qué hacer. <strong className="text-gray-900 font-semibold">Te da con qué hacerlo</strong>. Es tu apoyo silencioso. Tu respaldo profesional. Tu caja de recursos cuando el proceso lo exige. Porque un mentor con herramientas claras puede sostener procesos profundos sin improvisar.
+            </p>
+          </div>
         </div>
         
         {/* Grid de recursos */}
         <div className="grid grid-cols-2 gap-4">
           {[
-            { icon: Users, text: '+1.000 dinámicas', color: '#7c3aed' },
-            { icon: FileText, text: 'Plantillas pro', color: '#FF9100' },
-            { icon: Target, text: 'Diagnósticos', color: '#1A8314' },
-            { icon: BookOpen, text: '+600 títulos', color: '#7c3aed' },
-            { icon: Play, text: 'Cursos video', color: '#FF9100' },
-            { icon: Heart, text: 'Cuerpo-emoción', color: '#1A8314' }
+            { icon: Users, text: '+1.000 dinámicas de grupo', color: '#7c3aed' },
+            { icon: FileText, text: 'Plantillas profesionales', color: '#FF9100' },
+            { icon: Target, text: 'Modelos de diagnóstico', color: '#1A8314' },
+            { icon: BookOpen, text: '+600 títulos biblioteca', color: '#7c3aed' },
+            { icon: Play, text: 'Cursos en video', color: '#FF9100' },
+            { icon: Heart, text: 'Materiales cuerpo-emoción', color: '#1A8314' }
           ].map((item, idx) => (
-            <div key={idx} className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
+            <div key={idx} className="flex items-center gap-4 p-5 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
               <div 
-                className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
                 style={{ backgroundColor: `${item.color}15` }}
               >
-                <item.icon className="w-5 h-5" style={{ color: item.color }} />
+                <item.icon className="w-6 h-6" style={{ color: item.color }} />
               </div>
-              <span className="font-medium text-gray-700 text-sm">{item.text}</span>
+              <span className="font-body font-medium text-gray-700">{item.text}</span>
             </div>
           ))}
         </div>
@@ -708,7 +763,7 @@ const ToolboxSection = () => (
 );
 
 // ============================================
-// IPARTNER - Monetización con elegancia
+// IPARTNER COMPLETO
 // ============================================
 const IPartnerSection = ({ mentorData, onActionClick }) => {
   const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
@@ -720,24 +775,35 @@ const IPartnerSection = ({ mentorData, onActionClick }) => {
           <div className="space-y-8">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
               <TrendingUp className="w-4 h-4 text-[#c4ff0f]" />
-              <span className="text-sm text-white/80">iPartner</span>
+              <span className="text-sm font-body text-white/80">iPartner</span>
             </div>
             
-            <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight">
+            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-semibold text-white leading-tight">
               Monetiza tu impacto,
               <br />
               <span className="text-[#c4ff0f]">multiplica tu legado</span>
             </h2>
             
-            <p className="text-xl text-white/70 leading-relaxed">
-              Además de formarte y transformar vidas, en InverSer también puedes generar ingresos. iPartner es nuestro sistema de afiliación consciente.
-            </p>
+            <div className="space-y-6 font-body text-lg text-white/70 leading-relaxed">
+              <p>
+                Además de formarte y transformar vidas, en InverSer también puedes generar ingresos. <strong className="text-white">iPartner</strong> es nuestro sistema de afiliación consciente.
+              </p>
+              
+              <p>
+                Invita a otros mentores al ecosistema y recibe una comisión directa. Si ellos también invitan, recibes un segundo nivel. No es un sistema piramidal vacío: es un <strong className="text-white">modelo de expansión con propósito</strong>.
+              </p>
+              
+              <p>
+                Algunos mentores cubren con creces el costo de su membresía solo con dos o tres referidos. Otros han construido redes de impacto que generan ingresos pasivos significativos.
+              </p>
+            </div>
             
-            <ul className="space-y-4">
+            <ul className="space-y-4 font-body">
               {[
                 'Invita mentores y recibe comisión directa',
-                'Ganancias por segundo nivel',
-                'Modelo ético de expansión'
+                'Ganancias por segundo nivel de invitados',
+                'Cubre tu membresía con pocos referidos',
+                'Modelo ético de expansión con propósito'
               ].map((item, idx) => (
                 <li key={idx} className="flex items-center gap-3 text-white/70">
                   <CheckCircle className="w-5 h-5 text-[#c4ff0f]" />
@@ -745,6 +811,10 @@ const IPartnerSection = ({ mentorData, onActionClick }) => {
                 </li>
               ))}
             </ul>
+            
+            <blockquote className="border-l-2 border-[#c4ff0f] pl-6 font-heading text-xl text-white/60 italic">
+              &ldquo;En InverSer, tu impacto también puede sostenerte.&rdquo;
+            </blockquote>
             
             <ButtonAnchor
               buttonKey="email_mpp"
@@ -761,22 +831,22 @@ const IPartnerSection = ({ mentorData, onActionClick }) => {
           {/* Landings Card */}
           <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 md:p-10 border border-white/10">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-[#c4ff0f]/20 flex items-center justify-center">
-                <FileText className="w-5 h-5 text-[#c4ff0f]" />
+              <div className="w-12 h-12 rounded-xl bg-[#c4ff0f]/20 flex items-center justify-center">
+                <FileText className="w-6 h-6 text-[#c4ff0f]" />
               </div>
-              <h3 className="text-xl font-bold text-white">Landings Personalizadas</h3>
+              <h3 className="font-heading text-2xl font-semibold text-white">Landings Personalizadas</h3>
             </div>
             
-            <p className="text-white/70 mb-6 leading-relaxed">
-              Cada mentor tiene acceso a landings personalizadas como esta. Tu foto, tu presentación, tus enlaces.
+            <p className="font-body text-white/70 mb-6 leading-relaxed">
+              Cada mentor tiene acceso a landings personalizadas como esta que estás leyendo ahora. Una página diseñada para que tú la compartas con tu red, con tu estilo, con tu voz.
             </p>
             
-            <ul className="space-y-3 text-white/60 text-sm">
+            <ul className="space-y-3 font-body text-white/60">
               {[
-                'Tu foto y presentación',
-                'Landing para el ecosistema',
-                'Landings por certificación',
-                'Formatos adaptables'
+                'Tu foto, presentación y enlaces de contacto',
+                'Landing para presentar el ecosistema a otros',
+                'Landings específicas por cada certificación',
+                'Formatos adaptables para tus programas propios'
               ].map((item, idx) => (
                 <li key={idx} className="flex items-center gap-2">
                   <ChevronRight className="w-4 h-4 text-[#c4ff0f]" />
@@ -784,6 +854,12 @@ const IPartnerSection = ({ mentorData, onActionClick }) => {
                 </li>
               ))}
             </ul>
+            
+            <div className="mt-8 p-5 bg-[#c4ff0f]/10 rounded-xl border border-[#c4ff0f]/20">
+              <p className="font-body text-sm text-white/80 leading-relaxed">
+                <span className="text-[#c4ff0f] font-medium">Nota:</span> No necesitas diseñar nada. Nosotros lo hacemos por ti. Tú solo decides qué mostrar y cómo comunicar. Tu landing se crea automáticamente al unirte.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -792,31 +868,31 @@ const IPartnerSection = ({ mentorData, onActionClick }) => {
 };
 
 // ============================================
-// CTA FINAL - Impactante y emocional
+// CTA FINAL
 // ============================================
 const CTAFinalSection = ({ mentorData, onActionClick }) => {
   const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
 
   return (
     <section className="relative py-32 md:py-40 overflow-hidden">
-      {/* Fondo gradiente */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#7c3aed] via-[#5b21b6] to-[#4c1d95]" />
       
-      {/* Decoración */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/10 rounded-full filter blur-[150px]" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#c4ff0f]/20 rounded-full filter blur-[150px]" />
       </div>
       
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-white leading-tight mb-8">
           Si sientes que este mundo necesita
           <br />
           <span className="text-[#c4ff0f]">más mentores conscientes...</span>
         </h2>
         
-        <p className="text-xl md:text-2xl text-white/80 mb-12 max-w-2xl mx-auto font-light">
-          Entonces sigue avanzando. Esto no es una promesa. Es una arquitectura.
+        <p className="font-body text-xl md:text-2xl text-white/80 mb-12 max-w-3xl mx-auto leading-relaxed">
+          Si intuyes que tu rol puede crecer más allá de las sesiones uno a uno. Si buscas un espacio que te potencie sin deshumanizarte. Si crees que la tecnología puede ser aliada de la transformación humana…
+          <br /><br />
+          <strong className="text-white">Entonces sigue avanzando. Esto no es una promesa. Es una arquitectura.</strong>
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -842,8 +918,10 @@ const CTAFinalSection = ({ mentorData, onActionClick }) => {
           />
         </div>
         
-        <p className="mt-12 text-white/50 text-sm">
-          Bienvenido al Mentor & Partner Program. Tu legado comienza aquí.
+        <p className="mt-16 font-heading text-xl text-white/60 italic">
+          Bienvenido al Mentor & Partner Program. Bienvenido al Plan Pioneros.
+          <br />
+          <span className="text-white/80 font-medium">Tu legado comienza aquí.</span>
         </p>
       </div>
     </section>
@@ -851,7 +929,7 @@ const CTAFinalSection = ({ mentorData, onActionClick }) => {
 };
 
 // ============================================
-// FOOTER - Minimalista y elegante
+// FOOTER
 // ============================================
 const FooterMPP = ({ mentorData, onActionClick }) => {
   const mentor = mentorData?.mentor || {};
@@ -862,18 +940,18 @@ const FooterMPP = ({ mentorData, onActionClick }) => {
     <footer className="bg-[#031730] text-white py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-3 gap-12 mb-12 pb-12 border-b border-white/10">
-          {/* Logo y descripción */}
+          {/* Logo */}
           <div className="space-y-4">
             <LogoMPP />
-            <p className="text-white/50 text-sm leading-relaxed max-w-xs">
-              Ecosistema de empoderamiento para mentores conscientes.
+            <p className="font-body text-white/50 text-sm leading-relaxed max-w-xs">
+              Ecosistema de empoderamiento para mentores conscientes. Donde la tecnología potencia la transformación humana.
             </p>
           </div>
           
           {/* Navegación */}
           <div>
-            <p className="font-semibold text-white mb-4">Navegación</p>
-            <nav className="flex flex-col space-y-2">
+            <p className="font-heading font-semibold text-white mb-4">Navegación</p>
+            <nav className="flex flex-col space-y-2 font-body">
               {['Ecosistema', 'Certificación', 'Herramientas', 'Comunidad'].map((item, idx) => (
                 <a 
                   key={idx}
@@ -886,14 +964,14 @@ const FooterMPP = ({ mentorData, onActionClick }) => {
             </nav>
           </div>
           
-          {/* Mentor - alineado a la derecha */}
+          {/* Mentor */}
           <div className="flex flex-col items-end text-right">
             {hasMentor && (
               <>
                 <div className="flex items-center gap-4 mb-4">
                   <div>
-                    <p className="font-semibold">{mentor.first_name} {mentor.last_name}</p>
-                    <p className="text-[#c4ff0f] text-sm">Team Líder</p>
+                    <p className="font-heading font-semibold">{mentor.first_name} {mentor.last_name}</p>
+                    <p className="font-body text-[#c4ff0f] text-sm">Team Líder</p>
                   </div>
                   {mentor.photo_url && (
                     <img 
@@ -919,7 +997,7 @@ const FooterMPP = ({ mentorData, onActionClick }) => {
         </div>
         
         {/* Bottom */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/40">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 font-body text-sm text-white/40">
           <a 
             href="https://inverser.us/terminos-condiciones/" 
             target="_blank" 
@@ -948,7 +1026,7 @@ const FooterMPP = ({ mentorData, onActionClick }) => {
 };
 
 // ============================================
-// MAIN LANDING COMPONENT
+// MAIN LANDING
 // ============================================
 const LandingMPP = ({ mentorData, onActionClick }) => {
   useEffect(() => {
@@ -957,13 +1035,13 @@ const LandingMPP = ({ mentorData, onActionClick }) => {
   }, [mentorData]);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen font-body">
       <NavbarMPP mentorData={mentorData} onActionClick={onActionClick} />
       <HeroMPP mentorData={mentorData} onActionClick={onActionClick} />
       <IntroEcosistemaSection />
       <CertificacionSection mentorData={mentorData} onActionClick={onActionClick} />
       <StatementSection />
-      <HerramientasGestionSection />
+      <HerramientasSection />
       <IASection />
       <KommunitySection />
       <ToolboxSection />
