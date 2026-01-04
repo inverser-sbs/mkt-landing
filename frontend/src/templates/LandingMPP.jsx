@@ -658,7 +658,7 @@ const VideoTKSection = () => {
         </div>
         
         <p className="text-center text-gray-500 mt-8 italic">
-          "Hay aprendizajes que no entran por la lógica, sino por la vibración. Este es tu laboratorio de sentidos."
+          &ldquo;Hay aprendizajes que no entran por la lógica, sino por la vibración. Este es tu laboratorio de sentidos.&rdquo;
         </p>
       </div>
     </section>
