@@ -18,10 +18,10 @@ import React, { useEffect } from 'react';
 import { 
   Calendar, Clock, Users, BookOpen, Brain, MessageSquare,
   Video, Headphones, Layout, Globe, Briefcase, Link2,
-  Award, Star, ChevronRight, Mail, Phone, ExternalLink,
+  Award, Star, ChevronRight, ChevronDown, Mail, Phone, ExternalLink,
   Sparkles, Target, Heart, Zap, Shield, TrendingUp,
   Play, Mic, Move, Grid, Send, DollarSign, FileText,
-  CheckCircle, ArrowRight
+  CheckCircle, ArrowRight, HelpCircle
 } from 'lucide-react';
 import { Badge } from '../components/ui/badge';
 import { getImageUrl } from '../utils/imageUrl';
