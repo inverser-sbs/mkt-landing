@@ -512,7 +512,7 @@ const IASection = () => (
           </div>
           
           <blockquote className="border-l-4 border-[#c4ff0f] pl-6 text-white/80 italic">
-            "El mentor del futuro no teme a la IA. La guía. La humaniza. La transforma en aliada del crecimiento humano."
+            &ldquo;El mentor del futuro no teme a la IA. La guía. La humaniza. La transforma en aliada del crecimiento humano.&rdquo;
           </blockquote>
         </div>
         
