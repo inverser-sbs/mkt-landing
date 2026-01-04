@@ -49,6 +49,14 @@ const BUTTON_ICONS = {
   'demo_hero': Calendar,
   'prueba_cta': ArrowRight,
   'comprar_pricing': ExternalLink,
+  // MPP - Mentor & Partner Program
+  'agendar_mpp': Calendar,
+  'whatsapp_mpp': Phone,
+  'ver_perfil_mpp': Users,
+  'ver_certificacion_mpp': FileText,
+  'email_mpp': MessageCircle,
+  'aplicar_mpp': ArrowRight,
+  'ir_perfil_footer_mpp': Users,
   // Default
   'default': ExternalLink
 };
