@@ -19,7 +19,7 @@ El Panel de Edición permite a los mentores actualizar sus enlaces de forma segu
 
 ### Ejemplo Real
 ```
-https://landing-debug-1.preview.emergentagent.com/edit/noel-rivera?token=qoy6llrBNTjtVPznm89-a5EWoJvuqDokWHyWwgP3J6I
+https://mentor-program.preview.emergentagent.com/edit/noel-rivera?token=qoy6llrBNTjtVPznm89-a5EWoJvuqDokWHyWwgP3J6I
 ```
 
 ---
@@ -227,12 +227,12 @@ curl -X POST "http://localhost:8001/api/admin/mentors/6946b322ec03d45e8b368942/m
 
 ### Panel de Edición
 ```
-https://landing-debug-1.preview.emergentagent.com/edit/{slug}?token={token}
+https://mentor-program.preview.emergentagent.com/edit/{slug}?token={token}
 ```
 
 ### Generar Magic Link (Admin)
 ```
-POST https://landing-debug-1.preview.emergentagent.com/api/admin/mentors/{id}/magic-link?days_valid=7
+POST https://mentor-program.preview.emergentagent.com/api/admin/mentors/{id}/magic-link?days_valid=7
 ```
 
 ---
