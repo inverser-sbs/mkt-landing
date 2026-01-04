@@ -1,5 +1,6 @@
 import React from 'react';
 import ButtonAnchor, { prepareAnchorData } from './ButtonAnchor';
+import { getImageUrl } from '../utils/imageUrl';
 
 const Footer = ({ mentorData, onActionClick }) => {
   // Datos del mentor para mostrar contacto
@@ -102,29 +103,37 @@ const Footer = ({ mentorData, onActionClick }) => {
             </ul>
           </div>
 
-          {/* Mentor Section - Sin título "Tu Mentor" */}
+          {/* Mentor Section con foto miniatura */}
           <div>
-            {/* Mentor certificado como título principal */}
-            <p className="text-xs text-gray-500 mb-1">Mentor certificado</p>
             {mentor && (
-              <p className="text-base font-medium text-white mb-4">
-                {mentor.first_name} {mentor.last_name}
-              </p>
+              <>
+                <div className="flex items-center gap-3 mb-4">
+                  {mentor.photo_url && (
+                    <img 
+                      src={getImageUrl(mentor.photo_url)} 
+                      alt={`${mentor.first_name} ${mentor.last_name}`}
+                      className="w-12 h-12 rounded-full object-cover border-2 border-[#c4ff0f]/40"
+                    />
+                  )}
+                  <div>
+                    <p className="text-xs text-gray-500">Mentor certificado</p>
+                    <p className="text-base font-medium text-white">
+                      {mentor.first_name} {mentor.last_name}
+                    </p>
+                  </div>
+                </div>
+                <ButtonAnchor
+                  buttonKey="ir_perfil_footer"
+                  templateKey={templateKey}
+                  actions={actions}
+                  mentorLinks={mentorLinks}
+                  campaignLinks={campaignLinks}
+                  onActionClick={onActionClick}
+                  variant="ghost"
+                  size="sm"
+                />
+              </>
             )}
-            
-            {/* ============================================ */}
-            {/* BUTTON ANCHOR - Ir al perfil (Footer) */}
-            {/* ============================================ */}
-            <ButtonAnchor
-              buttonKey="ir_perfil_footer"
-              templateKey={templateKey}
-              actions={actions}
-              mentorLinks={mentorLinks}
-              campaignLinks={campaignLinks}
-              onActionClick={onActionClick}
-              variant="ghost"
-              size="sm"
-            />
           </div>
         </div>
 
