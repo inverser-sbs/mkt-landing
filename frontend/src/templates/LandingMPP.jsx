@@ -122,7 +122,7 @@ const HeroMPP = ({ mentorData, onActionClick }) => {
               <span className="text-sm font-body text-white/80">Plan Pioneros</span>
             </div>
             
-            <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-semibold leading-[1.05] tracking-tight">
+            <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight">
               <span className="text-white">Mentor</span>
               <span className="text-[#c4ff0f]"> & </span>
               <span className="text-white">Partner</span>
