@@ -957,29 +957,86 @@ const FAQSection = () => {
     },
     {
       question: "¿Por qué hablan de \"ecosistema\" y no de programa tradicional?",
-      answer: `Porque el Mentor & Partner Program no está diseñado para que tú vengas a hacer un programa, sino para que acompañes a otros en distintos procesos de transformación.
+      answer: `Porque en InverSer no creemos en espacios cerrados ni en modelos donde el mentor solo "consume" lo que otros diseñaron.
 
-Aquí no existe una única certificación ni una sola propuesta formativa. El mentor accede a un conjunto de programas —como la Certificación Profesional de NeuroCoaching y los que se irán sumando— desde los cuales puede formar, mentorear y acompañar, siempre apalancado en la infraestructura de InverSer.
+Hablamos de ecosistema porque lo que proponemos es un entorno vivo, flexible y en evolución constante, donde las personas habitan digitalmente para crecer humanamente, pero también aportan, co-crean y transforman el propio espacio.
 
-A esto se suman todas las capas que sostienen tu rol: herramientas tecnológicas, inteligencia artificial aplicada, espacios de comunidad, sistemas de reservas, salas de encuentros, modelos de monetización y soporte estratégico.
+El Mentor & Partner Program no está pensado para que vengas únicamente a hacer un programa puntual ni para que repitas un guion prefabricado. Está diseñado para que ejerzas tu rol de mentor acompañando procesos reales, mientras el ecosistema se enriquece con tu experiencia, tu mirada y tu forma de acompañar.
 
-Por eso hablamos de ecosistema: porque no es un programa aislado, sino un medio completo para ejercer el mentoring en sus distintas expresiones —formación, sesiones de coaching, mentoría, consultoría empresarial— sin que tengas que construir todo desde cero.`
+Dentro del ecosistema no existe una sola certificación ni una única propuesta formativa. Accedes a múltiples programas —como la Certificación Profesional de NeuroCoaching y los que se irán incorporando—, pero también a espacios donde mentores y alumnos pueden proponer, diseñar y desarrollar nuevos módulos, experiencias y recorridos de aprendizaje.
+
+Por eso el ecosistema no es rígido ni inmutable. Tiene estructura, reglas claras y coherencia, pero está pensado para adaptarse, crecer y evolucionar a medida que las personas que lo habitan lo hacen.
+
+InverSer no busca empaquetar el comportamiento del mentor. Busca ofrecerle herramientas sólidas, infraestructura y soporte, dejando siempre en el centro lo más importante: la experiencia, la conexión humana y la capacidad de acompañar desde la autenticidad.
+
+Llamarlo ecosistema no es una metáfora. Es una decisión consciente: crear un espacio donde el mentor no solo utiliza el sistema, sino que forma parte viva de él, contribuyendo a su evolución mientras crece profesional y humanamente.
+
+Por eso hablamos de ecosistema y no de programa tradicional: porque aquí no entras a cumplir un recorrido cerrado, sino a habitar, aportar y construir un medio vivo para ejercer el mentoring en la era digital, con humanidad, propósito y futuro.`
+    },
+    {
+      question: "¿Cómo puedo habitar un ecosistema tan completo sin perder mi esencia como mentor?",
+      answer: `Es una pregunta legítima y profundamente humana. Cuando un ecosistema es potente, estructurado y ofrece muchas herramientas, es natural preguntarse si ese mismo sistema puede terminar condicionando, limitando o diluyendo la identidad de quien lo habita.
+
+En InverSer, el ecosistema no existe para encerrar al mentor, sino para ampliarlo.
+
+Nada dentro del Mentor & Partner Program es obligatorio. Ninguna certificación, ningún método, ninguna herramienta. Todo lo que el ecosistema ofrece está ahí como posibilidad, no como imposición. El mentor decide qué utiliza, cómo lo utiliza y hasta dónde lo integra en su práctica profesional.
+
+El ecosistema no define tu identidad ni tu forma de acompañar. Esa identidad viene de tu historia, tu experiencia, tu mirada y tu forma de estar con otros seres humanos. InverSer no busca reemplazar esa voz, sino darle soporte, estructura y proyección si tú eliges hacerlo.
+
+Aquí no se espera que el mentor se adapte al sistema. El sistema está diseñado para adaptarse al mentor. Puedes utilizar una certificación existente, crear tus propios módulos formativos, proponer nuevas experiencias, o incluso usar solo algunas herramientas del ecosistema mientras desarrollas propuestas completamente personales.
+
+Y si en algún momento deseas llevar tu práctica a un entorno totalmente propio —con tu marca, tus nombres, tus recorridos y tu identidad completa—, también existe esa posibilidad a través de servicios como SuiteX, donde InverSer actúa como aliado tecnológico, no como contenedor identitario.
+
+Por diseño, este ecosistema evita convertirse en una "jaula dorada" porque:
+• No exige exclusividad.
+• No impone recorridos cerrados.
+• No captura al mentor dentro de una única forma de hacer.
+
+InverSer no necesita que el mentor se disuelva para funcionar. Funciona precisamente porque cada mentor permanece siendo quien es, mientras encuentra un espacio que lo sostiene, lo amplifica y le permite crecer sin perder autenticidad.
+
+Habitar este ecosistema no significa pertenecer a una estructura que te define. Significa elegir un entorno que te acompaña mientras tú sigues siendo tú.`
+    },
+    {
+      question: "¿El ecosistema no corre el riesgo de homogeneizar la mentoría?",
+      answer: `No. Y es importante decirlo con claridad.
+
+La mentoría no es homogenizable, porque no es un contenido, es un acto humano. Nace de la experiencia, la trayectoria, la sensibilidad y la forma de estar de cada mentor. Eso no se puede estandarizar ni automatizar.
+
+Lo que sí tiene una estructura común —como ocurre en cualquier universidad o formación profesional— son los contenidos, los recorridos formativos y los marcos de trabajo de certificaciones como la Certificación Profesional de NeuroCoaching y de los programas que se integran al ecosistema.
+
+Esa estructura no busca uniformar a los mentores, sino dar coherencia, calidad y profundidad al proceso de aprendizaje del mentee. A partir de ahí, cada mentor acompaña desde su propia historia, su mirada, su estilo y su vivencia.
+
+Dicho de otro modo:
+• El contenido puede ser compartido.
+• La mentoría nunca lo es.
+
+En InverSer no formamos "mentores en serie" ni replicadores de un guion. Buscamos exactamente lo contrario: que cada mentor aporte su voz, su experiencia y su forma de acompañar, enriqueciendo el proceso.
+
+Por eso hablamos de ecosistema vivo. Un espacio donde existe una base común que sostiene, pero donde la riqueza surge de la diversidad, la conexión humana y la experiencia real de quienes acompañan.
+
+Aquí no se estandariza a las personas. Se cuida la estructura para que la humanidad pueda expresarse.`
+    },
+    {
+      question: "¿La estructura del ecosistema limita la creatividad o la originalidad del mentor?",
+      answer: `No. La estructura en InverSer no limita la creatividad: la sostiene.
+
+El ecosistema ofrece una columna vertebral clara —métodos, recorridos, contenidos base y herramientas— para garantizar profundidad, coherencia y calidad en los procesos de transformación. Pero esa estructura no es una jaula, es un soporte.
+
+La originalidad del mentor no solo no se sacrifica, sino que se activa y se potencia:
+• Cada proceso de mentoría es uno a uno, humano y contextual.
+• El mentor puede adaptar tareas, profundizar contenidos o abrir nuevas líneas de trabajo cuando un mentee lo necesita.
+• Puede crear sus propios módulos, experiencias y recursos formativos dentro del ecosistema y utilizarlos con sus mentees.
+• Puede aportar desde su experiencia viva, su mirada profesional y su sensibilidad personal.
+
+La estructura existe para evitar el caos, no para uniformar. Igual que en una universidad: el programa es común, pero cada docente deja su huella, su enfoque y su forma de acompañar.
+
+Además, el ecosistema está diseñado para escuchar y evolucionar. Mentores y mentees pueden proponer mejoras, ajustes y nuevas integraciones que se analizan y, cuando tienen sentido, se incorporan.
+
+Por eso hablamos de un ecosistema vivo y no de un programa cerrado. Aquí no se busca eficiencia a costa de la humanidad. Se busca humanizar la estructura para que la transformación sea real, profunda y sostenible.`
     },
     {
       question: "¿Qué diferencia a este programa de otros espacios de mentoring?",
-      answer: `La diferencia principal es que aquí no solo te formamos como mentor: te acompañamos a ejercer como mentor.
-
-Muchos espacios de mentoring se quedan en la formación: te dicen qué hacer, cómo hacerlo y te entregan contenidos valiosos. Eso no está mal, pero suele dejarte solo cuando llega el momento de llevarlo a la práctica.
-
-En InverSer damos un paso más. Aquí no solo accedes a formación, sino a un ecosistema completo de apoyo. Te entregamos herramientas reales, infraestructura digital, modelos probados y programas ya diseñados, validados y acreditados —como la Certificación Profesional de NeuroCoaching y los que se irán sumando— para que puedas acompañar procesos desde el primer momento.
-
-No te decimos únicamente "esto es lo que podrías hacer". Te decimos: "aquí está todo para que lo hagas".
-
-Además, el ecosistema no limita tu práctica a los programas de InverSer. También puedes utilizar estas herramientas para acompañar con tus propios programas, servicios de coaching, mentoría o consultoría empresarial, siempre apalancado en una estructura tecnológica, humana y estratégica sólida.
-
-Por eso nos diferenciamos del resto del mercado: porque no existe hoy un espacio de mentoring que integre, en un solo entorno, formación, acompañamiento, herramientas, productos listos para el mercado y sistemas de monetización.
-
-Aquí no te dejamos con ideas. Te damos el medio para llevarlas a la acción.`
+      answer: "La diferencia principal es que aquí no solo te formamos como mentor: te acompañamos a ejercer como mentor."
     },
     {
       question: "¿A quién está dirigido este programa?",
@@ -995,19 +1052,77 @@ Aquí no te dejamos con ideas. Te damos el medio para llevarlas a la acción.`
     },
     {
       question: "¿Cómo funciona el sistema de Partner / afiliados?",
-      answer: `El sistema de Partner del Mentor & Partner Program está diseñado para que tu rol como mentor sea sostenible, escalable y económicamente viable.
+      answer: `El sistema de Partner del Mentor & Partner Program está diseñado para que tu rol como mentor sea sostenible, escalable y económicamente viable, sin perder el foco humano del acompañamiento.
 
-La monetización no se basa en un único modelo, sino en varias vías complementarias:
+La monetización no se basa en un único mecanismo, sino en varias vías complementarias, siempre vinculadas a tu rol como mentor y al valor real que aportas dentro del ecosistema.
 
-1. Monetización por tu rol como mentor: Cada vez que acompañas a mentíes dentro de certificaciones como la Certificación Profesional de NeuroCoaching generas ingresos por tu labor directa.
+1. Monetización por tu rol directo como mentor
+Cada vez que acompañas a mentees dentro de certificaciones como la Certificación Profesional de NeuroCoaching —y de los programas que se irán incorporando— generas ingresos por tu labor directa de acompañamiento.
 
-2. Monetización como mentor supervisor: Cuando algunas de las personas que tú acompañaste deciden convertirse en mentores dentro del ecosistema, sigues generando ingresos por los mentees que ellos acompañen.
+2. Monetización como mentor supervisor
+Cuando algunos de tus mentees deciden convertirse en mentores dentro del ecosistema, sigues generando ingresos por los procesos que ellos acompañan. Esto te permite evolucionar de forma natural hacia un rol de mentor supervisor, acompañando también a nuevos mentores.
 
-3. Invitación directa de otros mentores: Puedes invitar a otros profesionales del coaching y del acompañamiento para que se postulen al ecosistema. Si son aprobados, generas ingresos por ellos y también por un segundo nivel.
+3. Invitación directa de otros mentores
+Puedes invitar a otros profesionales del coaching o del acompañamiento (aunque provengan de otras escuelas) para que se postulen al ecosistema. Si son aprobados, generas ingresos por ellos y por un segundo nivel máximo, creando una red colaborativa y sostenible.
 
-4. Monetización por productos y servicios del ecosistema: Todos los productos y servicios digitales que InverSer desarrolle estarán integrados en este modelo de afiliación.
+4. Monetización por productos y servicios del ecosistema
+Todos los productos y servicios digitales que InverSer desarrolle (herramientas, plataformas, servicios profesionales) estarán integrados en este modelo, generando nuevas oportunidades de ingresos.
 
-Gracias a este sistema, muchos mentores descubren que su membresía prácticamente se paga sola.`
+El objetivo es claro: que el mentor disponga de formas reales, éticas y sostenibles de monetizar su labor, hasta el punto de que, en muchos casos, su membresía prácticamente se paga sola.`
+    },
+    {
+      question: "¿Cómo escala InverSer sin deshumanizar los procesos de mentoría?",
+      answer: `InverSer no escala a través de la masificación, sino a través de la multiplicación consciente de capacidad humana.
+
+El ecosistema está diseñado para crecer sin perder humanidad porque el centro no es el volumen, sino la calidad del acompañamiento.
+
+Esto se cuida de varias formas muy concretas:
+
+• El mentor decide a cuántos mentees puede acompañar. No existen cuotas mínimas ni exigencias de volumen. Cada mentor actúa desde su disponibilidad real de tiempo, energía y presencia.
+
+• Existen límites humanos explícitos. Si un mentor comienza a acompañar a más personas de las que humanamente puede sostener, eso se convierte en un indicador de alerta para el ecosistema. Acompañar es una responsabilidad, no una carrera por cantidad.
+
+• Los procesos de certificación no son autoconsumibles. No se venden como contenidos aislados ni como formaciones masivas. Cada mentee entra al ecosistema acompañado por un mentor desde el inicio.
+
+• El crecimiento se da por creación de nuevas células humanas, no por sobrecarga. A medida que se forman nuevos mentores, se amplía la capacidad de acompañamiento sin diluir la calidad.
+
+• Los espacios colectivos (webinars, encuentros generativos, sesiones compartidas) enriquecen el aprendizaje, pero nunca sustituyen la mentoría uno a uno.
+
+• El ecosistema aprende y se adapta. Los programas no son rígidos ni cerrados. Se nutren de la experiencia real de los mentores, de los encuentros en vivo y de las necesidades humanas que emergen en el camino.
+
+Escalar, para InverSer, no significa atender a más personas con menos presencia. Significa crear las condiciones para que más personas sean acompañadas con profundidad, consciencia y cuidado, sin perder el vínculo humano.
+
+Aquí no se crece deshumanizando. Se crece formando más humanidad capaz de acompañar a otros.`
+    },
+    {
+      question: "¿Cómo evita InverSer que el sistema iPartner se convierta en un esquema piramidal?",
+      answer: `Esta es una pregunta legítima, y en InverSer la abordamos con total transparencia.
+
+El sistema iPartner no está diseñado para reclutar masivamente ni para priorizar la captación sobre la mentoría. Es una herramienta financiera al servicio de un ecosistema humano, no su motor principal.
+
+Existen salvaguardas claras y explícitas que lo diferencian radicalmente de cualquier esquema piramidal:
+
+1. Selección consciente de mentores
+No cualquiera puede entrar. Cada mentor pasa por un proceso de aplicación, evaluación y conversación. Buscamos alineación humana, ética y profesional. InverSer no es para todos, y eso es intencional.
+
+2. Límite estructural claro
+El sistema contempla un máximo de dos niveles de distribución de beneficios. No existen estructuras infinitas ni crecimiento descontrolado.
+
+3. Producto y acompañamiento reales
+Aquí no se paga por entrar a un sistema vacío. Existen certificaciones reales, procesos formativos concretos y acompañamiento humano uno a uno. El valor está en el proceso, no en la afiliación.
+
+4. Protección del mentee
+Los pagos de los mentees son mensuales. Si un mentor abandona, el sistema permite congelar pagos y reasignar el proceso a otro mentor compatible, garantizando continuidad y cuidado.
+
+5. Transparencia financiera
+La distribución de beneficios es clara, comprensible y revisable. No existen promesas irreales ni rendimientos financieros garantizados.
+
+6. El foco no es reclutar, es acompañar
+El iPartner premia el acompañamiento sostenido, la formación de nuevos mentores y el liderazgo responsable. No recompensa la captación vacía.
+
+Un esquema piramidal se basa en dinero sin producto, sin proceso y sin responsabilidad. El iPartner de InverSer se basa en acompañamiento humano, formación real y límites claros.
+
+Aquí el crecimiento económico es consecuencia del valor que aportas, no al revés.`
     },
     {
       question: "¿Qué incluye el Plan Pioneros?",
@@ -1015,9 +1130,9 @@ Gracias a este sistema, muchos mentores descubren que su membresía prácticamen
 
 Esta etapa nace con una intención muy clara: rodearnos de profesionales alineados, con experiencia real, que quieran crecer junto a InverSer y, al mismo tiempo, nutrir el ecosistema con su mirada, su práctica y su conocimiento.
 
-Como pionero, accedes al ecosistema completo mediante un setup inicial y participas activamente en un proceso de co-creación y evolución.
+Como pionero, accedes al ecosistema completo mediante un setup inicial y participas activamente en un proceso de co-creación y evolución: tu feedback, tus aportes y tu experiencia ayudan a fortalecer, ajustar y hacer más efectivo todo el sistema.
 
-A cambio de ese compromiso temprano, los pioneros reciben condiciones preferenciales, entre ellas una membresía futura con descuento permanente.
+A cambio de ese compromiso temprano, los pioneros reciben condiciones preferenciales, entre ellas una membresía futura con descuento permanente, que reconoce haber dado el paso cuando el ecosistema aún estaba en fase de crecimiento y consolidación.
 
 El Plan Pioneros es, en esencia, un acuerdo ganar–ganar: InverSer crece contigo, y tú creces siendo parte de la construcción desde el inicio.`
     },
@@ -1031,19 +1146,40 @@ El Plan Pioneros es, en esencia, un acuerdo ganar–ganar: InverSer crece contig
     },
     {
       question: "¿Qué tipo de herramientas voy a encontrar dentro del ecosistema?",
-      answer: "Desde plataformas de proyectos, e-learning, comunidad, reservas de sesiones, salas de encuentro, inteligencia artificial aplicada, hasta un Toolbox profesional con dinámicas, plantillas, bibliotecas y recursos avanzados para tu práctica como mentor."
+      answer: `Desde plataformas de proyectos, e-learning, comunidad, reservas de sesiones, salas de encuentro y espacios colaborativos, hasta un Toolbox profesional con dinámicas, plantillas, bibliotecas y recursos avanzados para tu práctica como mentor.
+
+Además, el ecosistema integra herramientas de inteligencia artificial aplicadas al acompañamiento, diseñadas para potenciar el trabajo humano, nunca para sustituirlo.`
+    },
+    {
+      question: "¿Qué papel juega la inteligencia artificial (MIA) dentro del ecosistema?",
+      answer: `MIA es una herramienta de apoyo basada en inteligencia artificial, diseñada para acompañar tanto a mentores como a mentees en el acceso rápido a conocimiento relevante, recursos formativos y propuestas metodológicas.
+
+No es una mentora humana, no toma decisiones por ti ni sustituye el acompañamiento real. Su valor está en acelerar el acceso a información de calidad, para que el mentor pueda dedicar más tiempo a lo verdaderamente importante: el análisis humano, la conversación profunda y la conexión con el mentee.
+
+MIA está alimentada exclusivamente con:
+• Libros y materiales de referentes del coaching, el desarrollo humano y la psicología aplicada.
+• El pensamiento filosófico, el lenguaje y la estructura metodológica de InverSer.
+
+No realiza búsquedas abiertas en internet ni genera respuestas fuera de este marco. Su función es similar a la de una biblioteca viva altamente especializada, capaz de sugerir dinámicas, enfoques, lecturas o marcos de reflexión que el mentor luego interpreta, adapta y lleva al terreno humano.
+
+Cuando una pregunta toca ámbitos existenciales, decisiones vitales o procesos personales profundos, MIA está diseñada para derivar siempre al mentor humano, recordando que la transformación no se delega a una herramienta.
+
+En InverSer entendemos la inteligencia artificial como lo que es: una tecnología para reducir tiempos operativos, ampliar acceso al conocimiento y liberar energía creativa, no como un reemplazo de la experiencia humana.
+
+MIA no lidera procesos. Los lideras tú.
+Ella apoya, tú acompañas.`
     },
     {
       question: "¿Qué pasa después de completar el formulario de aplicación?",
       answer: `Revisamos tu perfil y, si hay alineación, te invitamos a una conversación.
 
-Ese encuentro es un espacio para conocernos, resolver tus dudas, profundizar en tu momento profesional y confirmar si este ecosistema es adecuado para ti.
+Ese encuentro es un espacio para conocernos, resolver tus dudas, profundizar en tu momento profesional y confirmar si este ecosistema es adecuado para ti y si existe un match real para avanzar juntos.
 
-Si ambas partes estamos de acuerdo, el siguiente paso es realizar un pago único de incorporación (setup inicial del ecosistema). Este pago permite configurar tu llave de acceso, tu espacio dentro de InverSer y habilitar todas las herramientas.
+Si ambas partes estamos de acuerdo, el siguiente paso es realizar un pago único de incorporación (setup inicial del ecosistema). Este pago permite configurar tu llave de acceso, tu espacio dentro de InverSer y habilitar todas las herramientas y entornos que forman parte del ecosistema.
 
-Durante la etapa de Pioneros no se cobra membresía. Esta fase inicial está pensada para que el primer equipo de mentores y InverSer podamos alinearnos y fortalecer el ecosistema antes de iniciar formalmente la membresía.
+Durante la etapa de Pioneros no se cobra membresía (mensual, trimestral o anual). Esta fase inicial está pensada para que el primer equipo de mentores y InverSer podamos alinearnos, ajustar y fortalecer el ecosistema antes de iniciar formalmente la membresía.
 
-El valor del setup es un importe especial y accesible para los pioneros, precisamente porque son quienes nos acompañan en esta primera etapa de construcción y crecimiento compartido.`
+El valor del setup es un importe especial y accesible para los pioneros, precisamente porque son quienes nos acompañan en esta primera etapa de construcción y crecimiento compartido. Es, una vez más, un acuerdo ganar–ganar: tú accedes al ecosistema desde el inicio y nosotros nos nutrimos de tu experiencia y tu mirada profesional.`
     }
   ];
 
