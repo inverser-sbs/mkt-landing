@@ -1245,6 +1245,20 @@ El valor del setup es un importe especial y accesible para los pioneros, precisa
             </div>
           ))}
         </div>
+        
+        {/* Botón Quiero Unirme */}
+        <div className="flex justify-center mt-12">
+          <ButtonAnchor
+            buttonKey="unirme_faq"
+            templateKey="mpp"
+            actions={actions}
+            mentorLinks={mentorLinks}
+            campaignLinks={campaignLinks}
+            onActionClick={onActionClick}
+            variant="primary"
+            size="lg"
+          />
+        </div>
       </div>
     </section>
   );
