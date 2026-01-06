@@ -1383,7 +1383,7 @@ const LandingMPP = ({ mentorData, onActionClick }) => {
       <ToolboxSection />
       <IPartnerSection mentorData={mentorData} onActionClick={onActionClick} />
       <CTAFinalSection mentorData={mentorData} onActionClick={onActionClick} />
-      <FAQSection />
+      <FAQSection mentorData={mentorData} onActionClick={onActionClick} />
       <FooterMPP mentorData={mentorData} onActionClick={onActionClick} />
     </div>
   );
