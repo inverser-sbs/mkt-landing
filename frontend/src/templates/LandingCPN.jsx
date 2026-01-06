@@ -594,7 +594,7 @@ const EjesSection = () => {
       frase: 'Tu mente es tu mayor aliado.'
     },
     {
-      icon: Zap,
+      icon: Activity,
       title: 'Consciencia Corporal',
       description: 'Tu cuerpo es más que un vehículo: es un canal de sabiduría y energía.',
       frase: 'Escucha lo que tu cuerpo tiene que decir.'
