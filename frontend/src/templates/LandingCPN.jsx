@@ -760,7 +760,7 @@ const NivelesSection = () => {
   ];
 
   return (
-    <section className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-[#faf8f5]">
+    <section id="niveles" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-[#faf8f5]">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7c3aed]/10 mb-6">
@@ -1268,7 +1268,7 @@ const FAQSectionCPN = () => {
   ];
 
   return (
-    <section className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-[#faf8f5]">
+    <section id="faq" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-[#faf8f5]">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7c3aed]/10 mb-6">
