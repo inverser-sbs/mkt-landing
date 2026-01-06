@@ -4,76 +4,126 @@
 Plataforma de marketing full-stack (React, FastAPI, MongoDB) para gestión de campañas de mentores con landing pages dinámicas personalizables.
 
 ## Estado Actual
-**Fecha:** 4 Enero 2026
+**Fecha:** 6 Enero 2026
 
 ### Landings Aprobadas
 - **MPP (Mentor & Partner Program) v1.0** ✅ APROBADA
-  - Hero responsive con card de mentor
-  - Secciones: Intro Ecosistema, Certificación, Statement, Herramientas, IA, Kommunity, Toolbox, Directorio iProfesional, iPartner, CTA Final, FAQ
-  - 18 preguntas frecuentes completas
-  - Efectos parallax en secciones Directorio y CTA
-  - Tipografía personalizada (Cormorant Garamond, Plus Jakarta Sans)
-  - Sistema de botones con ButtonAnchor
-  - Responsive optimizado para móvil
+- **CPN (Certificación Profesional NeuroCoaching) v2.0** 🔄 EN REVISIÓN
 
-- **CPN (Certificación Profesional NeuroCoaching)**
-  - Hero con card de mentor (estilo similar a MPP)
-  - Sección de testimonios con carrusel dinámico (4 testimonios)
-  - Foto miniatura de mentor en footer
-  - FAQ Section
+---
 
-### Templates Disponibles
-1. `cpn` - Certificación Profesional NeuroCoaching
+## Landing MPP v1.0 (APROBADA)
+
+### Secciones
+1. Hero responsive con card de mentor
+2. Intro Ecosistema
+3. Certificación
+4. Statement
+5. Herramientas
+6. IA (MIA)
+7. Kommunity
+8. Toolbox
+9. Directorio iProfesional (parallax)
+10. iPartner
+11. CTA Final (parallax)
+12. FAQ (18 preguntas + botón "Quiero Unirme")
+13. Footer
+
+### Características
+- Tipografía personalizada (Cormorant Garamond, Plus Jakarta Sans)
+- Sistema de botones con ButtonAnchor
+- Responsive optimizado para móvil
+- Efectos parallax en múltiples secciones
+
+---
+
+## Landing CPN v2.0 (EN REVISIÓN)
+
+### Secciones Implementadas
+1. **Hero** - Card de mentor + parallax
+2. **TransformaSER** - Filosofía del SER (NUEVA)
+3. **¿Es para ti?** - Reenfocada desde la posibilidad
+4. **Qué Lograrás** - Beneficios actualizados
+5. **Metodología PEDALEAR** - Enriquecida
+6. **7 Ejes Transformacionales** - (NUEVA, parallax)
+7. **Niveles de Certificación** - 280, 180, 120 días
+8. **Ecosistema Digital** - Herramientas (NUEVA)
+9. **Comunidad** - Stats + parallax
+10. **Tu Siguiente Paso** - De Coach a Mentor (reenfocada)
+11. **Acreditaciones** - 4 logos (GCF, CEL, FGU, CIC)
+12. **Testimonios** - Carrusel 4 personas
+13. **FAQ** - 10 preguntas actualizadas
+14. **CTA Final** - Parallax
+15. **Footer** - Con logo InverSer + foto mentor
+
+### Pendiente
+- Agregar IDs a secciones Niveles y FAQ para navegación
+- Verificación final del menú de navegación en móvil
+
+---
+
+## Templates Disponibles
+1. `cpn` - Certificación Profesional NeuroCoaching (v2.0)
 2. `mpp` - Mentor & Partner Program (v1.0)
 3. `suitex` - SuiteX
 
-### Sistema de Botones (ButtonAnchor)
-Cada landing tiene slots predefinidos donde se anclan botones configurables por mentor:
-- Navbar, Hero (primary, secondary, profile)
-- Secciones internas (certificación, partner, FAQ)
-- CTA Final y Footer
+## Sistema de Botones (ButtonAnchor)
 
-## Arquitectura de Archivos Clave
+### Slots CPN
+- Navbar - Inscríbete
+- Hero - Agendar Llamada / WhatsApp / Ver Perfil
+- TransformaSER - Iniciar
+- ¿Es para ti? - Entrevista
+- Siguiente Paso - Partner
+- CTA Final - Aplicar
+- Footer - Ir al Perfil
+
+### Slots MPP
+- Navbar - Postular
+- Hero - Agendar / WhatsApp / Ver Perfil
+- Certificación - Ver
+- Partner - Email
+- CTA Final - Aplicar / WhatsApp
+- FAQ - Quiero Unirme
+- Footer - Ir al Perfil
+
+---
+
+## Arquitectura
 
 ```
 /app/frontend/src/
 ├── templates/
-│   ├── index.js (Registry de templates, slots y botones)
-│   ├── LandingMPP.jsx (Landing MPP v1.0 - APROBADA)
-│   ├── LandingCPN.jsx
+│   ├── index.js (Registry)
+│   ├── LandingMPP.jsx (v1.0 APROBADA)
+│   ├── LandingCPN.jsx (v2.0)
 │   └── LandingSuitex.jsx
 ├── components/
-│   ├── ButtonAnchor.jsx (Sistema de botones)
-│   ├── HeroSection.jsx (Hero para CPN)
-│   ├── TestimonialsSection.jsx (Carrusel testimonios)
-│   └── Footer.jsx
-└── tailwind.config.js (Fuentes personalizadas)
+│   ├── ButtonAnchor.jsx
+│   ├── AccreditationsSection.jsx (logos)
+│   ├── TestimonialsSection.jsx
+│   └── ...
 ```
+
+## URLs de Prueba
+- `/mpp/demo-mentor` - Landing MPP
+- `/cpn/demo-mentor` - Landing CPN
+
+## Logos y Assets
+- InverSer: `https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/ux8tcoz0_logo-02.png`
+- GCF: `https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/4oif9u9q_GCF-1.png`
+- CEL: `https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/4xct8y9m_CEL-1.png`
+- FGU: `https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/no18ggug_FGU_kit...`
+- CIC: `https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/2rkhabrt_CIC-1.jpg`
 
 ## Backlog
 
 ### P1 - Próximas Tareas
-- Configurar URLs reales de botones MPP en admin (Agendar, WhatsApp, etc.)
-- Verificación final de landing CPN en producción
+- Finalizar IDs de navegación en CPN
+- Verificar menú móvil CPN
+- Aprobar CPN v2.0
 
 ### P2 - Mejoras Futuras
-- Admin Users + Permisos Granulares (RBAC)
+- Admin Users + RBAC
 - Historial de cambios de links
 - Tracking de atribución
-- Estado granular de mentores por campaña
-
-## Documentación
-- `/app/PROTOCOLOS_DESARROLLO.md` - Guía de desarrollo y deployment
-- `/app/frontend/public/PROTOCOLOS_DESARROLLO.html` - Versión HTML
-
-## Integraciones
-- Google Fonts (Cormorant Garamond, Plus Jakarta Sans)
-- Imágenes: Pexels (fondos parallax)
-
-## Credenciales de Prueba
-- Campaña MPP: `mpp`
-- Campaña CPN: `cpn`
-- Mentor demo: `demo-mentor`
-- URLs de prueba:
-  - `/mpp/demo-mentor`
-  - `/cpn/demo-mentor`
