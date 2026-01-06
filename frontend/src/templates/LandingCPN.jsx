@@ -1061,42 +1061,28 @@ const AcreditacionesSection = () => {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {accreditations.map((accreditation, index) => (
-            <a
+            <div
               key={index}
-              href={accreditation.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 group flex flex-col items-center"
+              className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 group flex flex-col items-center"
             >
-              <div className="h-20 w-full flex items-center justify-center mb-4">
+              <div className="h-28 w-full flex items-center justify-center mb-6">
                 <img
                   src={accreditation.logo}
                   alt={accreditation.name}
-                  className="max-h-16 max-w-full object-contain"
+                  className="max-h-24 max-w-full object-contain"
                 />
               </div>
               
               <div className="text-center flex-1 flex flex-col">
-                <h3 className="font-heading text-base font-bold text-gray-900 mb-2 group-hover:text-[#7c3aed] transition-colors">
+                <h3 className="font-heading text-lg font-bold text-gray-900 mb-2">
                   {accreditation.name}
                 </h3>
-                <p className="font-body text-xs text-gray-600 leading-relaxed flex-1">{accreditation.description}</p>
+                <p className="font-body text-sm text-gray-600 leading-relaxed flex-1">{accreditation.description}</p>
               </div>
-              
-              <div className="flex items-center text-[#7c3aed] font-semibold text-xs mt-4 group-hover:underline">
-                <span className="mr-1">Verificar</span>
-                <ExternalLink className="w-3 h-3" />
-              </div>
-            </a>
+            </div>
           ))}
-        </div>
-
-        <div className="text-center mt-8">
-          <p className="font-body text-sm text-gray-500 italic">
-            Todas las acreditaciones son verificables. Haz clic en cada tarjeta para más información.
-          </p>
         </div>
       </div>
     </section>
