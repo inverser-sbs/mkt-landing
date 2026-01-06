@@ -41,6 +41,7 @@ import { getImageUrl } from '../utils/imageUrl';
 // ============================================
 const NavbarCPN = ({ mentorData, onActionClick }) => {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
 
   useEffect(() => {
@@ -48,6 +49,22 @@ const NavbarCPN = ({ mentorData, onActionClick }) => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setMobileMenuOpen(false);
+    }
+  };
+
+  const navLinks = [
+    { id: 'inicio', label: 'Inicio' },
+    { id: 'programa', label: 'Programa' },
+    { id: 'metodologia', label: 'Metodología' },
+    { id: 'niveles', label: 'Niveles' },
+    { id: 'faq', label: 'FAQ' }
+  ];
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -59,21 +76,78 @@ const NavbarCPN = ({ mentorData, onActionClick }) => {
             <img 
               src="https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/ux8tcoz0_logo-02.png" 
               alt="InverSer" 
-              className="h-10"
+              className="h-10 md:h-12"
             />
           </div>
-          
-          <ButtonAnchor
-            buttonKey="inscribete_nav"
-            templateKey="cpn"
-            actions={actions}
-            mentorLinks={mentorLinks}
-            campaignLinks={campaignLinks}
-            onActionClick={onActionClick}
-            variant="primary"
-            size="sm"
-          />
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-6 lg:gap-8">
+            {navLinks.map((link) => (
+              <button 
+                key={link.id}
+                onClick={() => scrollToSection(link.id)} 
+                className={`text-sm font-medium transition-colors ${
+                  scrolled ? 'text-gray-700 hover:text-[#7c3aed]' : 'text-white/90 hover:text-[#c4ff0f]'
+                }`}
+              >
+                {link.label}
+              </button>
+            ))}
+            
+            <ButtonAnchor
+              buttonKey="inscribete_nav"
+              templateKey="cpn"
+              actions={actions}
+              mentorLinks={mentorLinks}
+              campaignLinks={campaignLinks}
+              onActionClick={onActionClick}
+              variant="primary"
+              size="sm"
+            />
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? (
+              <X className={`w-6 h-6 ${scrolled ? 'text-gray-700' : 'text-white'}`} />
+            ) : (
+              <Menu className={`w-6 h-6 ${scrolled ? 'text-gray-700' : 'text-white'}`} />
+            )}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className={`md:hidden mt-4 py-4 border-t ${scrolled ? 'border-gray-200' : 'border-white/20'}`}>
+            <div className="flex flex-col space-y-4">
+              {navLinks.map((link) => (
+                <button 
+                  key={link.id}
+                  onClick={() => scrollToSection(link.id)} 
+                  className={`text-left font-medium ${
+                    scrolled ? 'text-gray-700 hover:text-[#7c3aed]' : 'text-white hover:text-[#c4ff0f]'
+                  }`}
+                >
+                  {link.label}
+                </button>
+              ))}
+              
+              <ButtonAnchor
+                buttonKey="inscribete_nav"
+                templateKey="cpn"
+                actions={actions}
+                mentorLinks={mentorLinks}
+                campaignLinks={campaignLinks}
+                onActionClick={onActionClick}
+                variant="primary"
+                size="sm"
+              />
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );
