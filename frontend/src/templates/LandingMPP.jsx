@@ -89,7 +89,7 @@ const HeroMPP = ({ mentorData, onActionClick }) => {
     first_name: '',
     last_name: '',
     photo_url: null,
-    title: 'Team Líder'
+    title: 'Team Líder INVERSER SBS'
   };
   
   const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
@@ -168,7 +168,7 @@ const HeroMPP = ({ mentorData, onActionClick }) => {
                 <p className="font-heading text-2xl font-semibold text-white mb-1">
                   {hasMentor ? `${mentor.first_name} ${mentor.last_name}` : 'Tu Mentor'}
                 </p>
-                <p className="font-body text-[#c4ff0f] text-sm mb-6">Team Líder</p>
+                <p className="font-body text-[#c4ff0f] text-sm mb-6">Team Líder<br />INVERSER SBS</p>
                 
                 {/* Botones en pirámide: Ver Perfil arriba, los otros dos lado a lado */}
                 <div className="space-y-3">
@@ -1410,7 +1410,7 @@ const FooterMPP = ({ mentorData, onActionClick }) => {
                 <div className="flex items-center gap-4 mb-4">
                   <div>
                     <p className="font-heading font-semibold">{mentor.first_name} {mentor.last_name}</p>
-                    <p className="font-body text-[#c4ff0f] text-sm">Team Líder</p>
+                    <p className="font-body text-[#c4ff0f] text-sm">Team Líder<br />INVERSER SBS</p>
                   </div>
                   {mentor.photo_url && (
                     <img 
