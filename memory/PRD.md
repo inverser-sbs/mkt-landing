@@ -37,10 +37,10 @@ Plataforma de marketing full-stack (React, FastAPI, MongoDB) para gestión de ca
 
 ---
 
-## Landing CPN v2.0 (EN REVISIÓN)
+## Landing CPN v2.0 (PENDIENTE APROBACIÓN FINAL)
 
 ### Secciones Implementadas
-1. **Hero** - Card de mentor + parallax
+1. **Hero** - Card de mentor + parallax + **4 acreditaciones con logos** (GCF, CEL, CIC, FGU)
 2. **TransformaSER** - Filosofía del SER (NUEVA)
 3. **¿Es para ti?** - Reenfocada desde la posibilidad
 4. **Qué Lograrás** - Beneficios actualizados
@@ -50,15 +50,14 @@ Plataforma de marketing full-stack (React, FastAPI, MongoDB) para gestión de ca
 8. **Ecosistema Digital** - Herramientas (NUEVA)
 9. **Comunidad** - Stats + parallax
 10. **Tu Siguiente Paso** - De Coach a Mentor (reenfocada)
-11. **Acreditaciones** - 4 logos (GCF, CEL, FGU, CIC)
+11. **Acreditaciones** - 4 logos con enlaces (GCF, CEL, FGU, CIC)
 12. **Testimonios** - Carrusel 4 personas
 13. **FAQ** - 10 preguntas actualizadas
 14. **CTA Final** - Parallax
 15. **Footer** - Con logo InverSer + foto mentor
 
-### Pendiente
-- Agregar IDs a secciones Niveles y FAQ para navegación
-- Verificación final del menú de navegación en móvil
+### Última actualización (6 Enero 2026)
+- ✅ Acreditaciones agregadas al Hero: 4 logos con fondo blanco, efecto hover y enlaces a las instituciones
 
 ---
 
