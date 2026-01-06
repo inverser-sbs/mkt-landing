@@ -1408,9 +1408,12 @@ const FooterCPN = ({ mentorData, onActionClick }) => {
           </div>
         </div>
         
-        <div className="border-t border-white/10 pt-8 text-center">
+        <div className="border-t border-white/10 pt-8 text-center space-y-2">
           <p className="font-body text-white/40 text-sm">
-            © 2009-2026 INVERSER SBS LLC · Todos los derechos reservados
+            © 2009-2026 <a href="https://inverser.us" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">INVERSER SBS LLC</a> · Todos los derechos reservados
+          </p>
+          <p className="font-body text-white/40 text-sm">
+            <a href="https://inverser.us/terminos-condiciones/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Términos y Condiciones</a>
           </p>
         </div>
       </div>
