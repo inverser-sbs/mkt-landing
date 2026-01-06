@@ -652,11 +652,29 @@ const EjesSection = () => {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-          {ejes.map((eje, idx) => (
+        {/* Primera fila - 4 ejes */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-4 md:mb-6">
+          {ejes.slice(0, 4).map((eje, idx) => (
             <div 
               key={idx}
               className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-[#c4ff0f]/30 hover:bg-white/10 transition-all duration-300"
+            >
+              <div className="w-12 h-12 rounded-xl bg-[#c4ff0f]/10 flex items-center justify-center mb-4">
+                <eje.icon className="w-6 h-6 text-[#c4ff0f]" />
+              </div>
+              <h3 className="font-heading text-lg font-semibold text-white mb-2">{eje.title}</h3>
+              <p className="font-body text-white/60 text-sm mb-3 leading-relaxed">{eje.description}</p>
+              <p className="font-body text-[#c4ff0f] text-xs italic">"{eje.frase}"</p>
+            </div>
+          ))}
+        </div>
+        
+        {/* Segunda fila - 3 ejes centrados */}
+        <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+          {ejes.slice(4).map((eje, idx) => (
+            <div 
+              key={idx + 4}
+              className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-[#c4ff0f]/30 hover:bg-white/10 transition-all duration-300 w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(25%-0.75rem)]"
             >
               <div className="w-12 h-12 rounded-xl bg-[#c4ff0f]/10 flex items-center justify-center mb-4">
                 <eje.icon className="w-6 h-6 text-[#c4ff0f]" />
