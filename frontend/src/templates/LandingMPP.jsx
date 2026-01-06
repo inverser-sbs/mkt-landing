@@ -182,7 +182,7 @@ const HeroMPP = ({ mentorData, onActionClick }) => {
                       mentorLinks={mentorLinks}
                       campaignLinks={campaignLinks}
                       onActionClick={onActionClick}
-                      variant="ghost"
+                      variant="outline"
                       size="sm"
                     />
                   </div>
