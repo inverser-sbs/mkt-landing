@@ -1017,27 +1017,20 @@ const AcreditacionesSection = () => {
   const accreditations = [
     {
       name: 'Global Coaching Federation',
-      description: 'Reconocimiento internacional que certifica nuestros estándares de excelencia en coaching a nivel mundial',
       logo: 'https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/4oif9u9q_GCF-1.png',
-      link: 'https://globalcoachingfederation.org/members/inverser/',
     },
     {
       name: 'Center of Education and Leadership',
-      description: 'Respaldo académico que garantiza la validez y calidad de nuestra certificación profesional',
       logo: 'https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/4xct8y9m_CEL-1.png',
-      link: 'https://cel.education/',
     },
     {
       name: 'Florida Global University',
-      description: 'Respaldo académico universitario internacional con sede en Estados Unidos',
       logo: 'https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/no18ggug_FGU_kit%20de%20marca_RGB_Mesa%20de%20trabajo%201%20copia%208.png',
-      link: 'https://floridaglobal.university/es/',
     },
     {
       name: 'Confederación Interamericana de Coaching',
-      description: 'Organización que agrupa las principales escuelas de coaching de América',
       logo: 'https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/2rkhabrt_CIC-1.jpg',
-      link: 'https://interamericanadecoaching.org/escuelas/',
+      hasBg: true, // Flag para aplicar fondo blanco al logo con fondo no transparente
     },
   ];
 
