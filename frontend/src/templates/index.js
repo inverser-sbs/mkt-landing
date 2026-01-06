@@ -39,16 +39,15 @@ export const DEFAULT_TEMPLATE_KEY = 'cpn';
 // Ubicaciones visuales fijas en cada landing
 export const TEMPLATE_SLOTS = {
   'cpn': [
-    { key: 'navbar', label: 'Navbar - Botón de Inscripción', description: 'Botón en el menú de navegación' },
-    { key: 'hero_primary', label: 'Hero - Botón Principal', description: 'Botón grande y destacado en la sección principal' },
-    { key: 'hero_secondary', label: 'Hero - Botón Secundario', description: 'Botón debajo del principal en el Hero' },
-    { key: 'hero_profile', label: 'Hero - Ver Perfil Mentor', description: 'Botón debajo de la foto del mentor' },
-    { key: 'awakening', label: 'Sección Despertar', description: 'Botón en la sección "Es momento de despertar"' },
-    { key: 'is_for_you', label: 'Sección ¿Es para ti?', description: 'Botón en la sección de perfil ideal' },
-    { key: 'why_inverser', label: 'Sección ¿Por qué InverSer?', description: 'Botón en la sección de beneficios' },
-    { key: 'partner', label: 'Sección Partner Program', description: 'Botón para unirse como partner' },
-    { key: 'cta', label: 'CTA Final', description: 'Sección de llamada a la acción al final' },
-    { key: 'footer_profile', label: 'Footer - Ir al Perfil', description: 'Botón en el footer para acceder al perfil del mentor' }
+    { key: 'navbar', label: 'Navbar - Inscríbete', description: 'Botón en el menú de navegación' },
+    { key: 'hero_primary', label: 'Hero - Agendar Llamada', description: 'Botón principal en el card del mentor' },
+    { key: 'hero_secondary', label: 'Hero - WhatsApp', description: 'Botón secundario en el card del mentor' },
+    { key: 'hero_profile', label: 'Hero - Ver Perfil', description: 'Botón para ver perfil del mentor' },
+    { key: 'transforma_ser', label: 'TransformaSER - Iniciar', description: 'Botón en la sección de filosofía del SER' },
+    { key: 'es_para_ti', label: '¿Es para ti? - Entrevista', description: 'Botón en la sección de perfil ideal' },
+    { key: 'siguiente_paso', label: 'Siguiente Paso - Partner', description: 'Botón para conocer el Mentor Program' },
+    { key: 'cta', label: 'CTA Final - Aplicar', description: 'Botón principal de conversión' },
+    { key: 'footer_profile', label: 'Footer - Ir al Perfil', description: 'Botón en el footer' }
   ],
   'suitex': [
     { key: 'hero_primary', label: 'Hero - Botón Principal', description: 'Botón de Demo/Acción principal en el Hero' },
