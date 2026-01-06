@@ -249,7 +249,7 @@ const HeroCPN = ({ mentorData, onActionClick }) => {
                 <p className="font-heading text-xl sm:text-2xl font-semibold text-white mb-1">
                   {hasMentor ? `${mentor.first_name} ${mentor.last_name}` : 'Tu Mentor'}
                 </p>
-                <p className="font-body text-[#c4ff0f] text-sm mb-6">Mentor Certificado GCF</p>
+                <p className="font-body text-[#c4ff0f] text-sm mb-6">Mentor Certificado<br />INVERSER SBS</p>
                 
                 {/* Botones en pirámide */}
                 <div className="space-y-3">
