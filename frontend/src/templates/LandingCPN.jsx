@@ -188,65 +188,61 @@ const HeroCPN = ({ mentorData, onActionClick }) => {
               </div>
               
               {/* Logos de acreditaciones */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4">
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 sm:gap-3">
                 <a 
                   href="https://globalcoachingfederation.org/members/inverser/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 hover:border-[#c4ff0f]/30 transition-all duration-300"
+                  className="group flex items-center justify-center px-3 py-2 rounded-xl bg-white/90 hover:bg-white hover:scale-105 shadow-lg hover:shadow-xl transition-all duration-300"
                   title="Global Coaching Federation"
                 >
                   <img 
                     src="https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/4oif9u9q_GCF-1.png" 
-                    alt="GCF" 
-                    className="h-6 sm:h-7 w-auto object-contain brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity"
+                    alt="Global Coaching Federation" 
+                    className="h-7 sm:h-8 w-auto object-contain"
                   />
-                  <span className="hidden sm:inline text-xs font-body text-white/60 group-hover:text-white/80 transition-colors">GCF</span>
                 </a>
                 
                 <a 
                   href="https://cel.education/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 hover:border-[#c4ff0f]/30 transition-all duration-300"
+                  className="group flex items-center justify-center px-3 py-2 rounded-xl bg-white/90 hover:bg-white hover:scale-105 shadow-lg hover:shadow-xl transition-all duration-300"
                   title="Center of Education and Leadership"
                 >
                   <img 
                     src="https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/4xct8y9m_CEL-1.png" 
                     alt="CEL" 
-                    className="h-6 sm:h-7 w-auto object-contain brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity"
+                    className="h-7 sm:h-8 w-auto object-contain"
                   />
-                  <span className="hidden sm:inline text-xs font-body text-white/60 group-hover:text-white/80 transition-colors">CEL</span>
                 </a>
                 
                 <a 
                   href="https://interamericanadecoaching.org/escuelas/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 hover:border-[#c4ff0f]/30 transition-all duration-300"
+                  className="group flex items-center justify-center px-3 py-2 rounded-xl bg-white/90 hover:bg-white hover:scale-105 shadow-lg hover:shadow-xl transition-all duration-300"
                   title="Confederación Interamericana de Coaching"
                 >
                   <img 
                     src="https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/2rkhabrt_CIC-1.jpg" 
                     alt="CIC" 
-                    className="h-6 sm:h-7 w-auto object-contain brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity"
+                    className="h-7 sm:h-8 w-auto object-contain"
                   />
-                  <span className="hidden sm:inline text-xs font-body text-white/60 group-hover:text-white/80 transition-colors">CIC</span>
                 </a>
                 
                 <a 
                   href="https://floridaglobal.university/es/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 hover:border-[#c4ff0f]/30 transition-all duration-300"
+                  className="group flex items-center justify-center px-3 py-2 rounded-xl bg-white/90 hover:bg-white hover:scale-105 shadow-lg hover:shadow-xl transition-all duration-300"
                   title="Florida Global University"
                 >
                   <img 
                     src="https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/no18ggug_FGU_kit%20de%20marca_RGB_Mesa%20de%20trabajo%201%20copia%208.png" 
-                    alt="FGU" 
-                    className="h-6 sm:h-7 w-auto object-contain brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity"
+                    alt="Florida Global University" 
+                    className="h-7 sm:h-8 w-auto object-contain"
                   />
-                  <span className="hidden sm:inline text-xs font-body text-white/60 group-hover:text-white/80 transition-colors">FGU</span>
                 </a>
               </div>
             </div>
