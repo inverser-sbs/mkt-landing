@@ -932,7 +932,7 @@ const IPartnerSection = ({ mentorData, onActionClick }) => {
             </blockquote>
             
             <ButtonAnchor
-              buttonKey="email_mpp"
+              buttonKey="contacto_mpp"
               templateKey="mpp"
               actions={actions}
               mentorLinks={mentorLinks}
