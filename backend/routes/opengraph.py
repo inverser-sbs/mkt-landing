@@ -20,6 +20,7 @@ async def get_db():
 CAMPAIGN_DESCRIPTIONS = {
     "cpn": "Certificación Profesional NeuroCoaching",
     "mpp": "Mentor & Partner Program",
+    "partner": "Mentor & Partner Program",
     "suitex": "SuiteX"
 }
 

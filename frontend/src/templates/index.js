@@ -245,9 +245,9 @@ export const TEMPLATE_BUTTONS = {
     // ===== PARTNER SECTION =====
     {
       key: 'contacto_mpp',
-      label_default: 'Contactar por Email',
+      label_default: 'Contáctame',
       slot: 'partner',
-      description: 'Botón de contacto por email en la sección de monetización',
+      description: 'Botón de contacto en la sección de monetización',
       link_type: 'mentor',
       style: 'primary'
     },
