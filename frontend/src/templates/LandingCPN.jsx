@@ -1254,7 +1254,7 @@ const FooterCPN = ({ mentorData, onActionClick }) => {
           {/* Logo y descripción */}
           <div>
             <img 
-              src="https://inverser.us/wp-content/uploads/2024/10/InverSer-logo-200px.png" 
+              src="https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/ux8tcoz0_logo-02.png" 
               alt="InverSer" 
               className="h-10 mb-4"
             />
