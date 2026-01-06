@@ -16,9 +16,9 @@ async def get_db():
     from server import db
     return db
 
-# Campaign display names
-CAMPAIGN_TITLES = {
-    "cpn": "Certificación Profesional NeuroCoaching & Mentor Program",
+# Campaign descriptions (segunda línea en WhatsApp)
+CAMPAIGN_DESCRIPTIONS = {
+    "cpn": "Certificación Profesional NeuroCoaching",
     "mpp": "Mentor & Partner Program",
     "suitex": "SuiteX"
 }
@@ -40,8 +40,8 @@ async def get_opengraph_html(
     base_url = get_base_url()
     
     # Default values
-    title = CAMPAIGN_TITLES.get(campaign, "InverSer")
-    description = "Transforma tu vida y la de otros con nuestra certificación profesional."
+    title = "INVERSER"
+    description = CAMPAIGN_DESCRIPTIONS.get(campaign, "Plataforma de Coaching y Mentoring")
     image_url = f"{base_url}/api/uploads/inverser-logo.png"  # Fallback image
     page_url = f"{base_url}/{campaign}/{slug}"
     
@@ -52,7 +52,7 @@ async def get_opengraph_html(
         
         if mentor:
             mentor_name = f"{mentor.first_name} {mentor.last_name}".strip()
-            title = f"{CAMPAIGN_TITLES.get(campaign, 'InverSer')} | {mentor_name}"
+            title = f"INVERSER - {mentor_name}"
             
             if mentor.photo_url:
                 # Handle relative and absolute URLs
@@ -83,7 +83,7 @@ async def get_opengraph_html(
     <meta property="og:image" content="{image_url}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:site_name" content="InverSer">
+    <meta property="og:site_name" content="INVERSER">
     <meta property="og:locale" content="es_ES">
     
     <!-- Twitter -->
