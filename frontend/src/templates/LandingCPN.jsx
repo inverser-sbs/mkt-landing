@@ -294,7 +294,7 @@ const TransformaSERSection = ({ mentorData, onActionClick }) => {
   const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
 
   return (
-    <section className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-white">
+    <section id="programa" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7c3aed]/10 mb-6">
