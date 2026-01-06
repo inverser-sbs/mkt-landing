@@ -31,7 +31,7 @@ import {
   Sparkles, Target, Heart, Zap, Shield, TrendingUp,
   Play, FileText, CheckCircle, ArrowRight, HelpCircle,
   Clock, Quote, Lightbulb, Compass, Eye, MessageCircle,
-  Layers, Rocket, GraduationCap, Trophy
+  Layers, Rocket, GraduationCap, Trophy, Menu, X
 } from 'lucide-react';
 import ButtonAnchor, { prepareAnchorData } from '../components/ButtonAnchor';
 import { getImageUrl } from '../utils/imageUrl';
