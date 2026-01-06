@@ -21,7 +21,7 @@ import {
   Award, Star, ChevronRight, ChevronDown, Mail, Phone, ExternalLink,
   Sparkles, Target, Heart, Zap, Shield, TrendingUp,
   Play, Mic, Move, Grid, Send, DollarSign, FileText,
-  CheckCircle, ArrowRight, HelpCircle
+  CheckCircle, ArrowRight, HelpCircle, Handshake
 } from 'lucide-react';
 import { Badge } from '../components/ui/badge';
 import { getImageUrl } from '../utils/imageUrl';
@@ -947,8 +947,11 @@ const CTAFinalSection = ({ mentorData, onActionClick }) => {
 // ============================================
 // FAQ SECTION
 // ============================================
-const FAQSection = () => {
+const FAQSection = ({ mentorData, onActionClick }) => {
   const [openIndex, setOpenIndex] = React.useState(null);
+  
+  // Preparar datos para ButtonAnchor
+  const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
 
   const faqs = [
     {
