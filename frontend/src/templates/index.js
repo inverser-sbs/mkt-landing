@@ -61,7 +61,7 @@ export const TEMPLATE_SLOTS = {
     { key: 'hero_secondary', label: 'Hero - WhatsApp', description: 'Botón secundario en el Hero' },
     { key: 'hero_profile', label: 'Hero - Ver Perfil', description: 'Botón debajo de la foto del mentor' },
     { key: 'certificacion', label: 'Certificación - Ver', description: 'Botón para conocer la certificación' },
-    { key: 'partner', label: 'Partner - Email', description: 'Botón de contacto en sección Partner' },
+    { key: 'partner', label: 'Partner - Contacto', description: 'Botón de contacto en sección Partner' },
     { key: 'cta_primary', label: 'CTA Final - Aplicar', description: 'Botón principal del CTA final' },
     { key: 'cta_secondary', label: 'CTA Final - WhatsApp', description: 'Botón secundario del CTA final' },
     { key: 'faq_cta', label: 'FAQ - Quiero Unirme', description: 'Botón al final de las preguntas frecuentes' },
