@@ -16,14 +16,6 @@ async def get_db():
     from server import db
     return db
 
-# Campaign descriptions (segunda línea en WhatsApp)
-CAMPAIGN_DESCRIPTIONS = {
-    "cpn": "Certificación Profesional NeuroCoaching",
-    "mpp": "Mentor & Partner Program",
-    "partner": "Mentor & Partner Program",
-    "suitex": "SuiteX"
-}
-
 def get_base_url():
     """Get base URL from environment or default"""
     return os.environ.get("FRONTEND_URL", "").rstrip("/")
@@ -42,12 +34,17 @@ async def get_opengraph_html(
     
     # Default values
     title = "INVERSER"
-    description = CAMPAIGN_DESCRIPTIONS.get(campaign, "Plataforma de Coaching y Mentoring")
-    image_url = f"{base_url}/api/uploads/inverser-logo.png"  # Fallback image
+    description = "Plataforma de Coaching y Mentoring"
+    image_url = f"{base_url}/api/uploads/inverser-logo.png"
     page_url = f"{base_url}/{campaign}/{slug}"
     
-    # Try to get mentor data
     try:
+        # Get campaign name from database
+        campaign_doc = await db.campaigns.find_one({"key": campaign})
+        if campaign_doc and campaign_doc.get("name"):
+            description = campaign_doc["name"]
+        
+        # Get mentor data
         mentor_service = MentorService(db)
         mentor = await mentor_service.get_mentor_by_slug(slug)
         
@@ -56,15 +53,13 @@ async def get_opengraph_html(
             title = f"INVERSER - {mentor_name}"
             
             if mentor.photo_url:
-                # Handle relative and absolute URLs
                 if mentor.photo_url.startswith("http"):
                     image_url = mentor.photo_url
                 else:
                     image_url = f"{base_url}{mentor.photo_url}"
     except Exception:
-        pass  # Use defaults if anything fails
+        pass
     
-    # Generate HTML with OG tags
     html = f"""<!DOCTYPE html>
 <html lang="es">
 <head>
