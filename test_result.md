@@ -172,7 +172,7 @@ frontend:
         comment: "Verified via screenshot - /noel-rivera redirects to /cpn/noel-rivera correctly. Final URL confirmed in browser."
       - working: true
         agent: "testing"
-        comment: "✅ TESTED: Legacy redirect working perfectly. /noel-rivera automatically redirects to /cpn/noel-rivera. Final URL verified as https://mentor-program.preview.emergentagent.com/cpn/noel-rivera."
+        comment: "✅ TESTED: Legacy redirect working perfectly. /noel-rivera automatically redirects to /cpn/noel-rivera. Final URL verified as https://cpn-redesign.preview.emergentagent.com/cpn/noel-rivera."
 
 metadata:
   created_by: "main_agent"
@@ -744,7 +744,7 @@ agent_communication:
     status_history:
       - working: true
         agent: "main"
-        comment: "ROOT CAUSE: FRONTEND_URL was not being parsed from .env due to concatenated line (CORS_ORIGINS='*'FRONTEND_URL=...). FIX: 1) Fixed .env formatting with proper line breaks. 2) Changed magic_token_service.py to use get_frontend_url() function instead of module-level constant. Magic link now correctly points to https://mentor-program.preview.emergentagent.com. Verified: curl returns 200, page loads correctly."
+        comment: "ROOT CAUSE: FRONTEND_URL was not being parsed from .env due to concatenated line (CORS_ORIGINS='*'FRONTEND_URL=...). FIX: 1) Fixed .env formatting with proper line breaks. 2) Changed magic_token_service.py to use get_frontend_url() function instead of module-level constant. Magic link now correctly points to https://cpn-redesign.preview.emergentagent.com. Verified: curl returns 200, page loads correctly."
 
   - task: "P0-1: ResizeObserver Loop Suppressed"
     implemented: true

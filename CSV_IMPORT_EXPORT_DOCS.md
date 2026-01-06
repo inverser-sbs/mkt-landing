@@ -336,22 +336,22 @@ curl ".../template" -o template.csv
 
 ### Export
 ```
-GET https://mentor-program.preview.emergentagent.com/api/admin/csv/export
+GET https://cpn-redesign.preview.emergentagent.com/api/admin/csv/export
 ```
 
 ### Import
 ```
-POST https://mentor-program.preview.emergentagent.com/api/admin/csv/import
+POST https://cpn-redesign.preview.emergentagent.com/api/admin/csv/import
 ```
 
 ### Preview
 ```
-POST https://mentor-program.preview.emergentagent.com/api/admin/csv/preview
+POST https://cpn-redesign.preview.emergentagent.com/api/admin/csv/preview
 ```
 
 ### Template
 ```
-GET https://mentor-program.preview.emergentagent.com/api/admin/csv/template
+GET https://cpn-redesign.preview.emergentagent.com/api/admin/csv/template
 ```
 
 ---
