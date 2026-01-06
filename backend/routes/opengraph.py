@@ -18,7 +18,7 @@ async def get_db():
 
 # Campaign display names
 CAMPAIGN_TITLES = {
-    "cpn": "Certificación Profesional de NeuroCoaching",
+    "cpn": "Certificación Profesional NeuroCoaching & Mentor Program",
     "mpp": "Mentor & Partner Program",
     "suitex": "SuiteX"
 }
