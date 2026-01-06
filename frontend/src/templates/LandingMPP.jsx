@@ -779,6 +779,104 @@ const ToolboxSection = () => (
 );
 
 // ============================================
+// DIRECTORIO VIVO SECTION
+// ============================================
+const DirectorioVivoSection = () => {
+  return (
+    <section 
+      className="relative py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-center"
+      style={{ 
+        backgroundImage: `url('https://images.pexels.com/photos/6985260/pexels-photo-6985260.jpeg')` 
+      }}
+    >
+      {/* Overlay oscuro */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#031730]/95 via-[#0a1f3d]/90 to-[#031730]/95" />
+      
+      <div className="relative z-10 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Columna izquierda - Contenido */}
+          <div className="space-y-8">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
+              <Globe className="w-4 h-4 text-[#c4ff0f]" />
+              <span className="text-sm font-body text-white/80">Directorio iProfesional</span>
+            </div>
+            
+            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-semibold text-white leading-tight">
+              Tu escaparate
+              <br />
+              <span className="text-[#c4ff0f]">al mundo</span>
+            </h2>
+            
+            <div className="space-y-6 font-body text-lg text-white/70 leading-relaxed">
+              <p>
+                ¿Qué pasaría si tu perfil profesional no fuera solo una ficha fría con tu nombre? ¿Y si fuera un <strong className="text-white">micrositio vivo</strong>, donde muestras quién eres, qué haces y cómo transformarás vidas?
+              </p>
+              
+              <p>
+                Bienvenido al <strong className="text-[#c4ff0f]">Directorio Vivo InverSer</strong>. Más que un listado, es tu escenario digital. Aquí podrás mostrar tu logo, tu marca, tus colores. Este no es un espacio genérico: <strong className="text-white">es tuyo</strong>.
+              </p>
+            </div>
+          </div>
+          
+          {/* Columna derecha - Features */}
+          <div className="space-y-6">
+            {[
+              {
+                icon: Users,
+                title: 'Perfil editable completo',
+                description: 'Tu historia, tus servicios, tus redes y tu contacto directo en un solo lugar.'
+              },
+              {
+                icon: FileText,
+                title: 'Blog personal integrado',
+                description: 'Escribe, inspira y comparte tu conocimiento desde dentro de InverSer.'
+              },
+              {
+                icon: Play,
+                title: 'Galería multimedia',
+                description: 'Videos, eventos, entrevistas, experiencias. Todo en tu escaparate.'
+              },
+              {
+                icon: Calendar,
+                title: 'Integración total',
+                description: 'Conecta tu calendario, tus artículos y tus certificaciones automáticamente.'
+              }
+            ].map((feature, idx) => (
+              <div 
+                key={idx}
+                className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-[#c4ff0f]/30 transition-all duration-300"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-[#c4ff0f]/10 flex items-center justify-center flex-shrink-0">
+                    <feature.icon className="w-6 h-6 text-[#c4ff0f]" />
+                  </div>
+                  <div>
+                    <h3 className="font-heading text-xl font-semibold text-white mb-2">{feature.title}</h3>
+                    <p className="font-body text-white/60">{feature.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        {/* Cita destacada */}
+        <div className="mt-16 text-center">
+          <div className="inline-block bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 max-w-3xl">
+            <blockquote className="font-heading text-2xl md:text-3xl text-white/90 italic leading-relaxed">
+              "Tener presencia no es estar. Es mostrarse con verdad, con alma, con intención."
+            </blockquote>
+            <p className="mt-4 font-body text-[#c4ff0f]">
+              El Directorio Vivo no es una vitrina. Es un portal hacia ti.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ============================================
 // IPARTNER COMPLETO
 // ============================================
 const IPartnerSection = ({ mentorData, onActionClick }) => {
