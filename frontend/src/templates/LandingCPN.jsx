@@ -579,6 +579,31 @@ const MetodologiaSection = () => {
 // ============================================
 // EJES TRANSFORMACIONALES (NUEVA)
 // ============================================
+
+// Icono personalizado: Persona haciendo ejercicio
+const IconoEjercicio = ({ className }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="4" r="2" />
+    <path d="M15 22v-4l-3-3-3 3v4" />
+    <path d="M9 12l-2-2 2-2" />
+    <path d="M15 12l2-2-2-2" />
+    <path d="M12 8v4" />
+  </svg>
+);
+
+// Icono personalizado: Persona meditando
+const IconoMeditacion = ({ className }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="5" r="2" />
+    <path d="M12 7v3" />
+    <path d="M8 14c0 0-1 1-1 3s1 3 1 3" />
+    <path d="M16 14c0 0 1 1 1 3s-1 3-1 3" />
+    <path d="M8 14h8" />
+    <path d="M9 17h6" />
+    <path d="M12 10c-2 0-4 2-4 4h8c0-2-2-4-4-4z" />
+  </svg>
+);
+
 const EjesSection = () => {
   const ejes = [
     {
@@ -594,7 +619,7 @@ const EjesSection = () => {
       frase: 'Tu mente es tu mayor aliado.'
     },
     {
-      icon: Activity,
+      icon: IconoEjercicio,
       title: 'Consciencia Corporal',
       description: 'Tu cuerpo es más que un vehículo: es un canal de sabiduría y energía.',
       frase: 'Escucha lo que tu cuerpo tiene que decir.'
@@ -618,7 +643,7 @@ const EjesSection = () => {
       frase: 'Comprender la mente es clave para acompañar.'
     },
     {
-      icon: Flower2,
+      icon: IconoMeditacion,
       title: 'RefleAcción',
       description: 'Reflexionar sin actuar es estancarse. Actuar sin reflexionar es perder el rumbo.',
       frase: 'Integra pensamiento y acción.'
