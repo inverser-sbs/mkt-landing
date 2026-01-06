@@ -1479,6 +1479,7 @@ const LandingMPP = ({ mentorData, onActionClick }) => {
       <IASection />
       <KommunitySection />
       <ToolboxSection />
+      <DirectorioVivoSection />
       <IPartnerSection mentorData={mentorData} onActionClick={onActionClick} />
       <CTAFinalSection mentorData={mentorData} onActionClick={onActionClick} />
       <FAQSection mentorData={mentorData} onActionClick={onActionClick} />
