@@ -25,7 +25,7 @@ CAMPAIGN_TITLES = {
 
 def get_base_url():
     """Get base URL from environment or default"""
-    return os.environ.get("REACT_APP_BACKEND_URL", "").rstrip("/")
+    return os.environ.get("FRONTEND_URL", "").rstrip("/")
 
 @router.get("/{campaign}/{slug}", response_class=HTMLResponse)
 async def get_opengraph_html(
