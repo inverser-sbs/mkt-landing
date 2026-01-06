@@ -618,7 +618,7 @@ const EjesSection = () => {
       frase: 'Comprender la mente es clave para acompañar.'
     },
     {
-      icon: Rocket,
+      icon: Flower2,
       title: 'RefleAcción',
       description: 'Reflexionar sin actuar es estancarse. Actuar sin reflexionar es perder el rumbo.',
       frase: 'Integra pensamiento y acción.'
