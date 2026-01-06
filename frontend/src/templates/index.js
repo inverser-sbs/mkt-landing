@@ -161,10 +161,6 @@ export const TEMPLATE_BUTTONS = {
       style: 'ghost'
     }
   ],
-      link_type: 'mentor',
-      style: 'ghost'
-    }
-  ],
   'suitex': [
     {
       key: 'demo_hero',
