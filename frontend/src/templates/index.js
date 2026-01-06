@@ -87,7 +87,7 @@ export const TEMPLATE_BUTTONS = {
       label_default: 'Inscríbete Ahora',
       slot: 'navbar',
       description: 'Botón del menú principal para inscripción rápida',
-      link_type: 'mentor',  // Cada mentor define su URL de inscripción
+      link_type: 'mentor',
       style: 'primary'
     },
     // ===== HERO SECTION =====
@@ -96,7 +96,7 @@ export const TEMPLATE_BUTTONS = {
       label_default: 'Agendar Llamada',
       slot: 'hero_primary',
       description: 'Botón principal del Hero para agendar una llamada con el mentor',
-      link_type: 'mentor',  // Cada mentor pone su URL de Calendly
+      link_type: 'mentor',
       style: 'primary'
     },
     {
@@ -104,52 +104,42 @@ export const TEMPLATE_BUTTONS = {
       label_default: 'WhatsApp',
       slot: 'hero_secondary',
       description: 'Contacto directo vía WhatsApp en el Hero',
-      link_type: 'mentor',  // Cada mentor pone su link de WhatsApp
+      link_type: 'mentor',
       style: 'secondary'
     },
-    // ===== HERO - PERFIL MENTOR =====
     {
       key: 'ver_perfil',
       label_default: 'Ver perfil',
       slot: 'hero_profile',
       description: 'Botón debajo de la foto del mentor en el Hero',
-      link_type: 'mentor',  // Destino a definir posteriormente
+      link_type: 'mentor',
       style: 'outline'
     },
-    // ===== AWAKENING SECTION =====
+    // ===== TRANSFORMA SER SECTION =====
     {
       key: 'iniciar_transformacion',
       label_default: 'Quiero Iniciar mi Transformación',
-      slot: 'awakening',
-      description: 'Botón en la sección "Es momento de despertar"',
+      slot: 'transforma_ser',
+      description: 'Botón en la sección de filosofía del SER',
       link_type: 'mentor',
       style: 'primary'
     },
-    // ===== IS FOR YOU SECTION =====
+    // ===== ES PARA TI SECTION =====
     {
       key: 'solicitar_entrevista',
       label_default: 'Solicita tu Entrevista',
-      slot: 'is_for_you',
+      slot: 'es_para_ti',
       description: 'Botón en la sección "¿Es para ti?"',
       link_type: 'mentor',
       style: 'primary'
     },
-    // ===== WHY INVERSER SECTION =====
-    {
-      key: 'solicitar_info',
-      label_default: 'Solicita Información',
-      slot: 'why_inverser',
-      description: 'Botón en la sección "¿Por qué InverSer?"',
-      link_type: 'mentor',
-      style: 'outline'
-    },
-    // ===== PARTNER SECTION =====
+    // ===== SIGUIENTE PASO (EX-PARTNER) =====
     {
       key: 'partner_cta',
-      label_default: 'Conviértete en Partner',
-      slot: 'partner',
-      description: 'Botón para unirse al programa de partners',
-      link_type: 'mentor',  // Cada mentor puede personalizar o usar la misma URL
+      label_default: 'Conoce el Mentor Program',
+      slot: 'siguiente_paso',
+      description: 'Botón para conocer el camino como Mentor después de certificarte',
+      link_type: 'mentor',
       style: 'primary'
     },
     // ===== CTA FINAL =====
@@ -167,6 +157,10 @@ export const TEMPLATE_BUTTONS = {
       label_default: 'Ir al perfil',
       slot: 'footer_profile',
       description: 'Botón en el footer para acceder al perfil del mentor',
+      link_type: 'mentor',
+      style: 'ghost'
+    }
+  ],
       link_type: 'mentor',
       style: 'ghost'
     }
