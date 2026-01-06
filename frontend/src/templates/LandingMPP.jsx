@@ -1032,7 +1032,9 @@ La estructura existe para evitar el caos, no para uniformar. Igual que en una un
 
 Además, el ecosistema está diseñado para escuchar y evolucionar. Mentores y mentees pueden proponer mejoras, ajustes y nuevas integraciones que se analizan y, cuando tienen sentido, se incorporan.
 
-Por eso hablamos de un ecosistema vivo y no de un programa cerrado. Aquí no se busca eficiencia a costa de la humanidad. Se busca humanizar la estructura para que la transformación sea real, profunda y sostenible.`
+Por eso hablamos de un ecosistema vivo y no de un programa cerrado. Aquí no se busca eficiencia a costa de la humanidad. Se busca humanizar la estructura para que la transformación sea real, profunda y sostenible.
+
+Se cuida la estructura para que la humanidad pueda expresarse.`
     },
     {
       question: "¿Qué diferencia a este programa de otros espacios de mentoring?",
@@ -1051,22 +1053,22 @@ Por eso hablamos de un ecosistema vivo y no de un programa cerrado. Aquí no se 
       answer: "Tu rol es acompañar procesos humanos: formar, mentorear, sostener conversaciones, guiar recorridos de transformación. InverSer se encarga de la infraestructura, las herramientas y los sistemas para que tú puedas enfocarte en lo esencial: el acompañamiento."
     },
     {
-      question: "¿Cómo funciona el sistema de Partner / afiliados?",
-      answer: `El sistema de Partner del Mentor & Partner Program está diseñado para que tu rol como mentor sea sostenible, escalable y económicamente viable, sin perder el foco humano del acompañamiento.
+      question: "¿Cómo funciona el modelo iPartner y de qué maneras puede monetizar un mentor dentro del ecosistema?",
+      answer: `El modelo iPartner del Mentor & Partner Program está diseñado para que tu rol como mentor sea sostenible, escalable y económicamente viable, sin perder nunca el foco humano del acompañamiento.
 
-La monetización no se basa en un único mecanismo, sino en varias vías complementarias, siempre vinculadas a tu rol como mentor y al valor real que aportas dentro del ecosistema.
+La monetización no se basa en un único mecanismo, sino en varias vías complementarias, todas vinculadas a tu rol como mentor y al valor real que aportas dentro del ecosistema.
 
 1. Monetización por tu rol directo como mentor
-Cada vez que acompañas a mentees dentro de certificaciones como la Certificación Profesional de NeuroCoaching —y de los programas que se irán incorporando— generas ingresos por tu labor directa de acompañamiento.
+Cada vez que acompañas a mentees dentro de certificaciones como la Certificación Profesional de NeuroCoaching —y de los programas que se irán incorporando— generas ingresos por tu labor directa de acompañamiento humano.
 
 2. Monetización como mentor supervisor
-Cuando algunos de tus mentees deciden convertirse en mentores dentro del ecosistema, sigues generando ingresos por los procesos que ellos acompañan. Esto te permite evolucionar de forma natural hacia un rol de mentor supervisor, acompañando también a nuevos mentores.
+Cuando algunos de tus mentees deciden convertirse en mentores dentro del ecosistema, continúas generando ingresos por los procesos que ellos acompañan. Esto te permite evolucionar de forma natural hacia un rol de mentor supervisor, sosteniendo y acompañando también a nuevos mentores.
 
 3. Invitación directa de otros mentores
 Puedes invitar a otros profesionales del coaching o del acompañamiento (aunque provengan de otras escuelas) para que se postulen al ecosistema. Si son aprobados, generas ingresos por ellos y por un segundo nivel máximo, creando una red colaborativa y sostenible.
 
 4. Monetización por productos y servicios del ecosistema
-Todos los productos y servicios digitales que InverSer desarrolle (herramientas, plataformas, servicios profesionales) estarán integrados en este modelo, generando nuevas oportunidades de ingresos.
+Todos los productos y servicios digitales que InverSer desarrolle (herramientas, plataformas, servicios profesionales) se integran a este modelo, generando nuevas oportunidades de ingresos.
 
 El objetivo es claro: que el mentor disponga de formas reales, éticas y sostenibles de monetizar su labor, hasta el punto de que, en muchos casos, su membresía prácticamente se paga sola.`
     },
@@ -1095,34 +1097,30 @@ Escalar, para InverSer, no significa atender a más personas con menos presencia
 Aquí no se crece deshumanizando. Se crece formando más humanidad capaz de acompañar a otros.`
     },
     {
-      question: "¿Cómo evita InverSer que el sistema iPartner se convierta en un esquema piramidal?",
-      answer: `Esta es una pregunta legítima, y en InverSer la abordamos con total transparencia.
+      question: "¿Cómo está diseñado el modelo iPartner para ser ético, sostenible y humano?",
+      answer: `El modelo iPartner del Mentor & Partner Program está diseñado para reconocer y sostener el valor real que el mentor aporta, sin desviar el foco del acompañamiento humano ni convertir el crecimiento en una lógica puramente financiera.
 
-El sistema iPartner no está diseñado para reclutar masivamente ni para priorizar la captación sobre la mentoría. Es una herramienta financiera al servicio de un ecosistema humano, no su motor principal.
+Su funcionamiento se apoya en principios claros que priorizan la ética, la sostenibilidad y la coherencia:
 
-Existen salvaguardas claras y explícitas que lo diferencian radicalmente de cualquier esquema piramidal:
+1. Integración consciente de mentores
+Cada mentor pasa por un proceso de aplicación, evaluación y conversación. No buscamos volumen, buscamos alineación humana, profesional y ética.
 
-1. Selección consciente de mentores
-No cualquiera puede entrar. Cada mentor pasa por un proceso de aplicación, evaluación y conversación. Buscamos alineación humana, ética y profesional. InverSer no es para todos, y eso es intencional.
+2. Estructura simple y con límites claros
+El modelo contempla un máximo de dos niveles de reconocimiento, permitiendo acompañar, supervisar y sostener relaciones reales sin generar estructuras desbordadas.
 
-2. Límite estructural claro
-El sistema contempla un máximo de dos niveles de distribución de beneficios. No existen estructuras infinitas ni crecimiento descontrolado.
+3. Valor real en el centro
+El reconocimiento económico está siempre vinculado a procesos formativos concretos, mentoría uno a uno y entrega tangible de valor.
 
-3. Producto y acompañamiento reales
-Aquí no se paga por entrar a un sistema vacío. Existen certificaciones reales, procesos formativos concretos y acompañamiento humano uno a uno. El valor está en el proceso, no en la afiliación.
+4. Protección de las personas en formación
+Los procesos se sostienen con pagos periódicos y seguimiento activo, cuidando la continuidad del acompañamiento humano.
 
-4. Protección del mentee
-Los pagos de los mentees son mensuales. Si un mentor abandona, el sistema permite congelar pagos y reasignar el proceso a otro mentor compatible, garantizando continuidad y cuidado.
+5. Transparencia y coherencia financiera
+La lógica de distribución es clara, comprensible y revisable. El ecosistema se construye desde la confianza.
 
-5. Transparencia financiera
-La distribución de beneficios es clara, comprensible y revisable. No existen promesas irreales ni rendimientos financieros garantizados.
+6. El acompañamiento como eje
+El crecimiento económico surge como consecuencia natural del acompañamiento, la formación y el liderazgo responsable.
 
-6. El foco no es reclutar, es acompañar
-El iPartner premia el acompañamiento sostenido, la formación de nuevos mentores y el liderazgo responsable. No recompensa la captación vacía.
-
-Un esquema piramidal se basa en dinero sin producto, sin proceso y sin responsabilidad. El iPartner de InverSer se basa en acompañamiento humano, formación real y límites claros.
-
-Aquí el crecimiento económico es consecuencia del valor que aportas, no al revés.`
+En InverSer, el sistema está al servicio de las personas, no al revés.`
     },
     {
       question: "¿Qué incluye el Plan Pioneros?",
