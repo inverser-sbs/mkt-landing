@@ -270,6 +270,15 @@ export const TEMPLATE_BUTTONS = {
       link_type: 'mentor',
       style: 'primary'
     },
+    // ===== FAQ SECTION =====
+    {
+      key: 'unirme_faq',
+      label_default: 'Quiero Unirme',
+      slot: 'faq_cta',
+      description: 'Botón al final de las preguntas frecuentes',
+      link_type: 'mentor',
+      style: 'primary'
+    },
     // ===== FOOTER =====
     {
       key: 'ir_perfil_footer_mpp',
