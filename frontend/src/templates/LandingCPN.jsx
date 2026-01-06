@@ -722,7 +722,6 @@ const NivelesSection = () => {
   const niveles = [
     {
       title: 'Nivel Junior',
-      duracion: '280 días',
       perfil: 'Tu primer paso en el mundo del NeuroCoaching',
       transformacion: 'De interesado a Mentor en formación',
       mision: 'Aprender desde la práctica, sentir el poder de acompañar, enamorarte del arte de SER y ESTAR para otros.',
@@ -732,7 +731,6 @@ const NivelesSection = () => {
     },
     {
       title: 'Nivel Senior',
-      duracion: '180 días',
       perfil: 'Comprensión profunda del cambio y mirada estratégica',
       transformacion: 'De coach en formación a NeuroCoach con dominio avanzado',
       mision: 'Elevar la calidad de las sesiones, adaptarte a diferentes clientes, aplicar estrategias de mayor impacto.',
@@ -742,7 +740,6 @@ const NivelesSection = () => {
     },
     {
       title: 'Nivel Máster',
-      duracion: '120 días',
       perfil: 'Referente capaz de crear transformación a gran escala',
       transformacion: 'De coach avanzado a líder del NeuroCoaching',
       mision: 'Convertirte en referente, desarrollar tu propio enfoque, formar a la próxima generación.',
@@ -766,9 +763,15 @@ const NivelesSection = () => {
             <span className="text-[#7c3aed]">Certificación</span>
           </h2>
           
-          <p className="font-body text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="font-body text-lg text-gray-600 max-w-3xl mx-auto mb-4">
             Un recorrido estructurado con objetivos claros para cada etapa de tu evolución.
           </p>
+          
+          {/* Destacado 1500 horas */}
+          <div className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-[#7c3aed] to-[#5b21b6] rounded-full text-white">
+            <Clock className="w-5 h-5" />
+            <span className="font-heading text-lg font-bold">+1.500 horas de Formación</span>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
@@ -778,8 +781,8 @@ const NivelesSection = () => {
               className={`bg-gradient-to-br ${nivel.bgColor} rounded-3xl p-6 md:p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2`}
             >
               <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r ${nivel.color} text-white text-sm font-semibold mb-6`}>
-                <Clock className="w-4 h-4" />
-                <span>{nivel.duracion}</span>
+                <GraduationCap className="w-4 h-4" />
+                <span>{nivel.title}</span>
               </div>
               
               <h3 className="font-heading text-2xl font-bold text-gray-900 mb-3">{nivel.title}</h3>
@@ -801,12 +804,6 @@ const NivelesSection = () => {
               </div>
             </div>
           ))}
-        </div>
-        
-        <div className="mt-12 text-center">
-          <p className="font-body text-gray-600">
-            <strong className="text-gray-900">Acceso total:</strong> 3 años para completar tu certificación a tu ritmo
-          </p>
         </div>
       </div>
     </section>
