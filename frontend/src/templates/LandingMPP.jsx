@@ -786,11 +786,11 @@ const DirectorioVivoSection = () => {
     <section 
       className="relative py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-center"
       style={{ 
-        backgroundImage: `url('https://images.pexels.com/photos/6985260/pexels-photo-6985260.jpeg')` 
+        backgroundImage: `url('https://images.pexels.com/photos/2569997/pexels-photo-2569997.jpeg')` 
       }}
     >
-      {/* Overlay oscuro */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#031730]/95 via-[#0a1f3d]/90 to-[#031730]/95" />
+      {/* Overlay con menor opacidad para ver imagen parallax */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a2e]/85 via-[#16213e]/80 to-[#0f0f23]/85" />
       
       <div className="relative z-10 max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -988,8 +988,14 @@ const CTAFinalSection = ({ mentorData, onActionClick }) => {
   const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
 
   return (
-    <section className="relative py-32 md:py-40 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#7c3aed] via-[#5b21b6] to-[#4c1d95]" />
+    <section 
+      className="relative py-32 md:py-40 overflow-hidden bg-fixed bg-cover bg-center"
+      style={{ 
+        backgroundImage: `url('https://images.pexels.com/photos/4069293/pexels-photo-4069293.jpeg')` 
+      }}
+    >
+      {/* Overlay con gradiente púrpura */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#7c3aed]/90 via-[#5b21b6]/85 to-[#4c1d95]/90" />
       
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/10 rounded-full filter blur-[150px]" />
@@ -998,8 +1004,7 @@ const CTAFinalSection = ({ mentorData, onActionClick }) => {
       
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-white leading-tight mb-8">
-          Si sientes que este mundo necesita
-          <br />
+          <span className="whitespace-nowrap">Si sientes que este mundo necesita</span>{' '}
           <span className="text-[#c4ff0f]">más mentores conscientes...</span>
         </h2>
         
