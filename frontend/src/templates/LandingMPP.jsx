@@ -114,15 +114,15 @@ const HeroMPP = ({ mentorData, onActionClick }) => {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-24 pb-16">
-        <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-16 items-center">
           {/* Contenido principal */}
-          <div className="lg:col-span-3 space-y-8">
+          <div className="lg:col-span-3 space-y-6 md:space-y-8 text-center lg:text-left">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
               <Sparkles className="w-4 h-4 text-[#c4ff0f]" />
               <span className="text-sm font-body text-white/80">Plan Pioneros</span>
             </div>
             
-            <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight">
+            <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight">
               <span className="text-white">Mentor</span>
               <span className="text-[#c4ff0f]"> & </span>
               <span className="text-white">Partner</span>
@@ -132,11 +132,11 @@ const HeroMPP = ({ mentorData, onActionClick }) => {
               </span>
             </h1>
             
-            <p className="font-body text-xl md:text-2xl text-white/80 leading-relaxed max-w-2xl">
+            <p className="font-body text-lg md:text-xl lg:text-2xl text-white/80 leading-relaxed max-w-2xl mx-auto lg:mx-0">
               Bienvenido a una nueva dimensión del mentoring. Un <span className="text-[#c4ff0f] font-medium">ecosistema de empoderamiento</span> donde tu experiencia, tu criterio y tu vocación se amplifican.
             </p>
             
-            <p className="font-body text-lg text-white/50 max-w-xl leading-relaxed">
+            <p className="font-body text-base md:text-lg text-white/50 max-w-xl mx-auto lg:mx-0 leading-relaxed">
               No es un curso. No es una certificación aislada. Es una <span className="text-white/70">infraestructura completa</span> para que puedas ejercer tu rol de mentor con profundidad, respaldo y proyección.
             </p>
           </div>
@@ -752,8 +752,8 @@ const ToolboxSection = () => (
           </div>
         </div>
         
-        {/* Grid de recursos */}
-        <div className="grid grid-cols-2 gap-4">
+        {/* Grid de recursos - responsive */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {[
             { icon: Users, text: '+1.000 dinámicas de grupo', color: '#7c3aed' },
             { icon: FileText, text: 'Plantillas profesionales', color: '#FF9100' },
@@ -762,14 +762,14 @@ const ToolboxSection = () => (
             { icon: Play, text: 'Cursos en video', color: '#FF9100' },
             { icon: Heart, text: 'Materiales cuerpo-emoción', color: '#1A8314' }
           ].map((item, idx) => (
-            <div key={idx} className="flex items-center gap-4 p-5 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
+            <div key={idx} className="flex items-center gap-4 p-4 sm:p-5 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
               <div 
-                className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center flex-shrink-0"
                 style={{ backgroundColor: `${item.color}15` }}
               >
-                <item.icon className="w-6 h-6" style={{ color: item.color }} />
+                <item.icon className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: item.color }} />
               </div>
-              <span className="font-body font-medium text-gray-700">{item.text}</span>
+              <span className="font-body font-medium text-gray-700 text-sm sm:text-base">{item.text}</span>
             </div>
           ))}
         </div>
@@ -1003,8 +1003,8 @@ const CTAFinalSection = ({ mentorData, onActionClick }) => {
       </div>
       
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-white leading-tight mb-8">
-          <span className="whitespace-nowrap">Si sientes que este mundo necesita</span>{' '}
+        <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-white leading-tight mb-8">
+          Si sientes que este mundo necesita{' '}
           <span className="text-[#c4ff0f]">más mentores conscientes...</span>
         </h2>
         
