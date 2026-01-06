@@ -17,6 +17,7 @@ from routes.mentor_edit import router as mentor_edit_router
 from routes.admin_csv import router as admin_csv_router
 from routes.admin_campaigns import router as admin_campaigns_router
 from routes.auth import router as auth_router
+from routes.opengraph import router as opengraph_router
 
 ROOT_DIR = Path(__file__).parent
 # Load .env but DO NOT override system environment variables (from docker-compose)
@@ -45,6 +46,7 @@ app.include_router(mentor_edit_router)
 app.include_router(admin_csv_router)
 app.include_router(admin_campaigns_router)
 app.include_router(auth_router)
+app.include_router(opengraph_router)
 
 # Add CORS middleware
 app.add_middleware(
