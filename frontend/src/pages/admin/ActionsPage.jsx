@@ -927,9 +927,11 @@ const ActionsPage = () => {
                 <div className="space-y-3">
                   {/* Label */}
                   <div className="space-y-2">
-                    <Label htmlFor="label">Texto del botón</Label>
+                    <Label htmlFor="btn-label">Texto del botón</Label>
                     <Input
-                      id="label"
+                      id="btn-label"
+                      name="btn-label"
+                      autoComplete="off"
                       value={formData.label}
                       onChange={(e) => setFormData({ ...formData, label: e.target.value })}
                       placeholder={getButtonDefaultLabel(templateKey, formData.button_key)}
