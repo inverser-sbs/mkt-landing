@@ -180,71 +180,19 @@ const HeroCPN = ({ mentorData, onActionClick }) => {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-16 items-center">
           {/* Contenido principal */}
           <div className="lg:col-span-3 space-y-6 md:space-y-8 text-center lg:text-left">
-            {/* Acreditaciones en el Hero */}
-            <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+            {/* Acreditaciones en el Hero - Diseño minimalista */}
+            <div className="inline-flex flex-wrap items-center justify-center lg:justify-start gap-x-3 gap-y-2 text-sm font-body text-white/70">
+              <span className="flex items-center gap-1.5">
                 <Award className="w-4 h-4 text-[#c4ff0f]" />
-                <span className="text-sm font-body text-white/80">Programa Avalado Internacionalmente</span>
-              </div>
-              
-              {/* Logos de acreditaciones */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 sm:gap-3">
-                <a 
-                  href="https://globalcoachingfederation.org/members/inverser/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-center px-3 py-2 rounded-xl bg-white/90 hover:bg-white hover:scale-105 shadow-lg hover:shadow-xl transition-all duration-300"
-                  title="Global Coaching Federation"
-                >
-                  <img 
-                    src="https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/4oif9u9q_GCF-1.png" 
-                    alt="Global Coaching Federation" 
-                    className="h-7 sm:h-8 w-auto object-contain"
-                  />
-                </a>
-                
-                <a 
-                  href="https://cel.education/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-center px-3 py-2 rounded-xl bg-white/90 hover:bg-white hover:scale-105 shadow-lg hover:shadow-xl transition-all duration-300"
-                  title="Center of Education and Leadership"
-                >
-                  <img 
-                    src="https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/4xct8y9m_CEL-1.png" 
-                    alt="CEL" 
-                    className="h-7 sm:h-8 w-auto object-contain"
-                  />
-                </a>
-                
-                <a 
-                  href="https://interamericanadecoaching.org/escuelas/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-center px-3 py-2 rounded-xl bg-white/90 hover:bg-white hover:scale-105 shadow-lg hover:shadow-xl transition-all duration-300"
-                  title="Confederación Interamericana de Coaching"
-                >
-                  <img 
-                    src="https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/2rkhabrt_CIC-1.jpg" 
-                    alt="CIC" 
-                    className="h-7 sm:h-8 w-auto object-contain"
-                  />
-                </a>
-                
-                <a 
-                  href="https://floridaglobal.university/es/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-center px-3 py-2 rounded-xl bg-white/90 hover:bg-white hover:scale-105 shadow-lg hover:shadow-xl transition-all duration-300"
-                  title="Florida Global University"
-                >
-                  <img 
-                    src="https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/no18ggug_FGU_kit%20de%20marca_RGB_Mesa%20de%20trabajo%201%20copia%208.png" 
-                    alt="Florida Global University" 
-                    className="h-7 sm:h-8 w-auto object-contain"
-                  />
-                </a>
-              </div>
+                Avalado por:
+              </span>
+              <a href="https://globalcoachingfederation.org/members/inverser/" target="_blank" rel="noopener noreferrer" className="hover:text-[#c4ff0f] transition-colors">GCF</a>
+              <span className="text-white/30">•</span>
+              <a href="https://cel.education/" target="_blank" rel="noopener noreferrer" className="hover:text-[#c4ff0f] transition-colors">CEL</a>
+              <span className="text-white/30">•</span>
+              <a href="https://interamericanadecoaching.org/escuelas/" target="_blank" rel="noopener noreferrer" className="hover:text-[#c4ff0f] transition-colors">CIC</a>
+              <span className="text-white/30">•</span>
+              <a href="https://floridaglobal.university/es/" target="_blank" rel="noopener noreferrer" className="hover:text-[#c4ff0f] transition-colors">Florida Global University</a>
             </div>
             
             <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight">
