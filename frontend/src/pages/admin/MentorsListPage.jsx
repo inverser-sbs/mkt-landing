@@ -192,11 +192,11 @@ const MentorsListPage = () => {
 
   const copyPublicUrl = (slug) => {
     if (!selectedCampaign) return;
-    const url = `${window.location.origin}/${selectedCampaign.key}/${slug}`;
+    const url = `${window.location.origin}/api/og/${selectedCampaign.key}/${slug}`;
     navigator.clipboard.writeText(url);
     toast({
       title: 'Copiado',
-      description: `URL pública para campaña "${selectedCampaign.name}" copiada`
+      description: `URL para compartir en redes (campaña "${selectedCampaign.name}") copiada`
     });
   };
 
