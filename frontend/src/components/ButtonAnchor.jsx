@@ -26,7 +26,7 @@
 
 import React, { useState } from 'react';
 import { Button } from './ui/button';
-import { Calendar, Phone, MessageCircle, ExternalLink, ArrowRight, FileText, Users, AlertCircle } from 'lucide-react';
+import { Calendar, Phone, MessageCircle, ExternalLink, ArrowRight, FileText, Users, AlertCircle, Handshake } from 'lucide-react';
 import { getButtonByKey } from '../templates';
 import {
   Tooltip,
@@ -58,6 +58,7 @@ const BUTTON_ICONS = {
   'email_mpp': MessageCircle,
   'aplicar_mpp': ArrowRight,
   'ir_perfil_footer_mpp': Users,
+  'unirme_faq': Handshake,
   // Default
   'default': ExternalLink
 };
