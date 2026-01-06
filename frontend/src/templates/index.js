@@ -65,6 +65,7 @@ export const TEMPLATE_SLOTS = {
     { key: 'partner', label: 'Partner - Email', description: 'Botón de contacto en sección Partner' },
     { key: 'cta_primary', label: 'CTA Final - Aplicar', description: 'Botón principal del CTA final' },
     { key: 'cta_secondary', label: 'CTA Final - WhatsApp', description: 'Botón secundario del CTA final' },
+    { key: 'faq_cta', label: 'FAQ - Quiero Unirme', description: 'Botón al final de las preguntas frecuentes' },
     { key: 'footer_profile', label: 'Footer - Ir al Perfil', description: 'Botón para ver perfil del mentor' }
   ]
 };
