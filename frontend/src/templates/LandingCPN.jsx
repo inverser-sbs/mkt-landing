@@ -886,37 +886,97 @@ const SiguientePasoSection = ({ mentorData, onActionClick }) => {
 };
 
 // ============================================
-// ACREDITACIONES SECTION
+// ACREDITACIONES SECTION (Completa con logos)
 // ============================================
-const AcreditacionesSection = () => (
-  <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white border-y border-gray-100">
-    <div className="max-w-5xl mx-auto text-center">
-      <p className="font-body text-sm text-gray-500 uppercase tracking-wider mb-8">
-        Certificación avalada por
-      </p>
-      
-      <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
-        <div className="flex flex-col items-center">
-          <Award className="w-16 h-16 text-[#7c3aed] mb-3" />
-          <p className="font-heading font-semibold text-gray-900">Global Coaching Federation</p>
-          <p className="font-body text-sm text-gray-500">Reconocimiento Internacional</p>
+const AcreditacionesSection = () => {
+  const accreditations = [
+    {
+      name: 'Global Coaching Federation',
+      description: 'Reconocimiento internacional que certifica nuestros estándares de excelencia en coaching a nivel mundial',
+      logo: 'https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/4oif9u9q_GCF-1.png',
+      link: 'https://globalcoachingfederation.org/members/inverser/',
+    },
+    {
+      name: 'Center of Education and Leadership',
+      description: 'Respaldo académico que garantiza la validez y calidad de nuestra certificación profesional',
+      logo: 'https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/4xct8y9m_CEL-1.png',
+      link: 'https://cel.education/',
+    },
+    {
+      name: 'Florida Global University',
+      description: 'Respaldo académico universitario internacional con sede en Estados Unidos',
+      logo: 'https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/no18ggug_FGU_kit%20de%20marca_RGB_Mesa%20de%20trabajo%201%20copia%208.png',
+      link: 'https://floridaglobal.university/es/',
+    },
+    {
+      name: 'Confederación Interamericana de Coaching',
+      description: 'Organización que agrupa las principales escuelas de coaching de América',
+      logo: 'https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/2rkhabrt_CIC-1.jpg',
+      link: 'https://interamericanadecoaching.org/escuelas/',
+    },
+  ];
+
+  return (
+    <section className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-white">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7c3aed]/10 mb-6">
+            <Award className="w-4 h-4 text-[#7c3aed]" />
+            <span className="text-sm font-body text-[#7c3aed] font-medium">Respaldo Internacional</span>
+          </div>
+          
+          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-semibold text-gray-900 leading-tight mb-6">
+            Acreditaciones que garantizan{' '}
+            <span className="text-[#7c3aed]">excelencia</span>
+          </h2>
+          
+          <p className="font-body text-lg text-gray-600 max-w-4xl mx-auto">
+            Nuestro programa cuenta con el respaldo de las más prestigiosas organizaciones 
+            internacionales de coaching y educación superior.
+          </p>
         </div>
-        
-        <div className="h-16 w-px bg-gray-200 hidden md:block" />
-        
-        <div className="flex flex-col items-center">
-          <img 
-            src="https://inverser.us/wp-content/uploads/2024/10/InverSer-logo-200px.png" 
-            alt="InverSer" 
-            className="h-12 mb-3"
-          />
-          <p className="font-heading font-semibold text-gray-900">InverSer</p>
-          <p className="font-body text-sm text-gray-500">18 años transformando vidas</p>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {accreditations.map((accreditation, index) => (
+            <a
+              key={index}
+              href={accreditation.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 group flex flex-col items-center"
+            >
+              <div className="h-20 w-full flex items-center justify-center mb-4">
+                <img
+                  src={accreditation.logo}
+                  alt={accreditation.name}
+                  className="max-h-16 max-w-full object-contain"
+                />
+              </div>
+              
+              <div className="text-center flex-1 flex flex-col">
+                <h3 className="font-heading text-base font-bold text-gray-900 mb-2 group-hover:text-[#7c3aed] transition-colors">
+                  {accreditation.name}
+                </h3>
+                <p className="font-body text-xs text-gray-600 leading-relaxed flex-1">{accreditation.description}</p>
+              </div>
+              
+              <div className="flex items-center text-[#7c3aed] font-semibold text-xs mt-4 group-hover:underline">
+                <span className="mr-1">Verificar</span>
+                <ExternalLink className="w-3 h-3" />
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <div className="text-center mt-8">
+          <p className="font-body text-sm text-gray-500 italic">
+            Todas las acreditaciones son verificables. Haz clic en cada tarjeta para más información.
+          </p>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 // ============================================
 // TESTIMONIOS SECTION (Existente)
