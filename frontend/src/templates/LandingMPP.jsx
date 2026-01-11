@@ -186,8 +186,8 @@ const HeroMPP = ({ mentorData, onActionClick }) => {
                       size="sm"
                     />
                   </div>
-                  {/* Agendar y WhatsApp - lado a lado en desktop, columna en móvil */}
-                  <div className="flex flex-col sm:flex-row gap-2 w-full">
+                  {/* Agendar y WhatsApp - lado a lado */}
+                  <div className="flex gap-2 w-full">
                     <ButtonAnchor
                       buttonKey="agendar_mpp"
                       templateKey="mpp"
