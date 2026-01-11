@@ -537,27 +537,31 @@ const HerramientasSection = () => {
         </div>
         
         {/* Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {tools.map((tool, idx) => (
             <div 
               key={idx} 
-              className="group bg-white rounded-2xl p-8 border border-gray-100 hover:border-transparent hover:shadow-2xl transition-all duration-500"
+              className="group bg-white rounded-2xl p-5 md:p-6 border border-gray-100 hover:border-transparent hover:shadow-2xl transition-all duration-500"
             >
-              <div 
-                className="w-16 h-16 rounded-2xl mb-6 flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
-                style={{ backgroundColor: `${tool.color}10` }}
-              >
-                <tool.icon className="w-8 h-8" style={{ color: tool.color }} />
+              <div className="flex items-center gap-3 mb-3">
+                <div 
+                  className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-110"
+                  style={{ backgroundColor: `${tool.color}10` }}
+                >
+                  <tool.icon className="w-6 h-6" style={{ color: tool.color }} />
+                </div>
+                <div>
+                  <h3 className="font-heading text-xl font-semibold text-gray-900">{tool.title}</h3>
+                  <p className="font-body text-xs text-[#7c3aed]">{tool.subtitle}</p>
+                </div>
               </div>
               
-              <h3 className="font-heading text-2xl font-semibold text-gray-900 mb-2">{tool.title}</h3>
-              <p className="font-body text-sm text-[#7c3aed] mb-4">{tool.subtitle}</p>
-              <p className="font-body text-gray-600 leading-relaxed mb-6">{tool.description}</p>
+              <p className="font-body text-sm text-gray-600 leading-relaxed mb-4">{tool.description}</p>
               
-              <ul className="space-y-2">
+              <ul className="space-y-1">
                 {tool.features.map((feature, fidx) => (
-                  <li key={fidx} className="flex items-center gap-2 font-body text-sm text-gray-500">
-                    <ChevronRight className="w-4 h-4 text-[#c4ff0f]" />
+                  <li key={fidx} className="flex items-center gap-2 font-body text-xs text-gray-500">
+                    <ChevronRight className="w-3 h-3 text-[#c4ff0f]" />
                     {feature}
                   </li>
                 ))}
