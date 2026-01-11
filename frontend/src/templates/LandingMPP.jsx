@@ -1006,12 +1006,12 @@ const CTAFinalSection = ({ mentorData, onActionClick }) => {
       </div>
       
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-white leading-tight mb-8">
+        <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-white leading-tight mb-6">
           Si sientes que este mundo necesita{' '}
           <span className="text-[#c4ff0f]">más mentores conscientes...</span>
         </h2>
         
-        <p className="font-body text-xl md:text-2xl text-white/80 mb-12 max-w-3xl mx-auto leading-relaxed">
+        <p className="font-body text-xl md:text-2xl text-white/80 mb-8 max-w-3xl mx-auto leading-relaxed">
           Si intuyes que tu rol puede crecer más allá de las sesiones uno a uno. Si buscas un espacio que te potencie sin deshumanizarte. Si crees que la tecnología puede ser aliada de la transformación humana…
           <br /><br />
           <strong className="text-white">Entonces sigue avanzando. Esto no es una promesa. Es una arquitectura.</strong>
@@ -1040,7 +1040,7 @@ const CTAFinalSection = ({ mentorData, onActionClick }) => {
           />
         </div>
         
-        <p className="mt-16 font-heading text-xl text-white/60 italic">
+        <p className="mt-10 font-heading text-xl text-white/60 italic">
           Bienvenido al Mentor & Partner Program. Bienvenido al Plan Pioneros.
           <br />
           <span className="text-white/80 font-medium">Tu legado comienza aquí.</span>
