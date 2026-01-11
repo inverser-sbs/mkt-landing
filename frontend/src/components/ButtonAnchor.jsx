@@ -168,8 +168,8 @@ const ButtonAnchor = ({
   
   const sizeClasses = {
     sm: 'px-3 py-2 text-sm',
-    default: 'px-4 py-3 text-base',
-    lg: 'px-6 py-4 text-base'
+    default: 'px-4 py-3 text-sm sm:text-base',
+    lg: 'px-4 py-3 text-sm sm:text-base sm:px-6 sm:py-4'
   };
   
   // 11. Mensaje de tooltip según estado
