@@ -97,7 +97,7 @@ const HeroMPP = ({ mentorData, onActionClick }) => {
   const hasMentor = mentor.first_name && mentor.first_name !== '';
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
+    <section className="relative min-h-[85vh] md:min-h-[90vh] flex items-center overflow-hidden">
       {/* Imagen de fondo */}
       <div className="absolute inset-0">
         <div 
@@ -114,7 +114,7 @@ const HeroMPP = ({ mentorData, onActionClick }) => {
         <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-[#c4ff0f]/10 rounded-full filter blur-[150px]" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-24 pb-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-20 pb-12">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-16 items-center">
           {/* Contenido principal */}
           <div className="lg:col-span-3 space-y-6 md:space-y-8 text-center lg:text-left">

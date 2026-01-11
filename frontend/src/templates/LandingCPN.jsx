@@ -89,7 +89,7 @@ const HeroCPN = ({ mentorData, onActionClick }) => {
   return (
     <section 
       id="inicio"
-      className="relative min-h-screen flex items-center pt-20 pb-16 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-center"
+      className="relative min-h-[85vh] md:min-h-[90vh] flex items-center pt-20 pb-12 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-center"
       style={{ 
         backgroundImage: `url('https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg')` 
       }}
