@@ -192,14 +192,13 @@ const ButtonAnchor = ({
         ${sizeClasses[size]}
         ${className}
         ${!isClickable ? 'pointer-events-auto' : ''}
-        whitespace-normal text-center
       `}
     >
       {!hasUrl && !isRetired && (
         <AlertCircle className="w-4 h-4 mr-2 flex-shrink-0 text-current opacity-70" />
       )}
       <Icon className="w-5 h-5 mr-2 flex-shrink-0" />
-      <span className="break-words">{label}</span>
+      <span>{label}</span>
     </Button>
   );
   
