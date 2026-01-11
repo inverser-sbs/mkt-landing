@@ -40,38 +40,12 @@ import { getImageUrl } from '../utils/imageUrl';
 // NAVBAR
 // ============================================
 const NavbarCPN = ({ mentorData, onActionClick }) => {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setMobileMenuOpen(false);
-    }
-  };
-
-  const navLinks = [
-    { id: 'inicio', label: 'Inicio' },
-    { id: 'programa', label: 'Programa' },
-    { id: 'metodologia', label: 'Metodología' },
-    { id: 'niveles', label: 'Niveles' },
-    { id: 'faq', label: 'FAQ' }
-  ];
-
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-3' : 'bg-[#031730]/80 backdrop-blur-xl py-4'
-    }`}>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#031730]/80 backdrop-blur-xl border-b border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between h-16 md:h-20">
           <div className="flex items-center gap-3">
             <img 
               src="https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/ux8tcoz0_logo-02.png" 
@@ -79,76 +53,26 @@ const NavbarCPN = ({ mentorData, onActionClick }) => {
               className="h-10 md:h-12"
             />
           </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6 lg:gap-8">
-            {navLinks.map((link) => (
-              <button 
-                key={link.id}
-                onClick={() => scrollToSection(link.id)} 
-                className={`text-sm font-medium transition-colors ${
-                  scrolled ? 'text-gray-700 hover:text-[#7c3aed]' : 'text-white/90 hover:text-[#c4ff0f]'
-                }`}
-              >
-                {link.label}
-              </button>
-            ))}
-            
-            <ButtonAnchor
-              buttonKey="inscribete_nav"
-              templateKey="cpn"
-              actions={actions}
-              mentorLinks={mentorLinks}
-              campaignLinks={campaignLinks}
-              onActionClick={onActionClick}
-              variant="primary"
-              size="sm"
-            />
+          
+          <div className="hidden md:flex items-center space-x-8 text-sm font-body text-white/70">
+            <a href="#inicio" className="hover:text-[#c4ff0f] transition-all duration-300">Inicio</a>
+            <a href="#programa" className="hover:text-[#c4ff0f] transition-all duration-300">Programa</a>
+            <a href="#metodologia" className="hover:text-[#c4ff0f] transition-all duration-300">Metodología</a>
+            <a href="#niveles" className="hover:text-[#c4ff0f] transition-all duration-300">Niveles</a>
+            <a href="#faq" className="hover:text-[#c4ff0f] transition-all duration-300">FAQ</a>
           </div>
-
-          {/* Mobile: Button always visible + Menu toggle */}
-          <div className="flex md:hidden items-center gap-2">
-            <ButtonAnchor
-              buttonKey="inscribete_nav"
-              templateKey="cpn"
-              actions={actions}
-              mentorLinks={mentorLinks}
-              campaignLinks={campaignLinks}
-              onActionClick={onActionClick}
-              variant="primary"
-              size="sm"
-            />
-            <button
-              className="p-2"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              {mobileMenuOpen ? (
-                <X className={`w-6 h-6 ${scrolled ? 'text-gray-700' : 'text-white'}`} />
-              ) : (
-                <Menu className={`w-6 h-6 ${scrolled ? 'text-gray-700' : 'text-white'}`} />
-              )}
-            </button>
-          </div>
+          
+          <ButtonAnchor
+            buttonKey="inscribete_nav"
+            templateKey="cpn"
+            actions={actions}
+            mentorLinks={mentorLinks}
+            campaignLinks={campaignLinks}
+            onActionClick={onActionClick}
+            variant="primary"
+            size="sm"
+          />
         </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className={`md:hidden mt-4 py-4 border-t ${scrolled ? 'border-gray-200' : 'border-white/20'}`}>
-            <div className="flex flex-col space-y-4">
-              {navLinks.map((link) => (
-                <button 
-                  key={link.id}
-                  onClick={() => scrollToSection(link.id)} 
-                  className={`text-left font-medium ${
-                    scrolled ? 'text-gray-700 hover:text-[#7c3aed]' : 'text-white hover:text-[#c4ff0f]'
-                  }`}
-                >
-                  {link.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </nav>
   );
