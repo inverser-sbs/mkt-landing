@@ -230,7 +230,7 @@ const HeroMPP = ({ mentorData, onActionClick }) => {
 // ECOSISTEMA - CONTENIDO COMPLETO CON FONDO
 // ============================================
 const IntroEcosistemaSection = () => (
-  <section id="ecosistema" className="relative py-5 md:py-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
+  <section id="ecosistema" className="relative py-2 md:py-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
     {/* Imagen de fondo sutil */}
     <div className="absolute inset-0">
       <div 
@@ -256,8 +256,8 @@ const IntroEcosistemaSection = () => (
       </div>
       
       {/* Contenido completo */}
-      <div className="space-y-4 md:space-y-6 font-body text-base md:text-lg text-gray-600 leading-[1.7] md:leading-[1.8]">
-        <p className="first-letter:text-5xl md:first-letter:text-6xl first-letter:font-heading first-letter:font-bold first-letter:text-[#7c3aed] first-letter:float-left first-letter:mr-2 md:first-letter:mr-3 first-letter:mt-1">
+      <div className="space-y-2 md:space-y-6 font-body text-base md:text-lg text-gray-600 leading-[1.6] md:leading-[1.8]">
+        <p className="first-letter:text-4xl md:first-letter:text-6xl first-letter:font-heading first-letter:font-bold first-letter:text-[#7c3aed] first-letter:float-left first-letter:mr-2 md:first-letter:mr-3 first-letter:mt-1">
           Vivimos en un tiempo vertiginoso. La Inteligencia Artificial avanza sin pausa, automatiza procesos, optimiza decisiones y redefine el trabajo. Pero mientras la tecnología crece, algo queda en riesgo: la <strong className="text-gray-900 font-semibold">capacidad humana de comprender, sostener y acompañar procesos emocionales y vitales</strong>.
         </p>
         
@@ -266,9 +266,9 @@ const IntroEcosistemaSection = () => (
         </p>
         
         {/* Quote destacado */}
-        <blockquote className="relative py-4 md:py-8 my-4 md:my-10">
+        <blockquote className="relative py-2 md:py-8 my-2 md:my-10">
           <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#7c3aed] to-[#c4ff0f] rounded-full" />
-          <p className="pl-6 font-heading text-lg md:text-2xl lg:text-3xl font-medium text-gray-900 italic leading-snug">
+          <p className="pl-4 md:pl-6 font-heading text-base md:text-2xl lg:text-3xl font-medium text-gray-900 italic leading-snug">
             &ldquo;InverSer evoluciona desde ahí. Desde años de experiencia real en el mundo digital, en la formación de coaches, en procesos profundos de transformación humana.&rdquo;
           </p>
         </blockquote>
@@ -277,7 +277,7 @@ const IntroEcosistemaSection = () => (
           No somos una plataforma más. No somos un marketplace de servicios. <strong className="text-gray-900 font-semibold">Somos un ecosistema para mentores conscientes</strong>. Un lugar donde la tecnología no deshumaniza, sino que amplifica tu capacidad de impacto.
         </p>
         
-        <p className="text-center font-heading text-base md:text-2xl font-medium text-gray-900 py-2 md:py-4 leading-relaxed">
+        <p className="text-center font-heading text-sm md:text-2xl font-medium text-gray-900 py-1 md:py-4 leading-snug md:leading-relaxed">
           Hoy, InverSer se expresa con más claridad en ese punto donde{' '}
           <span className="text-[#7c3aed]">la tecnología necesita conciencia</span>.
           <br />
@@ -292,7 +292,7 @@ const IntroEcosistemaSection = () => (
       </div>
       
       {/* Tres pilares */}
-      <div className="grid md:grid-cols-3 gap-4 md:gap-6 mt-6 md:mt-10">
+      <div className="grid md:grid-cols-3 gap-3 md:gap-6 mt-3 md:mt-10">
         {[
           { icon: Heart, text: 'Estructura sin rigidez', desc: 'Flexibilidad que respeta tu estilo' },
           { icon: Zap, text: 'Herramientas sin frialdad', desc: 'Tecnología con alma y propósito' },
