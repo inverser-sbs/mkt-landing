@@ -992,7 +992,7 @@ const CTAFinalSection = ({ mentorData, onActionClick }) => {
 
   return (
     <section 
-      className="relative py-32 md:py-40 overflow-hidden bg-fixed bg-cover bg-center"
+      className="relative py-16 md:py-20 overflow-hidden bg-fixed bg-cover bg-center"
       style={{ 
         backgroundImage: `url('https://images.pexels.com/photos/4069293/pexels-photo-4069293.jpeg')` 
       }}
