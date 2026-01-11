@@ -190,7 +190,7 @@ const HeroCPN = ({ mentorData, onActionClick }) => {
                       size="sm"
                     />
                   </div>
-                  <div className="flex flex-col sm:flex-row gap-2 w-full">
+                  <div className="flex flex-col sm:flex-row gap-2 justify-center">
                     <ButtonAnchor
                       buttonKey="agenda_hero"
                       templateKey="cpn"
@@ -200,7 +200,6 @@ const HeroCPN = ({ mentorData, onActionClick }) => {
                       onActionClick={onActionClick}
                       variant="primary"
                       size="sm"
-                      className="flex-1"
                     />
                     <ButtonAnchor
                       buttonKey="whatsapp_hero"
@@ -211,7 +210,6 @@ const HeroCPN = ({ mentorData, onActionClick }) => {
                       onActionClick={onActionClick}
                       variant="secondary"
                       size="sm"
-                      className="flex-1"
                     />
                   </div>
                 </div>
