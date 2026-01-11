@@ -574,7 +574,7 @@ const HerramientasSection = () => {
 // IA SECTION COMPLETO
 // ============================================
 const IASection = () => (
-  <section className="relative py-12 md:py-16 overflow-hidden">
+  <section className="relative py-10 md:py-12 overflow-hidden">
     <div className="absolute inset-0 bg-[#031730]">
       <div 
         className="absolute inset-0 opacity-20 bg-cover bg-center"
@@ -657,7 +657,7 @@ const IASection = () => (
 // KOMMUNITY COMPLETO
 // ============================================
 const KommunitySection = () => (
-  <section id="comunidad" className="relative py-12 md:py-16 overflow-hidden">
+  <section id="comunidad" className="relative py-10 md:py-12 overflow-hidden">
     <div className="absolute inset-0">
       <div 
         className="absolute inset-0 bg-cover bg-center"
@@ -992,7 +992,7 @@ const CTAFinalSection = ({ mentorData, onActionClick }) => {
 
   return (
     <section 
-      className="relative py-16 md:py-20 overflow-hidden bg-fixed bg-cover bg-center"
+      className="relative py-12 md:py-14 overflow-hidden bg-fixed bg-cover bg-center"
       style={{ 
         backgroundImage: `url('https://images.pexels.com/photos/4069293/pexels-photo-4069293.jpeg')` 
       }}
