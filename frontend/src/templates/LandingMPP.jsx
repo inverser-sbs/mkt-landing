@@ -452,8 +452,8 @@ const StatementSection = () => (
       <p className="font-heading text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium text-white leading-[1.3]">
         Si eres coach, terapeuta, formador, consultor, líder de equipos o una persona con vocación de acompañar a otros…
       </p>
-      <p className="font-heading text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-[#c4ff0f] mt-8">
-        este es tu lugar.
+      <p className="font-heading text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-[#c4ff0f] mt-4 md:mt-8">
+        Este es tu lugar!.
       </p>
     </div>
   </section>
