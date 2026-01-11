@@ -231,7 +231,7 @@ const TransformaSERSection = ({ mentorData, onActionClick }) => {
   const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
 
   return (
-    <section id="programa" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-white">
+    <section id="programa" className="py-12 md:py-10 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7c3aed]/10 mb-6">
@@ -322,7 +322,7 @@ const EsParaTiSection = ({ mentorData, onActionClick }) => {
 
   return (
     <section 
-      className="relative py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-center"
+      className="relative py-12 md:py-10 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-center"
       style={{ 
         backgroundImage: `url('https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg')` 
       }}
@@ -416,7 +416,7 @@ const QueLograsSection = () => {
   ];
 
   return (
-    <section className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-[#faf8f5]">
+    <section className="py-12 md:py-10 px-4 sm:px-6 lg:px-8 bg-[#faf8f5]">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#c4ff0f]/20 mb-6">
@@ -465,7 +465,7 @@ const MetodologiaSection = () => {
   ];
 
   return (
-    <section id="metodologia" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-white">
+    <section id="metodologia" className="py-12 md:py-10 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7c3aed]/10 mb-6">
@@ -591,7 +591,7 @@ const EjesSection = () => {
 
   return (
     <section 
-      className="relative py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-center"
+      className="relative py-12 md:py-10 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-center"
       style={{ 
         backgroundImage: `url('https://images.pexels.com/photos/2559941/pexels-photo-2559941.jpeg')` 
       }}
@@ -689,7 +689,7 @@ const NivelesSection = () => {
   ];
 
   return (
-    <section id="niveles" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-[#faf8f5]">
+    <section id="niveles" className="py-12 md:py-10 px-4 sm:px-6 lg:px-8 bg-[#faf8f5]">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7c3aed]/10 mb-6">
@@ -765,7 +765,7 @@ const EcosistemaDigitalSection = () => {
   ];
 
   return (
-    <section className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-white">
+    <section className="py-12 md:py-10 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="space-y-6 md:space-y-8">
@@ -822,7 +822,7 @@ const EcosistemaDigitalSection = () => {
 // ============================================
 const ComunidadSection = () => (
   <section 
-    className="relative py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-center"
+    className="relative py-12 md:py-10 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-center"
     style={{ 
       backgroundImage: `url('https://images.pexels.com/photos/3184398/pexels-photo-3184398.jpeg')` 
     }}
@@ -868,7 +868,7 @@ const SiguientePasoSection = ({ mentorData, onActionClick }) => {
   const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
 
   return (
-    <section className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-[#faf8f5] overflow-hidden">
+    <section className="py-12 md:py-10 px-4 sm:px-6 lg:px-8 bg-[#faf8f5] overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="space-y-6 md:space-y-8 overflow-hidden">
@@ -967,7 +967,7 @@ const AcreditacionesSection = () => {
   ];
 
   return (
-    <section className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-white">
+    <section className="py-12 md:py-10 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7c3aed]/10 mb-6">
@@ -1112,7 +1112,7 @@ No soy quien soy ahora, sino todo lo que puedo ser.`
   };
 
   return (
-    <section className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#031730] via-[#0a1f3d] to-[#031730]">
+    <section className="py-12 md:py-10 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#031730] via-[#0a1f3d] to-[#031730]">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-12">
           <span className="inline-block px-4 py-1.5 bg-[#c4ff0f]/20 text-[#c4ff0f] text-sm font-medium rounded-full mb-4">
@@ -1228,7 +1228,7 @@ const FAQSectionCPN = () => {
   ];
 
   return (
-    <section id="faq" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-[#faf8f5]">
+    <section id="faq" className="py-12 md:py-10 px-4 sm:px-6 lg:px-8 bg-[#faf8f5]">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7c3aed]/10 mb-6">
@@ -1285,7 +1285,7 @@ const CTAFinalSection = ({ mentorData, onActionClick }) => {
 
   return (
     <section 
-      className="relative py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-center"
+      className="relative py-12 md:py-10 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-center"
       style={{ 
         backgroundImage: `url('https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg')` 
       }}
@@ -1334,7 +1334,7 @@ const FooterCPN = ({ mentorData, onActionClick }) => {
   const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
 
   return (
-    <footer className="bg-[#031730] text-white py-16 px-4 sm:px-6 lg:px-8">
+    <footer className="bg-[#031730] text-white py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-3 gap-12 mb-12">
           {/* Logo y descripción */}

@@ -232,7 +232,7 @@ const HeroMPP = ({ mentorData, onActionClick }) => {
 // ECOSISTEMA - CONTENIDO COMPLETO CON FONDO
 // ============================================
 const IntroEcosistemaSection = () => (
-  <section id="ecosistema" className="relative py-24 md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
+  <section id="ecosistema" className="relative py-12 md:py-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
     {/* Imagen de fondo sutil */}
     <div className="absolute inset-0">
       <div 
@@ -320,7 +320,7 @@ const CertificacionSection = ({ mentorData, onActionClick }) => {
   const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
 
   return (
-    <section id="certificacion" className="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-white">
+    <section id="certificacion" className="py-12 md:py-10 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="max-w-4xl mb-20">
@@ -517,7 +517,7 @@ const HerramientasSection = () => {
   ];
 
   return (
-    <section id="herramientas" className="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#faf8f5]">
+    <section id="herramientas" className="py-12 md:py-10 px-4 sm:px-6 lg:px-8 bg-[#faf8f5]">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="max-w-3xl mx-auto text-center mb-20">
@@ -574,7 +574,7 @@ const HerramientasSection = () => {
 // IA SECTION COMPLETO
 // ============================================
 const IASection = () => (
-  <section className="relative py-24 md:py-32 overflow-hidden">
+  <section className="relative py-12 md:py-16 overflow-hidden">
     <div className="absolute inset-0 bg-[#031730]">
       <div 
         className="absolute inset-0 opacity-20 bg-cover bg-center"
@@ -657,7 +657,7 @@ const IASection = () => (
 // KOMMUNITY COMPLETO
 // ============================================
 const KommunitySection = () => (
-  <section id="comunidad" className="relative py-24 md:py-32 overflow-hidden">
+  <section id="comunidad" className="relative py-12 md:py-16 overflow-hidden">
     <div className="absolute inset-0">
       <div 
         className="absolute inset-0 bg-cover bg-center"
@@ -728,7 +728,7 @@ const KommunitySection = () => (
 // TOOLBOX COMPLETO
 // ============================================
 const ToolboxSection = () => (
-  <section className="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-white">
+  <section className="py-12 md:py-10 px-4 sm:px-6 lg:px-8 bg-white">
     <div className="max-w-7xl mx-auto">
       <div className="grid lg:grid-cols-2 gap-16 items-center">
         {/* Contenido */}
@@ -787,7 +787,7 @@ const ToolboxSection = () => (
 const DirectorioVivoSection = () => {
   return (
     <section 
-      className="relative py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-center"
+      className="relative py-12 md:py-10 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-center"
       style={{ 
         backgroundImage: `url('https://images.pexels.com/photos/2569997/pexels-photo-2569997.jpeg')` 
       }}
@@ -886,7 +886,7 @@ const IPartnerSection = ({ mentorData, onActionClick }) => {
   const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
 
   return (
-    <section className="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#031730]">
+    <section className="py-12 md:py-10 px-4 sm:px-6 lg:px-8 bg-[#031730]">
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
@@ -1295,7 +1295,7 @@ El valor del setup es un importe especial y accesible para los pioneros, precisa
   };
 
   return (
-    <section id="faq" className="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#faf8f5]">
+    <section id="faq" className="py-12 md:py-10 px-4 sm:px-6 lg:px-8 bg-[#faf8f5]">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
@@ -1379,7 +1379,7 @@ const FooterMPP = ({ mentorData, onActionClick }) => {
   const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
 
   return (
-    <footer className="bg-[#031730] text-white py-16 px-4 sm:px-6 lg:px-8">
+    <footer className="bg-[#031730] text-white py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-3 gap-12 mb-12 pb-12 border-b border-white/10">
           {/* Logo */}
