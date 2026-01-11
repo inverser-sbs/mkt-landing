@@ -438,7 +438,7 @@ const CertificacionSection = ({ mentorData, onActionClick }) => {
 // STATEMENT SECTION
 // ============================================
 const StatementSection = () => (
-  <section className="relative py-32 md:py-40 overflow-hidden">
+  <section className="relative py-12 md:py-40 overflow-hidden">
     <div className="absolute inset-0">
       <div 
         className="absolute inset-0 bg-cover bg-center bg-fixed"
