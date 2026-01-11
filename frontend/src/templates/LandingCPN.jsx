@@ -1356,7 +1356,7 @@ const LandingCPN = ({ mentorData, onActionClick }) => {
   }, [mentorData]);
 
   return (
-    <div className="min-h-screen font-body">
+    <div className="min-h-screen font-body overflow-x-hidden">
       <NavbarCPN mentorData={mentorData} onActionClick={onActionClick} />
       <HeroCPN mentorData={mentorData} onActionClick={onActionClick} />
       <TransformaSERSection mentorData={mentorData} onActionClick={onActionClick} />
