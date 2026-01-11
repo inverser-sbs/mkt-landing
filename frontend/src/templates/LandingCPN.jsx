@@ -190,7 +190,7 @@ const HeroCPN = ({ mentorData, onActionClick }) => {
                       size="sm"
                     />
                   </div>
-                  <div className="flex gap-2 w-full">
+                  <div className="flex flex-col sm:flex-row gap-2 w-full">
                     <ButtonAnchor
                       buttonKey="agenda_hero"
                       templateKey="cpn"
