@@ -4,11 +4,11 @@
 Plataforma de marketing full-stack (React, FastAPI, MongoDB) para gestión de campañas de mentores con landing pages dinámicas personalizables.
 
 ## Estado Actual
-**Fecha:** 6 Enero 2026
+**Fecha:** 11 Enero 2026
 
 ### Landings Aprobadas
-- **MPP (Mentor & Partner Program) v1.0** ✅ APROBADA
-- **CPN (Certificación Profesional NeuroCoaching) v2.0** 🔄 EN REVISIÓN
+- **MPP (Mentor & Partner Program) v1.1** ✅ ACTUALIZADA
+- **CPN (Certificación Profesional NeuroCoaching) v2.1** ✅ ACTUALIZADA
 
 ---
 
