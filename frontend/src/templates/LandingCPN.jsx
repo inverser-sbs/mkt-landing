@@ -106,17 +106,29 @@ const NavbarCPN = ({ mentorData, onActionClick }) => {
             />
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? (
-              <X className={`w-6 h-6 ${scrolled ? 'text-gray-700' : 'text-white'}`} />
-            ) : (
-              <Menu className={`w-6 h-6 ${scrolled ? 'text-gray-700' : 'text-white'}`} />
-            )}
-          </button>
+          {/* Mobile: Button always visible + Menu toggle */}
+          <div className="flex md:hidden items-center gap-2">
+            <ButtonAnchor
+              buttonKey="inscribete_nav"
+              templateKey="cpn"
+              actions={actions}
+              mentorLinks={mentorLinks}
+              campaignLinks={campaignLinks}
+              onActionClick={onActionClick}
+              variant="primary"
+              size="sm"
+            />
+            <button
+              className="p-2"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? (
+                <X className={`w-6 h-6 ${scrolled ? 'text-gray-700' : 'text-white'}`} />
+              ) : (
+                <Menu className={`w-6 h-6 ${scrolled ? 'text-gray-700' : 'text-white'}`} />
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
