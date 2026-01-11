@@ -266,9 +266,9 @@ const IntroEcosistemaSection = () => (
         </p>
         
         {/* Quote destacado */}
-        <blockquote className="relative py-8 my-10">
+        <blockquote className="relative py-4 md:py-8 my-4 md:my-10">
           <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#7c3aed] to-[#c4ff0f] rounded-full" />
-          <p className="pl-6 font-heading text-xl md:text-2xl lg:text-3xl font-medium text-gray-900 italic leading-snug">
+          <p className="pl-6 font-heading text-lg md:text-2xl lg:text-3xl font-medium text-gray-900 italic leading-snug">
             &ldquo;InverSer evoluciona desde ahí. Desde años de experiencia real en el mundo digital, en la formación de coaches, en procesos profundos de transformación humana.&rdquo;
           </p>
         </blockquote>
