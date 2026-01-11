@@ -1019,6 +1019,8 @@ const TestimoniosSection = () => {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [slideDirection, setSlideDirection] = useState('left');
 
   const testimonios = [
     {
@@ -1059,17 +1061,27 @@ No soy quien soy ahora, sino todo lo que puedo ser.`
     }
   ];
 
+  const changeSlide = (newIndex, direction) => {
+    setSlideDirection(direction);
+    setIsAnimating(true);
+    setTimeout(() => {
+      setCurrentIndex(newIndex);
+      setTimeout(() => setIsAnimating(false), 50);
+    }, 200);
+  };
+
   useEffect(() => {
     if (!isAutoPlaying) return;
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % testimonios.length);
+      changeSlide((currentIndex + 1) % testimonios.length, 'left');
     }, 8000);
     return () => clearInterval(interval);
-  }, [isAutoPlaying, testimonios.length]);
+  }, [isAutoPlaying, currentIndex, testimonios.length]);
 
   const goToSlide = (index) => {
     setIsAutoPlaying(false);
-    setCurrentIndex(index);
+    const direction = index > currentIndex ? 'left' : 'right';
+    changeSlide(index, direction);
   };
 
   const minSwipeDistance = 50;
@@ -1091,11 +1103,11 @@ No soy quien soy ahora, sino todo lo que puedo ser.`
     
     if (isLeftSwipe) {
       setIsAutoPlaying(false);
-      setCurrentIndex((prev) => (prev + 1) % testimonios.length);
+      changeSlide((currentIndex + 1) % testimonios.length, 'left');
     }
     if (isRightSwipe) {
       setIsAutoPlaying(false);
-      setCurrentIndex((prev) => (prev - 1 + testimonios.length) % testimonios.length);
+      changeSlide((currentIndex - 1 + testimonios.length) % testimonios.length, 'right');
     }
   };
 
@@ -1113,14 +1125,20 @@ No soy quien soy ahora, sino todo lo que puedo ser.`
         </div>
 
         <div 
-          className="bg-white/5 backdrop-blur-sm rounded-3xl border border-white/10 p-6 md:p-10 cursor-grab active:cursor-grabbing"
+          className="bg-white/5 backdrop-blur-sm rounded-3xl border border-white/10 p-6 md:p-10 cursor-grab active:cursor-grabbing overflow-hidden"
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
         >
           <Quote className="w-10 h-10 text-[#c4ff0f]/30 mb-6" />
           
-          <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
+          <div 
+            className={`flex flex-col md:flex-row gap-6 md:gap-8 items-start transition-all duration-300 ease-out ${
+              isAnimating 
+                ? `opacity-0 ${slideDirection === 'left' ? '-translate-x-8' : 'translate-x-8'}` 
+                : 'opacity-100 translate-x-0'
+            }`}
+          >
             <div className="flex-shrink-0 mx-auto md:mx-0">
               <div className="w-20 h-20 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-[#c4ff0f]/40">
                 <img
