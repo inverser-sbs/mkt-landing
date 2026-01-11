@@ -177,7 +177,7 @@ const HeroCPN = ({ mentorData, onActionClick }) => {
                 <p className="font-body text-[#c4ff0f] text-sm mb-6">Mentor Certificado<br />INVERSER SBS</p>
                 
                 {/* Botones en pirámide */}
-                <div className="space-y-3">
+                <div className="space-y-3 w-full">
                   <div className="flex justify-center">
                     <ButtonAnchor
                       buttonKey="ver_perfil"
@@ -190,7 +190,7 @@ const HeroCPN = ({ mentorData, onActionClick }) => {
                       size="sm"
                     />
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex flex-col sm:flex-row gap-2 w-full">
                     <ButtonAnchor
                       buttonKey="agenda_hero"
                       templateKey="cpn"
@@ -200,6 +200,7 @@ const HeroCPN = ({ mentorData, onActionClick }) => {
                       onActionClick={onActionClick}
                       variant="primary"
                       size="sm"
+                      className="flex-1"
                     />
                     <ButtonAnchor
                       buttonKey="whatsapp_hero"
@@ -210,6 +211,7 @@ const HeroCPN = ({ mentorData, onActionClick }) => {
                       onActionClick={onActionClick}
                       variant="secondary"
                       size="sm"
+                      className="flex-1"
                     />
                   </div>
                 </div>
