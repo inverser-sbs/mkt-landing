@@ -1017,6 +1017,8 @@ const AcreditacionesSection = () => {
 const TestimoniosSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
 
   const testimonios = [
     {
@@ -1070,6 +1072,33 @@ No soy quien soy ahora, sino todo lo que puedo ser.`
     setCurrentIndex(index);
   };
 
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    
+    if (isLeftSwipe) {
+      setIsAutoPlaying(false);
+      setCurrentIndex((prev) => (prev + 1) % testimonios.length);
+    }
+    if (isRightSwipe) {
+      setIsAutoPlaying(false);
+      setCurrentIndex((prev) => (prev - 1 + testimonios.length) % testimonios.length);
+    }
+  };
+
   return (
     <section className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#031730] via-[#0a1f3d] to-[#031730]">
       <div className="max-w-5xl mx-auto">
@@ -1083,7 +1112,12 @@ No soy quien soy ahora, sino todo lo que puedo ser.`
           </h2>
         </div>
 
-        <div className="bg-white/5 backdrop-blur-sm rounded-3xl border border-white/10 p-6 md:p-10">
+        <div 
+          className="bg-white/5 backdrop-blur-sm rounded-3xl border border-white/10 p-6 md:p-10 cursor-grab active:cursor-grabbing"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
           <Quote className="w-10 h-10 text-[#c4ff0f]/30 mb-6" />
           
           <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
