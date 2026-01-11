@@ -232,7 +232,7 @@ const HeroMPP = ({ mentorData, onActionClick }) => {
 // ECOSISTEMA - CONTENIDO COMPLETO CON FONDO
 // ============================================
 const IntroEcosistemaSection = () => (
-  <section id="ecosistema" className="relative py-12 md:py-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
+  <section id="ecosistema" className="relative py-8 md:py-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
     {/* Imagen de fondo sutil */}
     <div className="absolute inset-0">
       <div 
@@ -244,13 +244,13 @@ const IntroEcosistemaSection = () => (
     
     <div className="relative z-10 max-w-4xl mx-auto">
       {/* Header */}
-      <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7c3aed]/10 mb-4">
+      <div className="text-center mb-5 md:mb-8">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7c3aed]/10 mb-3 md:mb-4">
           <Target className="w-4 h-4 text-[#7c3aed]" />
           <span className="text-sm font-body text-[#7c3aed] font-medium">El Ecosistema</span>
         </div>
         
-        <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-900 leading-tight">
+        <h2 className="font-heading text-2xl md:text-4xl lg:text-5xl font-semibold text-gray-900 leading-tight">
           Aquí no vienes a consumir contenidos.
           <br />
           <span className="text-[#7c3aed]">Vienes a habitar un ecosistema.</span>
@@ -279,7 +279,7 @@ const IntroEcosistemaSection = () => (
           No somos una plataforma más. No somos un marketplace de servicios. <strong className="text-gray-900 font-semibold">Somos un ecosistema para mentores conscientes</strong>. Un lugar donde la tecnología no deshumaniza, sino que amplifica tu capacidad de impacto.
         </p>
         
-        <p className="text-center font-heading text-xl md:text-2xl font-medium text-gray-900 py-4 leading-relaxed">
+        <p className="text-center font-heading text-lg md:text-2xl font-medium text-gray-900 py-3 md:py-4 leading-relaxed">
           Hoy, InverSer se expresa con más claridad en ese punto donde{' '}
           <span className="text-[#7c3aed]">la tecnología necesita conciencia</span>.
           <br />
@@ -294,7 +294,7 @@ const IntroEcosistemaSection = () => (
       </div>
       
       {/* Tres pilares */}
-      <div className="grid md:grid-cols-3 gap-6 mt-10">
+      <div className="grid md:grid-cols-3 gap-4 md:gap-6 mt-6 md:mt-10">
         {[
           { icon: Heart, text: 'Estructura sin rigidez', desc: 'Flexibilidad que respeta tu estilo' },
           { icon: Zap, text: 'Herramientas sin frialdad', desc: 'Tecnología con alma y propósito' },
