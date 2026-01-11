@@ -256,8 +256,8 @@ const IntroEcosistemaSection = () => (
       </div>
       
       {/* Contenido completo */}
-      <div className="space-y-6 font-body text-base md:text-lg text-gray-600 leading-[1.8]">
-        <p className="first-letter:text-6xl first-letter:font-heading first-letter:font-bold first-letter:text-[#7c3aed] first-letter:float-left first-letter:mr-3 first-letter:mt-1">
+      <div className="space-y-4 md:space-y-6 font-body text-base md:text-lg text-gray-600 leading-[1.7] md:leading-[1.8]">
+        <p className="first-letter:text-5xl md:first-letter:text-6xl first-letter:font-heading first-letter:font-bold first-letter:text-[#7c3aed] first-letter:float-left first-letter:mr-2 md:first-letter:mr-3 first-letter:mt-1">
           Vivimos en un tiempo vertiginoso. La Inteligencia Artificial avanza sin pausa, automatiza procesos, optimiza decisiones y redefine el trabajo. Pero mientras la tecnología crece, algo queda en riesgo: la <strong className="text-gray-900 font-semibold">capacidad humana de comprender, sostener y acompañar procesos emocionales y vitales</strong>.
         </p>
         
