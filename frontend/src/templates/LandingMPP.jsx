@@ -230,7 +230,7 @@ const HeroMPP = ({ mentorData, onActionClick }) => {
 // ECOSISTEMA - CONTENIDO COMPLETO CON FONDO
 // ============================================
 const IntroEcosistemaSection = () => (
-  <section id="ecosistema" className="relative py-8 md:py-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
+  <section id="ecosistema" className="relative py-5 md:py-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
     {/* Imagen de fondo sutil */}
     <div className="absolute inset-0">
       <div 
