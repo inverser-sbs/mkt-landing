@@ -520,18 +520,18 @@ const HerramientasSection = () => {
     <section id="herramientas" className="py-12 md:py-10 px-4 sm:px-6 lg:px-8 bg-[#faf8f5]">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="max-w-3xl mx-auto text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7c3aed]/10 mb-6">
+        <div className="max-w-3xl mx-auto text-center mb-10">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7c3aed]/10 mb-4">
             <Briefcase className="w-4 h-4 text-[#7c3aed]" />
             <span className="text-sm font-body text-[#7c3aed] font-medium">Herramientas</span>
           </div>
           
-          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-semibold text-gray-900 leading-tight mb-8">
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-900 leading-tight mb-4">
             Tu infraestructura de{' '}
             <span className="text-[#7c3aed]">acompañamiento</span>
           </h2>
           
-          <p className="font-body text-xl text-gray-600 leading-relaxed">
+          <p className="font-body text-lg text-gray-600 leading-relaxed">
             Un ecosistema que te sostiene mientras tú sostienes a otros. Herramientas diseñadas no desde la eficiencia fría, sino desde la comprensión profunda de lo que significa acompañar procesos humanos.
           </p>
         </div>
