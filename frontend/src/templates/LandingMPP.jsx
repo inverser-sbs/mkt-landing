@@ -286,8 +286,8 @@ const IntroEcosistemaSection = () => (
           Y donde las personas necesitan mentores preparados para este nuevo mundo.
         </p>
         
-        <p>
-          Si eres coach, terapeuta, formador, consultor, líder de equipos o simplemente una persona con vocación de acompañar a otros… <strong className="text-gray-900 font-semibold">este es tu lugar</strong>. Aquí encontrarás estructura sin rigidez, herramientas sin frialdad, comunidad sin competencia. Un espacio donde tu experiencia se vuelve legado. Y donde cada mentee que acompañas se convierte en semilla de una transformación mayor.
+        <p className="mt-0 md:mt-4">
+          Si eres coach, terapeuta, formador, consultor, líder de equipos o simplemente una persona con vocación de acompañar a otros… <strong className="text-gray-900 font-semibold">Este es tu lugar!.</strong> Aquí encontrarás estructura sin rigidez, herramientas sin frialdad, comunidad sin competencia. Un espacio donde tu experiencia se vuelve legado. Y donde cada mentee que acompañas se convierte en semilla de una transformación mayor.
         </p>
       </div>
       
