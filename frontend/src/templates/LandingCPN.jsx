@@ -271,15 +271,17 @@ const TransformaSERSection = ({ mentorData, onActionClick }) => {
           ].map((item, idx) => (
             <div 
               key={idx}
-              className="bg-gradient-to-br from-gray-50 to-white rounded-3xl p-8 border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+              className="bg-gradient-to-br from-gray-50 to-white rounded-3xl p-6 border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
             >
-              <div 
-                className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6"
-                style={{ backgroundColor: `${item.color}15` }}
-              >
-                <item.icon className="w-8 h-8" style={{ color: item.color }} />
+              <div className="flex items-center gap-4 mb-4">
+                <div 
+                  className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                  style={{ backgroundColor: `${item.color}15` }}
+                >
+                  <item.icon className="w-6 h-6" style={{ color: item.color }} />
+                </div>
+                <h3 className="font-heading text-xl font-semibold text-gray-900">{item.title}</h3>
               </div>
-              <h3 className="font-heading text-xl font-semibold text-gray-900 mb-3">{item.title}</h3>
               <p className="font-body text-gray-600 leading-relaxed">{item.description}</p>
             </div>
           ))}
