@@ -242,13 +242,13 @@ const IntroEcosistemaSection = () => (
     
     <div className="relative z-10 max-w-4xl mx-auto">
       {/* Header */}
-      <div className="text-center mb-5 md:mb-8">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7c3aed]/10 mb-3 md:mb-4">
+      <div className="text-center mb-3 md:mb-8">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7c3aed]/10 mb-2 md:mb-4">
           <Target className="w-4 h-4 text-[#7c3aed]" />
           <span className="text-sm font-body text-[#7c3aed] font-medium">El Ecosistema</span>
         </div>
         
-        <h2 className="font-heading text-2xl md:text-4xl lg:text-5xl font-semibold text-gray-900 leading-tight">
+        <h2 className="font-heading text-xl md:text-4xl lg:text-5xl font-semibold text-gray-900 leading-tight">
           Aquí no vienes a consumir contenidos.
           <br />
           <span className="text-[#7c3aed]">Vienes a habitar un ecosistema.</span>
