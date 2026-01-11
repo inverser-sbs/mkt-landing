@@ -623,13 +623,15 @@ const EjesSection = () => {
           {ejes.slice(0, 4).map((eje, idx) => (
             <div 
               key={idx}
-              className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-[#c4ff0f]/30 hover:bg-white/10 transition-all duration-300"
+              className="bg-white/5 backdrop-blur-sm rounded-2xl p-5 border border-white/10 hover:border-[#c4ff0f]/30 hover:bg-white/10 transition-all duration-300"
             >
-              <div className="w-12 h-12 rounded-xl bg-[#c4ff0f]/10 flex items-center justify-center mb-4">
-                <eje.icon className="w-6 h-6 text-[#c4ff0f]" />
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-xl bg-[#c4ff0f]/10 flex items-center justify-center flex-shrink-0">
+                  <eje.icon className="w-5 h-5 text-[#c4ff0f]" />
+                </div>
+                <h3 className="font-heading text-base font-semibold text-white">{eje.title}</h3>
               </div>
-              <h3 className="font-heading text-lg font-semibold text-white mb-2">{eje.title}</h3>
-              <p className="font-body text-white/60 text-sm mb-3 leading-relaxed">{eje.description}</p>
+              <p className="font-body text-white/60 text-sm mb-2 leading-relaxed">{eje.description}</p>
               <p className="font-body text-[#c4ff0f] text-xs italic">"{eje.frase}"</p>
             </div>
           ))}
@@ -640,13 +642,15 @@ const EjesSection = () => {
           {ejes.slice(4).map((eje, idx) => (
             <div 
               key={idx + 4}
-              className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-[#c4ff0f]/30 hover:bg-white/10 transition-all duration-300 w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(25%-0.75rem)]"
+              className="bg-white/5 backdrop-blur-sm rounded-2xl p-5 border border-white/10 hover:border-[#c4ff0f]/30 hover:bg-white/10 transition-all duration-300 w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(25%-0.75rem)]"
             >
-              <div className="w-12 h-12 rounded-xl bg-[#c4ff0f]/10 flex items-center justify-center mb-4">
-                <eje.icon className="w-6 h-6 text-[#c4ff0f]" />
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-xl bg-[#c4ff0f]/10 flex items-center justify-center flex-shrink-0">
+                  <eje.icon className="w-5 h-5 text-[#c4ff0f]" />
+                </div>
+                <h3 className="font-heading text-base font-semibold text-white">{eje.title}</h3>
               </div>
-              <h3 className="font-heading text-lg font-semibold text-white mb-2">{eje.title}</h3>
-              <p className="font-body text-white/60 text-sm mb-3 leading-relaxed">{eje.description}</p>
+              <p className="font-body text-white/60 text-sm mb-2 leading-relaxed">{eje.description}</p>
               <p className="font-body text-[#c4ff0f] text-xs italic">"{eje.frase}"</p>
             </div>
           ))}
