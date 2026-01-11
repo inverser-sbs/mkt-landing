@@ -287,7 +287,7 @@ const TransformaSERSection = ({ mentorData, onActionClick }) => {
           ))}
         </div>
 
-        <div className="mt-16 text-center">
+        <div className="mt-16 text-center px-4">
           <ButtonAnchor
             buttonKey="iniciar_transformacion"
             templateKey="cpn"
@@ -297,7 +297,7 @@ const TransformaSERSection = ({ mentorData, onActionClick }) => {
             onActionClick={onActionClick}
             variant="primary"
             size="lg"
-            className="w-full sm:w-auto"
+            className="w-full sm:w-auto max-w-xs sm:max-w-none mx-auto"
           />
         </div>
       </div>
@@ -359,7 +359,7 @@ const EsParaTiSection = ({ mentorData, onActionClick }) => {
             ))}
           </div>
 
-          <div className="mt-10 text-center">
+          <div className="mt-10 text-center px-4">
             <ButtonAnchor
               buttonKey="solicitar_entrevista"
               templateKey="cpn"
@@ -369,7 +369,7 @@ const EsParaTiSection = ({ mentorData, onActionClick }) => {
               onActionClick={onActionClick}
               variant="primary"
               size="lg"
-              className="w-full sm:w-auto"
+              className="w-full sm:w-auto max-w-xs sm:max-w-none mx-auto"
             />
           </div>
         </div>
@@ -911,17 +911,19 @@ const SiguientePasoSection = ({ mentorData, onActionClick }) => {
               ))}
             </ul>
             
-            <ButtonAnchor
-              buttonKey="partner_cta"
-              templateKey="cpn"
-              actions={actions}
-              mentorLinks={mentorLinks}
-              campaignLinks={campaignLinks}
-              onActionClick={onActionClick}
-              variant="primary"
-              size="lg"
-              className="w-full sm:w-auto"
-            />
+            <div className="mt-6">
+              <ButtonAnchor
+                buttonKey="partner_cta"
+                templateKey="cpn"
+                actions={actions}
+                mentorLinks={mentorLinks}
+                campaignLinks={campaignLinks}
+                onActionClick={onActionClick}
+                variant="primary"
+                size="lg"
+                className="w-full sm:w-auto max-w-xs sm:max-w-none"
+              />
+            </div>
           </div>
           
           <div className="bg-gradient-to-br from-[#7c3aed]/10 via-purple-50 to-[#c4ff0f]/10 rounded-3xl p-8 md:p-10 border border-[#7c3aed]/20">
@@ -1249,7 +1251,7 @@ const CTAFinalSection = ({ mentorData, onActionClick }) => {
           que genera cambios reales… y también ingresos recurrentes.
         </p>
         
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 px-4">
           <ButtonAnchor
             buttonKey="formulario_cta"
             templateKey="cpn"
@@ -1259,7 +1261,7 @@ const CTAFinalSection = ({ mentorData, onActionClick }) => {
             onActionClick={onActionClick}
             variant="primary"
             size="lg"
-            className="w-full sm:w-auto"
+            className="w-full sm:w-auto max-w-xs sm:max-w-none"
           />
         </div>
         
