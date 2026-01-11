@@ -866,10 +866,10 @@ const SiguientePasoSection = ({ mentorData, onActionClick }) => {
   const { actions, mentorLinks, campaignLinks } = prepareAnchorData(mentorData);
 
   return (
-    <section className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-[#faf8f5]">
+    <section className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-[#faf8f5] overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div className="space-y-6 md:space-y-8">
+          <div className="space-y-6 md:space-y-8 overflow-hidden">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#c4ff0f]/20">
               <Rocket className="w-4 h-4 text-[#7c3aed]" />
               <span className="text-sm font-body text-[#7c3aed] font-medium">Tu Siguiente Paso</span>
