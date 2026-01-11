@@ -279,7 +279,7 @@ const IntroEcosistemaSection = () => (
           No somos una plataforma más. No somos un marketplace de servicios. <strong className="text-gray-900 font-semibold">Somos un ecosistema para mentores conscientes</strong>. Un lugar donde la tecnología no deshumaniza, sino que amplifica tu capacidad de impacto.
         </p>
         
-        <p className="text-center font-heading text-xl md:text-2xl font-medium text-gray-900 py-6 leading-relaxed">
+        <p className="text-center font-heading text-xl md:text-2xl font-medium text-gray-900 py-4 leading-relaxed">
           Hoy, InverSer se expresa con más claridad en ese punto donde{' '}
           <span className="text-[#7c3aed]">la tecnología necesita conciencia</span>.
           <br />
@@ -294,7 +294,7 @@ const IntroEcosistemaSection = () => (
       </div>
       
       {/* Tres pilares */}
-      <div className="grid md:grid-cols-3 gap-6 mt-16">
+      <div className="grid md:grid-cols-3 gap-6 mt-10">
         {[
           { icon: Heart, text: 'Estructura sin rigidez', desc: 'Flexibilidad que respeta tu estilo' },
           { icon: Zap, text: 'Herramientas sin frialdad', desc: 'Tecnología con alma y propósito' },
