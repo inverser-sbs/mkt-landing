@@ -172,7 +172,7 @@ const HeroMPP = ({ mentorData, onActionClick }) => {
                 <p className="font-body text-[#c4ff0f] text-sm mb-6">Team Líder<br />INVERSER SBS</p>
                 
                 {/* Botones en pirámide: Ver Perfil arriba, los otros dos lado a lado */}
-                <div className="space-y-3">
+                <div className="space-y-3 w-full">
                   {/* Ver Perfil - arriba centrado */}
                   <div className="flex justify-center">
                     <ButtonAnchor
@@ -186,8 +186,8 @@ const HeroMPP = ({ mentorData, onActionClick }) => {
                       size="sm"
                     />
                   </div>
-                  {/* Agendar y WhatsApp - lado a lado */}
-                  <div className="flex gap-2">
+                  {/* Agendar y WhatsApp - lado a lado en desktop, columna en móvil */}
+                  <div className="flex flex-col sm:flex-row gap-2 w-full">
                     <ButtonAnchor
                       buttonKey="agendar_mpp"
                       templateKey="mpp"
@@ -197,6 +197,7 @@ const HeroMPP = ({ mentorData, onActionClick }) => {
                       onActionClick={onActionClick}
                       variant="primary"
                       size="sm"
+                      className="flex-1"
                     />
                     <ButtonAnchor
                       buttonKey="whatsapp_mpp"
@@ -207,6 +208,7 @@ const HeroMPP = ({ mentorData, onActionClick }) => {
                       onActionClick={onActionClick}
                       variant="secondary"
                       size="sm"
+                      className="flex-1"
                     />
                   </div>
                 </div>
