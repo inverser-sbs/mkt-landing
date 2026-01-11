@@ -146,17 +146,6 @@ const NavbarCPN = ({ mentorData, onActionClick }) => {
                   {link.label}
                 </button>
               ))}
-              
-              <ButtonAnchor
-                buttonKey="inscribete_nav"
-                templateKey="cpn"
-                actions={actions}
-                mentorLinks={mentorLinks}
-                campaignLinks={campaignLinks}
-                onActionClick={onActionClick}
-                variant="primary"
-                size="sm"
-              />
             </div>
           </div>
         )}
