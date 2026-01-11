@@ -298,12 +298,14 @@ const IntroEcosistemaSection = () => (
           { icon: Zap, text: 'Herramientas sin frialdad', desc: 'Tecnología con alma y propósito' },
           { icon: Users, text: 'Comunidad sin competencia', desc: 'Crecimiento compartido y genuino' }
         ].map((item, idx) => (
-          <div key={idx} className="text-center group">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#7c3aed]/10 to-[#c4ff0f]/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-              <item.icon className="w-8 h-8 text-[#7c3aed]" />
+          <div key={idx} className="flex items-center gap-3 md:block md:text-center group">
+            <div className="w-12 h-12 md:w-16 md:h-16 md:mx-auto md:mb-4 rounded-2xl bg-gradient-to-br from-[#7c3aed]/10 to-[#c4ff0f]/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+              <item.icon className="w-6 h-6 md:w-8 md:h-8 text-[#7c3aed]" />
             </div>
-            <p className="font-heading text-lg font-semibold text-gray-900 mb-1">{item.text}</p>
-            <p className="font-body text-sm text-gray-500">{item.desc}</p>
+            <div>
+              <p className="font-heading text-base md:text-lg font-semibold text-gray-900 mb-0 md:mb-1">{item.text}</p>
+              <p className="font-body text-xs md:text-sm text-gray-500">{item.desc}</p>
+            </div>
           </div>
         ))}
       </div>
