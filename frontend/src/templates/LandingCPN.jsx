@@ -297,6 +297,7 @@ const TransformaSERSection = ({ mentorData, onActionClick }) => {
             onActionClick={onActionClick}
             variant="primary"
             size="lg"
+            className="w-full sm:w-auto"
           />
         </div>
       </div>
@@ -368,6 +369,7 @@ const EsParaTiSection = ({ mentorData, onActionClick }) => {
               onActionClick={onActionClick}
               variant="primary"
               size="lg"
+              className="w-full sm:w-auto"
             />
           </div>
         </div>
@@ -918,6 +920,7 @@ const SiguientePasoSection = ({ mentorData, onActionClick }) => {
               onActionClick={onActionClick}
               variant="primary"
               size="lg"
+              className="w-full sm:w-auto"
             />
           </div>
           
@@ -1256,6 +1259,7 @@ const CTAFinalSection = ({ mentorData, onActionClick }) => {
             onActionClick={onActionClick}
             variant="primary"
             size="lg"
+            className="w-full sm:w-auto"
           />
         </div>
         
