@@ -66,6 +66,13 @@ async def get_mentor_by_slug(campaign: str, slug: str, db: AsyncIOMotorDatabase 
     # Sort by order
     available_actions.sort(key=lambda x: x["order"])
     
+    # Get video widget code for this mentor+campaign
+    settings = await db.mentor_campaign_settings.find_one({
+        "mentor_id": mentor.id,
+        "campaign_key": campaign
+    })
+    video_widget_code = settings.get("video_widget_code", "") if settings else ""
+    
     return {
         "campaign": {
             "key": campaign,
@@ -78,7 +85,8 @@ async def get_mentor_by_slug(campaign: str, slug: str, db: AsyncIOMotorDatabase 
             "photo_url": mentor.photo_url,
             "slug": mentor.slug
         },
-        "actions": available_actions
+        "actions": available_actions,
+        "video_widget_code": video_widget_code
     }
 
 @router.get("/mentor/{slug}/redirect-info")
