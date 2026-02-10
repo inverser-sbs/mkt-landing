@@ -1493,45 +1493,53 @@ const LandingMPP = ({ mentorData, onActionClick }) => {
     };
   }, []);
 
-  // Widget de Video del Mentor (dinámico) - Posición fija inferior izquierda
+  // Widget de Video del Mentor (dinámico)
+  // Se inserta directamente en el body para que el widget maneje su propia posición
   useEffect(() => {
     const videoWidgetCode = mentorData?.video_widget_code;
     if (!videoWidgetCode || !videoWidgetCode.trim()) return;
 
-    // Create a fixed container in the bottom-left corner
-    const container = document.createElement('div');
-    container.id = 'mentor-video-widget-container';
-    container.style.cssText = `
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      z-index: 9999;
-    `;
-    document.body.appendChild(container);
+    // Create a temporary container to parse the HTML
+    const temp = document.createElement('div');
+    temp.innerHTML = videoWidgetCode;
 
-    // Insert the widget HTML
-    container.innerHTML = videoWidgetCode;
+    // Get all elements from the widget code
+    const elements = Array.from(temp.childNodes);
+    const addedElements = [];
 
-    // Execute any scripts in the widget code
-    const scripts = container.querySelectorAll('script');
-    scripts.forEach(oldScript => {
-      const newScript = document.createElement('script');
-      // Copy all attributes
-      Array.from(oldScript.attributes).forEach(attr => {
-        newScript.setAttribute(attr.name, attr.value);
-      });
-      // Copy inline script content if any
-      if (oldScript.textContent) {
-        newScript.textContent = oldScript.textContent;
+    elements.forEach(element => {
+      if (element.nodeType === Node.ELEMENT_NODE) {
+        if (element.tagName === 'SCRIPT') {
+          // For scripts, create a new script element to ensure execution
+          const newScript = document.createElement('script');
+          Array.from(element.attributes).forEach(attr => {
+            newScript.setAttribute(attr.name, attr.value);
+          });
+          if (element.textContent) {
+            newScript.textContent = element.textContent;
+          }
+          newScript.setAttribute('data-mentor-widget', 'true');
+          document.body.appendChild(newScript);
+          addedElements.push(newScript);
+        } else {
+          // For other elements, clone and append
+          const clone = element.cloneNode(true);
+          clone.setAttribute('data-mentor-widget', 'true');
+          document.body.appendChild(clone);
+          addedElements.push(clone);
+        }
       }
-      oldScript.parentNode.replaceChild(newScript, oldScript);
     });
 
     return () => {
-      const existingContainer = document.getElementById('mentor-video-widget-container');
-      if (existingContainer) {
-        document.body.removeChild(existingContainer);
-      }
+      // Cleanup: remove all elements we added
+      addedElements.forEach(el => {
+        if (el.parentNode) {
+          el.parentNode.removeChild(el);
+        }
+      });
+      // Also remove any elements FacePop might have created
+      document.querySelectorAll('[data-mentor-widget="true"]').forEach(el => el.remove());
     };
   }, [mentorData?.video_widget_code]);
 
