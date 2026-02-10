@@ -118,14 +118,32 @@ Plataforma de marketing full-stack (React, FastAPI, MongoDB) para gestión de ca
 - FGU: `https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/no18ggug_FGU_kit...`
 - CIC: `https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/2rkhabrt_CIC-1.jpg`
 
+## Trabajo Completado (Enero 2026)
+
+### Open Graph Dinámico
+- ✅ Endpoint `/api/og/{campaign}/{slug}` para previews en redes sociales
+- ✅ Panel admin genera URLs con Open Graph para compartir
+
+### Widgets y Integraciones
+- ✅ TinyTalk chat widget en LandingCPN.jsx
+- ✅ TinyTalk chat widget en LandingMPP.jsx
+
+### UI/UX Fixes
+- ✅ Navbar sticky en ambas landings
+- ✅ Diseño responsive optimizado (móvil y desktop)
+- ✅ Espaciado vertical reducido ("aire innecesario")
+- ✅ Carrusel de testimonios con swipe
+- ✅ Bug del autocomplete del admin corregido
+
+---
+
 ## Backlog
 
 ### P1 - Próximas Tareas
-- Finalizar IDs de navegación en CPN
-- Verificar menú móvil CPN
-- Aprobar CPN v2.0
+- Editor de Landing Pages en admin panel (textos, colores, imágenes)
 
 ### P2 - Mejoras Futuras
-- Admin Users + RBAC
+- Admin Users + RBAC (permisos granulares)
 - Historial de cambios de links
-- Tracking de atribución
+- Tracking de atribución simple
+- Refactorizar LandingCPN.jsx y LandingMPP.jsx (dividir en sub-componentes)
