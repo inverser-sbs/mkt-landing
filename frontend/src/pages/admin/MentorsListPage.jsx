@@ -41,7 +41,8 @@ import {
   Globe,
   Filter,
   Users,
-  Trash2
+  Trash2,
+  Video
 } from 'lucide-react';
 import { useToast } from '../../hooks/use-toast';
 import { Toaster } from '../../components/ui/toaster';
