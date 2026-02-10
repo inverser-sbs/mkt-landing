@@ -1480,6 +1480,19 @@ const LandingMPP = ({ mentorData, onActionClick }) => {
     document.title = campaignName;
   }, [mentorData]);
 
+  // Widget TinyTalk
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.tinytalk.ai/latest/tiny-talk-sdk.min.umd.js';
+    script.setAttribute('data-tiny-bot-id', '5f9f9c4b-290b-41ad-913a-f049af22b972');
+    script.defer = true;
+    document.body.appendChild(script);
+    
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen font-body">
       <NavbarMPP mentorData={mentorData} onActionClick={onActionClick} />
