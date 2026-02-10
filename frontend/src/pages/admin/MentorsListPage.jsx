@@ -64,6 +64,7 @@ const MentorsListPage = () => {
   const [magicLinkModalOpen, setMagicLinkModalOpen] = useState(false);
   const [selectedMentor, setSelectedMentor] = useState(null);
   const [mentorLinks, setMentorLinks] = useState({});
+  const [videoWidgetCode, setVideoWidgetCode] = useState(''); // Video widget code for mentor
   const [availableActions, setAvailableActions] = useState([]); // Actions available for this campaign
   const [mentorMagicLink, setMentorMagicLink] = useState(null);
   const [loadingLinks, setLoadingLinks] = useState(false);
