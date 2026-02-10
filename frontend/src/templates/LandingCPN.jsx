@@ -1434,16 +1434,24 @@ const LandingCPN = ({ mentorData, onActionClick }) => {
     };
   }, []);
 
-  // Widget de Video del Mentor (dinámico)
+  // Widget de Video del Mentor (dinámico) - Posición fija inferior izquierda
   useEffect(() => {
     const videoWidgetCode = mentorData?.video_widget_code;
     if (!videoWidgetCode || !videoWidgetCode.trim()) return;
 
-    // Create a container for the widget
+    // Create a fixed container in the bottom-left corner
     const container = document.createElement('div');
     container.id = 'mentor-video-widget-container';
-    container.innerHTML = videoWidgetCode;
+    container.style.cssText = `
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 9999;
+    `;
     document.body.appendChild(container);
+
+    // Insert the widget HTML
+    container.innerHTML = videoWidgetCode;
 
     // Execute any scripts in the widget code
     const scripts = container.querySelectorAll('script');
