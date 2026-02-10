@@ -128,6 +128,7 @@ Plataforma de marketing full-stack (React, FastAPI, MongoDB) para gestión de ca
 ### Widgets y Integraciones
 - ✅ TinyTalk chat widget en LandingCPN.jsx
 - ✅ TinyTalk chat widget en LandingMPP.jsx
+- ✅ Widget de Video por Mentor (FacePop, Loom, etc.) - dinámico por campaña
 
 ### UI/UX Fixes
 - ✅ Navbar sticky en ambas landings
