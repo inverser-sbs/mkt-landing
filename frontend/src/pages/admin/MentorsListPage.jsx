@@ -255,12 +255,15 @@ const MentorsListPage = () => {
     try {
       await axios.put(
         `${BACKEND_URL}/api/admin/mentors/${selectedMentor.id}/links/${selectedCampaign.key}`,
-        mentorLinks
+        {
+          links: mentorLinks,
+          video_widget_code: videoWidgetCode
+        }
       );
       
       toast({
         title: 'Guardado',
-        description: 'Enlaces actualizados correctamente'
+        description: 'Enlaces y configuración actualizados correctamente'
       });
       setLinksModalOpen(false);
     } catch (error) {
