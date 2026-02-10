@@ -562,10 +562,10 @@ async def get_mentor_links_for_campaign(
 async def update_mentor_links_for_campaign(
     mentor_id: str,
     campaign_key: str,
-    links: Dict[str, str],
+    request: MentorLinksUpdateRequest,
     db: AsyncIOMotorDatabase = Depends(get_db)
 ):
-    """Update mentor links for a specific campaign"""
+    """Update mentor links and settings for a specific campaign"""
     link_service = MentorLinkService(db)
     action_service = ActionService(db)
     campaign_service = MentorCampaignService(db)
@@ -592,7 +592,7 @@ async def update_mentor_links_for_campaign(
     
     # Update links
     updated_count = 0
-    for action_key, url in links.items():
+    for action_key, url in request.links.items():
         if action_key not in valid_action_keys:
             continue
             
@@ -607,6 +607,18 @@ async def update_mentor_links_for_campaign(
             updated_count += 1
         else:
             await link_service.delete_link(mentor_id, campaign_key, action_key)
+    
+    # Update video widget code if provided
+    if request.video_widget_code is not None:
+        await db.mentor_campaign_settings.update_one(
+            {"mentor_id": mentor_id, "campaign_key": campaign_key},
+            {"$set": {
+                "mentor_id": mentor_id,
+                "campaign_key": campaign_key,
+                "video_widget_code": request.video_widget_code.strip() if request.video_widget_code else ""
+            }},
+            upsert=True
+        )
     
     return {
         "success": True,
