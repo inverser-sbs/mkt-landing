@@ -1493,6 +1493,40 @@ const LandingMPP = ({ mentorData, onActionClick }) => {
     };
   }, []);
 
+  // Widget de Video del Mentor (dinámico)
+  useEffect(() => {
+    const videoWidgetCode = mentorData?.video_widget_code;
+    if (!videoWidgetCode || !videoWidgetCode.trim()) return;
+
+    // Create a container for the widget
+    const container = document.createElement('div');
+    container.id = 'mentor-video-widget-container';
+    container.innerHTML = videoWidgetCode;
+    document.body.appendChild(container);
+
+    // Execute any scripts in the widget code
+    const scripts = container.querySelectorAll('script');
+    scripts.forEach(oldScript => {
+      const newScript = document.createElement('script');
+      // Copy all attributes
+      Array.from(oldScript.attributes).forEach(attr => {
+        newScript.setAttribute(attr.name, attr.value);
+      });
+      // Copy inline script content if any
+      if (oldScript.textContent) {
+        newScript.textContent = oldScript.textContent;
+      }
+      oldScript.parentNode.replaceChild(newScript, oldScript);
+    });
+
+    return () => {
+      const existingContainer = document.getElementById('mentor-video-widget-container');
+      if (existingContainer) {
+        document.body.removeChild(existingContainer);
+      }
+    };
+  }, [mentorData?.video_widget_code]);
+
   return (
     <div className="min-h-screen font-body">
       <NavbarMPP mentorData={mentorData} onActionClick={onActionClick} />
