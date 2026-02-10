@@ -723,6 +723,31 @@ const MentorsListPage = () => {
                   </div>
                 ))
               )}
+              
+              {/* Video Widget Code Section */}
+              <div className="pt-4 mt-4 border-t border-gray-200">
+                <Label className="flex items-center gap-2 mb-2">
+                  <Video className="w-4 h-4 text-purple-600" />
+                  <span>Widget de Video (opcional)</span>
+                </Label>
+                <p className="text-xs text-gray-500 mb-2">
+                  Pega aquí el código del widget de video (ej: FacePop, Loom, etc.). 
+                  Se mostrará en la esquina inferior izquierda de la landing.
+                </p>
+                <Textarea
+                  placeholder='<script id="..." src="https://..."></script>'
+                  value={videoWidgetCode}
+                  onChange={(e) => setVideoWidgetCode(e.target.value)}
+                  className="font-mono text-xs min-h-[80px]"
+                  data-testid="video-widget-code-input"
+                />
+                {videoWidgetCode && (
+                  <p className="text-xs text-green-600 mt-1 flex items-center gap-1">
+                    <CheckCircle2 className="w-3 h-3" />
+                    Widget configurado
+                  </p>
+                )}
+              </div>
             </div>
           )}
 
