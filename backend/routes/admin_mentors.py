@@ -74,6 +74,11 @@ class CampaignStatusUpdate(BaseModel):
     """Update mentor status in a specific campaign"""
     status: str  # active, paused, inactive
 
+class MentorLinksUpdateRequest(BaseModel):
+    """Request to update mentor links and settings for a campaign"""
+    links: Dict[str, str] = {}
+    video_widget_code: Optional[str] = None
+
 
 # ============================================
 # MENTOR CRUD (GLOBAL)
