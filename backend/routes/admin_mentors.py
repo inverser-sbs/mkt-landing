@@ -539,9 +539,17 @@ async def get_mentor_links_for_campaign(
             "internal_note": action.internal_note  # Include internal note for admin visibility
         })
     
+    # Get video widget code for this mentor+campaign
+    settings = await db.mentor_campaign_settings.find_one({
+        "mentor_id": mentor_id,
+        "campaign_key": campaign_key
+    })
+    video_widget_code = settings.get("video_widget_code", "") if settings else ""
+    
     return {
         "is_assigned": is_assigned,
-        "links": result
+        "links": result,
+        "video_widget_code": video_widget_code
     }
 
 
