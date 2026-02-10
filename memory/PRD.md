@@ -4,11 +4,14 @@
 Plataforma de marketing full-stack (React, FastAPI, MongoDB) para gestión de campañas de mentores con landing pages dinámicas personalizables.
 
 ## Estado Actual
-**Fecha:** 11 Enero 2026
+**Fecha:** 12 Enero 2026
 
 ### Landings Aprobadas
-- **MPP (Mentor & Partner Program) v1.1** ✅ ACTUALIZADA
-- **CPN (Certificación Profesional NeuroCoaching) v2.1** ✅ ACTUALIZADA
+- **MPP (Mentor & Partner Program) v1.2** ✅ APROBADA (con TinyTalk widget)
+- **CPN (Certificación Profesional NeuroCoaching) v2.2** ✅ APROBADA (con TinyTalk widget)
+
+### Integraciones Activas
+- **TinyTalk.ai Chat Widget** - Integrado en ambas landings (CPN y MPP)
 
 ---
 
