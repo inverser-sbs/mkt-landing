@@ -214,7 +214,7 @@ const MentorsListPage = () => {
         `${BACKEND_URL}/api/admin/mentors/${mentor.id}/links/${selectedCampaign.key}`
       );
       
-      // Response structure: { is_assigned: bool, links: [{action_key, label, url, active}] }
+      // Response structure: { is_assigned: bool, links: [{action_key, label, url, active}], video_widget_code: string }
       const linksData = response.data.links || [];
       
       // Convert array to object for form state
@@ -226,6 +226,9 @@ const MentorsListPage = () => {
       
       // Store the full links data for rendering labels
       setAvailableActions(linksData);
+      
+      // Set video widget code
+      setVideoWidgetCode(response.data.video_widget_code || '');
     } catch (error) {
       console.error('Error fetching links:', error);
       toast({
