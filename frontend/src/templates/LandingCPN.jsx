@@ -1434,55 +1434,8 @@ const LandingCPN = ({ mentorData, onActionClick }) => {
     };
   }, []);
 
-  // Widget de Video del Mentor (dinámico) - DESHABILITADO temporalmente
-  // TODO: Reemplazar con nuestro propio componente de video widget
-  useEffect(() => {
-    const videoWidgetCode = mentorData?.video_widget_code;
-    if (!videoWidgetCode || !videoWidgetCode.trim()) return;
-
-    // Create a temporary container to parse the HTML
-    const temp = document.createElement('div');
-    temp.innerHTML = videoWidgetCode;
-
-    // Get all elements from the widget code
-    const elements = Array.from(temp.childNodes);
-    const addedElements = [];
-
-    elements.forEach(element => {
-      if (element.nodeType === Node.ELEMENT_NODE) {
-        if (element.tagName === 'SCRIPT') {
-          // For scripts, create a new script element to ensure execution
-          const newScript = document.createElement('script');
-          Array.from(element.attributes).forEach(attr => {
-            newScript.setAttribute(attr.name, attr.value);
-          });
-          if (element.textContent) {
-            newScript.textContent = element.textContent;
-          }
-          newScript.setAttribute('data-mentor-widget', 'true');
-          document.body.appendChild(newScript);
-          addedElements.push(newScript);
-        } else {
-          // For other elements, clone and append
-          const clone = element.cloneNode(true);
-          clone.setAttribute('data-mentor-widget', 'true');
-          document.body.appendChild(clone);
-          addedElements.push(clone);
-        }
-      }
-    });
-
-    return () => {
-      // Cleanup: remove all elements we added
-      addedElements.forEach(el => {
-        if (el.parentNode) {
-          el.parentNode.removeChild(el);
-        }
-      });
-      // Also remove any elements FacePop might have created
-      document.querySelectorAll('[data-mentor-widget="true"]').forEach(el => el.remove());
-    };
-  }, [mentorData?.video_widget_code]);
+  // Widget de Video del Mentor - DESHABILITADO temporalmente
+  // TODO: Crear nuestro propio componente VideoWidget con comportamiento de burbuja expandible
 
   return (
     <div className="min-h-screen font-body overflow-x-hidden">
