@@ -123,14 +123,14 @@ const VideoWidget = ({ videoUrl, orientation = 'horizontal', position = 'bottom-
 
   if (!videoUrl || !videoType) return null;
 
-  // Sizes based on orientation
+  // Sizes based on orientation - INCREASED SIZES
   const bubbleSize = orientation === 'vertical' 
-    ? { width: 60, height: 80 } 
-    : { width: 80, height: 60 };
+    ? { width: 80, height: 110 } 
+    : { width: 110, height: 80 };
   
   const expandedSize = orientation === 'vertical'
-    ? { width: 'min(280px, 70vw)', height: 'min(500px, 70vh)' }
-    : { width: 'min(400px, 90vw)', height: 'min(225px, 50vw)' };
+    ? { width: 'min(320px, 80vw)', height: 'min(570px, 80vh)' }
+    : { width: 'min(480px, 92vw)', height: 'min(270px, 55vw)' };
 
   // Position styles
   const positionStyles = position === 'bottom-left'
@@ -140,27 +140,31 @@ const VideoWidget = ({ videoUrl, orientation = 'horizontal', position = 'bottom-
   // Render video player based on type
   const renderPlayer = () => {
     if (videoType === 'youtube') {
+      // YouTube with minimal branding
       return (
         <iframe
           ref={iframeRef}
-          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=${isMuted ? 1 : 0}&playsinline=1&rel=0`}
+          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=${isMuted ? 1 : 0}&playsinline=1&rel=0&modestbranding=1&showinfo=0&iv_load_policy=3&fs=0`}
           className="w-full h-full rounded-2xl"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
           title="Video del mentor"
+          style={{ border: 'none' }}
         />
       );
     }
 
     if (videoType === 'vimeo') {
+      // Vimeo with minimal branding
       return (
         <iframe
           ref={iframeRef}
-          src={`https://player.vimeo.com/video/${videoId}?autoplay=1&muted=${isMuted ? 1 : 0}&playsinline=1`}
+          src={`https://player.vimeo.com/video/${videoId}?autoplay=1&muted=${isMuted ? 1 : 0}&playsinline=1&title=0&byline=0&portrait=0`}
           className="w-full h-full rounded-2xl"
           allow="autoplay; fullscreen; picture-in-picture"
           allowFullScreen
           title="Video del mentor"
+          style={{ border: 'none' }}
         />
       );
     }
