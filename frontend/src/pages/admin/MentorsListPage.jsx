@@ -727,27 +727,61 @@ const MentorsListPage = () => {
                 ))
               )}
               
-              {/* Video Widget Code Section */}
+              {/* Video Widget Section */}
               <div className="pt-4 mt-4 border-t border-gray-200">
                 <Label className="flex items-center gap-2 mb-2">
                   <Video className="w-4 h-4 text-purple-600" />
                   <span>Widget de Video (opcional)</span>
                 </Label>
-                <p className="text-xs text-gray-500 mb-2">
-                  Pega aquí el código del widget de video (ej: FacePop, Loom, etc.). 
-                  Se mostrará en la esquina inferior izquierda de la landing.
+                <p className="text-xs text-gray-500 mb-3">
+                  Pega la URL del video (YouTube, Vimeo, MP4, Amazon S3). 
+                  Se mostrará como una burbuja en la esquina inferior izquierda de la landing.
                 </p>
-                <Textarea
-                  placeholder='<script id="..." src="https://..."></script>'
-                  value={videoWidgetCode}
-                  onChange={(e) => setVideoWidgetCode(e.target.value)}
-                  className="font-mono text-xs min-h-[80px]"
-                  data-testid="video-widget-code-input"
+                
+                {/* Video URL Input */}
+                <Input
+                  placeholder='https://www.youtube.com/watch?v=... o URL de video'
+                  value={videoWidgetUrl}
+                  onChange={(e) => setVideoWidgetUrl(e.target.value)}
+                  className="font-mono text-sm mb-3"
+                  data-testid="video-widget-url-input"
                 />
-                {videoWidgetCode && (
+                
+                {/* Orientation Selection */}
+                {videoWidgetUrl && (
+                  <div className="mb-3">
+                    <Label className="text-xs text-gray-600 mb-2 block">Orientación del video:</Label>
+                    <div className="flex gap-4">
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="videoOrientation"
+                          value="horizontal"
+                          checked={videoWidgetOrientation === 'horizontal'}
+                          onChange={(e) => setVideoWidgetOrientation(e.target.value)}
+                          className="w-4 h-4 text-purple-600"
+                        />
+                        <span className="text-sm">Horizontal (YouTube)</span>
+                      </label>
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="videoOrientation"
+                          value="vertical"
+                          checked={videoWidgetOrientation === 'vertical'}
+                          onChange={(e) => setVideoWidgetOrientation(e.target.value)}
+                          className="w-4 h-4 text-purple-600"
+                        />
+                        <span className="text-sm">Vertical (Reel/TikTok)</span>
+                      </label>
+                    </div>
+                  </div>
+                )}
+                
+                {videoWidgetUrl && (
                   <p className="text-xs text-green-600 mt-1 flex items-center gap-1">
                     <CheckCircle2 className="w-3 h-3" />
-                    Widget configurado
+                    Video configurado ({videoWidgetOrientation})
                   </p>
                 )}
               </div>
