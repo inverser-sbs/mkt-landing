@@ -1493,21 +1493,8 @@ const LandingMPP = ({ mentorData, onActionClick }) => {
     };
   }, []);
 
-  // FacePop Base Script (requerido para que funcionen los widgets de video de mentores)
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.innerHTML = `(function(f,n) { n = document.createElement('script'); n.src = 'https://fcdn.answerly.io/fn.js'; n.setAttribute('data-companyId', f); document.getElementsByTagName('html')[0].insertAdjacentElement('beforeend', n); })('9b0d9486-7b02-4c1c-957b-358c90647899');`;
-    document.body.appendChild(script);
-    
-    return () => {
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
-    };
-  }, []);
-
-  // Widget de Video del Mentor (dinámico)
-  // Se inserta directamente en el body para que el widget maneje su propia posición
+  // Widget de Video del Mentor (dinámico) - DESHABILITADO temporalmente
+  // TODO: Reemplazar con nuestro propio componente de video widget
   useEffect(() => {
     const videoWidgetCode = mentorData?.video_widget_code;
     if (!videoWidgetCode || !videoWidgetCode.trim()) return;
