@@ -85,8 +85,13 @@ const VideoWidget = ({ videoUrl, orientation = 'horizontal', position = 'bottom-
 
   // Handle expand/collapse
   const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
-    if (!isExpanded) {
+    const newState = !isExpanded;
+    setIsExpanded(newState);
+    
+    // Track the action
+    trackVideoClick(newState ? 'expand' : 'collapse');
+    
+    if (newState) {
       setIsMuted(false); // Unmute when expanding
     } else {
       setIsMuted(true); // Mute when collapsing
