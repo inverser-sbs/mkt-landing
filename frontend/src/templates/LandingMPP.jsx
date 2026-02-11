@@ -26,6 +26,7 @@ import {
 import { Badge } from '../components/ui/badge';
 import { getImageUrl } from '../utils/imageUrl';
 import ButtonAnchor, { prepareAnchorData } from '../components/ButtonAnchor';
+import VideoWidget from '../components/VideoWidget';
 
 // ============================================
 // IMÁGENES DE AMBIENTE
