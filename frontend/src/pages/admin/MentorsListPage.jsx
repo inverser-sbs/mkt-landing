@@ -261,7 +261,8 @@ const MentorsListPage = () => {
         `${BACKEND_URL}/api/admin/mentors/${selectedMentor.id}/links/${selectedCampaign.key}`,
         {
           links: mentorLinks,
-          video_widget_code: videoWidgetCode
+          video_widget_url: videoWidgetUrl,
+          video_widget_orientation: videoWidgetOrientation
         }
       );
       
