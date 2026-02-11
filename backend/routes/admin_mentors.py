@@ -77,7 +77,8 @@ class CampaignStatusUpdate(BaseModel):
 class MentorLinksUpdateRequest(BaseModel):
     """Request to update mentor links and settings for a campaign"""
     links: Dict[str, str] = {}
-    video_widget_code: Optional[str] = None
+    video_widget_url: Optional[str] = None
+    video_widget_orientation: Optional[str] = None  # 'horizontal' | 'vertical'
 
 
 # ============================================
