@@ -1210,7 +1210,7 @@ const FAQSectionCPN = () => {
     },
     {
       question: "¿Qué validez internacional tiene la certificación?",
-      answer: "La certificación está avalada por la Global Coaching Federation (GCF), lo que te brinda reconocimiento internacional y credibilidad profesional en cualquier parte del mundo."
+      answer: "La certificación está avalada por la Global Coaching Federation (GCF), el Centro de Educación y Liderazgo (CEL), Florida Global University (FGU) y la Confederación Interamericana de Coaching (CIC), lo que te brinda reconocimiento internacional y credibilidad profesional en cualquier parte del mundo."
     },
     {
       question: "¿Puedo generar ingresos mientras estudio?",
