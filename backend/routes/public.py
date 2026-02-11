@@ -66,12 +66,13 @@ async def get_mentor_by_slug(campaign: str, slug: str, db: AsyncIOMotorDatabase 
     # Sort by order
     available_actions.sort(key=lambda x: x["order"])
     
-    # Get video widget code for this mentor+campaign
+    # Get video widget settings for this mentor+campaign
     settings = await db.mentor_campaign_settings.find_one({
         "mentor_id": mentor.id,
         "campaign_key": campaign
     })
-    video_widget_code = settings.get("video_widget_code", "") if settings else ""
+    video_widget_url = settings.get("video_widget_url", "") if settings else ""
+    video_widget_orientation = settings.get("video_widget_orientation", "horizontal") if settings else "horizontal"
     
     return {
         "campaign": {
@@ -86,7 +87,8 @@ async def get_mentor_by_slug(campaign: str, slug: str, db: AsyncIOMotorDatabase 
             "slug": mentor.slug
         },
         "actions": available_actions,
-        "video_widget_code": video_widget_code
+        "video_widget_url": video_widget_url,
+        "video_widget_orientation": video_widget_orientation
     }
 
 @router.get("/mentor/{slug}/redirect-info")
