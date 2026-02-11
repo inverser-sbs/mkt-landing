@@ -100,15 +100,17 @@ const AnalyticsPage = () => {
     setLoadingStats(true);
     
     try {
-      const [kpisRes, mentorsRes, actionsRes] = await Promise.all([
+      const [kpisRes, mentorsRes, actionsRes, videoWidgetRes] = await Promise.all([
         axios.get(`${BACKEND_URL}/api/track/stats/campaign/${selectedCampaign.key}?days=${periodDays}`),
         axios.get(`${BACKEND_URL}/api/track/stats/campaign/${selectedCampaign.key}/mentors?days=${periodDays}`),
-        axios.get(`${BACKEND_URL}/api/track/stats/campaign/${selectedCampaign.key}/actions?days=${periodDays}`)
+        axios.get(`${BACKEND_URL}/api/track/stats/campaign/${selectedCampaign.key}/actions?days=${periodDays}`),
+        axios.get(`${BACKEND_URL}/api/track/video-widget/stats/${selectedCampaign.key}?days=${periodDays}`)
       ]);
       
       setKpis(kpisRes.data);
       setMentorStats(mentorsRes.data);
       setActionStats(actionsRes.data);
+      setVideoWidgetStats(videoWidgetRes.data);
     } catch (error) {
       console.error('Error fetching stats:', error);
       toast({
