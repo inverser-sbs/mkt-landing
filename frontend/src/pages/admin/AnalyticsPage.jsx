@@ -328,6 +328,76 @@ const AnalyticsPage = () => {
             </Card>
           </div>
 
+          {/* Video Widget Stats */}
+          {videoWidgetStats && (videoWidgetStats.total_expands > 0 || Object.keys(videoWidgetStats.mentor_stats || {}).length > 0) && (
+            <Card className="mb-6">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Video className="w-5 h-5 text-purple-600" />
+                  Widget de Video
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
+                  <div className="bg-purple-50 rounded-lg p-4 text-center">
+                    <Play className="w-6 h-6 text-purple-600 mx-auto mb-2" />
+                    <p className="text-2xl font-bold text-purple-900">{videoWidgetStats.total_expands || 0}</p>
+                    <p className="text-sm text-purple-700">Videos Abiertos</p>
+                  </div>
+                  <div className="bg-green-50 rounded-lg p-4 text-center">
+                    <Video className="w-6 h-6 text-green-600 mx-auto mb-2" />
+                    <p className="text-2xl font-bold text-green-900">{videoWidgetStats.total_plays || 0}</p>
+                    <p className="text-sm text-green-700">Reproducciones</p>
+                  </div>
+                  <div className="bg-blue-50 rounded-lg p-4 text-center">
+                    <Users className="w-6 h-6 text-blue-600 mx-auto mb-2" />
+                    <p className="text-2xl font-bold text-blue-900">
+                      {Object.keys(videoWidgetStats.mentor_stats || {}).length}
+                    </p>
+                    <p className="text-sm text-blue-700">Mentores con Video</p>
+                  </div>
+                </div>
+                
+                {Object.keys(videoWidgetStats.mentor_stats || {}).length > 0 && (
+                  <div className="overflow-x-auto">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Mentor</TableHead>
+                          <TableHead className="text-center">Abiertos</TableHead>
+                          <TableHead className="text-center">Reproducciones</TableHead>
+                          <TableHead className="text-center">Cerrados</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {Object.entries(videoWidgetStats.mentor_stats).map(([mentorId, stats]) => (
+                          <TableRow key={mentorId}>
+                            <TableCell className="font-medium">{mentorId}</TableCell>
+                            <TableCell className="text-center">
+                              <Badge variant="outline" className="bg-purple-50">
+                                {stats.expand || 0}
+                              </Badge>
+                            </TableCell>
+                            <TableCell className="text-center">
+                              <Badge variant="outline" className="bg-green-50">
+                                {stats.play || 0}
+                              </Badge>
+                            </TableCell>
+                            <TableCell className="text-center">
+                              <Badge variant="outline" className="bg-gray-50">
+                                {stats.collapse || 0}
+                              </Badge>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          )}
+
           <div className="grid lg:grid-cols-3 gap-6">
             {/* Mentor Performance Table */}
             <div className="lg:col-span-2">
