@@ -1435,9 +1435,6 @@ const LandingCPN = ({ mentorData, onActionClick }) => {
     };
   }, []);
 
-  // Widget de Video del Mentor - DESHABILITADO temporalmente
-  // TODO: Crear nuestro propio componente VideoWidget con comportamiento de burbuja expandible
-
   return (
     <div className="min-h-screen font-body overflow-x-hidden">
       <NavbarCPN mentorData={mentorData} onActionClick={onActionClick} />
@@ -1456,6 +1453,15 @@ const LandingCPN = ({ mentorData, onActionClick }) => {
       <FAQSectionCPN />
       <CTAFinalSection mentorData={mentorData} onActionClick={onActionClick} />
       <FooterCPN mentorData={mentorData} onActionClick={onActionClick} />
+      
+      {/* Video Widget del Mentor - Esquina inferior izquierda */}
+      {mentorData?.video_widget_url && (
+        <VideoWidget 
+          videoUrl={mentorData.video_widget_url}
+          orientation={mentorData.video_widget_orientation || 'horizontal'}
+          position="bottom-left"
+        />
+      )}
     </div>
   );
 };
