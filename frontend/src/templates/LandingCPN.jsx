@@ -35,6 +35,7 @@ import {
 } from 'lucide-react';
 import ButtonAnchor, { prepareAnchorData } from '../components/ButtonAnchor';
 import { getImageUrl } from '../utils/imageUrl';
+import VideoWidget from '../components/VideoWidget';
 
 // ============================================
 // NAVBAR
