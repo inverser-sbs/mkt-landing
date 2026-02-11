@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Play, X, Volume2, VolumeX } from 'lucide-react';
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 /**
  * VideoWidget - Widget de video flotante para landings
  * 
@@ -8,8 +10,10 @@ import { Play, X, Volume2, VolumeX } from 'lucide-react';
  * - videoUrl: URL del video (YouTube, Vimeo, MP4, Amazon S3)
  * - orientation: 'horizontal' | 'vertical'
  * - position: 'bottom-left' | 'bottom-right' (default: bottom-left)
+ * - mentorId: ID del mentor para tracking
+ * - campaignKey: Key de la campaña para tracking
  */
-const VideoWidget = ({ videoUrl, orientation = 'horizontal', position = 'bottom-left' }) => {
+const VideoWidget = ({ videoUrl, orientation = 'horizontal', position = 'bottom-left', mentorId, campaignKey }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [thumbnail, setThumbnail] = useState(null);
@@ -17,6 +21,25 @@ const VideoWidget = ({ videoUrl, orientation = 'horizontal', position = 'bottom-
   const [videoId, setVideoId] = useState(null);
   const videoRef = useRef(null);
   const iframeRef = useRef(null);
+
+  // Track video click
+  const trackVideoClick = async (action) => {
+    try {
+      await fetch(`${BACKEND_URL}/api/track/video-widget`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          mentor_id: mentorId,
+          campaign_key: campaignKey,
+          action: action, // 'expand' | 'collapse' | 'play'
+          video_url: videoUrl,
+          timestamp: new Date().toISOString()
+        })
+      });
+    } catch (error) {
+      console.error('Error tracking video click:', error);
+    }
+  };
 
   // Detect video type and extract ID/thumbnail
   useEffect(() => {
