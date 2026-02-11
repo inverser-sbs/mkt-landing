@@ -612,15 +612,17 @@ async def update_mentor_links_for_campaign(
         else:
             await link_service.delete_link(mentor_id, campaign_key, action_key)
     
-    # Update video widget code if provided
-    if request.video_widget_code is not None:
+    # Update video widget settings if provided
+    update_fields = {"mentor_id": mentor_id, "campaign_key": campaign_key}
+    if request.video_widget_url is not None:
+        update_fields["video_widget_url"] = request.video_widget_url.strip() if request.video_widget_url else ""
+    if request.video_widget_orientation is not None:
+        update_fields["video_widget_orientation"] = request.video_widget_orientation
+    
+    if len(update_fields) > 2:  # More than just mentor_id and campaign_key
         await db.mentor_campaign_settings.update_one(
             {"mentor_id": mentor_id, "campaign_key": campaign_key},
-            {"$set": {
-                "mentor_id": mentor_id,
-                "campaign_key": campaign_key,
-                "video_widget_code": request.video_widget_code.strip() if request.video_widget_code else ""
-            }},
+            {"$set": update_fields},
             upsert=True
         )
     
