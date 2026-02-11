@@ -412,7 +412,7 @@ const QueLograsSection = () => {
     {
       icon: Award,
       title: 'Certificación Internacional',
-      description: 'Obtén una credencial avalada por la Global Coaching Federation (GCF).'
+      description: 'Credencial avalada por GCF, CEL, Florida Global University y la CIC.'
     }
   ];
 
