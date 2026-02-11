@@ -1460,6 +1460,8 @@ const LandingCPN = ({ mentorData, onActionClick }) => {
           videoUrl={mentorData.video_widget_url}
           orientation={mentorData.video_widget_orientation || 'horizontal'}
           position="bottom-left"
+          mentorId={mentorData?.mentor?.slug}
+          campaignKey={mentorData?.campaign?.key}
         />
       )}
     </div>
