@@ -29,7 +29,9 @@ import {
   Layers,
   ArrowUpDown,
   Calendar,
-  RefreshCw
+  RefreshCw,
+  Video,
+  Play
 } from 'lucide-react';
 import { useToast } from '../../hooks/use-toast';
 import { Toaster } from '../../components/ui/toaster';
@@ -51,6 +53,7 @@ const AnalyticsPage = () => {
   const [kpis, setKpis] = useState(null);
   const [mentorStats, setMentorStats] = useState([]);
   const [actionStats, setActionStats] = useState([]);
+  const [videoWidgetStats, setVideoWidgetStats] = useState(null);
   const [loadingStats, setLoadingStats] = useState(false);
 
   // Sorting
