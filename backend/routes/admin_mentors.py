@@ -545,18 +545,21 @@ async def get_mentor_links_for_campaign(
             "internal_note": action.internal_note  # Include internal note for admin visibility
         })
     
-    # Get video widget code for this mentor+campaign
+    # Get video widget settings for this mentor+campaign
     settings = await db.mentor_campaign_settings.find_one({
         "mentor_id": mentor_id,
         "campaign_key": campaign_key
     })
-    video_widget_code = settings.get("video_widget_code", "") if settings else ""
+    video_widget_url = settings.get("video_widget_url", "") if settings else ""
+    video_widget_orientation = settings.get("video_widget_orientation", "horizontal") if settings else "horizontal"
     
     return {
         "is_assigned": is_assigned,
         "links": result,
-        "video_widget_code": video_widget_code
+        "video_widget_url": video_widget_url,
+        "video_widget_orientation": video_widget_orientation
     }
+
 
 
 @router.put("/{mentor_id}/links/{campaign_key}")
