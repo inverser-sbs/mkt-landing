@@ -981,11 +981,11 @@ const AcreditacionesSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="flex flex-wrap justify-center gap-6 md:gap-12">
           {accreditations.map((accreditation, index) => (
             <div
               key={index}
-              className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 flex flex-col items-center justify-center"
+              className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 flex flex-col items-center justify-center w-[160px] md:w-[220px]"
             >
               <div className={`h-24 md:h-32 w-full flex items-center justify-center mb-4 ${accreditation.hasBg ? 'bg-white rounded-xl p-2' : ''}`}>
                 <img
