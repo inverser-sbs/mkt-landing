@@ -114,11 +114,7 @@ const HeroCPN = ({ mentorData, onActionClick }) => {
               </span>
               <a href="https://globalcoachingfederation.org/members/inverser/" target="_blank" rel="noopener noreferrer" className="hover:text-[#c4ff0f] transition-colors">GCF</a>
               <span className="text-white/30">•</span>
-              <a href="https://cel.education/" target="_blank" rel="noopener noreferrer" className="hover:text-[#c4ff0f] transition-colors">CEL</a>
-              <span className="text-white/30">•</span>
               <a href="https://interamericanadecoaching.org/escuelas/" target="_blank" rel="noopener noreferrer" className="hover:text-[#c4ff0f] transition-colors">CIC</a>
-              <span className="text-white/30">•</span>
-              <a href="https://floridaglobal.university/es/" target="_blank" rel="noopener noreferrer" className="hover:text-[#c4ff0f] transition-colors">Florida Global University</a>
             </div>
             
             <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight">
@@ -412,7 +408,7 @@ const QueLograsSection = () => {
     {
       icon: Award,
       title: 'Certificación Internacional',
-      description: 'Credencial avalada por GCF, CEL, Florida Global University y la CIC.'
+      description: 'Credencial avalada por la Global Coaching Federation (GCF) y la Confederación Interamericana de Coaching (CIC).'
     }
   ];
 
@@ -959,14 +955,6 @@ const AcreditacionesSection = () => {
       logo: 'https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/4oif9u9q_GCF-1.png',
     },
     {
-      name: 'Center of Education and Leadership',
-      logo: 'https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/4xct8y9m_CEL-1.png',
-    },
-    {
-      name: 'Florida Global University',
-      logo: 'https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/no18ggug_FGU_kit%20de%20marca_RGB_Mesa%20de%20trabajo%201%20copia%208.png',
-    },
-    {
       name: 'Confederación Interamericana de Coaching',
       logo: 'https://customer-assets.emergentagent.com/job_landing-bugs/artifacts/2rkhabrt_CIC-1.jpg',
       hasBg: true, // Flag para aplicar fondo blanco al logo con fondo no transparente
@@ -1210,7 +1198,7 @@ const FAQSectionCPN = () => {
     },
     {
       question: "¿Qué validez internacional tiene la certificación?",
-      answer: "La certificación está avalada por la Global Coaching Federation (GCF), el Centro de Educación y Liderazgo (CEL), Florida Global University (FGU) y la Confederación Interamericana de Coaching (CIC), lo que te brinda reconocimiento internacional y credibilidad profesional en cualquier parte del mundo."
+      answer: "La certificación está avalada por la Global Coaching Federation (GCF) y la Confederación Interamericana de Coaching (CIC), lo que te brinda reconocimiento internacional y credibilidad profesional en cualquier parte del mundo."
     },
     {
       question: "¿Puedo generar ingresos mientras estudio?",
